@@ -97,7 +97,7 @@
                     @foreach($record->atts->where("is_active", 1) as $at)
 
                     <div class="form-group filelist">
-                        <div class=""><a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->filename }}</a></div><a href="{{ route('admin.record.rmfile',['id' => $at->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a><div></div>
+                        <div class=""><a href="{{ Config('constants.uploadRecord').$at->file }}" target="_blank">{{ $at->filename }}</a></div><a href="{{ route('admin.record.rmfile',['id' => $at->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a><div></div>
                     </div>
                     @endforeach
                 </div>
