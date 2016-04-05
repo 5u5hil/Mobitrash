@@ -22,5 +22,9 @@ class Record extends \Eloquent {
     public function atts() {
         return $this->hasMany('App\Models\Attachment', 'record_id');
     }
+    
+    public function fueltypes() {
+        return $this->belongsTo('App\Models\Fueltype', 'fueltype_id');
+    }
 
 }

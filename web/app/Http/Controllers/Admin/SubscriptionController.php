@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Wastetype;
 use App\Models\Frequency;
 use App\Models\Timeslot;
+use App\Models\Attachment;
 use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller {
@@ -92,8 +93,17 @@ class SubscriptionController extends Controller {
 
     public function save() {
         $subscription = Subscription::findOrNew(Input::get('id'));
-        $subscription->fill(Input::except('wastetype'))->save();
+        $subscription->fill(Input::except('wastetype', 'att'))->save();
         $subscription->wastetypes()->sync(Input::get('wastetype'));
+        foreach (Input::file('att') as $key => $att) {
+            if ($att) {
+                $destinationPath = public_path() . '/uploads/records/';
+                $fileName = time() . $key . '.' . $att->getClientOriginalExtension();
+                if ($att->move($destinationPath, $fileName)) {
+                   Attachment::create(['subscription_id' => $subscription->id,  'file' => $fileName, 'filename' => $att->getClientOriginalName(), 'is_active' => 1, "added_by" => Input::get("added_by")]);
+                }
+            }
+        }
         return redirect()->route('admin.subscription.view');
     }
 

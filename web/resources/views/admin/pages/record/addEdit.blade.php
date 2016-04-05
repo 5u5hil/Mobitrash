@@ -59,6 +59,20 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('City','Quantity',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('quantity',null, ["class"=>'form-control' ,"placeholder"=>'Quantity']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('user','Fuel Type',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('fueltype_id',$fueltypes,null, ["class"=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('City','Attachments',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
@@ -78,7 +92,7 @@
                     @foreach($record->atts as $at)
                     
                     <div class="form-group">
-                        <a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->file }}</a>
+                        <a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->filename }}</a>
                     </div>
                     @endforeach
                 </div>

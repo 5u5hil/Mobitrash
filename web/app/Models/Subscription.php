@@ -27,6 +27,10 @@ class Subscription extends \Eloquent {
         return $this->belongsTo('App\Models\Servicetype', 'servicetype_id');
     }
     
+    public function atts() {
+        return $this->hasMany('App\Models\Attachment', 'subscription_id');
+    }
+    
     public function wastetypes() {
         return $this->belongsToMany('App\Models\Wastetype', 'subscription_wastetype', 'subscription_id', 'wastetype_id');
     }

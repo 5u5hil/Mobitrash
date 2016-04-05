@@ -19,7 +19,7 @@
             <div class="box">
                 <div class="box-body">
 
-                    {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
+                    {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal', 'files'=>true ]) !!}
                     <div class="form-group">
                         {!!Form::label('user','Customer',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
@@ -39,7 +39,7 @@
                         <div class="col-sm-10">
                             {!! Form::select('timeslot',$timeslot,null, ["class"=>'form-control', "required"]) !!}
                         </div>
-                    </div>
+                    </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 ']) !!}
@@ -54,10 +54,32 @@
                             {!! Form::text('max_waste',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','Waste Type',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('wastetype[]',$wastetype,$wastetype_selected, ["class"=>'form-control', "required", "multiple" => true]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','Start Date',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::date('start_date',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','End Date',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::date('end_date',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','Attachments',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -69,6 +91,13 @@
                         </div>
                     </div>
                     {!! Form::close() !!}  
+                    <br>
+                    @foreach($subscription->atts as $at)
+                    
+                    <div class="form-group">
+                        <a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->filename }}</a>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
