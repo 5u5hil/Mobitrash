@@ -112,5 +112,13 @@ class SubscriptionController extends Controller {
         $subscription->delete();
         return redirect()->back()->with("message", "Subscription deleted sucessfully");
     }
+    
+    public function rmfile() {
+        $atta = Attachment::find(Input::get('id'));
+        $atta->is_active = '0';
+        $atta->save();
+        return redirect()->back()->with("message", "Attachment Removed sucessfully");
+        exit();
+    }
 
 }

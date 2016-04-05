@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/save', ['as' => 'admin.subscription.save', 'uses' => 'SubscriptionController@save']);
             Route::get('/edit', ['as' => 'admin.subscription.edit', 'uses' => 'SubscriptionController@edit']);
             Route::get('/delete', ['as' => 'admin.subscription.delete', 'uses' => 'SubscriptionController@delete']);
+            Route::get('/rmfile', ['as' => 'admin.subscription.rmfile', 'uses' => 'SubscriptionController@rmfile']);
         });
         
           Route::group(['prefix' => 'servicehistory'], function() {
@@ -125,6 +126,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/save', ['as' => 'admin.record.save', 'uses' => 'RecordController@save']);
             Route::get('/edit', ['as' => 'admin.record.edit', 'uses' => 'RecordController@edit']);
             Route::get('/delete', ['as' => 'admin.record.delete', 'uses' => 'RecordController@delete']);
+            Route::get('/rmfile', ['as' => 'admin.record.rmfile', 'uses' => 'RecordController@rmfile']);
         });
 
         Route::group(['prefix' => 'schedule'], function() {

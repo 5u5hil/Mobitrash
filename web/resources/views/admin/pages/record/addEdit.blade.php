@@ -1,6 +1,11 @@
 @extends('admin.layouts.default')
 @section('content')
-
+<style>
+    .filelist div{
+        width: 40%;
+        display: inline-block;
+    }
+</style>
 <section class="content-header">
     <h1>
         Add New Record
@@ -87,12 +92,12 @@
                         </div>
                     </div>
                     {!! Form::close() !!}  
-                    
+
                     <br>
-                    @foreach($record->atts as $at)
-                    
-                    <div class="form-group">
-                        <a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->filename }}</a>
+                    @foreach($record->atts->where("is_active", 1) as $at)
+
+                    <div class="form-group filelist">
+                        <div class=""><a href="/public/uploads/records/{{ $at->file }}" target="_blank">{{ $at->filename }}</a></div><a href="{{ route('admin.record.rmfile',['id' => $at->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a><div></div>
                     </div>
                     @endforeach
                 </div>
@@ -116,7 +121,7 @@
             $("[name='chk[]']").removeAttr('Checked');
         }
     });
-
+    
 </script>
 
 @stop
