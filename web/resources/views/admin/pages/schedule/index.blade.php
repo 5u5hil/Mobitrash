@@ -48,10 +48,10 @@
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>
                                 <td>
-                                    <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">view</a>
+                                    <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">Edit</a>
+                                    <a href="{{ route('admin.schedule.duplicate',['id' => $asset->id ])  }}" class="label label-primary active" ui-toggle-class="">Duplicate</a>
+                                    <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>

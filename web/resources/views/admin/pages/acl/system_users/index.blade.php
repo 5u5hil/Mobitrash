@@ -38,6 +38,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Date</th>
                                 <th>Actions</th>
                             </tr>
@@ -48,6 +49,7 @@
                                 <td>{{$system_user->first_name }}</td>
                                 <td>{{$system_user->last_name }}</td>
                                 <td>{{ $system_user->email }}</td>
+                                <td>{{ $system_user->roles[0]->name }}</td>
                                 <td>{{ date("d-M-Y",strtotime($system_user->created_at)) }}</td>
                                 <td>
                                     <a href="{!! route('admin.systemusers.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>

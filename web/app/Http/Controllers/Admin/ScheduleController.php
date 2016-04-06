@@ -79,6 +79,37 @@ class ScheduleController extends Controller {
         
         return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action'));
     }
+    public function show() {
+         $schedule = Schedule::find(Input::get('id'));
+
+        $pickups = $schedule->pickups()->with('user', 'address')->get();
+        $userss = Role::find(3)->users->toArray();
+        $users = [];
+        foreach ($userss as $value) {
+            $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+        }
+        
+        $v = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
+        $vans = [];
+        foreach ($v as $value) {
+            $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
+        }
+        $ops = [];
+        $opss = $schedule->operators->toArray();
+
+        $c = Role::find(2)->users->toArray();
+        $customers = [0 => "Select a Customer"];
+        foreach ($c as $value) {
+            $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+        }
+
+        foreach ($opss as $val)
+            array_push($ops, $val['id']);
+        $action = "admin.schedule.save";        
+        
+        return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action'));
+    
+    }
 
     public function save() {
 
@@ -93,6 +124,19 @@ class ScheduleController extends Controller {
             Pickup::create($pickup);
         }
         return redirect()->route('admin.schedule.view');
+    }
+    
+    public function duplicate() {
+        $schedule = Schedule::find(Input::get('id'));
+        $pickups = $schedule->pickups()->get();
+        $new_schedule = $schedule->replicate();
+        $new_schedule->push();              
+        foreach ($pickups as $key=>$pickup){
+            $pickup->schedule_id = $new_schedule->id;
+            $new_pickup = $pickup->replicate();
+            $new_pickup->push();
+        } 
+        return redirect()->back()->with("message", "Schedule duplicated sucessfully");
     }
 
     public function delete() {

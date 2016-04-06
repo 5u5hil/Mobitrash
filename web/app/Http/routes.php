@@ -135,6 +135,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/add', ['as' => 'admin.schedule.add', 'uses' => 'ScheduleController@add']);
             Route::post('/save', ['as' => 'admin.schedule.save', 'uses' => 'ScheduleController@save']);
             Route::get('/edit', ['as' => 'admin.schedule.edit', 'uses' => 'ScheduleController@edit']);
+            Route::get('/show', ['as' => 'admin.schedule.show', 'uses' => 'ScheduleController@show']);
+            Route::get('/duplicate', ['as' => 'admin.schedule.duplicate', 'uses' => 'ScheduleController@duplicate']);
             Route::get('/delete', ['as' => 'admin.schedule.delete', 'uses' => 'ScheduleController@delete']);
         });
 

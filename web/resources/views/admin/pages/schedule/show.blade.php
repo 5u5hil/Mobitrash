@@ -23,7 +23,7 @@
                     <div class="form-group">
                         {!!Form::label('user','Schedule Name',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('name',null, ["class"=>'form-control', 'placeholder'=>'Schedule Name', "required"]) !!}
+                            {!! Form::text('name',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -101,26 +101,7 @@
     </div>
 </section>
 
-<div class="addNew" style="display: none;">
-    <div class="row form-group">
-        <div class="col-sm-2">
-            {!! Form::select("pickup[0][user_id]",$customers,null, ["class"=>'form-control select_user', "required"]) !!}
-        </div>
-        <div class="col-sm-3"> 
-            {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
-        </div>
-        <div class="col-sm-3">
-            {!! Form::text("pickup[0][approximate_processing_time]", null, ["class"=>'form-control approx_time']) !!}
-        </div>
-        <div class="col-sm-2">
-            {!! Form::datetime("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
 
-        </div> 
-        <div class="col-sm-1" style=" text-align: right;">
-            <a  data-value="" href="javascript:void();" class="label label-danger active  DelImg" >Delete</a> 
-        </div>
-    </div>
-</div>
 @stop 
 
 @section('myscripts')
