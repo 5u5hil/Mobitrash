@@ -58,13 +58,17 @@
                             <div class="col-sm-2">
                                 {!! Form::text('user',$pickup->user->first_name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-3">
                                 {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
+                            </div>
+                            <div class="col-sm-3">
+                                {!! Form::text('address',$pickup->approximate_processing_time, ["class"=>'form-control', "readonly"]) !!}
                             </div>
                             <div class="col-sm-2">
                                 {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
+                                {!! Form::hidden("pickup[$key][approximate_processing_time]",$pickup->approximate_processing_time) !!}
 
                             </div> 
                             <div class="col-sm-1" style=" text-align: right;">
@@ -95,8 +99,11 @@
         <div class="col-sm-2">
             {!! Form::select("pickup[0][user_id]",$customers,null, ["class"=>'form-control select_user', "required"]) !!}
         </div>
-        <div class="col-sm-7">
+        <div class="col-sm-3"> 
             {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
+        </div>
+        <div class="col-sm-3">
+            {!! Form::text("pickup[0][approximate_processing_time]", null, ["class"=>'form-control approx_time']) !!}
         </div>
         <div class="col-sm-2">
             {!! Form::datetime("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
@@ -112,7 +119,7 @@
 @section('myscripts')
 
 <script>
-   
+
     $(".addMore").click(function () {
         $(".existing").append($(".addNew").html());
         $('[name*="user_id"]').each(function (k, v) {
@@ -130,6 +137,7 @@
     $("body").on("change", ".select_user", function () {
         var select = $(this);
         var options = $([]);
+        options = options.add($("<option />", {text: 'Select Address', value:''}));
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
             type: "GET",
@@ -137,15 +145,28 @@
                 uid: select.val()
             },
             success: function (data) {
-
                 $.each(data, function (k, v) {
-                    console.log(v.address)
                     var opt = $("<option />", {text: v.address, value: v.id});
-
                     options = options.add(opt);
                 });
-                console.log(options);
-                select.parent().parent().find(".select_add").html(options);
+                select.parent().parent().find(".select_add").html(options);    
+            }
+        });
+    });
+    
+    $("body").on("change", ".select_add", function () {
+        var select = $(this); 
+        var userid =  select.parent().parent().find(".select_user").val();
+        console.log(userid);
+        $.ajax({
+            url: "<?= route('getUserApproxTime') ?>",
+            type: "GET",
+            data: {
+                uid: userid,
+                address_id: select.val()
+            },
+            success: function (data) {                           
+                select.parent().parent().find(".approx_time").val(data.approximate_processing_time);
             }
         });
     });

@@ -56,7 +56,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ preg_match("/admin.roles.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.roles.view') }}"><i class="fa fa-circle-o"></i>Roles</a></li>
-                    <li class="{{ preg_match("/admin.systemusers.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.systemusers.view') }}"><i class="fa fa-circle-o"></i>Users</a></li>
+                    <li class="{{ preg_match("/admin.systemusers.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.systemusers.view') }}"><i class="fa fa-circle-o"></i>System Users</a></li>
+                    <li class="{{ preg_match("/admin.users.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.users.view') }}"><i class="fa fa-circle-o"></i>Customers</a></li>
                 </ul>
             </li>
 

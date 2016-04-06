@@ -4,6 +4,7 @@ $adminConstants = [
 
     'adminView' => 'admin.pages',
     'adminSystemUsersView' => 'admin.pages.acl.system_users',
+    'adminUsersView' => 'admin.pages.acl.users',
     'adminRoleView' => 'admin.pages.acl.roles',
     'adminCityView' => 'admin.pages.masters.cities',
     'adminFrequencyView' => 'admin.pages.masters.frequency',

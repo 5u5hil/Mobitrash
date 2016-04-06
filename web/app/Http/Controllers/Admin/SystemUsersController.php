@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Input;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Subscription;
 use Hash;
 use Auth;
 use Session;
@@ -13,9 +14,17 @@ use App\Http\Controllers\Controller;
 class SystemUsersController extends Controller {
 
     public function index() {
-        $system_users = User::paginate(Config('constants.paginateNo'));
+        $system_users = User::whereHas('roles', function($q) {
+                    $q->where('id', '!=', 2);
+                })->paginate(Config('constants.paginateNo'));        
         $roles = Role::get(['id', 'name'])->toArray();
         return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles'));
+    }
+
+    public function users() {
+        $users = Role::find(2)->users()->paginate(Config('constants.paginateNo'));
+        $roles = Role::get(['id', 'name'])->toArray();
+        return view(Config('constants.adminUsersView') . '.index', compact('users', 'roles'));
     }
 
     public function add() {
@@ -104,6 +113,10 @@ class SystemUsersController extends Controller {
 
     public function getAddresses() {
         return User::find(Input::get('uid'))->addresses;
+    }
+
+    public function getApproxTime() {
+        return Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->first();
     }
 
 }

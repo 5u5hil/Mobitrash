@@ -23,6 +23,7 @@ class SubscriptionController extends Controller {
 
         $userss = Role::find(2)->users->toArray();
         $users = [];
+        $users = [0 => "Select a Customer"];
         foreach ($userss as $value) {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
@@ -60,6 +61,7 @@ class SubscriptionController extends Controller {
         $userss = Role::find(2)->users->toArray();
 
         $users = [];
+        $users = [0 => "Select a Customer"];
         foreach ($userss as $value) {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }

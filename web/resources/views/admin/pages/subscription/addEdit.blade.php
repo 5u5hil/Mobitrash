@@ -28,7 +28,14 @@
                     <div class="form-group">
                         {!!Form::label('user','Customer',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('user_id',$users,null, ["class"=>'form-control selectpicker', "data-show-content" => "false", "required", "data-live-search" => "true"]) !!}
+                            {!! Form::select('user_id',$users,null, ["class"=>'form-control selectpicker select_user', "data-show-content" => "false", "required", "data-live-search" => "true"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('user','Customer Address',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('user_address_id',[],null, ["class"=>'form-control select_add', "data-show-content" => "false", "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -82,6 +89,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('dop','Approximate Processing Time',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::time('approximate_processing_time',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('dop','Attachments',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
@@ -123,6 +137,32 @@
             $("[name='chk[]']").removeAttr('Checked');
         }
     });
+    
+    $(".select_user").change(function () {
+        var select = $(this);
+        var options = '';
+        $.ajax({
+            url: "<?= route('getUserAdd') ?>",
+            type: "GET",
+            data: {
+                uid: select.val()
+            },
+            success: function (data) {
+                $.each(data, function (k, v) {
+                    var selected = '';
+                    <?php 
+                    if($subscription->user_address_id){echo "var addressid = ".$subscription->user_address_id.";"; }else { echo 'var addressid = 0;';}
+                    ?>
+                    if(v.id == addressid){
+                        selected = 'selected';
+                    }
+                    var opt = '<option value="'+v.id+'" '+selected+'>'+v.address+'</option>';
+                    options += opt;
+                });
+                $(".select_add").html(options);
+            }
+        });
+    }).change();
 
 </script>
 

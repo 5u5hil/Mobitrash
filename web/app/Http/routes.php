@@ -29,6 +29,7 @@
 Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
+        Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
@@ -155,18 +156,20 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/delete', ['as' => 'admin.roles.delete', 'uses' => 'RolesController@delete']);
             });
 
-
-
             Route::group(['prefix' => 'systemusers'], function() {
                 Route::post('/chk_existing_username', ['as' => 'chk_existing_username', 'uses' => 'SystemUsersController@chk_existing_username']);
-
                 Route::get('/', ['as' => 'admin.systemusers.view', 'uses' => 'SystemUsersController@index']);
                 Route::get('/add', ['as' => 'admin.systemusers.add', 'uses' => 'SystemUsersController@add']);
                 Route::post('/save', ['as' => 'admin.systemusers.save', 'uses' => 'SystemUsersController@save']);
                 Route::get('/edit', ['as' => 'admin.systemusers.edit', 'uses' => 'SystemUsersController@edit']);
                 Route::post('/update', ['as' => 'admin.systemusers.update', 'uses' => 'SystemUsersController@update']);
                 Route::get('/delete', ['as' => 'admin.systemusers.delete', 'uses' => 'SystemUsersController@delete']);
-            });
+            });  
+            
+            Route::group(['prefix' => 'users'], function() {
+                Route::get('/', ['as' => 'admin.users.view', 'uses' => 'SystemUsersController@users']);
+            });  
+            
         });
         // });
     });

@@ -45,6 +45,7 @@ class ScheduleController extends Controller {
             array_push($ops, $val['id']);
 
         $action = "admin.schedule.save";
+        
         return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'ops', 'customers', 'users', 'vans','pickups', 'action'));
     }
 
@@ -57,7 +58,7 @@ class ScheduleController extends Controller {
         foreach ($userss as $value) {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
-
+        
         $v = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
         $vans = [];
         foreach ($v as $value) {
@@ -74,7 +75,8 @@ class ScheduleController extends Controller {
 
         foreach ($opss as $val)
             array_push($ops, $val['id']);
-        $action = "admin.schedule.save";
+        $action = "admin.schedule.save";        
+        
         return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action'));
     }
 
