@@ -1,15 +1,19 @@
 @extends('admin.layouts.default')
 @section('content')
-
+<style>
+    .view-table tr td:first-child{
+        font-weight: bold;
+    }
+</style>
 <section class="content-header">
     <h1>
-        Add New Schedule
-        <small>Add/Edit</small>
+        Schedule
+        <small>View</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ route('admin.schedule.view') }}"><i class="fa fa-coffee"></i>Schedule</a></li>
-        <li class="active">Add/Edit</li>
+        <li class="active">view</li>
     </ol>
 </section>
 
@@ -17,85 +21,98 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-body">
 
-                    {!! Form::model($schedule, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
-                    <div class="form-group">
-                        {!!Form::label('user','Schedule Name',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::text('name',null, ["class"=>'form-control', "required"]) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('user','For',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::date('for',null, ["class"=>'form-control', "required"]) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('user','Van',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select('van_id',$vans,null, ["class"=>'form-control', "required"]) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('user','Operators',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "required", "multiple" => true]) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <h4>Pickups</h4>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="row clearfix" >
-                        <div class="col-sm-2 pull-right">
-                            <a href="javascript:void();" class="label label-success active addMore" >Add a Pickup</a> 
-                        </div>
-                    </div>
-                    <br />
-                    <div class="existing">
-                        @if($pickups->count()>0)
-
-                        @foreach($pickups as $key => $pickup)
-
-                        <div class="row form-group">
-                            <div class="col-sm-2">
-                                {!! Form::text('user',$pickup->user->first_name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
-                            </div>
-                            <div class="col-sm-3">
-                                {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
-                            </div>
-                            <div class="col-sm-3">
-                                {!! Form::text('address',$pickup->approximate_processing_time, ["class"=>'form-control', "readonly"]) !!}
-                            </div>
-                            <div class="col-sm-2">
-                                {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
-                                {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
-                                {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
-                                {!! Form::hidden("pickup[$key][approximate_processing_time]",$pickup->approximate_processing_time) !!}
-
-                            </div> 
-                            <div class="col-sm-1" style=" text-align: right;">
-                                <a  data-value="" href="javascript:void();" class="label label-danger active  DelImg" >Delete</a> 
-                            </div>
-
-                        </div>
-                        @endforeach
-                        @endif
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-2">
-                            {!! Form::hidden('id',null) !!}
-                            {!! Form::hidden('added_by',Auth::id()) !!}
-                            {!! Form::submit('Submit',["class" => "btn btn-primary"]) !!}
-                        </div>
-                    </div>
-                    {!! Form::close() !!}  
+                <div class="box-header with-border">
+                    <h3 class="box-title"><b>{{$schedule->name}}</b></h3>
                 </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-bordered view-table">
+                        <tbody>
+                            <tr>
+                                <td>For</td>
+                                <td>
+                                    {{$schedule->for}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Van</td>
+                                <td>                                                                     
+                                    @foreach($vans as $key => $van)
+                                    <div class="row form-group">
+                                        <div class="col-sm-4">
+                                            {{$van['name'].' - '.$van['asset_no']}}                                                                              
+                                        </div> 
+                                    </div>
+                                    @endforeach                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Operator</td>
+                                <td>
+                                    @foreach($operators as $key => $operator)
+                                    <div class="row form-group">
+                                        <div class="col-sm-4">
+                                            {{$operator['first_name'].' '.$operator['last_name']}}                                                                              
+                                        </div> 
+                                    </div>
+                                    @endforeach 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Driver</td>
+                                <td>
+                                    @foreach($drivers as $key => $driver)
+                                    <div class="row form-group">
+                                        <div class="col-sm-4">
+                                            {{$driver['first_name'].' '.$driver['last_name']}}                                                                              
+                                        </div> 
+                                    </div>
+                                    @endforeach 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pickups</td>
+                                <td style="padding: 20px;">
+                                    @if($pickups->count()>0)
+                                    <div class="row form-group">
+                                        <div style="font-weight: bold; border-bottom: 1px solid #ECECEC;">
+                                        <div class="col-sm-2">
+                                            Name
+                                        </div>
+                                        <div class="col-sm-3">
+                                            Address
+                                        </div>
+                                        Approx. Processing Time
+                                        <div class="col-sm-2">
+                                            Pickup Time                                            
+                                        </div> 
+                                        </div>
+                                    </div>
+                                    @foreach($pickups as $key => $pickup)
+
+                                    <div class="row form-group">
+                                        <div class="col-sm-2">
+                                            {{$pickup->user->first_name}}
+                                        </div>
+                                        <div class="col-sm-3">
+                                            {{$pickup->address->address}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{$pickup->approximate_processing_time}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{$pickup->pickuptime}}                                            
+                                        </div> 
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                </td>
+                            </tr>
+
+                        </tbody></table>
+                </div>
+
             </div>
         </div>
     </div>
@@ -129,7 +146,7 @@
         var select = $(this);
         var options = $([]);
         select.parent().parent().find(".approx_time").val('');
-        options = options.add($("<option />", {text: 'Select Address', value:''}));
+        options = options.add($("<option />", {text: 'Select Address', value: ''}));
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
             type: "GET",
@@ -141,14 +158,14 @@
                     var opt = $("<option />", {text: v.address, value: v.id});
                     options = options.add(opt);
                 });
-                select.parent().parent().find(".select_add").html(options);    
+                select.parent().parent().find(".select_add").html(options);
             }
         });
     });
-    
+
     $("body").on("change", ".select_add", function () {
-        var select = $(this); 
-        var userid =  select.parent().parent().find(".select_user").val();
+        var select = $(this);
+        var userid = select.parent().parent().find(".select_user").val();
         console.log(userid);
         $.ajax({
             url: "<?= route('getUserApproxTime') ?>",
@@ -157,7 +174,7 @@
                 uid: userid,
                 address_id: select.val()
             },
-            success: function (data) {                           
+            success: function (data) {
                 select.parent().parent().find(".approx_time").val(data.approximate_processing_time);
             }
         });

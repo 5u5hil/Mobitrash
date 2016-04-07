@@ -27,6 +27,10 @@ class Subscription extends \Eloquent {
         return $this->belongsTo('App\Models\Servicetype', 'servicetype_id');
     }
     
+    public function packages() {
+        return $this->belongsTo('App\Models\Package', 'package_id');
+    }
+    
     public function atts() {
         return $this->hasMany('App\Models\Attachment', 'subscription_id');
     }

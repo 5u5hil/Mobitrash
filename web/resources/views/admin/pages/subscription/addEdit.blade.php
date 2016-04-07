@@ -54,9 +54,23 @@
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('user','Package',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('package_id',$packages, null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div> 
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('amt_paid',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','Paid On',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::date('paid_on',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

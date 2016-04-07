@@ -87,6 +87,22 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/delete', ['as' => 'admin.fueltype.delete', 'uses' => 'FueltypeController@delete']);
             });
             
+            Route::group(['prefix' => 'package'], function() {
+                Route::get('/', ['as' => 'admin.package.view', 'uses' => 'PackageController@index']);
+                Route::get('/add', ['as' => 'admin.package.add', 'uses' => 'PackageController@add']);
+                Route::post('/save', ['as' => 'admin.package.save', 'uses' => 'PackageController@save']);
+                Route::get('/edit', ['as' => 'admin.package.edit', 'uses' => 'PackageController@edit']);
+                Route::get('/delete', ['as' => 'admin.package.delete', 'uses' => 'PackageController@delete']);
+            });
+            
+            Route::group(['prefix' => 'occupancy'], function() {
+                Route::get('/', ['as' => 'admin.occupancy.view', 'uses' => 'OccupancyController@index']);
+                Route::get('/add', ['as' => 'admin.occupancy.add', 'uses' => 'OccupancyController@add']);
+                Route::post('/save', ['as' => 'admin.occupancy.save', 'uses' => 'OccupancyController@save']);
+                Route::get('/edit', ['as' => 'admin.occupancy.edit', 'uses' => 'OccupancyController@edit']);
+                Route::get('/delete', ['as' => 'admin.occupancy.delete', 'uses' => 'OccupancyController@delete']);
+            });
+            
             Route::group(['prefix' => 'additive'], function() {
                 Route::get('/', ['as' => 'admin.additive.view', 'uses' => 'AdditiveController@index']);
                 Route::get('/add', ['as' => 'admin.additive.add', 'uses' => 'AdditiveController@add']);

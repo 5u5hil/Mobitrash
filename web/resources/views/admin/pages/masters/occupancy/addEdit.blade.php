@@ -3,12 +3,12 @@
 
 <section class="content-header">
     <h1>
-        Add New Fueltype
+        Add New Occupancy
         <small>Add/Edit</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('admin.fueltype.view') }}"><i class="fa fa-coffee"></i>Fueltype</a></li>
+        <li><a href="{{ route('admin.occupancy.view') }}"><i class="fa fa-coffee"></i>Occupancy</a></li>
         <li class="active">Add/Edit</li>
     </ol>
 </section>
@@ -19,11 +19,11 @@
             <div class="box">
                 <div class="box-body">
 
-                    {!! Form::model($fueltype, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
+                    {!! Form::model($occupancy, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
-                        {!!Form::label('City','Fueltype',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Occupancy',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Fueltype Name', "required"]) !!}
+                            {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Occupancy Name', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

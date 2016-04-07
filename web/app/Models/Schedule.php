@@ -10,6 +10,10 @@ class Schedule extends \Eloquent {
     public function operators() {
         return $this->belongsToMany('App\Models\User', 'has_operators', 'schedule_id', 'user_id');
     }
+    
+    public function drivers() {
+        return $this->belongsToMany('App\Models\User', 'has_drivers', 'schedule_id', 'user_id');
+    }
 
     public function addedBy() {
         return $this->belongsTo('App\Models\User', 'added_by');

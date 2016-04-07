@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ route('admin.cities.view') }}"><i class="fa fa-coffee"></i>Wastetype</a></li>
+        <li><a href="{{ route('admin.wastetype.view') }}"><i class="fa fa-coffee"></i>Wastetype</a></li>
         <li class="active">Add/Edit</li>
     </ol>
 </section>
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         {!!Form::label('City','Wastetype',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'City Display Name', "required"]) !!}
+                            {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Wastetype Name', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

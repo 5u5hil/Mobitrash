@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Wastetype;
 use App\Models\Frequency;
 use App\Models\Timeslot;
+use App\Models\Package;
 use App\Models\Attachment;
 use App\Http\Controllers\Controller;
 
@@ -44,6 +45,12 @@ class SubscriptionController extends Controller {
         foreach ($f as $value) {
             $frequency[$value['id']] = $value['name'];
         }
+        
+        $pack = Package::where("is_active", 1)->get()->toArray();
+        $packages = [];
+        foreach ($pack as $value) {
+            $packages[$value['id']] = $value['name'];
+        }
 
         $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
         $timeslot = [];
@@ -53,7 +60,7 @@ class SubscriptionController extends Controller {
 
 
         $action = "admin.subscription.save";
-        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected'));
+        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages'));
     }
 
     public function edit() {
@@ -82,6 +89,12 @@ class SubscriptionController extends Controller {
         foreach ($f as $value) {
             $frequency[$value['id']] = $value['name'];
         }
+        
+        $pack = Package::where("is_active", 1)->get()->toArray();
+        $packages = [];
+        foreach ($pack as $value) {
+            $packages[$value['id']] = $value['name'];
+        }
 
         $t = Timeslot::where("is_active", 1)->get()->toArray();
         $timeslot = [];
@@ -90,7 +103,7 @@ class SubscriptionController extends Controller {
         }
 
         $action = "admin.subscription.save";
-        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected'));
+        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages'));
     }
 
     public function save() {

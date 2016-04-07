@@ -3,7 +3,7 @@
 
 <section class="content-header">
     <h1>
-        Add New City
+        Add New Assets
         <small>Add/Edit</small>
     </h1>
     <ol class="breadcrumb">
@@ -21,6 +21,13 @@
 
                     {!! Form::model($asset, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
+                        {!!Form::label('type','Asset Type',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('type',$types,null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('Name','Name',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Asset Name', "required"]) !!}
@@ -35,13 +42,7 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                    <div class="form-group">
-                        {!!Form::label('type','Asset Type',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select('type',$types,null, ["class"=>'form-control', "required"]) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
                     <div class="form-group">
                         {!!Form::label('cities','City',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">

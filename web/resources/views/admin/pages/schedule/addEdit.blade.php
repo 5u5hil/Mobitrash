@@ -47,6 +47,14 @@
                             {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "required", "multiple" => true]) !!}
                         </div>
                     </div>
+                    
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('user','Drivers',['class'=>'col-sm-2 ']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('drivers[]',$drivers, $opsd, ["class"=>'form-control', "required", "multiple" => true]) !!}
+                        </div>
+                    </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <h4>Pickups</h4>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -56,6 +64,7 @@
                         </div>
                     </div>
                     <br />
+                    
                     <div class="existing">
                         @if($pickups->count()>0)
 
@@ -69,7 +78,7 @@
                                 {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
                             <div class="col-sm-3">
-                                {!! Form::text('address',$pickup->approximate_processing_time, ["class"=>'form-control', "readonly"]) !!}
+                                {!! Form::text('approximate_processing_time',$pickup->approximate_processing_time, ["class"=>'form-control', "disabled" => "disabled", "readonly"]) !!}
                             </div>
                             <div class="col-sm-2">
                                 {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}

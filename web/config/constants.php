@@ -18,6 +18,8 @@ $adminConstants = [
     'adminScheduleView' => 'admin.pages.schedule',
     'adminAssetView' => 'admin.pages.assets',
     'adminRecordView' => 'admin.pages.record',
+    'adminPackageView' => 'admin.pages.masters.package',
+    'adminOccupancyView' => 'admin.pages.masters.occupancy',
     'paginateNo' => 20,
     'uploadRecord'=>'/public/uploads/records/'
 ];
