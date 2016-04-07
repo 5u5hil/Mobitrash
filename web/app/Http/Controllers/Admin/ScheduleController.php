@@ -98,7 +98,7 @@ class ScheduleController extends Controller {
             $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
         $action = "admin.schedule.save";
-
+        
         return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd'));
     }
 
@@ -106,13 +106,21 @@ class ScheduleController extends Controller {
         $schedule = Schedule::find(Input::get('id'));
 
         $pickups = $schedule->pickups()->with('user', 'address')->get();
-        //$operators = Role::find(3)->users->toArray();        
         $vans = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
         
         $operators = $schedule->operators->toArray();
         $drivers = $schedule->drivers->toArray();
 
         return view(Config('constants.adminScheduleView') . '.show', compact('schedule', 'drivers', 'pickups', 'users', 'vans', 'operators'));
+    }
+    
+     public function removePickup() {
+        $pickup = Pickup::find(Input::get('id'));
+        if($pickup->delete()){
+            return ['flash'=>'success'];
+        }else{
+            return ['flash'=>'fail'];
+        }
     }
 
     public function save() {
@@ -121,11 +129,12 @@ class ScheduleController extends Controller {
         $schedule->fill(Input::except('operators', 'drivers', 'pickup'))->save();
         $schedule->operators()->sync(Input::get('operators'));
         $schedule->drivers()->sync(Input::get('drivers'));        
-        Pickup::where("schedule_id", $schedule->id)->delete();
+        Pickup::where("schedule_id", $schedule->id)->delete(); 
         if (Input::get("pickup")) {
             foreach (Input::get("pickup") as $pickup) {
                 $pickup['schedule_id'] = $schedule->id;
                 Pickup::create($pickup);
+                //print('<pre>'); print_r($pickup);print('</pre>'); 
             }
         }
         return redirect()->route('admin.schedule.view');

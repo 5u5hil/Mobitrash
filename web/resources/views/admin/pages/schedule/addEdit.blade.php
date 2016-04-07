@@ -60,7 +60,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="row clearfix" >
                         <div class="col-sm-2 pull-right">
-                            <a href="javascript:void();" class="label label-success active addMore" >Add a Pickup</a> 
+                            <a class="label label-success active addMore" >Add a Pickup</a> 
                         </div>
                     </div>
                     <br />
@@ -77,9 +77,7 @@
                             <div class="col-sm-3">
                                 {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
-                            <div class="col-sm-3">
-                                {!! Form::text('approximate_processing_time',$pickup->approximate_processing_time, ["class"=>'form-control', "disabled" => "disabled", "readonly"]) !!}
-                            </div>
+                            
                             <div class="col-sm-2">
                                 {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
@@ -88,13 +86,18 @@
 
                             </div> 
                             <div class="col-sm-1" style=" text-align: right;">
-                                <a  data-value="" href="javascript:void();" class="label label-danger active  DelImg" >Delete</a> 
+                                <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
                             </div>
+                            <div class="col-sm-2">
+                                {{$pickup->approximate_processing_time}}
+                            </div>
+                            
 
                         </div>
                         @endforeach
                         @endif
                     </div>
+                    
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -103,7 +106,7 @@
                             {!! Form::submit('Submit',["class" => "btn btn-primary"]) !!}
                         </div>
                     </div>
-                    {!! Form::close() !!}  
+                    {!! Form::close() !!} 
                 </div>
             </div>
         </div>
@@ -118,16 +121,17 @@
         <div class="col-sm-3"> 
             {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
         </div>
-        <div class="col-sm-3">
-            {!! Form::text("pickup[0][approximate_processing_time]", null, ["class"=>'form-control approx_time']) !!}
-        </div>
         <div class="col-sm-2">
             {!! Form::datetime("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
-
-        </div> 
-        <div class="col-sm-1" style=" text-align: right;">
-            <a  data-value="" href="javascript:void();" class="label label-danger active  DelImg" >Delete</a> 
         </div>
+        <div class="col-sm-1" style=" text-align: right;">
+            <a  data-value="" class="label label-danger active  DelImg" >Delete</a> 
+        </div>
+        <div class="col-sm-2">
+            {!! Form::hidden("pickup[0][approximate_processing_time]", null, ["class"=>'form-control approx_time', "readonly"=> "readonly"]) !!}
+            <span class="approx_time_text"></span>
+        </div>        
+        
     </div>
 </div>
 @stop 
@@ -144,11 +148,12 @@
         $('[name*="user_address_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][user_address_id]");
         });
-        $('[name*="approximate_processing_time"]').each(function (k, v) {
-            $(this).attr("name", "pickup[" + k + "][approximate_processing_time]");
-        });
+        
         $('[name*="pickuptime"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][pickuptime]");
+        });
+        $('[name*="approximate_processing_time"]').each(function (k, v) {
+            $(this).attr("name", "pickup[" + k + "][approximate_processing_time]");
         });
 
     });
@@ -186,10 +191,31 @@
                 address_id: select.val()
             },
             success: function (data) {                           
-                select.parent().parent().find(".approx_time").val(data.approximate_processing_time);
+                select.parent().parent().find(".approx_time").val(data[0].approximate_processing_time);
+                select.parent().parent().find(".approx_time_text").html(data[0].approximate_processing_time);
+//                select.parent().parent().find(".frequency").val(data.approximate_processing_time);
+                select.parent().parent().find(".frequency_text").html(data[0].frequency.name);
             }
         });
     });
+    
+    $("body").on("click", ".delete-pickup", function () {
+        var pickup_id = $(this).attr('data-id');
+        var $this = $(this);
+        $.ajax({
+            url: "<?= route('removeSchedulePickup') ?>",
+            type: "GET",
+            data: {
+                id: pickup_id,
+            },
+            success: function (response) { 
+                if(response.flash == 'success'){
+                    $this.parent().parent().fadeOut();
+                }
+            }
+        });
+    });
+    
 
 </script>
 

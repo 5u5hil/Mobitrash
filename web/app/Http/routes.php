@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
         Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
+        Route::get('/remove-schedule-pickup', ["as" => "removeSchedulePickup", "uses" => "ScheduleController@removePickup"]);
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);

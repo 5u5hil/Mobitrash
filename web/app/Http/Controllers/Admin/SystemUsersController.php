@@ -116,7 +116,11 @@ class SystemUsersController extends Controller {
     }
 
     public function getApproxTime() {
-        return Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->first();
+        $subscription = Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->with('frequency')->first();
+//        print('<pre>'); print_r($subscription);print('</pre>'); 
+//exit();
+        return [$subscription];
+
     }
 
 }
