@@ -26,11 +26,17 @@
                     <span>Service History</span>
                 </a>
             </li>
-            <li class=" {{ preg_match("/admin.subscription.view/",Route::currentRouteName())? 'active' : ''}}">
-                <a href="{{ route('admin.subscription.view') }}">
+            <li class=" {{ preg_match("/admin.subscription.view|admin.renewal.view/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="#">
                     <i class="fa fa-user-plus"></i>
                     <span>User Subscriptions</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
+                    <li class="{{ preg_match("/admin.renewal.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.renewal.view') }}"><i class="fa fa-calendar-check-o"></i>Due for Renewal</a></li>
+                    
+                </ul>
             </li>  
             <li class=" {{ preg_match("/admin.assets.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.assets.view') }}">
@@ -48,7 +54,7 @@
 
 
 
-            <li class="treeview {{ preg_match("/admin.roles.view|admin.systemusers.view/",Route::currentRouteName())? 'active' : ''}}">
+            <li class="treeview {{ preg_match("/admin.roles.view|admin.systemusers.view|admin.users.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-user"></i>
                     <span>User Management</span>
@@ -71,7 +77,7 @@
                     <li class="{{ preg_match("/admin.cities.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.cities.view') }}"><i class="fa fa-building-o"></i>Cities</a></li>
                     <li class="{{ preg_match("/admin.frquency.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.frequency.view') }}"><i class="fa fa-tasks"></i>Frequency</a></li>
                     <li class="{{ preg_match("/admin.timeslot.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.timeslot.view') }}"><i class="fa fa-calendar"></i>Timeslot</a></li>
-                    <li class="{{ preg_match("/admin.servicetype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.servicetype.view') }}"><i class="fa fa-circle-o"></i>Servicetype</a></li>
+                    <!--<li class="{{ preg_match("/admin.servicetype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.servicetype.view') }}"><i class="fa fa-circle-o"></i>Servicetype</a></li>-->
                     <li class="{{ preg_match("/admin.wastetype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.wastetype.view') }}"><i class="fa fa-trash"></i>Wastetype</a></li>
                     <li class="{{ preg_match("/admin.fueltype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.fueltype.view') }}"><i class="fa fa-truck"></i>Fueltype</a></li>
                     <li class="{{ preg_match("/admin.additive.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.additive.view') }}"><i class="fa fa-circle-o"></i>Additive</a></li>

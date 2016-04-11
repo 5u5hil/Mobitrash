@@ -15,6 +15,7 @@ $adminConstants = [
     'adminAdditiveView' => 'admin.pages.masters.additive',
     'adminRecordtypeView' => 'admin.pages.masters.recordtype',
     'adminSubscriptionView' => 'admin.pages.subscription',
+    'adminRenewalView' => 'admin.pages.subscription',
     'adminScheduleView' => 'admin.pages.schedule',
     'adminAssetView' => 'admin.pages.assets',
     'adminRecordView' => 'admin.pages.record',

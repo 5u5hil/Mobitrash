@@ -1,14 +1,18 @@
 @extends('admin.layouts.default')
 @section('content')
 <style>
-    .view-table tr td:first-child{
-        font-weight: bold;
+    .sub-info-block{
+        border: 1px solid #ccc;
+        box-shadow: 1px 4px 10px 1px rgb(220, 220, 220);
+        padding: 10px;
+        border-radius: 4px;
+        width: 330px!important;
     }
     .sub-info div{
-        margin-right: 15px;
-        width: 87px;
         display: inline-block;
-        overflow-x: hidden;
+    }
+    .sub-info .info-left{
+        width: 160px;      
     }
 </style>
 <section class="content-header">
@@ -92,10 +96,8 @@
                                             <div class="col-sm-2">
                                                 Pickup Time                                            
                                             </div> 
-                                            <div class="col-sm-4 sub-info">   
-                                                <div>Package</div>
-                                                <div>Frequency</div>
-                                                <div>Approx. Time</div>            
+                                            <div class="col-sm-4">  
+
                                             </div>  
                                         </div>
                                     </div>
@@ -111,11 +113,17 @@
                                         <div class="col-sm-2">
                                             {{$pickup->pickuptime}}
                                         </div>
-                                        <div class="col-sm-4 sub-info">   
-                                            <div>{{ @$pickup->sub_deatils->packages->name}}</div>
-                                            <div>{{ @$pickup->sub_deatils->frequency->name}}</div>
-                                            <div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
-                                        </div>  
+                                        <div class="col-sm-4 sub-info-block">  
+                                            <div class="sub-info">
+                                                <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
+                                            </div>
+                                            <div class="sub-info">
+                                                <div class="info-left">Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
+                                            </div>                                
+                                            <div class="sub-info">
+                                                <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
+                                            </div>
+                                        </div> 
                                     </div>
                                     @endforeach
                                     @endif

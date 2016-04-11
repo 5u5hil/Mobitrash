@@ -18,6 +18,13 @@ class SubscriptionController extends Controller {
         $subscription = Subscription::paginate(Config('constants.paginateNo'));
         return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription'));
     }
+    
+    function renewal() {
+        $now = Date('Y-m-d');
+        $now_10days = Date('Y-m-d',strtotime($now . ' +10 day'));
+        $subscription = Subscription::where('end_date','>',$now)->where('end_date','<=',$now_10days)->paginate(Config('constants.paginateNo'));
+        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription'));
+    }
 
     public function add() {
         $subscription = new Subscription();

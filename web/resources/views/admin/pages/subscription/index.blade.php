@@ -36,6 +36,8 @@
                                 <th>Preferred Timeslot</th>
                                 <th>Frequency</th>
                                 <th>Amount Paid</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>                                
                                 <th>Subscribed On</th>
                                 <th>Last Updated By</th>
                             </tr>
@@ -48,14 +50,13 @@
                                 <td>{{ @$asset->timeslot()->first()->name }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>
+                                <td>{{ date('d M Y', strtotime($asset->start_date)) }}</td>
+                                <td>{{ date('d M Y', strtotime($asset->end_date)) }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>                                
                                     <a href="{{ route('admin.subscription.delete',['id' => $asset->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 

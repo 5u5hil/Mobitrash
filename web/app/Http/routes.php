@@ -129,6 +129,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/delete', ['as' => 'admin.subscription.delete', 'uses' => 'SubscriptionController@delete']);
             Route::get('/rmfile', ['as' => 'admin.subscription.rmfile', 'uses' => 'SubscriptionController@rmfile']);
         });
+        Route::group(['prefix' => 'renewal'], function() {
+            Route::get('/', ['as' => 'admin.renewal.view', 'uses' => 'SubscriptionController@renewal']);
+        });
         
           Route::group(['prefix' => 'servicehistory'], function() {
             Route::get('/', ['as' => 'admin.servicehistory.view', 'uses' => 'ServicehistoryController@index']);

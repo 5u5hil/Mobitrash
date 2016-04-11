@@ -1,8 +1,18 @@
 @extends('admin.layouts.default')
 @section('content')
 <style>
-    .sub-info span{
-        margin-right: 15px;
+    .sub-info-block{
+        border: 1px solid #ccc;
+        box-shadow: 1px 4px 10px 1px rgb(220, 220, 220);
+        padding: 10px;
+        border-radius: 4px;
+        width: 330px!important;
+    }
+    .sub-info div{
+        display: inline-block;
+    }
+    .sub-info .info-left{
+        width: 160px;      
     }
 </style>
 <section class="content-header">
@@ -31,10 +41,10 @@
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
+                    <div class="form-group"> 
                         {!!Form::label('user','For',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('for',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::date('for',null, ["class"=>'form-control datepicker', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -83,7 +93,7 @@
                             </div>
 
                             <div class="col-sm-2">
-                                {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
+                                {!! Form::time("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
 
@@ -91,10 +101,16 @@
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
                             </div>
-                            <div class="col-sm-4 sub-info">   
-                                <span>{{ @$pickup->sub_deatils->packages->name}}</span>
-                                <span>{{ @$pickup->sub_deatils->frequency->name}}</span>
-                                <span>{{ @$pickup->sub_deatils->approximate_processing_time}}</span>            
+                            <div class="col-sm-4 sub-info-block">  
+                                <div class="sub-info">
+                                    <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
+                                </div>
+                                <div class="sub-info">
+                                    <div class="info-left">Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
+                                </div>                                
+                                <div class="sub-info">
+                                    <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
+                                </div>
                             </div> 
 
 
@@ -127,16 +143,23 @@
             {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
         </div>
         <div class="col-sm-2">
-            {!! Form::datetime("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
+            {!! Form::time("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
             <a  data-value="" class="label label-danger active  DelImg delete-new-pickup" >Delete</a> 
         </div>
-        <div class="col-sm-4 sub-info">   
-            <span class="package_name"></span>
-            <span class="frequency_name"></span>
-            <span class="approx_time_text"></span>            
-        </div>        
+        <div class="col-sm-4 sub-info-block sub-info"> 
+            <div class="sub-info">
+                <div class="info-left">Frequency</div><div class="frequency_name"></div>
+            </div>
+            <div class="sub-info">
+                <div class="info-left">Time Slot</div><div class="time_slot"></div>
+            </div>            
+            <div class="sub-info">
+                <div class="info-left">Approx Processing Time</div><div class="approx_time"></div>            
+            </div>
+        </div> 
+
 
     </div>
 </div>
@@ -164,7 +187,7 @@
     $("body").on("change", ".select_user", function () {
         var select = $(this);
         var options = $([]);
-        select.parent().parent().find(".sub-info span").html('');
+        select.parent().parent().find(".sub-info .approx_time, .sub-info .frequency_name, .sub-info .time_slot ").html('');
         options = options.add($("<option />", {text: 'Select Address', value: ''}));
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
@@ -194,11 +217,9 @@
                 address_id: select.val()
             },
             success: function (data) {
-                select.parent().parent().find(".approx_time").val(data[0].approximate_processing_time);
-                select.parent().parent().find(".approx_time_text").html(data[0].approximate_processing_time);
-//                select.parent().parent().find(".frequency").val(data.approximate_processing_time);
+                select.parent().parent().find(".approx_time").html(data[0].approximate_processing_time);
                 select.parent().parent().find(".frequency_name").html(data[0].frequency.name);
-                select.parent().parent().find(".package_name").html(data[0].packages.name);
+                select.parent().parent().find(".time_slot").html(data[0].timeslot.name);
             }
         });
     });

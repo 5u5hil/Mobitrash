@@ -16,7 +16,7 @@ class Subscription extends \Eloquent {
     }
 
     public function timeslot() {
-        return $this->belongsTo('App\Models\Timeslot', 'timeslot');
+        return $this->belongsTo('App\Models\Timeslot', 'timeslot_id');
     }
 
     public function frequency() {

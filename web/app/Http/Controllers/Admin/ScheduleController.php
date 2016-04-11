@@ -65,7 +65,7 @@ class ScheduleController extends Controller {
         $schedule = Schedule::find(Input::get('id'));
         $pickups = $schedule->pickups()->with('user', 'address')->get();
         foreach($pickups as $key => $pickup){
-            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'packages')->first();
+            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         }
         $userss = Role::find(3)->users->toArray();
         $users = [];
@@ -110,7 +110,7 @@ class ScheduleController extends Controller {
         $schedule = Schedule::find(Input::get('id'));
         $pickups = $schedule->pickups()->with('user', 'address')->get();
         foreach($pickups as $key => $pickup){
-            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'packages')->first();
+            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         }
         
         $vans = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
@@ -148,7 +148,9 @@ class ScheduleController extends Controller {
     }
 
     public function duplicate() {
-        $schedule = Schedule::find(Input::get('id'));
+        $schedule = Schedule::find(Input::get('id'));        
+        $schedule->for = Date('Y-m-d',strtotime($schedule->for . ' +1 day'));
+        
         $op = [];
         $oprators = $schedule->operators()->get()->toArray();
         foreach ($oprators as $value) {
@@ -169,7 +171,7 @@ class ScheduleController extends Controller {
             $new_pickup = $pickup->replicate();
             $new_pickup->push();
         }
-        return redirect()->back()->with("message", "Schedule duplicated sucessfully");
+        return redirect()->route('admin.schedule.edit', array('id' => $new_schedule->id))->with("message", "Schedule duplicated sucessfully");
     }
 
     public function delete() {
