@@ -4,6 +4,12 @@
     .view-table tr td:first-child{
         font-weight: bold;
     }
+    .sub-info div{
+        margin-right: 15px;
+        width: 87px;
+        display: inline-block;
+        overflow-x: hidden;
+    }
 </style>
 <section class="content-header">
     <h1>
@@ -75,18 +81,22 @@
                                 <td>Pickups</td>
                                 <td style="padding: 20px;">
                                     @if($pickups->count()>0)
-                                    <div class="row form-group">
-                                        <div style="font-weight: bold; border-bottom: 1px solid #ECECEC;">
-                                        <div class="col-sm-2">
-                                            Name
-                                        </div>
-                                        <div class="col-sm-3">
-                                            Address
-                                        </div>
-                                        Approx. Processing Time
-                                        <div class="col-sm-2">
-                                            Pickup Time                                            
-                                        </div> 
+                                    <div class="row form-group; border-bottom: 1px solid #ECECEC;">
+                                        <div style="font-weight: bold;">
+                                            <div class="col-sm-2">
+                                                Name
+                                            </div>
+                                            <div class="col-sm-3">
+                                                Address
+                                            </div>                                            
+                                            <div class="col-sm-2">
+                                                Pickup Time                                            
+                                            </div> 
+                                            <div class="col-sm-4 sub-info">   
+                                                <div>Package</div>
+                                                <div>Frequency</div>
+                                                <div>Approx. Time</div>            
+                                            </div>  
                                         </div>
                                     </div>
                                     @foreach($pickups as $key => $pickup)
@@ -99,11 +109,13 @@
                                             {{$pickup->address->address}}
                                         </div>
                                         <div class="col-sm-2">
-                                            {{$pickup->approximate_processing_time}}
+                                            {{$pickup->pickuptime}}
                                         </div>
-                                        <div class="col-sm-2">
-                                            {{$pickup->pickuptime}}                                            
-                                        </div> 
+                                        <div class="col-sm-4 sub-info">   
+                                            <div>{{ @$pickup->sub_deatils->packages->name}}</div>
+                                            <div>{{ @$pickup->sub_deatils->frequency->name}}</div>
+                                            <div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
+                                        </div>  
                                     </div>
                                     @endforeach
                                     @endif

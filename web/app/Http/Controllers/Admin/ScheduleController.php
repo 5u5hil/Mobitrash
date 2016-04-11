@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\Schedule;
 use App\Models\Pickup;
 use App\Models\Role;
+use App\Models\Subscription;
 use App\Models\Asset;
 use App\Http\Controllers\Controller;
 
@@ -63,6 +64,9 @@ class ScheduleController extends Controller {
     public function edit() {
         $schedule = Schedule::find(Input::get('id'));
         $pickups = $schedule->pickups()->with('user', 'address')->get();
+        foreach($pickups as $key => $pickup){
+            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'packages')->first();
+        }
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
@@ -104,8 +108,11 @@ class ScheduleController extends Controller {
 
     public function show() {
         $schedule = Schedule::find(Input::get('id'));
-
         $pickups = $schedule->pickups()->with('user', 'address')->get();
+        foreach($pickups as $key => $pickup){
+            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'packages')->first();
+        }
+        
         $vans = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
         
         $operators = $schedule->operators->toArray();

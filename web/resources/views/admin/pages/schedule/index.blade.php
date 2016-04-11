@@ -32,6 +32,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Schedule Name</th>
                                 <th>Schedule For</th>
                                 <th>Van</th>
                                 <th>Last Updated By</th>
@@ -42,7 +43,8 @@
                         <tbody>
                             @foreach($schedule as $asset)
                             <tr>
-                                <td>{{ $asset->id }}</td>                               
+                                <td>{{ $asset->id }}</td> 
+                                <td>{{ $asset->name }}</td> 
                                 <td>{{ date('d M Y', strtotime($asset->for)) }}</td>
                                 <td>{{ @$asset->van()->first()->name }}</td>
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>

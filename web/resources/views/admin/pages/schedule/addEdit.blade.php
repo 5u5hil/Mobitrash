@@ -1,6 +1,10 @@
 @extends('admin.layouts.default')
 @section('content')
-
+<style>
+    .sub-info span{
+        margin-right: 15px;
+    }
+</style>
 <section class="content-header">
     <h1>
         Add New Schedule
@@ -47,7 +51,7 @@
                             {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "required", "multiple" => true]) !!}
                         </div>
                     </div>
-                    
+
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('user','Drivers',['class'=>'col-sm-2 ']) !!}
@@ -64,7 +68,7 @@
                         </div>
                     </div>
                     <br />
-                    
+
                     <div class="existing">
                         @if($pickups->count()>0)
 
@@ -77,27 +81,28 @@
                             <div class="col-sm-3">
                                 {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
-                            
+
                             <div class="col-sm-2">
                                 {!! Form::datetime("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
-                                {!! Form::hidden("pickup[$key][approximate_processing_time]",$pickup->approximate_processing_time) !!}
 
                             </div> 
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
                             </div>
-                            <div class="col-sm-2">
-                                {{$pickup->approximate_processing_time}}
-                            </div>
-                            
+                            <div class="col-sm-4 sub-info">   
+                                <span>{{ @$pickup->sub_deatils->packages->name}}</span>
+                                <span>{{ @$pickup->sub_deatils->frequency->name}}</span>
+                                <span>{{ @$pickup->sub_deatils->approximate_processing_time}}</span>            
+                            </div> 
+
 
                         </div>
                         @endforeach
                         @endif
                     </div>
-                    
+
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
@@ -125,13 +130,14 @@
             {!! Form::datetime("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
-            <a  data-value="" class="label label-danger active  DelImg" >Delete</a> 
+            <a  data-value="" class="label label-danger active  DelImg delete-new-pickup" >Delete</a> 
         </div>
-        <div class="col-sm-2">
-            {!! Form::hidden("pickup[0][approximate_processing_time]", null, ["class"=>'form-control approx_time', "readonly"=> "readonly"]) !!}
-            <span class="approx_time_text"></span>
+        <div class="col-sm-4 sub-info">   
+            <span class="package_name"></span>
+            <span class="frequency_name"></span>
+            <span class="approx_time_text"></span>            
         </div>        
-        
+
     </div>
 </div>
 @stop 
@@ -148,12 +154,9 @@
         $('[name*="user_address_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][user_address_id]");
         });
-        
+
         $('[name*="pickuptime"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][pickuptime]");
-        });
-        $('[name*="approximate_processing_time"]').each(function (k, v) {
-            $(this).attr("name", "pickup[" + k + "][approximate_processing_time]");
         });
 
     });
@@ -161,8 +164,8 @@
     $("body").on("change", ".select_user", function () {
         var select = $(this);
         var options = $([]);
-        select.parent().parent().find(".approx_time").val('');
-        options = options.add($("<option />", {text: 'Select Address', value:''}));
+        select.parent().parent().find(".sub-info span").html('');
+        options = options.add($("<option />", {text: 'Select Address', value: ''}));
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
             type: "GET",
@@ -174,14 +177,14 @@
                     var opt = $("<option />", {text: v.address, value: v.id});
                     options = options.add(opt);
                 });
-                select.parent().parent().find(".select_add").html(options);    
+                select.parent().parent().find(".select_add").html(options);
             }
         });
     });
-    
+
     $("body").on("change", ".select_add", function () {
-        var select = $(this); 
-        var userid =  select.parent().parent().find(".select_user").val();
+        var select = $(this);
+        var userid = select.parent().parent().find(".select_user").val();
         console.log(userid);
         $.ajax({
             url: "<?= route('getUserApproxTime') ?>",
@@ -190,15 +193,16 @@
                 uid: userid,
                 address_id: select.val()
             },
-            success: function (data) {                           
+            success: function (data) {
                 select.parent().parent().find(".approx_time").val(data[0].approximate_processing_time);
                 select.parent().parent().find(".approx_time_text").html(data[0].approximate_processing_time);
 //                select.parent().parent().find(".frequency").val(data.approximate_processing_time);
-                select.parent().parent().find(".frequency_text").html(data[0].frequency.name);
+                select.parent().parent().find(".frequency_name").html(data[0].frequency.name);
+                select.parent().parent().find(".package_name").html(data[0].packages.name);
             }
         });
     });
-    
+
     $("body").on("click", ".delete-pickup", function () {
         var pickup_id = $(this).attr('data-id');
         var $this = $(this);
@@ -208,14 +212,18 @@
             data: {
                 id: pickup_id,
             },
-            success: function (response) { 
-                if(response.flash == 'success'){
+            success: function (response) {
+                if (response.flash == 'success') {
                     $this.parent().parent().fadeOut();
                 }
             }
         });
     });
-    
+
+    $("body").on("click", ".delete-new-pickup", function () {
+        $(this).parent().parent().remove();
+    });
+
 
 </script>
 
