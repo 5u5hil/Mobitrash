@@ -6,6 +6,8 @@
 <script src="{{ asset('public/Admin/plugins/fastclick/fastclick.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('public/Admin/dist/js/app.min.js') }}"></script>
+<script src="{{ asset('public/Admin/dist/js/jqueryui1.11.4.js') }}"></script>
+<script src="{{ asset('public/Admin/dist/js/jquery-ui-timepicker-addon.js') }}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('public/Admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
 <!-- jvectormap -->
@@ -19,7 +21,6 @@
 <script src="{{ asset('public/Admin/dist/js/pages/dashboard2.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/Admin/dist/js/demo.js') }}"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 
 

@@ -19,8 +19,7 @@ class ScheduleController extends Controller {
 
     public function add() {
         $schedule = new Schedule();
-
-
+        
         $pickups = $schedule->pickups()->with('user', 'address')->get();
         $userss = Role::find(3)->users->toArray();
         $users = [];
@@ -46,7 +45,7 @@ class ScheduleController extends Controller {
             array_push($opsd, $val['id']);
         }
 
-        $v = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
+        $v = Asset::where("is_active", 1)->where("type_id", 1)->get()->toArray();
         $vans = [];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
@@ -91,7 +90,7 @@ class ScheduleController extends Controller {
             array_push($opsd, $val['id']);
         }
 
-        $v = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
+        $v = Asset::where("is_active", 1)->where("type_id", 1)->get()->toArray();
         $vans = [];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
@@ -112,9 +111,6 @@ class ScheduleController extends Controller {
         foreach($pickups as $key => $pickup){
             $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         }
-        
-        $vans = Asset::where("is_active", 1)->where("type", 1)->get()->toArray();
-        
         $operators = $schedule->operators->toArray();
         $drivers = $schedule->drivers->toArray();
 

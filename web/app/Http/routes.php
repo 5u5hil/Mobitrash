@@ -146,6 +146,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/add', ['as' => 'admin.record.add', 'uses' => 'RecordController@add']);
             Route::post('/save', ['as' => 'admin.record.save', 'uses' => 'RecordController@save']);
             Route::get('/edit', ['as' => 'admin.record.edit', 'uses' => 'RecordController@edit']);
+            Route::get('/show', ['as' => 'admin.record.show', 'uses' => 'RecordController@show']);
             Route::get('/delete', ['as' => 'admin.record.delete', 'uses' => 'RecordController@delete']);
             Route::get('/rmfile', ['as' => 'admin.record.rmfile', 'uses' => 'RecordController@rmfile']);
         });
@@ -166,6 +167,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/add', ['as' => 'admin.assets.add', 'uses' => 'AssetsController@add']);
             Route::post('/save', ['as' => 'admin.assets.save', 'uses' => 'AssetsController@save']);
             Route::get('/edit', ['as' => 'admin.assets.edit', 'uses' => 'AssetsController@edit']);
+            Route::get('/show', ['as' => 'admin.assets.show', 'uses' => 'AssetsController@show']);
             Route::get('/delete', ['as' => 'admin.assets.delete', 'uses' => 'AssetsController@delete']);
         });
 

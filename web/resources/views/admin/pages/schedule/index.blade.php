@@ -52,7 +52,7 @@
                                 <td>
                                     <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">view</a>
                                     <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">Edit</a>
-                                    <a href="{{ route('admin.schedule.duplicate',['id' => $asset->id ])  }}" class="label label-primary active" onclick="return confirm('Schedule will duplicated for next day! Are you sure?')" ui-toggle-class="">Duplicate</a>
+                                    <a href="{{ route('admin.schedule.duplicate',['id' => $asset->id ])  }}" class="label label-primary active" onclick="return confirm('Schedule will duplicated for next day of schedule date! Are you sure?')" ui-toggle-class="">Duplicate</a>
                                     <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 

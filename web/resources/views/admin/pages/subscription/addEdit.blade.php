@@ -49,7 +49,7 @@
                     <div class="form-group">
                         {!!Form::label('user','Timeslot',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('timeslot',$timeslot,null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::select('timeslot_id',$timeslot,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -70,12 +70,12 @@
                     <div class="form-group">
                         {!!Form::label('dop','Paid On',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('paid_on',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('paid_on',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Max Waste',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Max Waste quantity (kg)',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('max_waste',null, ["class"=>'form-control', "required"]) !!}
                         </div>
@@ -91,21 +91,21 @@
                     <div class="form-group">
                         {!!Form::label('dop','Start Date',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('start_date',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('start_date',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','End Date',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('end_date',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('end_date',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','Approximate Processing Time',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::time('approximate_processing_time',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('approximate_processing_time',null, ["class"=>'form-control timepicker', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

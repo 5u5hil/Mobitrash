@@ -1,0 +1,28 @@
+.datepicker{
+    padding: 0 15px;
+}
+
+input:required { 
+    //background-color: #FFDFDF;
+}
+select:required { 
+    //background-color: #FFDFDF;
+}
+
+.dropdown-menu{
+    border: 1px solid #656565;
+}
+
+.sub-info-block{
+    border: 1px solid #ccc;
+    box-shadow: 1px 4px 10px 1px rgb(220, 220, 220);
+    padding: 10px;
+    border-radius: 4px;
+    width: 330px!important;
+}
+.sub-info div{
+    display: inline-block;
+}
+.sub-info .info-left{
+    width: 160px;      
+}

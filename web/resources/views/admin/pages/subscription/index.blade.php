@@ -37,7 +37,9 @@
                                 <th>Frequency</th>
                                 <th>Amount Paid</th>
                                 <th>Start Date</th>
-                                <th>End Date</th>                                
+                                <th>End Date</th>    
+                                <th>Max Waste Quantity</th>    
+                                <th>Waste Type</th>    
                                 <th>Subscribed On</th>
                                 <th>Last Updated By</th>
                             </tr>
@@ -52,6 +54,8 @@
                                 <td>{{ $asset->amt_paid }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->start_date)) }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->end_date)) }}</td>
+                                <td>{{ $asset->max_waste }}</td>
+                                <td>{{ $asset->wastetypes[0]->name}}</td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
 

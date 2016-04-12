@@ -40,23 +40,19 @@
                                 <th>Last Updated At</th>
                             </tr>
                         </thead>
-                        <tbody>
-                          
-                            @foreach($record as $city)
-                            
+                        <tbody>                          
+                            @foreach($record as $city)                            
                             <tr>
                                 <td>{{ @$city->id }}</td>
                                 <td>{{ @$city->rtype->name }}</td>
-                                <td>{{ @$city->asset->name ." " . $city->asset->asset_no }}</td>
+                                <td>{{ @$city->asset->name ." " . @$city->asset->asset_no }}</td>
                                 <td>{{ $city->remarks }}</td>
                                 <td>{{ date("d M Y",strtotime($city->date)) }}</td>
                                 <td>{{ @$city->addedBy->first_name }}</td>
                                 <td>{{ date("d M Y",strtotime($city->updated_at)) }}</td>
                                 <td>
+                                    <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>
                                     <a href="{{ route('admin.record.edit',['id' => $city->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
                                     <a href="{{ route('admin.record.delete',['id' => $city->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 

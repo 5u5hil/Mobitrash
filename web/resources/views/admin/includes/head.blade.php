@@ -16,7 +16,9 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/skins/_all-skins.min.css') }}">
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui.css') }}">
+<link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">
+<link rel="stylesheet" href="{{ asset('public/Admin/dist/css/style.css') }}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

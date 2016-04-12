@@ -14,7 +14,6 @@ class RecordController extends Controller {
 
     function index() {
         $record = Record::with(['rtype', 'addedBy', 'asset'])->paginate(Config('constants.paginateNo'));
-
         return view(Config('constants.adminRecordView') . '.index', compact('record'));
     }
 
@@ -69,6 +68,12 @@ class RecordController extends Controller {
 
         $action = "admin.record.save";
         return view(Config('constants.adminRecordView') . '.addEdit', compact('record', 'action', 'recordtypes', 'vans', 'fueltypes'));
+    }
+    
+    public function show() {
+        $record = Record::find(Input::get('id')); 
+        $atts = $record->atts()->get();
+        return view(Config('constants.adminRecordView') . '.show', compact('record', 'atts'));
     }
 
     public function save() {

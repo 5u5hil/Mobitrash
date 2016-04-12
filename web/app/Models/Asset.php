@@ -12,7 +12,7 @@ class Asset extends \Eloquent {
     }
 
     public function type() {
-        return $this->belongsTo('App\Models\AssetType', 'type');
+        return $this->belongsTo('App\Models\AssetType', 'type_id');
     }
 
     public function addedBy() {

@@ -17,7 +17,7 @@ class AssetsController extends Controller {
 
     public function add() {
         $asset = new Asset();
-        $eassets = Asset::where("type", 1)->get()->toArray();
+        $eassets = Asset::where("type_id", 1)->get()->toArray();
         $exassets = [0 => "Individual Asset"];
         foreach ($eassets as $value) {
             $exassets[$value['id']] = $value['name'] . " - " . $value['asset_no'];
@@ -41,7 +41,7 @@ class AssetsController extends Controller {
 
     public function edit() {
         $asset = Asset::find(Input::get('id'));
-        $eassets = Asset::where("type", 1)->get()->toArray();
+        $eassets = Asset::where("type_id", 1)->get()->toArray();
         $exassets = [0 => "Individual Asset"];
         foreach ($eassets as $value) {
             $exassets[$value['id']] = $value['name'] . " - " . $value['asset_no'];
@@ -63,6 +63,11 @@ class AssetsController extends Controller {
 
         $action = "admin.assets.save";
         return view(Config('constants.adminAssetView') . '.addEdit', compact('asset', 'types', 'cities', 'exassets', 'action'));
+    }
+    
+    public function show() {
+        $assets = Asset::find(Input::get('id')); 
+        return view(Config('constants.adminAssetView') . '.show', compact('assets'));
     }
 
     public function save() {

@@ -1,20 +1,5 @@
 @extends('admin.layouts.default')
 @section('content')
-<style>
-    .sub-info-block{
-        border: 1px solid #ccc;
-        box-shadow: 1px 4px 10px 1px rgb(220, 220, 220);
-        padding: 10px;
-        border-radius: 4px;
-        width: 330px!important;
-    }
-    .sub-info div{
-        display: inline-block;
-    }
-    .sub-info .info-left{
-        width: 160px;      
-    }
-</style>
 <section class="content-header">
     <h1>
         Add New Schedule
@@ -44,7 +29,7 @@
                     <div class="form-group"> 
                         {!!Form::label('user','For',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('for',null, ["class"=>'form-control datepicker', "required"]) !!}
+                            {!! Form::text('for',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -93,7 +78,7 @@
                             </div>
 
                             <div class="col-sm-2">
-                                {!! Form::time("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control', "required"]) !!}
+                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker-f2', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
 
@@ -106,7 +91,7 @@
                                     <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
                                 </div>
                                 <div class="sub-info">
-                                    <div class="info-left">Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
+                                    <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
                                 </div>                                
                                 <div class="sub-info">
                                     <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
@@ -143,7 +128,7 @@
             {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
         </div>
         <div class="col-sm-2">
-            {!! Form::time("pickup[0][pickuptime]",null, ["class"=>'form-control', "required"]) !!}
+            {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
             <a  data-value="" class="label label-danger active  DelImg delete-new-pickup" >Delete</a> 
@@ -153,7 +138,7 @@
                 <div class="info-left">Frequency</div><div class="frequency_name"></div>
             </div>
             <div class="sub-info">
-                <div class="info-left">Time Slot</div><div class="time_slot"></div>
+                <div class="info-left">Preferred Time Slot</div><div class="time_slot"></div>
             </div>            
             <div class="sub-info">
                 <div class="info-left">Approx Processing Time</div><div class="approx_time"></div>            
@@ -171,6 +156,9 @@
 
     $(".addMore").click(function () {
         $(".existing").append($(".addNew").html());
+        $('.timepicker-new').timepicker({
+            timeFormat: 'hh:mm TT'
+        });
         $('[name*="user_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][user_id]");
         });

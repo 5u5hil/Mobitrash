@@ -23,7 +23,7 @@
                     <div class="form-group">
                         {!!Form::label('type','Asset Type',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('type',$types,null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::select('type_id',$types,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         {!!Form::label('dop','DOP',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('dop',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('dop',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

@@ -30,14 +30,14 @@
                     <div class="form-group">
                         {!!Form::label('Active','Start Time',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::time('start_time',null, ["class"=>'form-control']) !!}
+                            {!! Form::text('start_time',null, ["class"=>'form-control timepicker']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('Active','End Time',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::time('end_time',null, ["class"=>'form-control']) !!}
+                            {!! Form::text('end_time',null, ["class"=>'form-control timepicker']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

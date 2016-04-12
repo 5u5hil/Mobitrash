@@ -43,7 +43,7 @@
                     <div class="form-group">
                         {!!Form::label('user','Date of Receipt',['class'=>'col-sm-2 ']) !!}
                         <div class="col-sm-10">
-                            {!! Form::date('date',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('date',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

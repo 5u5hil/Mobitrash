@@ -1,20 +1,5 @@
 @extends('admin.layouts.default')
 @section('content')
-<style>
-    .sub-info-block{
-        border: 1px solid #ccc;
-        box-shadow: 1px 4px 10px 1px rgb(220, 220, 220);
-        padding: 10px;
-        border-radius: 4px;
-        width: 330px!important;
-    }
-    .sub-info div{
-        display: inline-block;
-    }
-    .sub-info .info-left{
-        width: 160px;      
-    }
-</style>
 <section class="content-header">
     <h1>
         Schedule
@@ -47,14 +32,12 @@
                             </tr>
                             <tr>
                                 <td>Van</td>
-                                <td>                                                                     
-                                    @foreach($vans as $key => $van)
+                                <td>  
                                     <div class="row form-group">
                                         <div class="col-sm-4">
-                                            {{$van['name'].' - '.$van['asset_no']}}                                                                              
+                                            {{@$schedule->van->name.' - '.@$schedule->van->asset_no}}                                                                              
                                         </div> 
-                                    </div>
-                                    @endforeach                                   
+                                    </div>                                 
                                 </td>
                             </tr>
                             <tr>
@@ -118,7 +101,7 @@
                                                 <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
                                             </div>
                                             <div class="sub-info">
-                                                <div class="info-left">Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
+                                                <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
                                             </div>                                
                                             <div class="sub-info">
                                                 <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
