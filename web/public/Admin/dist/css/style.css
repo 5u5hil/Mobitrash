@@ -2,12 +2,16 @@
     padding: 0 15px;
 }
 
-input:required { 
-    //background-color: #FFDFDF;
+.required:after { 
+    content: '  *';
+    color: #EF1919;
 }
-select:required { 
-    //background-color: #FFDFDF;
+.optional:after { 
+    content: '  (optional)';
+    color: #B9B9B9;
+    font-weight: normal;
 }
+
 
 .dropdown-menu{
     border: 1px solid #656565;
@@ -25,4 +29,15 @@ select:required {
 }
 .sub-info .info-left{
     width: 160px;      
+}
+
+.filelist div{
+    width: 40%;
+    display: inline-block;
+}
+.show-fuel{
+    display: block;
+}
+.hide-fuel{
+    display: none;
 }

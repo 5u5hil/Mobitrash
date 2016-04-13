@@ -1,11 +1,6 @@
 @extends('admin.layouts.default')
 @section('content')
-<style>
-    .filelist div{
-        width: 40%;
-        display: inline-block;
-    }
-</style>
+
 <section class="content-header">
     <h1>
         Add New Record
@@ -26,14 +21,14 @@
 
                     {!! Form::model($record, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal','files'=>true ]) !!}
                     <div class="form-group">
-                        {!!Form::label('user','Record Type',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Record Type',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('recordtype_id',$recordtypes,null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::select('recordtype_id',$recordtypes,null, ["class"=>'form-control record_type', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Asset',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Asset',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('asset_id',$vans,null, ["class"=>'form-control', "required"]) !!}
                         </div>
@@ -41,7 +36,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        {!!Form::label('user','Date of Receipt',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Date of Receipt',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('date',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
@@ -50,35 +45,35 @@
 
 
                     <div class="form-group">
-                        {!!Form::label('City','Remarks',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Remarks',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('remarks',null, ["class"=>'form-control' ,"placeholder"=>'Remarks', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('City','Amount',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Amount',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('amt',null, ["class"=>'form-control' ,"placeholder"=>'Amount', "required"]) !!}
                         </div>
                     </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>                    
+                    <div class="form-group for-fuel-type <?php echo ($record->recordtype_id == 1 ? 'show-fuel' : 'hide-fuel'); ?>">
+                        {!!Form::label('user','Fuel Type',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('fueltype_id',$fueltypes,null, ["class"=>'form-control']) !!}
+                        </div>
+                    </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('City','Quantity',['class'=>'col-sm-2 ']) !!}
+                    <div class="form-group for-fuel-type <?php echo ($record->recordtype_id == 1 ? 'show-fuel' : 'hide-fuel'); ?>" >
+                        {!!Form::label('City','Quantity',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('quantity',null, ["class"=>'form-control' ,"placeholder"=>'Quantity']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Fuel Type',['class'=>'col-sm-2 ']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select('fueltype_id',$fueltypes,null, ["class"=>'form-control']) !!}
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('City','Attachments',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Attachments',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
                         </div>
@@ -121,7 +116,21 @@
             $("[name='chk[]']").removeAttr('Checked');
         }
     });
-    
+
+    $("body").on("change", ".record_type", function () {
+        var $this = $(this);
+        var recordtype = $this.val();
+        if(recordtype == 1){
+            $('.for-fuel-type').show();
+            $('.for-fuel-type input, .for-fuel-type select').prop('disabled',false);
+        }else{
+            $('.for-fuel-type').hide();
+            $('.for-fuel-type input, .for-fuel-type select').prop('disabled',true);
+        }
+    }).click();
+
+
+
 </script>
 
 @stop

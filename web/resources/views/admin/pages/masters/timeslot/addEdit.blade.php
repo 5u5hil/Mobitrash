@@ -21,35 +21,35 @@
 
                     {!! Form::model($timeslot, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
-                        {!!Form::label('City','Timeslot',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Timeslot',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Timeslot name', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Start Time',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','Start Time',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('start_time',null, ["class"=>'form-control timepicker']) !!}
+                            {!! Form::text('start_time',null, ["class"=>'form-control timepicker', 'placeholder' => 'Start Time']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','End Time',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','End Time',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('end_time',null, ["class"=>'form-control timepicker']) !!}
+                            {!! Form::text('end_time',null, ["class"=>'form-control timepicker', 'placeholder'=>'End Time']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Active',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','Active',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('is_active',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Slot Type',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','Slot Type',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('type',[0 => "Both", 1 => "Operator Shift", 2 => "User Pickup Time" ],null, ["class"=>'form-control']) !!}
                         </div>

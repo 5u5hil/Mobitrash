@@ -26,91 +26,91 @@
 
                     {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal', 'files'=>true ]) !!}
                     <div class="form-group">
-                        {!!Form::label('user','Customer',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Customer',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('user_id',$users,null, ["class"=>'form-control selectpicker select_user', "data-show-content" => "false", "required", "data-live-search" => "true"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Customer Address',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Customer Address',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('user_address_id',[],null, ["class"=>'form-control select_add', "data-show-content" => "false", "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Frequency',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Frequency',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('frequency_id',$frequency,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Timeslot',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Timeslot',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('timeslot_id',$timeslot,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Package',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Package',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('package_id',$packages, null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('amt_paid',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Paid On',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Paid On',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('paid_on',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Max Waste quantity (kg)',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Max Waste quantity (kg)',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('max_waste',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Waste Type',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Waste Type',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('wastetype[]',$wastetype,$wastetype_selected, ["class"=>'form-control', "required", "multiple" => true]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Start Date',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Start Date',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('start_date',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','End Date',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','End Date',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('end_date',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Approximate Processing Time',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Approximate Processing Time',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('approximate_processing_time',null, ["class"=>'form-control timepicker', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Attachments',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('dop','Attachments',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
                         </div>

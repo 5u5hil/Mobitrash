@@ -21,28 +21,28 @@
 
         {!! Form::model($role, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
         <div class="form-group">
-            {!!Form::label('Role','Role',['class'=>'col-sm-2 ']) !!}
+            {!!Form::label('Role','Role',['class'=>'col-sm-2 required']) !!}
             <div class="col-sm-10">
                 {!! Form::text('display_name',null, ["class"=>'form-control' ,"placeholder"=>'Role Display Name', "required"]) !!}
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
-            {!!Form::label('Unique Identifier','Unique Identifier',['class'=>'col-sm-2 ']) !!}
+            {!!Form::label('Unique Identifier','Unique Identifier',['class'=>'col-sm-2 optional']) !!}
             <div class="col-sm-10">
                 {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Unique Identifier']) !!}
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
-            {!!Form::label('Description','Description',['class'=>'col-sm-2 ']) !!}
+            {!!Form::label('Description','Description',['class'=>'col-sm-2 optional']) !!}
             <div class="col-sm-10">
                 {!! Form::text('description',null, ["class"=>'form-control' ,"placeholder"=>'Description']) !!}
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
-            {!!Form::label('Allocate Permissions','Allocate Permissions',['class'=>'col-sm-2 ']) !!}
+            {!!Form::label('Allocate Permissions','Allocate Permissions',['class'=>'col-sm-2 optional']) !!}
             <div class="col-sm-10">
                 <div class="col-sm-12 col-xs-12 col-md-12">
                     <label for="perm" class=""><input type="checkbox"  id="perm" name="chkAll"> Grant Complete Access</label>

@@ -21,21 +21,21 @@
 
                     {!! Form::model($frequency, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
-                        {!!Form::label('City','Frequency',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('City','Frequency',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Frequency name', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Value',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','Value',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('value',null, ["class"=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Active',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('Active','Active',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('is_active',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}
                         </div>

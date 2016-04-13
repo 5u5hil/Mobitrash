@@ -52,18 +52,20 @@
                                     {{$record->amt}}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Quantity</td>
-                                <td>
-                                    {{$record->quantity}}
-                                </td>
-                            </tr>
+                            @if($record->recordtype_id == 1)                            
                             <tr>
                                 <td>Fuel Type</td>
                                 <td>
                                     {{@$record->fueltypes->name}}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>
+                                    {{$record->quantity}}
+                                </td>
+                            </tr>
+                            @endif
                             <tr>
                                 <td>Attachments</td>
                                 <td>

@@ -25,64 +25,45 @@
 
                         {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                         <div class="form-group">
-                            {!!Form::label('Name','Name',['class'=>'col-sm-2 control-label']) !!}
+                            {!!Form::label('Name','Name',['class'=>'col-sm-2 control-label required']) !!}
                             {!! Form::hidden('id',null) !!}
-
                             <div class="col-sm-10">
                                 {!! Form::text('first_name',null, ["class"=>'form-control' ,"placeholder"=>'First Name', "required"]) !!}
                             </div>
                         </div>
-
                         <div class="form-group">
-                            {!!Form::label('Last Name','Last Name',['class'=>'col-sm-2 control-label']) !!}
+                            {!!Form::label('Last Name','Last Name',['class'=>'col-sm-2 control-label optional']) !!}
                             <div class="col-sm-10">
                                 {!! Form::text('last_name',null, ["class"=>'form-control' ,"placeholder"=>'Last Name']) !!}
                             </div>
                         </div>
-
-
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
-                            {!!Form::label('Email','Email',['class'=>'col-sm-2 control-label']) !!}
+                            {!!Form::label('Email','Email',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
-                                {!! Form::email('email',null, ["class"=>'form-control' ,"placeholder"=>'Email']) !!}
-                            </div>
-                        </div>
-
-                    
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            {!!Form::label('Password','Password',['class'=>'col-sm-2 control-label']) !!}
-                            <div class="col-sm-10">
-                                {!! Form::password('password', ["class"=>'form-control' ,"placeholder"=>'Password']) !!}
+                                {!! Form::email('email',null, ["class"=>'form-control' ,"placeholder"=>'Email', "required"]) !!}
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
                         <div class="form-group">
-                            {!!Form::label('Role','Role',['class'=>'col-sm-2 control-label']) !!}
+                            {!!Form::label('Password','Password',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
-
+                                {!! Form::password('password', ["class"=>'form-control' ,"placeholder"=>'Password' , "required"]) !!}
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            {!!Form::label('Role','Role',['class'=>'col-sm-2 control-label required']) !!}
+                            <div class="col-sm-10">
                                 {!! Form::select('roles',$roles_name,!empty($user->roles()->first()->id)?$user->roles()->first()->id:null,["class"=>'form-control m-b' , "required"]) !!}
-
                             </div>
                         </div>
-
-
                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 {!! Form::submit('Submit',["class" => "btn btn-primary SustemUserSubmit"]) !!}
-                                {!! Form::close() !!}     
-
-
+                                {!! Form::close() !!}
                             </div>
                         </div>
                         </form>

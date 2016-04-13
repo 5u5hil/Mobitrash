@@ -20,28 +20,28 @@
 
                     {!! Form::model($schedule, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
-                        {!!Form::label('user','Schedule Name',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Schedule Name',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('name',null, ["class"=>'form-control', 'placeholder'=>'Schedule Name', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group"> 
-                        {!!Form::label('user','For',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','For',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('for',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Van',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Van',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('van_id',$vans,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Operators',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Operators',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "required", "multiple" => true]) !!}
                         </div>
@@ -49,7 +49,7 @@
 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Drivers',['class'=>'col-sm-2 ']) !!}
+                        {!!Form::label('user','Drivers',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('drivers[]',$drivers, $opsd, ["class"=>'form-control', "required", "multiple" => true]) !!}
                         </div>

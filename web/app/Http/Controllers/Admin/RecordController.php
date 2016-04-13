@@ -22,13 +22,14 @@ class RecordController extends Controller {
 
         $rtypes = Recordtype::all()->toArray();
         $recordtypes = [];
+        $recordtypes = [0 => "Select Record Type"];
         foreach ($rtypes as $value) {
             $recordtypes[$value['id']] = $value['name'];
         }
 
         $fuel_types = Fueltype::all()->toArray();
         $fueltypes = [];
-        $fueltypes = ["" => "Please Select"];
+        $fueltypes = ["" => "Select Fuel Type"];
         foreach ($fuel_types as $value) {
             $fueltypes[$value['id']] = $value['name'];
         }
@@ -45,9 +46,10 @@ class RecordController extends Controller {
 
     public function edit() {
         $record = Record::find(Input::get('id'));
-
+        
         $rtypes = Recordtype::all()->toArray();
         $recordtypes = [];
+        $recordtypes = [0 => "Select Record Type"];
         foreach ($rtypes as $value) {
             $recordtypes[$value['id']] = $value['name'];
         }
