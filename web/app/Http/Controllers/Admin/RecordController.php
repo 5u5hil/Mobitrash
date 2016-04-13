@@ -13,14 +13,46 @@ use App\Http\Controllers\Controller;
 class RecordController extends Controller {
 
     function index() {
-        $record = Record::with(['rtype', 'addedBy', 'asset'])->paginate(Config('constants.paginateNo'));
-        return view(Config('constants.adminRecordView') . '.index', compact('record'));
+
+        $rtypes = Recordtype::where("is_active", 1)->get()->toArray();
+        $recordtypes = [];
+        $recordtypes = [0 => "Select Record Type"];
+        foreach ($rtypes as $value) {
+            $recordtypes[$value['id']] = $value['name'];
+        }
+        $v = Asset::where("is_active", 1)->get()->toArray();
+        $vans = [0 => "Not Part of Any Asset"];
+        foreach ($v as $value) {
+            $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
+        }
+        $filter = array('' => 'Filter By', 'recordtype_id' => 'Record Type', 'asset_id' => 'Record For', 'date' => 'Receipt Date');
+        $filter_type = NULL;
+        $record_type = NULL;
+        $assets_type = NULL;
+        $filter_value = NULL;
+        $filter_date = NULL;
+        if (Input::get('filter_value')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'date') {
+                $filter_date = Input::get('filter_value');
+            } else if ($filter_type == 'recordtype_id') {
+                $record_type = Input::get('filter_value');
+            } else if ($filter_type == 'asset_id') {
+                $assets_type = Input::get('filter_value');
+            }
+            $record = Record::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else {
+            $record = Record::with(['rtype', 'addedBy', 'asset'])->paginate(Config('constants.paginateNo'));
+        }
+
+        return view(Config('constants.adminRecordView') . '.index', compact('record', 'filter', 'recordtypes', 'vans', 'filter_type', 'filter_value', 'record_type', 'assets_type', 'filter_date'));
     }
 
     public function add() {
         $record = new Record();
 
-        $rtypes = Recordtype::all()->toArray();
+        $rtypes = Recordtype::where("is_active", 1)->get()->toArray();
         $recordtypes = [];
         $recordtypes = [0 => "Select Record Type"];
         foreach ($rtypes as $value) {
@@ -46,7 +78,7 @@ class RecordController extends Controller {
 
     public function edit() {
         $record = Record::find(Input::get('id'));
-        
+
         $rtypes = Recordtype::all()->toArray();
         $recordtypes = [];
         $recordtypes = [0 => "Select Record Type"];
@@ -71,9 +103,9 @@ class RecordController extends Controller {
         $action = "admin.record.save";
         return view(Config('constants.adminRecordView') . '.addEdit', compact('record', 'action', 'recordtypes', 'vans', 'fueltypes'));
     }
-    
+
     public function show() {
-        $record = Record::find(Input::get('id')); 
+        $record = Record::find(Input::get('id'));
         $atts = $record->atts()->get();
         return view(Config('constants.adminRecordView') . '.show', compact('record', 'atts'));
     }
@@ -86,7 +118,7 @@ class RecordController extends Controller {
                 $destinationPath = public_path() . '/uploads/records/';
                 $fileName = time() . $key . '.' . $att->getClientOriginalExtension();
                 if ($att->move($destinationPath, $fileName)) {
-                    Attachment::create(['record_id' => $record->id, 'file' => $fileName, 'filename' => $att->getClientOriginalName(),  'is_active' => 1, "added_by" => Input::get("added_by")]);
+                    Attachment::create(['record_id' => $record->id, 'file' => $fileName, 'filename' => $att->getClientOriginalName(), 'is_active' => 1, "added_by" => Input::get("added_by")]);
                 }
             }
         }
@@ -98,7 +130,7 @@ class RecordController extends Controller {
         $record->delete();
         return redirect()->back()->with("message", "Record deleted sucessfully");
     }
-    
+
     public function rmfile() {
         $atta = Attachment::find(Input::get('id'));
         $atta->is_active = '0';

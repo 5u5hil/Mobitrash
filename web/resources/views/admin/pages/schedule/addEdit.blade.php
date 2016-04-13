@@ -78,7 +78,7 @@
                             </div>
 
                             <div class="col-sm-2">
-                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker-f2', "required"]) !!}
+                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
 
@@ -156,9 +156,7 @@
 
     $(".addMore").click(function () {
         $(".existing").append($(".addNew").html());
-        $('.timepicker-new').timepicker({
-            timeFormat: 'hh:mm TT'
-        });
+        $('.existing .timepicker-new').timepicker();
         $('[name*="user_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][user_id]");
         });
@@ -176,6 +174,10 @@
         var select = $(this);
         var options = $([]);
         select.parent().parent().find(".sub-info .approx_time, .sub-info .frequency_name, .sub-info .time_slot ").html('');
+        if (select.val() == 0) {
+            select.parent().parent().find(".select_add").html("");
+            return;
+        }
         options = options.add($("<option />", {text: 'Select Address', value: ''}));
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
@@ -184,25 +186,37 @@
                 uid: select.val()
             },
             success: function (data) {
-                $.each(data, function (k, v) {
-                    var opt = $("<option />", {text: v.address, value: v.id});
+                //console.log(data.length);
+                if (data.length == 1) {
+                    options = $([]);
+                    var opt = $("<option />", {text: data[0].address, value: data[0].id, selected:'selected'});
                     options = options.add(opt);
-                });
+                    getAddress(select.parent().parent().find(".select_add"),data[0].id);
+                } else {
+                    $.each(data, function (k, v) {
+                        var opt = $("<option />", {text: v.address, value: v.id});
+                        options = options.add(opt);
+                    });
+                }
                 select.parent().parent().find(".select_add").html(options);
+               
             }
         });
     });
 
-    $("body").on("change", ".select_add", function () {
-        var select = $(this);
+    function getAddress(select,address_id) {
         var userid = select.parent().parent().find(".select_user").val();
-        console.log(userid);
+        console.log(address_id);
+        if (address_id == 0) {
+            select.parent().parent().find(".sub-info .approx_time, .sub-info .frequency_name, .sub-info .time_slot ").html('');
+            return;
+        }
         $.ajax({
             url: "<?= route('getUserApproxTime') ?>",
             type: "GET",
             data: {
                 uid: userid,
-                address_id: select.val()
+                address_id: address_id
             },
             success: function (data) {
                 select.parent().parent().find(".approx_time").html(data[0].approximate_processing_time);
@@ -210,6 +224,9 @@
                 select.parent().parent().find(".time_slot").html(data[0].timeslot.name);
             }
         });
+    }
+    $("body").on("change", ".select_add", function () {
+        getAddress($(this),$(this).val());
     });
 
     $("body").on("click", ".delete-pickup", function () {

@@ -41,3 +41,20 @@
 .hide-fuel{
     display: none;
 }
+
+.filter-box{
+    float: right;
+    width: 450px;
+    position: absolute;
+    right: 15px;
+}
+.filter-box input, .filter-box select{
+    width: 185px; 
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.filter-box .filter-button{
+    width: 40px;
+    display: inline-block;
+}

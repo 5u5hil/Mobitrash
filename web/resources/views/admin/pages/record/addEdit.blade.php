@@ -128,9 +128,6 @@
             $('.for-fuel-type input, .for-fuel-type select').prop('disabled',true);
         }
     }).click();
-
-
-
 </script>
 
 @stop
