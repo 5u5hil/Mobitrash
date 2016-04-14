@@ -13,8 +13,35 @@ use App\Http\Controllers\Controller;
 class ScheduleController extends Controller {
 
     function index() {
-        $schedule = Schedule::paginate(Config('constants.paginateNo'));
-        return view(Config('constants.adminScheduleView') . '.index', compact('schedule'));
+        
+        $v = Asset::where("is_active", 1)->where("type_id", 1)->get()->toArray();
+        $vans = [];
+        foreach ($v as $value) {
+            $vans[$value['id']] = $value['name'];
+        }
+        
+        $filter = array('' => 'Filter By', 'name' => 'Schedule Name', 'for' => 'Schedule Date', 'van_id' => 'Van');
+        
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'name') {
+                $field1 = Input::get('filter_value');
+            } else if ($filter_type == 'for') {
+                $field2 = Input::get('filter_value');
+            } else if ($filter_type == 'van_id') {
+                $field3 = Input::get('filter_value');
+            }
+            $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else {
+            $schedule = Schedule::paginate(Config('constants.paginateNo'));
+        }
+        return view(Config('constants.adminScheduleView') . '.index', compact('schedule', 'vans', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3'));
     }
 
     public function add() {

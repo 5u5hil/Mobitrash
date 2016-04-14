@@ -17,6 +17,35 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
+                    <div class="filter-box">
+                        <?php
+                        $show_f1 = 'display:none;';
+                        $show_f2 = 'display:none;';
+                        $show_f3 = 'display:none;';
+                        $dis_f1 = 'disabled';
+                        $dis_f2 = 'disabled';
+                        $dis_f3 = 'disabled';
+                        if ($field1) {
+                            $show_f1 = '';
+                            $dis_f1 = '';
+                        }
+                        if ($field2) {                            
+                            $show_f2 = ''; 
+                            $dis_f2 = '';
+                        }
+                        if ($field3) {
+                            $show_f3 = '';
+                            $dis_f3 = '';
+                        }                      
+                        ?>
+                        {!! Form::open(['method'=>'GET','route' => 'admin.assets.view' , 'class' => 'form-horizontal' ]) !!}
+                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
+                        {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
+                        {!! Form::select('filter_value',$types,$field2, ["class"=>'form-control f2 datepicker', "style"=>$show_f2, $dis_f2]) !!}
+                        {!! Form::select('filter_value',$cities, $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}
+                        {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
+                        {!! Form::close() !!}
+                    </div>
                     <h3 class="box-title">  
                         <a href="{!! route('admin.assets.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Asset</a>      
                     </h3>
@@ -57,7 +86,7 @@
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>
+                                    <!--<a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>-->
                                     <a href="{{ route('admin.assets.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>                                
                                     <a href="{{ route('admin.assets.delete',['id' => $asset->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
@@ -68,7 +97,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= $assets->render() ?> 
+                    <?= $assets->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value])->render() ?> 
 
                 </div>
             </div><!-- /.box -->
@@ -76,10 +105,26 @@
 
     </div> 
 </section>
-
-
-
-
-
-
 @stop 
+
+@section('myscripts')
+
+<script>
+    $(".filter_type").change(function () {
+        if ($(this).val() == 'name') {
+            $(".f1").show().prop('disabled', false);
+            $(".f2").hide().prop('disabled', true);
+            $(".f3").hide().prop('disabled', true);
+        } else if ($(this).val() == 'type_id') {
+            $(".f1").hide().prop('disabled', true);
+            $(".f2").show().prop('disabled', false);
+            $(".f3").hide().prop('disabled', true);
+        } else if ($(this).val() == 'city_id') {
+            $(".f1").hide().prop('disabled', true);
+            $(".f2").hide().prop('disabled', true);
+            $(".f3").show().prop('disabled', false);
+        }
+    });
+</script>
+
+@stop

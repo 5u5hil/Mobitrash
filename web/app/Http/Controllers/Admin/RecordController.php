@@ -26,12 +26,13 @@ class RecordController extends Controller {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
         $filter = array('' => 'Filter By', 'recordtype_id' => 'Record Type', 'asset_id' => 'Record For', 'date' => 'Receipt Date');
+        
         $filter_type = NULL;
         $record_type = NULL;
         $assets_type = NULL;
         $filter_value = NULL;
         $filter_date = NULL;
-        if (Input::get('filter_value')) {
+        if (Input::get('filter_value') && Input::get('filter_type')) {
             $filter_type = Input::get('filter_type');
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'date') {

@@ -15,15 +15,90 @@ use App\Http\Controllers\Controller;
 class SubscriptionController extends Controller {
 
     function index() {
-        $subscription = Subscription::paginate(Config('constants.paginateNo'));
-        return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription'));
+        $f = Frequency::where("is_active", 1)->get()->toArray();
+        $frequency = [];
+        foreach ($f as $value) {
+            $frequency[$value['id']] = $value['name'];
+        }
+
+        $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
+        $timeslot = [];
+        foreach ($t as $value) {
+            $timeslot[$value['id']] = $value['name'];
+        }
+        $filter = array('' => 'Filter By', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        $field4 = NULL;
+        $field5 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'timeslot_id') {
+                $field1 = Input::get('filter_value');
+            } else if ($filter_type == 'frequency_id') {
+                $field2 = Input::get('filter_value');
+            } else if ($filter_type == 'amt_paid') {
+                $field3 = Input::get('filter_value');
+            } else if ($filter_type == 'start_date') {
+                $field4 = Input::get('filter_value');
+            } else if ($filter_type == 'end_date') {
+                $field5 = Input::get('filter_value');
+            }
+            $subscription = Subscription::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else {
+            $subscription = Subscription::paginate(Config('constants.paginateNo'));
+        }
+        
+        return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3', 'field4', 'field5' ));
     }
-    
+
     function renewal() {
         $now = Date('Y-m-d');
-        $now_10days = Date('Y-m-d',strtotime($now . ' +10 day'));
-        $subscription = Subscription::where('end_date','<=',$now_10days)->paginate(Config('constants.paginateNo'));
-        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription'));
+        $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
+        $f = Frequency::where("is_active", 1)->get()->toArray();
+        $frequency = [];
+        foreach ($f as $value) {
+            $frequency[$value['id']] = $value['name'];
+        }
+
+        $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
+        $timeslot = [];
+        foreach ($t as $value) {
+            $timeslot[$value['id']] = $value['name'];
+        }
+        $filter = array('' => 'Filter By', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        $field4 = NULL;
+        $field5 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'timeslot_id') {
+                $field1 = Input::get('filter_value');
+            } else if ($filter_type == 'frequency_id') {
+                $field2 = Input::get('filter_value');
+            } else if ($filter_type == 'amt_paid') {
+                $field3 = Input::get('filter_value');
+            } else if ($filter_type == 'start_date') {
+                $field4 = Input::get('filter_value');
+            } else if ($filter_type == 'end_date') {
+                $field5 = Input::get('filter_value');
+            }
+            $subscription = Subscription::where('end_date', '<=', $now_10days)->where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else {
+            $subscription = Subscription::where('end_date', '<=', $now_10days)->paginate(Config('constants.paginateNo'));
+        }  
+        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3', 'field4', 'field5' ));
     }
 
     public function add() {
@@ -52,7 +127,7 @@ class SubscriptionController extends Controller {
         foreach ($f as $value) {
             $frequency[$value['id']] = $value['name'];
         }
-        
+
         $pack = Package::where("is_active", 1)->get()->toArray();
         $packages = [];
         foreach ($pack as $value) {
@@ -96,7 +171,7 @@ class SubscriptionController extends Controller {
         foreach ($f as $value) {
             $frequency[$value['id']] = $value['name'];
         }
-        
+
         $pack = Package::where("is_active", 1)->get()->toArray();
         $packages = [];
         foreach ($pack as $value) {
@@ -122,7 +197,7 @@ class SubscriptionController extends Controller {
                 $destinationPath = public_path() . '/uploads/records/';
                 $fileName = time() . $key . '.' . $att->getClientOriginalExtension();
                 if ($att->move($destinationPath, $fileName)) {
-                   Attachment::create(['subscription_id' => $subscription->id,  'file' => $fileName, 'filename' => $att->getClientOriginalName(), 'is_active' => 1, "added_by" => Input::get("added_by")]);
+                    Attachment::create(['subscription_id' => $subscription->id, 'file' => $fileName, 'filename' => $att->getClientOriginalName(), 'is_active' => 1, "added_by" => Input::get("added_by")]);
                 }
             }
         }
@@ -134,7 +209,7 @@ class SubscriptionController extends Controller {
         $subscription->delete();
         return redirect()->back()->with("message", "Subscription deleted sucessfully");
     }
-    
+
     public function rmfile() {
         $atta = Attachment::find(Input::get('id'));
         $atta->is_active = '0';

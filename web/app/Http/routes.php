@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
 
 
-        //   Route::group(['middleware' => 'CheckUser'], function() {
+//   Route::group(['middleware' => 'CheckUser'], function() {
         Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "LoginController@dashboard"]);
 
         Route::group(['prefix' => 'master'], function() {
@@ -88,7 +88,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.fueltype.edit', 'uses' => 'FueltypeController@edit']);
                 Route::get('/delete', ['as' => 'admin.fueltype.delete', 'uses' => 'FueltypeController@delete']);
             });
-            
+
             Route::group(['prefix' => 'package'], function() {
                 Route::get('/', ['as' => 'admin.package.view', 'uses' => 'PackageController@index']);
                 Route::get('/add', ['as' => 'admin.package.add', 'uses' => 'PackageController@add']);
@@ -96,7 +96,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.package.edit', 'uses' => 'PackageController@edit']);
                 Route::get('/delete', ['as' => 'admin.package.delete', 'uses' => 'PackageController@delete']);
             });
-            
+
             Route::group(['prefix' => 'occupancy'], function() {
                 Route::get('/', ['as' => 'admin.occupancy.view', 'uses' => 'OccupancyController@index']);
                 Route::get('/add', ['as' => 'admin.occupancy.add', 'uses' => 'OccupancyController@add']);
@@ -104,7 +104,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.occupancy.edit', 'uses' => 'OccupancyController@edit']);
                 Route::get('/delete', ['as' => 'admin.occupancy.delete', 'uses' => 'OccupancyController@delete']);
             });
-            
+
             Route::group(['prefix' => 'additive'], function() {
                 Route::get('/', ['as' => 'admin.additive.view', 'uses' => 'AdditiveController@index']);
                 Route::get('/add', ['as' => 'admin.additive.add', 'uses' => 'AdditiveController@add']);
@@ -112,7 +112,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.additive.edit', 'uses' => 'AdditiveController@edit']);
                 Route::get('/delete', ['as' => 'admin.additive.delete', 'uses' => 'AdditiveController@delete']);
             });
-            
+
             Route::group(['prefix' => 'recordtype'], function() {
                 Route::get('/', ['as' => 'admin.recordtype.view', 'uses' => 'RecordtypeController@index']);
                 Route::get('/add', ['as' => 'admin.recordtype.add', 'uses' => 'RecordtypeController@add']);
@@ -133,15 +133,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'renewal'], function() {
             Route::get('/', ['as' => 'admin.renewal.view', 'uses' => 'SubscriptionController@renewal']);
         });
-        
-          Route::group(['prefix' => 'servicehistory'], function() {
+
+        Route::group(['prefix' => 'servicehistory'], function() {
             Route::get('/', ['as' => 'admin.servicehistory.view', 'uses' => 'ServicehistoryController@index']);
             Route::get('/add', ['as' => 'admin.servicehistory.add', 'uses' => 'ServicehistoryController@add']);
             Route::post('/save', ['as' => 'admin.servicehistory.save', 'uses' => 'ServicehistoryController@save']);
             Route::get('/edit', ['as' => 'admin.servicehistory.edit', 'uses' => 'ServicehistoryController@edit']);
             Route::get('/delete', ['as' => 'admin.servicehistory.delete', 'uses' => 'ServicehistoryController@delete']);
         });
-        
+
         Route::group(['prefix' => 'record'], function() {
             Route::get('/', ['as' => 'admin.record.view', 'uses' => 'RecordController@index']);
             Route::get('/add', ['as' => 'admin.record.add', 'uses' => 'RecordController@add']);
@@ -189,13 +189,17 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.systemusers.edit', 'uses' => 'SystemUsersController@edit']);
                 Route::post('/update', ['as' => 'admin.systemusers.update', 'uses' => 'SystemUsersController@update']);
                 Route::get('/delete', ['as' => 'admin.systemusers.delete', 'uses' => 'SystemUsersController@delete']);
-            });  
-            
+            });
+
             Route::group(['prefix' => 'users'], function() {
                 Route::get('/', ['as' => 'admin.users.view', 'uses' => 'SystemUsersController@users']);
-            });  
-            
+            });
         });
-        // });
+// });
+    });
+    Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() { 
+        Route::get('/', ["as" => "Home", "uses" => "PageController@index"]);
+        Route::get('/login', ["as" => "Login", "uses" => "LoginController@login"]);
+        Route::get('/register', ["as" => "Register", "uses" => "LoginController@register"]);
     });
 });

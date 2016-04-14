@@ -11,8 +11,42 @@ use App\Http\Controllers\Controller;
 class AssetsController extends Controller {
 
     function index() {
-        $assets = Asset::paginate(Config('constants.paginateNo'));
-        return view(Config('constants.adminAssetView') . '.index', compact('assets'));
+        
+        $acities = City::where("is_active", 1)->get()->toArray();
+        $cities = [];
+        foreach ($acities as $value) {
+            $cities[$value['id']] = $value['name'];
+        }
+
+
+        $atypes = AssetType::select('id', 'name')->get()->toArray();
+        $types = [];
+        foreach ($atypes as $value) {
+            $types[$value['id']] = $value['name'];
+        }
+        $filter = array('' => 'Filter By', 'name' => 'Asset Name', 'type_id' => 'Type', 'city_id' => 'City');
+        
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'name') {
+                $field1 = Input::get('filter_value');
+            } else if ($filter_type == 'type_id') {
+                $field2 = Input::get('filter_value');
+            } else if ($filter_type == 'city_id') {
+                $field3 = Input::get('filter_value');
+            }
+            $assets = Asset::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else {
+            $assets = Asset::paginate(Config('constants.paginateNo'));
+        }
+        
+        return view(Config('constants.adminAssetView') . '.index', compact('assets', 'cities', 'types', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3'));
     }
 
     public function add() {

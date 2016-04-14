@@ -102,7 +102,6 @@
 @section('myscripts')
 
 <script>
-
     $(".filter_type").change(function () {
         if ($(this).val() == 'date') {
             $(".filter_value").show();
@@ -127,23 +126,6 @@
             $(".assets_type").prop('disabled', false);
         }
     });
-//    $(".filter_value, .record_type, .assets_type").change(function () {
-//        $this = $(this);
-//        $.ajax({
-//            url: "<?= route('recordIndexFilter') ?>",
-//            type: "GET",
-//            data: {
-//                type:  $(".filter_type").val(),
-//                query: $this.val()
-//            },
-//            success: function (response) {
-//                if (response) {
-//                    var data;
-//                    $('#indexdata').append(data);
-//                }
-//            }
-//        });
-//    });
 </script>
 
 @stop

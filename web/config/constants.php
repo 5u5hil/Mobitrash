@@ -27,7 +27,7 @@ $adminConstants = [
 
 
 $frontendConstants = [
-    'frontendView' => 'Frontend.pages',
+    'frontendView' => 'frontend.pages',
 ];
 
 

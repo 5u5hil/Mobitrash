@@ -1,0 +1,489 @@
+# Webalizer V2.01-10 Incremental Data - 04/12/2016 18:55:43
+2016 4 12 18 55 43
+15648 3172 9 110 56 5 27878596 3834 22 0 0 0
+2 368 1088 1 12
+1 1 4664 1 1 1 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+118 67 1592010 2 18 5 0 0
+1534 408 2408910 6 487 6 0 0
+3306 617 2293933 2 778 2 0 0
+3472 707 2949750 3 943 3 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+2300 545 2461624 2 620 3 0 0
+4917 827 16167705 2 987 2 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+881 188 7433018 227 0 0
+1471 307 2178870 356 0 0
+1361 398 2208913 506 0 0
+1457 278 1044751 322 0 0
+1999 415 6252546 487 0 0
+2221 418 1886943 532 0 0
+1929 277 2113301 356 0 0
+1992 416 2016300 523 0 0
+1315 273 1140233 339 0 0
+1022 202 1603721 186 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+2
+0
+0
+3172
+0
+0
+0
+0
+0
+0
+0
+0
+309
+0
+11436
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+729
+0
+0
+0
+0
+0
+# -urls- 
+/public/Admin/dist/js/app.min.js
+0 663 0 28260 0 0 0 0
+/public/Admin/plugins/fastclick/fastclick.min.js
+0 665 0 43880 0 0 0 0
+/admin
+0 9 0 15155 5 0 0 0
+/public/Admin/dist/css/jqueryui.css
+0 76 0 70434 0 0 0 0
+/admin/schedule/delete
+0 2 0 256 0 0 0 0
+/public/Admin/dist/img/default-50x50.gif
+1 3 0 552 0 0 0 0
+/admin/master/package/edit
+0 1 0 4869 0 0 0 0
+/public/uploads/records/30032016212144.xml
+0 1 0 704 0 0 0 0
+/public/Admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js
+0 663 0 432939 0 0 0 0
+/admin/master/wastetype/edit
+0 5 0 24237 0 0 0 0
+/public/uploads/records/14604460360.jpg
+1 1 0 10675 0 0 0 0
+/public/Admin/dist/js/jquery-ui-timepicker-addon.js
+0 70 0 79671 0 0 0 0
+/admin/assets/add
+0 18 0 93598 0 0 0 0
+/public/Admin/plugins/iCheck/icheck.min.js
+0 3 0 13548 0 0 0 0
+/public/Admin/dist/img/user4-128x128.jpg
+1 3 0 10431 0 0 0 0
+/admin/master/servicetype
+0 11 0 51257 0 0 0 0
+/public/uploads/records/14598577222.jpg
+1 1 0 12567 0 0 0 0
+/admin/master/timeslot/add
+0 7 0 35100 0 0 0 0
+/admin/get-user-approx-time
+0 166 0 57241 0 0 0 0
+/admin/get-user-addresses
+0 351 0 79755 0 0 0 0
+/admin/acl/users
+0 38 0 178003 0 0 0 0
+/admin/master/occupancy/edit
+0 1 0 4865 0 0 0 0
+/public/uploads/records/14598577221.jpg
+1 2 0 10675 0 0 0 0
+/public/Admin/plugins/sparkline/jquery.sparkline.min.js
+0 664 0 172988 0 0 0 0
+/admin/record/edit
+0 70 0 376836 0 0 0 0
+/admin/assets/edit
+0 18 0 96189 0 0 0 0
+/public/Admin/dist/js/jqueryui1.11.4.js
+0 70 0 470596 0 0 0 0
+/admin/acl/roles
+0 23 0 110180 0 0 0 0
+/admin/acl/systemusers/edit
+0 10 0 51698 0 0 0 0
+/public/uploads/records/14598577220.jpg
+1 2 0 10000 0 0 0 0
+/admin/subscription
+0 241 0 1235987 2 0 0 0
+/admin/subscription/add
+0 146 0 801169 0 1 0 0
+/public/Admin/dist/css/AdminLTE.min.css
+0 664 0 345576 0 0 0 0
+/admin/record/rmfile
+0 1 0 38 0 0 0 0
+/public/Admin/bootstrap/css/bootstrap.min.css
+0 664 0 490160 0 0 0 0
+/admin/schedule/save
+0 25 0 3334 0 0 0 0
+/public/Admin/dist/img/user3-128x128.jpg
+1 3 0 10533 0 0 0 0
+/admin/master/frequency/add
+0 12 0 58699 0 0 0 0
+/public/Admin/bootstrap/js/bootstrap.min.js
+0 664 0 143804 0 0 0 0
+/public/uploads/records/05042016114232.jpg
+1 4 0 10675 0 0 0 0
+/public/Admin/plugins/datepicker/datepicker3.css
+0 115 0 101235 0 0 0 0
+/admin/record/add
+0 35 0 186500 0 0 0 0
+/public/Admin/plugins/timepicker/bootstrap-timepicker.min.css
+0 95 544 7230 0 0 0 0
+/admin/master/package
+0 16 0 75147 0 0 0 0
+/public/Admin/plugins/jQuery/jQuery-2.1.4.min.js
+0 664 0 421725 0 0 0 0
+/public/Admin/dist/img/user8-128x128.jpg
+1 3 0 15180 0 0 0 0
+/admin/schedule
+0 415 0 2064909 2 0 0 0
+/admin/master/wastetype
+0 33 0 155067 0 0 0 0
+/admin/master/frequency
+0 16 0 78461 0 1 0 0
+/admin/acl/systemusers
+0 66 0 313799 0 0 0 0
+/admin/acl/roles/add
+0 8 0 50833 0 0 0 0
+/admin/schedule/view
+0 3 0 93 0 0 0 0
+/admin/subscription/edit
+0 127 0 723624 0 1 0 0
+/admin/assets
+0 79 0 387120 0 0 0 0
+/public/Admin/dist/js/demo.js
+0 718 0 524542 0 0 0 0
+/admin/schedule/show
+0 87 0 6870480 0 0 0 0
+/admin/master/servicetype/edit
+0 1 0 4887 0 0 0 0
+/public/Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js
+0 663 0 99969 0 0 0 0
+/admin/master/cities
+0 8 0 37709 0 0 0 0
+/public/Admin/dist/css/style.css
+0 175 0 5377 0 0 0 0
+/public/uploads/records/14604560940.jpg
+1 1 0 10000 0 0 0 0
+/public/Admin/plugins/timepicker/bootstrap-timepicker.min.js
+0 95 0 46359 0 0 0 0
+/admin/master/timeslot/edit
+0 8 0 40625 0 0 0 0
+/public/Admin/dist/img/user7-128x128.jpg
+1 3 0 19302 0 0 0 0
+/admin/record
+0 101 0 444782 0 0 0 0
+/public/Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css
+0 664 0 3296 0 0 0 0
+/admin/renewal
+0 42 0 199799 0 0 0 0
+/admin/master/recordtype
+0 9 0 42631 0 0 0 0
+/admin/master/package/add
+0 11 0 53525 0 0 0 0
+/admin/master/occupancy/add
+0 14 0 68396 0 0 0 0
+/public/uploads/records/14598579521.jpg
+1 2 0 12567 0 0 0 0
+/admin/master/additive
+0 11 0 50912 0 0 0 0
+/public/Admin/bootstrap/fonts/glyphicons-halflings-regular.woff
+0 1 0 23424 0 0 0 0
+/admin/schedule/duplicate
+0 20 0 3114 0 0 0 0
+/admin/remove-schedule-pickup
+0 11 0 321 0 0 0 0
+/public/Admin/dist/img/user1-128x128.jpg
+1 3 0 8637 0 0 0 0
+/public/uploads/records/14598579520.jpg
+1 3 0 10000 0 0 0 0
+/admin/master/frequency/edit
+0 1 0 4919 0 0 0 0
+/public/Admin/plugins/chartjs/Chart.min.js
+0 663 0 156276 0 0 0 0
+/public/Admin/dist/img/user6-128x128.jpg
+1 3 0 13026 0 0 0 0
+/admin/acl/roles/edit
+0 7 0 44354 0 0 0 0
+/public/uploads/records/14598576440jpg
+0 1 0 10000 0 0 0 0
+/admin/schedule/add
+0 187 0 1042502 0 1 0 0
+/admin/master/additive/add
+0 4 0 19238 0 0 0 0
+/public/Admin/plugins/slimScroll/jquery.slimscroll.min.js
+0 663 0 18690 0 0 0 0
+/public/uploads/records/05042016103047.jpg
+1 1 0 10675 0 0 0 0
+/admin/master/fueltype/add
+0 6 0 29337 0 0 0 0
+/admin/master/occupancy
+0 23 0 109288 0 0 0 0
+/admin/master/recordtype/add
+0 4 0 19378 0 0 0 0
+/admin/master/wastetype/add
+0 24 0 116967 0 0 0 0
+/public/uploads/records/14604438470.jpg
+1 1 0 10675 0 0 0 0
+/admin/master/servicetype/add
+0 2 0 9770 0 0 0 0
+/admin/master/cities/edit
+0 1 0 4895 0 0 0 0
+/admin/master/cities/add
+0 4 0 19572 0 0 0 0
+/admin/record/show
+0 26 0 110451 0 0 0 0
+/admin/assets/show
+0 29 0 3971122 0 0 0 0
+/public/Admin/dist/js/pages/dashboard2.js
+0 664 0 35860 0 0 0 0
+/public/Admin/dist/img/user2-160x160.jpg
+1 663 0 21210 0 0 0 0
+/admin/schedule/edit
+0 329 0 1935958 0 0 0 0
+/admin/acl/systemusers/add
+0 21 0 108623 0 0 0 0
+/public/Admin/dist/css/skins/_all-skins.min.css
+0 664 0 167512 0 0 0 0
+/admin/subscription/save
+0 2 0 1062 0 0 0 0
+/public/Admin/dist/css/jqueryui-timepicker-adon.css
+0 67 0 1945 0 0 0 0
+/admin/master/fueltype
+0 14 0 65717 0 0 0 0
+/public/Admin/dist/img/user5-128x128.jpg
+1 3 0 19338 0 0 0 0
+/admin/
+0 13 0 21977 11 0 0 0
+/admin/dashboard
+0 12 0 116696 0 2 0 0
+/admin/master/timeslot
+0 18 0 86012 0 0 0 0
+/public/Admin/plugins/datepicker/bootstrap-datepicker.js
+0 117 0 140514 0 0 0 0
+/public/Admin/bootstrap/fonts/glyphicons-halflings-regular.woff2
+0 4 0 54084 0 0 0 0
+# End Of Table - urls
+# -sites- (monthly)
+66.249.84.190
+0 1 1 1689 1 1459862412
+- 0 0
+66.249.84.199
+0 2 2 3379 2 1460484612
+/admin/ 0 0
+203.153.53.54
+0 15631 3155 27463555 13 1460487342
+/admin/record/edit 0 0
+66.249.85.213
+0 1 1 1689 1 1459859737
+- 0 0
+66.249.85.216
+0 3 3 5034 3 1460370557
+- 0 0
+66.249.85.219
+0 1 1 1689 1 1460024818
+- 0 0
+64.233.172.211
+0 3 3 79518 1 1459859737
+- 0 0
+64.233.172.219
+0 3 3 207709 0 0
+- 0 0
+64.233.172.227
+0 3 3 114334 0 0
+- 0 0
+# End Of Table - sites (monthly)
+# -sites- (daily)
+66.249.84.199
+0 1 1 1690 1 1460484612
+/admin/ 0 0
+203.153.53.54
+0 4916 826 16166015 1 1460487342
+/admin/record/edit 0 0
+# End Of Table - sites (daily)
+# -referrers- 
+http://mobitrash.cruxservers.in/admin/record/add
+1 288
+- (Direct Request)
+0 60
+http://mobitrash.cruxservers.in/admin/master/occupancy
+1 75
+http://mobitrash.cruxservers.in/admin/master/package/add
+1 59
+http://mobitrash.cruxservers.in/admin/master/frequency/edit
+1 1
+http://mobitrash.cruxservers.in/admin/record/show
+1 235
+http://mobitrash.cruxservers.in/admin/assets/show
+1 219
+http://mobitrash.cruxservers.in/admin/subscription
+1 976
+http://mobitrash.cruxservers.in/admin/master/recordtype/add
+1 19
+http://mobitrash.cruxservers.in/admin/master/timeslot/edit
+1 29
+http://www.google.com/search
+0 1
+http://mobitrash.cruxservers.in/admin/subscription/edit
+1 1108
+http://mobitrash.cruxservers.in/admin/master/occupancy/add
+1 53
+http://mobitrash.cruxservers.in/admin/renewal
+1 221
+http://mobitrash.cruxservers.in/admin/master/additive/add
+1 19
+http://mobitrash.cruxservers.in/admin/master/fueltype/add
+1 19
+http://mobitrash.cruxservers.in/admin/master/recordtype
+1 9
+http://mobitrash.cruxservers.in/admin/acl/systemusers
+1 293
+http://mobitrash.cruxservers.in/admin/acl/systemusers/add
+1 39
+http://mobitrash.cruxservers.in/public/Admin/dist/css/jqueryui.css
+1 208
+http://mobitrash.cruxservers.in/admin/master/package
+1 87
+http://mobitrash.cruxservers.in/admin/dashboard
+1 60
+http://mobitrash.cruxservers.in/admin/master/wastetype/add
+1 200
+http://mobitrash.cruxservers.in/admin/master/wastetype/edit
+1 10
+http://mobitrash.cruxservers.in/admin
+1 22
+http://mobitrash.cruxservers.in/admin/record/edit
+1 588
+http://mobitrash.cruxservers.in/admin/assets/edit
+1 91
+http://mobitrash.cruxservers.in/admin/master/occupancy/edit
+1 2
+http://mobitrash.cruxservers.in/admin/subscription/add
+1 1296
+http://mobitrash.cruxservers.in/admin/acl/roles/add
+1 8
+http://mobitrash.cruxservers.in/admin/master/additive
+1 29
+http://mobitrash.cruxservers.in/admin/master/cities/add
+1 3
+http://mobitrash.cruxservers.in/admin/master/servicetype
+1 42
+http://mobitrash.cruxservers.in/admin/schedule/show
+1 814
+http://mobitrash.cruxservers.in/admin/master/package/edit
+1 2
+http://mobitrash.cruxservers.in/admin/master/cities
+1 11
+http://mobitrash.cruxservers.in/public/Admin/bootstrap/css/bootstrap.min.css
+1 3
+http://mobitrash.cruxservers.in/admin/acl/users
+1 225
+http://mobitrash.cruxservers.in/admin/master/servicetype/add
+1 17
+http://mobitrash.cruxservers.in/admin/schedule/add
+1 1595
+http://mobitrash.cruxservers.in/admin/master/servicetype/edit
+1 1
+http://mobitrash.cruxservers.in/admin/master/wastetype
+1 54
+http://mobitrash.cruxservers.in/admin/master/frequency
+1 24
+http://mobitrash.cruxservers.in/admin/master/timeslot/add
+1 63
+http://mobitrash.cruxservers.in/admin/
+1 27
+http://mobitrash.cruxservers.in/admin/acl/roles
+1 32
+http://mobitrash.cruxservers.in/admin/assets
+1 287
+http://mobitrash.cruxservers.in/admin/assets/add
+1 76
+http://mobitrash.cruxservers.in/admin/acl/roles/edit
+1 3
+http://mobitrash.cruxservers.in/admin/master/fueltype
+1 30
+http://mobitrash.cruxservers.in/admin/master/timeslot
+1 26
+http://mobitrash.cruxservers.in/admin/acl/systemusers/edit
+1 8
+http://mobitrash.cruxservers.in/admin/record
+1 402
+http://mobitrash.cruxservers.in/admin/schedule
+1 2673
+http://mobitrash.cruxservers.in/admin/master/frequency/add
+1 55
+http://mobitrash.cruxservers.in/admin/schedule/edit
+1 2851
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+0 15360
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
+0 85
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+0 186
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview) Chrome/27.0.1453 Safari/537.36
+0 9
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon
+0 8
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames
