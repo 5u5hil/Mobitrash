@@ -5,6 +5,18 @@ $(document).ready(function () {
     $("#noweight").click(function () {
         $("#weightpas").hide();
     });
+    $("form").validationEngine({promptPosition: "bottomRight"});
+
+    $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true
+    });
+    $('.timepicker').timepicker();
+    $('.timepicker-f2').timepicker({
+        timeFormat: 'hh:mm TT'
+    });
+
 });
 
 $(function () {
@@ -56,18 +68,18 @@ $(function () {
 
     $('.travel-date-group .inline-calendar').datepicker();
 
-    $('.datetimepicker').datetimepicker({
-        showClose: true
-    });
-
-    $('.datetimepicker1').datetimepicker({
-        format: 'LT',
-        showClose: true
-    });
-
-    $('.datetimepicker2').datetimepicker({
-        inline: true,
-        sideBySide: true
-    });
+//    $('.datetimepicker').datetimepicker({
+//        showClose: true
+//    });
+//
+//    $('.datetimepicker1').datetimepicker({
+//        format: 'LT',
+//        showClose: true
+//    });
+//
+//    $('.datetimepicker2').datetimepicker({
+//        inline: true,
+//        sideBySide: true
+//    });
 
 });

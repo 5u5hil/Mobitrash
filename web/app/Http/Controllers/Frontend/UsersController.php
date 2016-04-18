@@ -2,43 +2,69 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Route;
 use Illuminate\Support\Facades\Input;
-use App\Models\Role;
 use App\Models\User;
-use App\Models\Subscription;
-use Hash;
-use Auth;
-use Session;
+use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Permission;
 use App\Http\Controllers\Controller;
+use Hash;
+use Session;
+use App\Models\Wastetype;
+use App\Models\Frequency;
+use App\Models\Timeslot;
+use App\Models\Package;
+use App\Models\City;
+use App\Models\Occupancy;
+use App\Models\Address;
+use App\Models\Subscription;
 
-class SystemUsersController extends Controller {
+class UsersController extends Controller {
 
-    public function index() {
-        $system_users = User::whereHas('roles', function($q) {
-                    $q->where('id', '!=', 2);
-                })->paginate(Config('constants.paginateNo'));        
-        $roles = Role::get(['id', 'name'])->toArray();
-        return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles'));
+    public function login() {
+        return view(Config('constants.frontendView') . '.login');
     }
 
-    public function users() {
-        $users = Role::find(2)->users()->paginate(Config('constants.paginateNo'));
-        $roles = Role::get(['id', 'name'])->toArray();
-        return view(Config('constants.adminUsersView') . '.index', compact('users', 'roles'));
-    }
-
-    public function add() {
-        $user = new User();
-        $action = "admin.systemusers.save";
-        $roles = Role::get(['id', 'display_name'])->toArray();
-        $roles_name = ["" => "Please Select"];
-        foreach ($roles as $role) {
-            $roles_name[$role['id']] = $role['display_name'];
+    public function register() {
+        $wastetypess = Wastetype::all()->toArray();
+        $wastetype = [];
+        foreach ($wastetypess as $value) {
+            $wastetype[$value['id']] = $value['name'];
         }
-        return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
+
+        $f = Frequency::where("is_active", 1)->get()->toArray();
+        $frequency = [];
+        foreach ($f as $value) {
+            $frequency[$value['id']] = $value['name'];
+        }
+
+        $pack = Package::where("is_active", 1)->get()->toArray();
+        $packages = [];
+        foreach ($pack as $value) {
+            $packages[$value['id']] = $value['name'];
+        }
+
+        $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
+        $timeslot = [];
+        foreach ($t as $value) {
+            $timeslot[$value['id']] = $value['name'];
+        }
+
+        $citiesd = City::where("is_active", 1)->get()->toArray();
+        $cities = [];
+        foreach ($citiesd as $value) {
+            $cities[$value['id']] = $value['name'];
+        }
+        $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
+        $occupancy = [];
+        foreach ($occupancyd as $value) {
+            $occupancy[$value['id']] = $value['name'];
+        }
+        return view(Config('constants.frontendView') . '.register', compact('frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'cities', 'occupancy'));
     }
 
-    public function save() {
+    public function registerUser() {
         $chk = User::where("email", "=", Input::get('email'))->first();
 
         if (empty($chk)) {
@@ -46,21 +72,55 @@ class SystemUsersController extends Controller {
             $user->first_name = Input::get('first_name');
             $user->last_name = Input::get('last_name');
             $user->email = Input::get('email');
+            $user->phone_number = Input::get('phone_number');
             $user->password = Hash::make(Input::get('password'));
             $user->user_type = 1;
-
-
-
             $user->save();
-
-            if (!empty(Input::get('roles'))) {
-                $user->roles()->sync([Input::get('roles')]);
+            $user->roles()->sync([2]);
+            $userD = ['email' => Input::get('email'),
+                'password' => Input::get('password')
+            ];
+            if (Auth::attempt($userD, true)) {
+                Session::put('loggedinUserId', $user->id);
+                return redirect()->route('user.register');
+            } else {
+                return redirect()->route('user.register');
             }
-            return redirect()->route('admin.systemusers.view');
         } else {
             Session::flash("usenameError", "Username already exist");
             return redirect()->back();
         }
+    }
+
+    public function checkUserLogin() {
+        $userDetails = User::where("email", "=", Input::get("email"))->first();
+        $userData = ['email' => Input::get('email'),
+            'password' => Input::get('password')
+        ];
+        if (Auth::attempt($userData, true)) {
+            $user = User::with('roles')->find($userDetails->id);
+
+            Session::put('loggedinUserId', $userDetails->id);
+            $roles = $user->roles()->first();
+            $r = Role::find($roles->id);
+            $per = $r->perms()->get()->toArray();
+            return redirect()->route('user.myprofile.view');
+        } else {
+            Session::flash('invalidUser', 'Invalid Username or Password');
+            return redirect()->route('user.login');
+        }
+    }
+
+    public function userLogout() {
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('user.login');
+    }
+
+    public function myProfile() {
+        $user = User::find(Auth::id());
+        $action = 'user.profile.update';
+        return view(Config('constants.frontendView') . '.myprofile', compact('user', 'action'));
     }
 
     public function update() {
@@ -68,28 +128,27 @@ class SystemUsersController extends Controller {
         $user = User::find(Input::get('id'));
         $user->first_name = Input::get('first_name');
         $user->last_name = Input::get('last_name');
+        $user->phone_number = Input::get('phone_number');
         $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
-
+        if (Input::get('old_password') && Input::get('new_password') && Input::get('confirm_password')) {
+            if (Hash::make(Input::get('old_password')) == $user->password) {
+                $user->password = Hash::make(Input::get('new_password'));
+            }
+            else{
+                $message= 'Password Not Changed! Incorrect Old password or Confirm Password doed not match with New Password';
+            }
+        }
         $user->user_type = 1;
         $user->update();
-
-        if (!empty(Input::get('roles'))) {
-            $user->roles()->sync([Input::get('roles')]);
-        }
-
-        return redirect()->route('admin.systemusers.view');
+        return redirect()->route('user.myprofile.view');
     }
 
-    public function edit() {
-        $user = User::find(Input::get('id'));
-        $action = "admin.systemusers.update";
-        $roles = Role::get(['id', 'display_name'])->toArray();
-        $roles_name = ["" => "Please Select"];
-        foreach ($roles as $role) {
-            $roles_name[$role['id']] = $role['display_name'];
-        }
-        return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
+    public function myAccount() {
+        return view(Config('constants.frontendView') . '.myaccount');
+    }
+
+    public function showUserSubscription() {
+        return view(Config('constants.frontendView') . '.subscription');
     }
 
     public function chk_existing_username() {
@@ -100,7 +159,6 @@ class SystemUsersController extends Controller {
         if (!empty($chk)) {
             echo "Invalid";
         } else {
-
             echo "valid";
         }
     }
@@ -111,16 +169,29 @@ class SystemUsersController extends Controller {
         return redirect()->back()->with("message", "User deleted successfully!");
     }
 
-    public function getAddresses() {
-        return User::find(Input::get('uid'))->addresses;
+    public function saveSubscription() {
+        $address = Address::findOrNew(Input::get('address_id'));
+        $address->user_id = Auth::id();
+        $address->address = Input::get('address');
+        $address->city = Input::get('city');
+        $address->pincode = Input::get('pincode');
+        $address->save();
+        $subscription = Subscription::findOrNew(Input::get('id'));
+        $subscription->user_id = Auth::id();
+        $subscription->timeslot_id = Input::get('timeslot_id');
+        $subscription->frequency_id = Input::get('frequency_id');
+        $subscription->package_id = Input::get('package_id');
+        $subscription->occupancy_id = Input::get('occupancy_id');
+        $subscription->max_waste = Input::get('max_waste');
+        $subscription->start_date = Input::get('start_date');
+        $subscription->end_date = Input::get('end_date');
+        $subscription->approximate_processing_time = Input::get('approximate_processing_time');
+        $subscription->weekly_quantity = Input::get('weekly_quantity');
+        $subscription->user_address_id = $address->id;
+        $subscription->remark = Input::get('remark');
+        $subscription->save();
+        $subscription->wastetypes()->sync(Input::get('wastetype'));
+        return redirect()->route('user.myprofile.view');
     }
-
-    public function getApproxTime() {
-        $subscription = Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
-//        print('<pre>'); print_r($subscription);print('</pre>'); 
-//exit();
-        return [$subscription];
-
-    }
-
+     
 }

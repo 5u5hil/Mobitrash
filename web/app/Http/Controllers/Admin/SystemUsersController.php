@@ -16,7 +16,7 @@ class SystemUsersController extends Controller {
     public function index() {
         $system_users = User::whereHas('roles', function($q) {
                     $q->where('id', '!=', 2);
-                })->paginate(Config('constants.paginateNo'));        
+                })->paginate(Config('constants.paginateNo'));
         $roles = Role::get(['id', 'name'])->toArray();
         return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles'));
     }
@@ -55,8 +55,15 @@ class SystemUsersController extends Controller {
 
             if (!empty(Input::get('roles'))) {
                 $user->roles()->sync([Input::get('roles')]);
+                if(Input::get('roles') == 2){
+                    return redirect()->route('admin.users.view');
+                }
+                else{
+                    return redirect()->route('admin.systemusers.view');
+                }
+            } else {
+                return redirect()->route('admin.systemusers.view');
             }
-            return redirect()->route('admin.systemusers.view');
         } else {
             Session::flash("usenameError", "Username already exist");
             return redirect()->back();
@@ -120,7 +127,6 @@ class SystemUsersController extends Controller {
 //        print('<pre>'); print_r($subscription);print('</pre>'); 
 //exit();
         return [$subscription];
-
     }
 
 }

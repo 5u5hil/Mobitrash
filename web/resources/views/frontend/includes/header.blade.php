@@ -7,8 +7,8 @@
         <!-- Logo
         ============================================= -->
         <div id="logo">
-            <a href="index.html" class="standard-logo" data-dark-logo="/public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/moblogo.png')}}" alt="Canvas Logo"></a>
-            <a href="index.html" class="retina-logo" data-dark-logo="public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/moblogo@2x.png')}}" alt="Canvas Logo"></a>
+            <a href="{{ route('/') }}" class="standard-logo" data-dark-logo="/public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/moblogo.png')}}" alt="Canvas Logo"></a>
+            <a href="{{ route('/') }}" class="retina-logo" data-dark-logo="public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/moblogo@2x.png')}}" alt="Canvas Logo"></a>
         </div><!-- #logo end -->
 
         <ul class="header-extras">
@@ -21,7 +21,7 @@
             <li>
                 <i class="i-small i-circled i-bordered fa fa-envelope nomargin"></i>
                 <div class="he-text">
-                    getit@mobitrash.in
+                    getit@mobitrash.in 
                 </div>
             </li>
         </ul>
@@ -39,16 +39,29 @@
                 <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
                 <ul>
-                    <li class="current"><a href="#"><div>Home</div></a>
+                    <li class="{{ preg_match("/\//",Route::currentRouteName())? 'current' : ''}}"><a href="#"><div>Home</div></a>
                     </li>
                     <!-- Mega Menu
                     ============================================= -->
-                    <li class="mega-menu"><a href="#"><div>About</div></a>
+                    <li class="{{ preg_match("/about/",Route::currentRouteName())? 'current' : ''}}"><a href="#"><div>About</div></a>
                     </li><!-- .mega-menu end -->
-                    <li><a href="#"><div>Pricing</div></a>
+                    <li class="{{ preg_match("/pricing/",Route::currentRouteName())? 'current' : ''}}"><a href="#"><div>Pricing</div></a>
                     </li><!-- .mega-menu end -->
                     <li><a href="#"><div>Contact</div></a></li>
-                    <li><a href="#"><div>Login / Register</div></a></li>
+                    @if(Auth::id())
+                    <li class="{{ preg_match("/user.myprofile.view/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.myprofile.view') }}"><div>Profile</div></a></li>
+                    <li><a href="{{ route('user.logout') }}"><div>Logout</div></a></li>
+                    @else
+                    @if(!preg_match("/user.login/",Route::currentRouteName()))
+                    <li class="{{ preg_match("/user.login/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.login') }}"><div>Login</div></a></li>
+                    @else
+                    @endif
+
+                    @if(!preg_match("/user.register/",Route::currentRouteName()))
+                    <li class="{{ preg_match("/user.register/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.register') }}"><div>Register</div></a></li>
+                    @else
+                    @endif
+                    @endif
                 </ul>
 
                 <!-- Top Search

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.default')
+@extends('frontend.layouts.site')
 @section('content')
 <section id="slider" class="slider-parallax" style="background-color: #222;">
 

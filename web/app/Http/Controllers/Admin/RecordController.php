@@ -21,7 +21,6 @@ class RecordController extends Controller {
             $recordtypes[$value['id']] = $value['name'];
         }
         $v = Asset::where("is_active", 1)->get()->toArray();
-        $vans = [0 => "Not Part of Any Asset"];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
@@ -68,7 +67,6 @@ class RecordController extends Controller {
         }
 
         $v = Asset::where("is_active", 1)->get()->toArray();
-        $vans = [0 => "Not Part of Any Asset"];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
@@ -95,7 +93,6 @@ class RecordController extends Controller {
         }
 
         $v = Asset::where("is_active", 1)->get()->toArray();
-        $vans = [0 => "Not Part of Any Asset"];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }

@@ -342,6 +342,6 @@
     });
     $('.timepicker').timepicker();
     $('.timepicker-f2').timepicker({
-            timeFormat: 'hh:mm TT'
-        });
+        timeFormat: 'hh:mm TT'
+    });
 })(jQuery, $.AdminLTE);

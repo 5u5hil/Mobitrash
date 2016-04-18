@@ -1,4 +1,4 @@
-@extends('frontend.layouts.default')
+@extends('frontend.layouts.site')
 @section('content')
 <section id="page-title">
 
@@ -19,154 +19,141 @@
             <div class="accordion accordion-lg divcenter nobottommargin clearfix" style="max-width: 550px;">
 
                 <div class="acctitle"><i class="acc-closed icon-lock3"></i><i class="acc-open icon-unlock"></i>Register</div>
+
                 <div class="acc_content clearfix">
-                    <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('check_user') }}" method="post">
+                    <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('user.register.save') }}" method="post">
                         <div class="col_full">
-                            <label for="template-contactform-name">Name <small>*</small></label>
-                            <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" />
+                            <label for="first_name">First Name <small>*</small></label>
+
+                            <input type="text" id="first_name" name="first_name" value="" class="sm-form-control required validate[required]" />
                         </div>
                         <div class="col_full">
-                            <label for="template-contactform-name">Phone No: <small>*</small></label>
-                            <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" />
+                            <label for="last_name">Last Name <small></small></label>
+                            <input type="text" id="last_name" name="last_name" value="" class="sm-form-control required" />
+                        </div>
+                        <div class="col_full">
+                            <label for="phone_number">Phone No: <small>*</small></label>
+                            <input type="number" id="phone_number" name="phone_number" value=""  class="sm-form-control required validate[required]" />
                         </div>
 
                         <div class="col_full">
-                            <label for="template-contactform-name">Email Id: <small>*</small></label>
-                            <input type="text" id="template-contactform-name" name="template-contactform-name" value="" class="sm-form-control required" />
+                            <label for="email">Email Id: <small>*</small></label>
+                            <input type="text" id="email" name="email" value="" class="sm-form-control required validate[required,custom[email]]" />
                         </div>
 
                         <div class="col_full">
-                            <label for="template-contactform-name">Password: <small>*</small></label>
-                            <input type="password" id="login-form-password" name="login-form-password" value="" class="sm-form-control required" />
+                            <label for="password">Password: <small>*</small></label>
+                            <input type="password" id="password" name="password" value="" class="sm-form-control required validate[required]" />
                         </div>
                         <div class="col_full">
-                            <label for="template-contactform-name">Confirm Password:</label>
-                            <input type="password" id="login-form-password" name="login-form-password" value="" class="sm-form-control required"/>
+                            <label for="confirm_password">Confirm Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" value="" class="sm-form-control required validate[required,equals[password]]"/>
                         </div>
                         <div class="col-md-12 pull-left">	
                             <center>
-                                <button class="button button-3d button-black nomargin " id="register-form-submit" name="register-form-submit" value="register">Register</button></center>
+                                <button type="submit" class="button button-3d button-black nomargin " id="register-form-submit">Register</button></center>
                         </div>
                     </form>
                 </div>
 
-                <div class="acctitle"><i class="acc-closed icon-play"></i><i class="acc-open icon-ok-sign"></i>Subscription Details</div>
+                <div id="subscription-block" class="acctitle"><i class="acc-closed icon-play"></i><i class="acc-open icon-ok-sign"></i>Subscription Details</div>
                 <div class="acc_content clearfix">
-                    <form id="register-form" name="register-form" class="nobottommargin" action="#" method="post">
-                        <div class="col_full">
-                            <label for="template-contactform-message">Address <small>*</small></label>
-                            <textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
-                        </div>
-                        <div class="col_half">
-                            <label for="template-contactform-service">City</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value=""> Select One </option>
-                                <option value="Wordpress">Wordpress</option>
-                                <option value="PHP / MySQL">PHP / MySQL</option>
-                                <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                                <option value="Graphic Design">Graphic Design</option>
-                            </select>
-                        </div>
+                    {!! Form::open( ['method' => 'post', 'route' => 'user.subscription.save' , 'class' => 'nobottommargin', 'id'=> 'sub-form', 'files'=>true ]) !!}
 
-                        <div class="col_half col_last">
-                            <label for="template-contactform-phone">Pincode</label>
-                            <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" />
-                        </div>
+                    <div class="col_full">
+                        <label for="template-contactform-message">Address <small>*</small></label>
+                        {!! Form::textarea('address',null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
 
-                        <div class="col_half">
-                            <label for="template-contactform-service">Occupancy Category</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Wordpress">Residential Society</option>
-                                <option value="PHP / MySQL">Restaurant/Hotel</option>
-                                <option value="HTML5 / CSS3">Corporate Office</option>
-                                <option value="Graphic Design">Educational Institute</option>
-                                <option value="Graphic Design">Hospital</option>
-                                <option value="Graphic Design">Factory/Industry</option>
-                                <option value="Graphic Design">Others- allow them to enter the category</option>
-                            </select>
-                        </div>
+                    </div>
+                    <div class="col_half">
+                        <label for="template-contactform-service">City <small>*</small></label>
+                        {!! Form::select('city',$cities,null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
 
-                        <div class="col_half col_last">
-                            <label for="template-contactform-service">Waste Category</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Wordpress">Wordpress</option>
-                                <option value="PHP / MySQL">PHP / MySQL</option>
-                                <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                                <option value="Graphic Design">Graphic Design</option>
-                            </select>
-                        </div>
+                    </div>
 
-                        <div class="col_full">
-                            <label for="template-contactform-phone">Max Waste Quantity (Kg):</label>
-                            <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" />
-                        </div>
-                        <div class="col_full">
-                            <label for="login-form-username">Return oF Compost: <span class="tab-space"><a href="javascript:void(0);" id="yesweight">Yes</a> / <a href="javascript:void(0);" id="noweight">No</a></span></label>
-                        </div>
-                        <div class="col_full" style="display:none;" id="weightpas">
-                            <label for="login-form-password">Weekly Quantity :</label>
-                            <input type="text" id="login-form-password" name="login-form-password" value="" class="form-control" />
-                        </div>
+                    <div class="col_half col_last">
+                        <label for="template-contactform-phone">Pincode</label>
+                        {!! Form::text('pincode',null, ["class"=>'required sm-form-control', "data-show-content" => "false"]) !!}
 
-                        <div class="col_half">
-                            <label for="template-contactform-service">Preferred Timeslot</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Wordpress">Wordpress</option>
-                                <option value="PHP / MySQL">PHP / MySQL</option>
-                                <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                                <option value="Graphic Design">Graphic Design</option>
-                            </select>
-                        </div>
+                    </div>
 
-                        <div class="col_half col_last">
-                            <label for="template-contactform-service">Package</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Wordpress">Wordpress</option>
-                                <option value="PHP / MySQL">PHP / MySQL</option>
-                                <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                                <option value="Graphic Design">Graphic Design</option>
-                            </select>
-                        </div>
+                    <div class="col_half">
+                        <label for="template-contactform-service">Occupancy Category <small>*</small></label>
+                        {!! Form::select('occupancy_id',$occupancy,null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
+
+                    </div>
+
+                    <div class="col_half col_last">
+                        <label for="template-contactform-service">Waste Category <small>*</small></label>
+                        {!! Form::select('wastetype[]',$wastetype, null, ["class"=>'required sm-form-control validate[required]', "required", "multiple" => true]) !!}
+
+                    </div>
+
+                    <div class="col_full">
+                        <label for="template-contactform-phone">Max Waste Quantity (Kg): <small>*</small></label>
+                        {!! Form::text('max_waste',null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
+
+                    </div>
+                    <div class="col_full">
+                        <label for="login-form-username">Return oF Compost: <span class="tab-space"><a href="javascript:void(0);" id="yesweight">Yes</a> / <a href="javascript:void(0);" id="noweight">No</a></span></label>
+                    </div>
+                    <div class="col_full" style="display:none;" id="weightpas">
+                        <label for="login-form-password">Weekly Quantity : </label>
+                        {!! Form::text('weekly_quantity',null, ["class"=>' sm-form-control', "data-show-content" => "false"]) !!}
+
+                    </div>
+
+                    <div class="col_half">
+                        <label for="template-contactform-service">Preferred Timeslot  <small>*</small></label>
+                        {!! Form::select('timeslot_id',$timeslot,null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
+
+                    </div>
+
+                    <div class="col_half col_last">
+                        <label for="template-contactform-service">Package  <small>*</small></label>
+                        {!! Form::select('package_id',$packages, null, ["class"=>'sm-form-control validate[required]', "required"]) !!}
+                    </div>
 
 
-                        <div class="col_half">
-                            <label for="">Service Start Date:</label>
-                            <div class="input-group input-daterange travel-date-group">
-                                <input type="text" value="" class="sm-form-control tleft past-enabled" placeholder="MM/DD/YYYY">
-                                <span class="input-group-addon" style="padding: 9px 12px;">
-                                    <i class="icon-calendar2"></i>
-                                </span>
-                            </div>
+                    <div class="col_half">
+                        <label for="">Service Start Date:</label>
+                        <div class="input-group input-daterange travel-date-group">
+                            {!! Form::text('start_date',null, ["class"=>'sm-form-control validate[required] datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+
+                        </div>
+                    </div>
+
+                    <div class="col_half col_last">
+                        <label for="">Service Start Date:</label>
+                        <div class="input-group input-daterange travel-date-group">
+                            {!! Form::text('end_date',null, ["class"=>'sm-form-control validate[required] datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+
+                        </div>
+                    </div>
+
+                    <div class="col_full">
+                        <label for="template-contactform-phone">Approximate Processing Time <small>*</small></label>
+                        {!! Form::text('approximate_processing_time',null, ["class"=>'required sm-form-control validate[required] timepicker', "data-show-content" => "false"]) !!}
+
+                    </div>
+                    <div class="col_half">
+                        <label for="template-contactform-service">Frequency  <small>*</small></label>
+                        {!! Form::select('frequency_id',$frequency,null, ["class"=>'required sm-form-control validate[required]', "data-show-content" => "false"]) !!}
+
+                    </div>
+
+                    <div class="col_full">
+                        <label for="template-contactform-message">Remarks <small>*</small></label>
+                        {!! Form::textarea('remark',null, ["class"=>'sm-form-control validate[required]', "required"]) !!}
+
+                    </div>
+                    <center>
+                        <div class="col_one_third nobottommargin">
+                            <button type="submit" class="button button-3d button-black nomargin" id="subscribe-form-submit">Save</button>
                         </div>
 
-                        <div class="col_half col_last">
-                            <label for="template-contactform-service">Agreement Duration</label>
-                            <select id="template-contactform-service" name="template-contactform-service" class="sm-form-control">
-                                <option value="">-- Select One --</option>
-                                <option value="Wordpress">Wordpress</option>
-                                <option value="PHP / MySQL">PHP / MySQL</option>
-                                <option value="HTML5 / CSS3">HTML5 / CSS3</option>
-                                <option value="Graphic Design">Graphic Design</option>
-                            </select>
-                        </div>
-
-                        <div class="col_full">
-                            <label for="template-contactform-message">Remarks <small>*</small></label>
-                            <textarea class="required sm-form-control" id="template-contactform-message" name="template-contactform-message" rows="6" cols="30"></textarea>
-                        </div>
-                        <center>
-                            <div class="col_one_third nobottommargin">
-                                <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Save</button>
-                            </div>
-                            <div class="col_one_third col_last">
-                                <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Add Subscription</button>
-                            </div>
-                        </center>
-                    </form>
+                    </center>
+                    {!! Form::close() !!}  
                 </div>
                 <div class="acctitle"><i class="acc-closed icon-money"></i><i class="acc-open icon-ok-sign"></i>Payment Due</div>
                 <div class="acc_content clearfix">
@@ -179,4 +166,48 @@
 
 </section><!-- #content end -->
 
+
 @stop
+
+@section("myscripts")
+<script>
+
+    $(document).ready(function () {
+        $("#register-form-submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '<?= route('user.register.save') ?>',
+                type: "POST",
+                data: $("#login-form").serialize(),
+                success: function (data) {
+                    $("#subscription-block").click();
+                    $(".acctitle").click(function (e) {
+                        e.preventDefault();
+                    });
+                }
+
+            });
+        })
+
+        $("#subscribe-form-submit").click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '<?= route('user.subscription.save') ?>',
+                type: "POST",
+                data: $("#sub-form").serialize(),
+                success: function (data) {
+                    window.location.href = "/";
+                }
+
+            });
+        })
+
+    });
+
+</script>
+
+
+
+@stop
+
+

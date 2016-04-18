@@ -18,8 +18,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function addresses() {
         return $this->hasMany('App\Models\Address', 'user_id');
     }
+
     public function roles() {
         return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
+    }
+
+    public function rules() {
+        return [
+            'email' => 'required|email',
+            'phone_number' => 'required'
+        ];
     }
 
 }

@@ -145,10 +145,10 @@ body {
 
 a {
 	text-decoration: none !important;
-	color: #95BB54;
+	color: #444444;
 }
 
-a:hover { color: #222; }
+a:hover { color: #95BB56; }
 
 a img { border: none; }
 
@@ -263,7 +263,7 @@ small { font-family: 'Lato', sans-serif; }
 	border-top: 1px solid #EEE;
 }
 
-.line.line-sm { margin: 30px 0; }
+.line.line-sm { margin: 23px 0; }
 
 span.middot {
 	display: inline-block;
@@ -1118,7 +1118,7 @@ body.stretched #header.full-header .container {
 #primary-menu ul li > a {
 	display: block;
 	line-height: 22px;
-	padding: 39px 39px;
+	padding: 39px 30px;
 	color: #fff;
 	font-weight: bold;
 	font-size: 13px;
@@ -1902,7 +1902,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #header.transparent-header
 	transition: height .4s ease, opacity .3s ease;
 }
 
-#header.sticky-style-2 { height: 161px; }
+#header.sticky-style-2 { height: 159px; }
 
 #header.sticky-style-3 { height: 181px; }
 
@@ -3408,7 +3408,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 .content-wrap {
 	position: relative;
-	padding: 80px 0;
+	padding: 50px 0;
 }
 
 #content .container { position: relative; }
@@ -8853,7 +8853,7 @@ ul.tab-nav-lg.tab-nav-section li.ui-tabs-active:before {
 
 .tab-container {
 	position: relative;
-	padding: 20px 0 0;
+	padding: 8px 0 0;
 }
 
 ul.tab-nav li a i {
@@ -10775,7 +10775,7 @@ label.error { display: none !important; }
 
 .fancy-title {
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 18px;
 }
 
 .fancy-title h1,
@@ -10860,7 +10860,7 @@ label.error { display: none !important; }
 	display: block;
 	background: transparent;
 	padding: 0 0 10px;
-	border-bottom: 2px solid #1ABC9C;
+	border-bottom: 2px solid #95BB56;
 }
 
 
@@ -11106,7 +11106,7 @@ body:not(.device-touch) #gotoTop {
 
 .stretched #gotoTop { bottom: 30px; }
 
-#gotoTop:hover { background-color: #1ABC9C; }
+#gotoTop:hover { background-color: #95BB54; }
 
 
 /* ----------------------------------------------------------------
@@ -13009,7 +13009,7 @@ background-color: #333333 !important;
 -o-background-color: #333333 !important;
 }
 
-span.tab-space {padding-left:8em;}
+span.tab-space {padding-left:6em;}
  
  .col-xs{
  float: left;
@@ -13019,3 +13019,71 @@ span.tab-space {padding-left:8em;}
  .fruittop{
   padding-top: 39px;
  }
+
+ .icons{
+   padding-left: 0;
+    margin-left: 0.10em !important;
+    list-style-type: none;
+    font-size: 16px !important;
+    line-height: 30px;
+ }
+
+ .icons ul li a{
+ color:#000;
+ 
+ }
+
+.loginsec{
+width:100%; 
+height: 100%; 
+position: absolute; 
+left: 0; 
+top: 0; 
+background: url('images/parallax/home/1.jpg') center center no-repeat; 
+background-size: cover;
+}
+
+.loginpanel{
+max-width: 400px; background-color: rgba(255,255,255,0.93);
+}
+
+#headsub ul li.actives > a{
+color:#95BB56;
+}
+
+
+.forgot-title{
+  font-size: 23px !important;
+  line-height: 44px !important;
+  padding-left: 30px !important;
+   font-weight: 400 !important;
+}
+
+.forgot-icon {
+    width: 20px !important;
+    font-size: 20px !important;
+    line-height: 64px !important;
+}
+
+.forgotspan{
+font-size:16px;
+}
+
+.resettex{
+    border: solid 5px #95BB56;
+    padding: 23px 16px 19px 21px;
+    background-color: #95BB56;
+    color: #fff;
+}
+
+.resetpass{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.footcolor{
+color: #95BB56;
+-moz-color: #95BB56;
+-webkit-color: #95BB56;
+-o-color: #95BB56;
+}

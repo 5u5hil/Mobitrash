@@ -35,9 +35,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
-
-
-//   Route::group(['middleware' => 'CheckUser'], function() {
+//      Route::group(['middleware' => 'CheckUser'], function() {
         Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "LoginController@dashboard"]);
 
         Route::group(['prefix' => 'master'], function() {
@@ -197,9 +195,18 @@ Route::group(['middleware' => ['web']], function () {
         });
 // });
     });
-    Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() { 
-        Route::get('/', ["as" => "Home", "uses" => "PageController@index"]);
-        Route::get('/login', ["as" => "Login", "uses" => "LoginController@login"]);
-        Route::get('/register', ["as" => "Register", "uses" => "LoginController@register"]);
+    Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
+        Route::get('/', ["as" => "/", "uses" => "PageController@index"]);
+        Route::get('/login', ["as" => "user.login", "uses" => "UsersController@login"]);
+        Route::post('/check-login', ["as" => "user.check.login", "uses" => "UsersController@checkUserLogin"]);
+        Route::get('/register', ["as" => "user.register", "uses" => "UsersController@register"]);
+        Route::post('/register-user', ["as" => "user.register.save", "uses" => "UsersController@registerUser"]);
+        Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
+        Route::get('/my-account', ["as" => "user.myaccount.view", "uses" => "UsersController@myAccount"]);
+        Route::get('/user-logout', ["as" => "user.logout", "uses" => "UsersController@userLogout"]);
+        Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
+        Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']); 
+        Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']); 
+        
     });
 });

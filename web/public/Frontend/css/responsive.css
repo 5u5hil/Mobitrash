@@ -1769,3 +1769,12 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
 	#logo a.retina-logo { display: inline-block; }
 }
 
+ @media (min-width: 768px) and (max-width: 1024px) {
+ 
+ .col-xs{
+ float:left;
+ width:0% !important;
+ }
+ 
+ }
+

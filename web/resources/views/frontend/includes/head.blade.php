@@ -7,13 +7,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/bootstrap.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/swiper.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/dark.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/font-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/magnific-popup.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/fullcalendar.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/responsive.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/validationEngine.jquery.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Admin/dist/css/jqueryui.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/style.css') }}">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
