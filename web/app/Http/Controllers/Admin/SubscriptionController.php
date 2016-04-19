@@ -11,6 +11,7 @@ use App\Models\Timeslot;
 use App\Models\Package;
 use App\Models\Attachment;
 use App\Http\Controllers\Controller;
+use App\Models\Occupancy;
 
 class SubscriptionController extends Controller {
 
@@ -53,8 +54,8 @@ class SubscriptionController extends Controller {
         } else {
             $subscription = Subscription::paginate(Config('constants.paginateNo'));
         }
-        
-        return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3', 'field4', 'field5' ));
+
+        return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5'));
     }
 
     function renewal() {
@@ -97,8 +98,8 @@ class SubscriptionController extends Controller {
             $subscription = Subscription::where('end_date', '<=', $now_10days)->where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
         } else {
             $subscription = Subscription::where('end_date', '<=', $now_10days)->paginate(Config('constants.paginateNo'));
-        }  
-        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3', 'field4', 'field5' ));
+        }
+        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5'));
     }
 
     public function add() {
@@ -111,11 +112,18 @@ class SubscriptionController extends Controller {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
 
-        $wastetypess = Wastetype::all()->toArray();
+        $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
+        $occupancy = [];
+        foreach ($occupancyd as $value) {
+            $occupancy[$value['id']] = $value['name'];
+        }
+
+        $wastetypess = Wastetype::where("is_active", 1)->get()->toArray();
         $wastetype = [];
         foreach ($wastetypess as $value) {
             $wastetype[$value['id']] = $value['name'];
         }
+        $return_of_compost = false;
 
         $wastetype_selected = [];
         $wastetype_selecteds = $subscription->wastetypes->toArray();
@@ -142,7 +150,7 @@ class SubscriptionController extends Controller {
 
 
         $action = "admin.subscription.save";
-        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages'));
+        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'occupancy', 'return_of_compost'));
     }
 
     public function edit() {
@@ -155,10 +163,20 @@ class SubscriptionController extends Controller {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
 
-        $wastetypess = Wastetype::all()->toArray();
+        $wastetypess = Wastetype::where("is_active", 1)->get()->toArray();
         $wastetype = [];
         foreach ($wastetypess as $value) {
             $wastetype[$value['id']] = $value['name'];
+        }
+        $return_of_compost = false;
+        if($subscription->return_of_compost){
+            $return_of_compost = true;
+        }
+        
+        $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
+        $occupancy = [];
+        foreach ($occupancyd as $value) {
+            $occupancy[$value['id']] = $value['name'];
         }
 
         $wastetype_selected = [];
@@ -185,7 +203,7 @@ class SubscriptionController extends Controller {
         }
 
         $action = "admin.subscription.save";
-        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages'));
+        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'occupancy', 'return_of_compost'));
     }
 
     public function save() {

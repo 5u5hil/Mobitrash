@@ -110,6 +110,23 @@ class UsersController extends Controller {
             return redirect()->route('user.login');
         }
     }
+    
+    public function forgotPassword() {
+        return view(Config('constants.frontendView') . '.forgot');
+    }
+    
+    public function updateForgotPassword() {
+        $user = User::where("email", "=", Input::get("email"))->first();  
+        $random = substr(str_shuffle(time()), 0, 6);
+        if ($user) {
+//            $user->password = Hash::make($random);;
+//            $user->update();
+            //email here
+            return ['flash'=>'success'];
+        } else {
+            return ['flash'=>'invalidEmail'];
+        }
+    }
 
     public function userLogout() {
         Auth::logout();
@@ -131,15 +148,23 @@ class UsersController extends Controller {
         $user->phone_number = Input::get('phone_number');
         $user->email = Input::get('email');
         if (Input::get('old_password') && Input::get('new_password') && Input::get('confirm_password')) {
-            if (Hash::make(Input::get('old_password')) == $user->password) {
-                $user->password = Hash::make(Input::get('new_password'));
-            }
-            else{
-                $message= 'Password Not Changed! Incorrect Old password or Confirm Password doed not match with New Password';
+            $check = Hash::check(Input::get('old_password'), $user->password);
+            if ($check == true) {
+                if ((Input::get('new_password')) == Input::get('confirm_password')) {
+                    $user->password = Hash::make(Input::get('new_password'));
+                    Session::flash('PasswordSuccess', 'Password updated successfully!');
+                } else {
+                    Session::flash('PasswordError', 'Password not changed: Confirmed Password does not match');
+                }
+            } else {
+                Session::flash('PasswordError', 'Password not changed: Incorrect Old Password');
             }
         }
+        
         $user->user_type = 1;
         $user->update();
+        Session::flash('profileSuccess', 'Profile Updated successfully!');
+        
         return redirect()->route('user.myprofile.view');
     }
 
@@ -148,25 +173,50 @@ class UsersController extends Controller {
     }
 
     public function showUserSubscription() {
-        return view(Config('constants.frontendView') . '.subscription');
-    }
-
-    public function chk_existing_username() {
-        $getname = Input::get('username');
-        // dd($getname);
-        $chk = User::where("user_name", "=", $getname)->first();
-
-        if (!empty($chk)) {
-            echo "Invalid";
-        } else {
-            echo "valid";
+        $subscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->with('frequency', 'timeslot', 'user')->first();
+        $address = Address::where("id", $subscription->user_address_id)->first();
+        
+        $wastetypess = Wastetype::all()->toArray();
+        $wastetype = [];
+        foreach ($wastetypess as $value) {
+            $wastetype[$value['id']] = $value['name'];
         }
-    }
 
-    public function delete() {
-        $user = User::find(Input::get('id'));
-        $user->delete();
-        return redirect()->back()->with("message", "User deleted successfully!");
+        $f = Frequency::where("is_active", 1)->get()->toArray();
+        $frequency = [];
+        foreach ($f as $value) {
+            $frequency[$value['id']] = $value['name'];
+        }
+
+        $pack = Package::where("is_active", 1)->get()->toArray();
+        $packages = [];
+        foreach ($pack as $value) {
+            $packages[$value['id']] = $value['name'];
+        }
+
+        $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
+        $timeslot = [];
+        foreach ($t as $value) {
+            $timeslot[$value['id']] = $value['name'];
+        }
+
+        $citiesd = City::where("is_active", 1)->get()->toArray();
+        $cities = [];
+        foreach ($citiesd as $value) {
+            $cities[$value['id']] = $value['name'];
+        }
+        $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
+        $occupancy = [];
+        foreach ($occupancyd as $value) {
+            $occupancy[$value['id']] = $value['name'];
+        }
+        $wastetype_selected = [];
+        $wastetype_selecteds = $subscription->wastetypes->toArray();
+        foreach ($wastetype_selecteds as $val){
+            array_push($wastetype_selected, $val['id']);
+        }
+        $action = 'user.subscription.save';
+        return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'cities', 'occupancy'));
     }
 
     public function saveSubscription() {
@@ -193,5 +243,5 @@ class UsersController extends Controller {
         $subscription->wastetypes()->sync(Input::get('wastetype'));
         return redirect()->route('user.myprofile.view');
     }
-     
+
 }

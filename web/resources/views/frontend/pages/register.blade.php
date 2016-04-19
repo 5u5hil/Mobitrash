@@ -187,7 +187,7 @@
                 }
 
             });
-        })
+        });
 
         $("#subscribe-form-submit").click(function (e) {
             e.preventDefault();
@@ -196,11 +196,11 @@
                 type: "POST",
                 data: $("#sub-form").serialize(),
                 success: function (data) {
-                    window.location.href = "/";
+                    window.location.href = "/my-profile";
                 }
 
             });
-        })
+        });
 
     });
 

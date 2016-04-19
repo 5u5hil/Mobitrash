@@ -48,11 +48,7 @@ class SystemUsersController extends Controller {
             $user->email = Input::get('email');
             $user->password = Hash::make(Input::get('password'));
             $user->user_type = 1;
-
-
-
             $user->save();
-
             if (!empty(Input::get('roles'))) {
                 $user->roles()->sync([Input::get('roles')]);
                 if(Input::get('roles') == 2){
@@ -65,8 +61,10 @@ class SystemUsersController extends Controller {
                 return redirect()->route('admin.systemusers.view');
             }
         } else {
-            Session::flash("usenameError", "Username already exist");
-            return redirect()->back();
+            Session::flash('message', "Email address already exist");
+            
+            var_dump( Session::all() );
+            return redirect()->route('admin.systemusers.add');
         }
     }
 
@@ -125,7 +123,7 @@ class SystemUsersController extends Controller {
     public function getApproxTime() {
         $subscription = Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
 //        print('<pre>'); print_r($subscription);print('</pre>'); 
-//exit();
+//        exit();
         return [$subscription];
     }
 

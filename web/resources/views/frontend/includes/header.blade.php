@@ -49,7 +49,7 @@
                     </li><!-- .mega-menu end -->
                     <li><a href="#"><div>Contact</div></a></li>
                     @if(Auth::id())
-                    <li class="{{ preg_match("/user.myprofile.view/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.myprofile.view') }}"><div>Profile</div></a></li>
+                    <li class="{{ preg_match("/user.myprofile.view/",Route::currentRouteName()) || preg_match("/user.subscription.view/",Route::currentRouteName()) || preg_match("/user.myaccount.view/",Route::currentRouteName()) ? 'current' : ''}}"><a href="{{ route('user.myprofile.view') }}"><div>Profile</div></a></li>
                     <li><a href="{{ route('user.logout') }}"><div>Logout</div></a></li>
                     @else
                     @if(!preg_match("/user.login/",Route::currentRouteName()))

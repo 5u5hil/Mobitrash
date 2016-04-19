@@ -18,10 +18,9 @@
             <div class="box">
                 <div class="box-body">
 
-
                     <div class="panel-body">
-                        <p style="color:red;text-align: center;">{{ Session::get('usenameError') }}</p>
-                        <p style="color:red;text-align: center;">{{ Session::get('usernameErr') }}</p>
+                        
+                        <p style="color:red;text-align: center;">{{ Session::get('message') }}</p>
 
                         {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                         <div class="form-group">

@@ -40,6 +40,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('user','Occupancy Type',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('occupancy_id',$occupancy,null, ["class"=>'form-control', "data-show-content" => "false", "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('user','Frequency',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('frequency_id',$frequency,null, ["class"=>'form-control', "required"]) !!}
@@ -99,6 +106,20 @@
                         {!!Form::label('dop','End Date',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('end_date',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','Return of Compost',['class'=>'col-sm-2']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('return_of_compost',[0 => "No", 1 => "Yes"],null, ["class"=>'return-of-compost form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group weekly-quantity" style="{{$return_of_compost? 'display:block;': 'display:none;'}}">
+                        {!!Form::label('dop','Weekly Quantity',['class'=>'col-sm-2']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('weekly_quantity',null, ["class"=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -177,6 +198,15 @@
             }
         });
     }).change();
+    
+    $('.return-of-compost').change(function(){
+        if($(this).val() == '1'){
+            $('.weekly-quantity').show();
+        }else{
+            $('.weekly-quantity').hide();
+            $('.weekly-quantity input').val('');
+        }
+    });
 
 </script>
 

@@ -8,13 +8,19 @@
 
     <div class="container clearfix">
         <h1>My Profile</h1>
+        <div class="flash-message green">
+            {{Session::pull('profileSuccess')}}  
+            {{Session::pull('PasswordSuccess')}}  
+        </div>
+        <div class="flash-message red">
+            {{Session::pull('PasswordError')}}                            
+        </div>
 
     </div>
 
 </section><!-- #page-title end -->
 
 <section id="content">
-
     <div class="content-wrap">
 
         <div class="container clearfix">
@@ -45,11 +51,7 @@
                     <div class="fancy-title title-bottom-border">
                         <h4>My Profile</h4>
                     </div>
-                    <div class="">
-
-                        <div class="contact-form-result"></div>
-
-
+                    <div class="">  
                         {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin' ]) !!}
                         <div class="form-process"></div>
                         <div class="col_one_third">

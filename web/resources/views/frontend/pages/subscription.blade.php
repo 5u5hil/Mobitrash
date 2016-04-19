@@ -20,7 +20,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>NEELYOG ANAND</h4>
+                            <h4>{{$subscription->user->first_name.' '.$subscription->user->last_name}}</h4>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
@@ -46,84 +46,75 @@
                     <div class="contact-widget">
 
                         <div class="contact-form-result"></div>
+                        {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin' ]) !!}
 
-                        <form class="nobottommargin" id="template-contactform" name="template-contactform" action="include/sendemail.php" method="post">
+                        <div class="form-process"></div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-phone">Address:</label>
+                            {!! Form::text('address',$address->address, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                        </div>
 
-                            <div class="form-process"></div>
-                            <div class="col_one_third">
-                                <label for="template-contactform-phone">Address:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="Neelyog Anand, Laxmi Nagar, Ghatkopar East"/>
-                            </div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-service">City:</label>
+                            {!! Form::select('city_id',$cities,$address->city_id, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                        </div>
 
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">City:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="Mumbai"/>
-                            </div>
+                        <div class="col_one_third col_last">
+                            <label for="template-contactform-phone">Pincode:</label>
+                            {!! Form::text('pincode',$address->pincode, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Pincode"]) !!}
+                        </div>
 
-                            <div class="col_one_third col_last">
-                                <label for="template-contactform-phone">Pincode:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="400075"/>
-                            </div>
+                        <div class="clear"></div>
 
-                            <div class="clear"></div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-service">Occupancy Category:</label>
+                            {!! Form::select('occupancy_id',$occupancy,null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Occupancy Category"]) !!}
+                        </div>
 
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">Occupancy Category:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="Residential Society"/>
-                            </div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-service">Waste Category:</label>
+                            {!! Form::select('wastetype',$wastetype,$wastetype_selected, ["class"=>"sm-form-control validate[required]","multiple" ,"disabled"=>"disabled"]) !!}
+                        </div>
 
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">Waste Category:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="Wet Waste"/>
-                            </div>
+                        <div class="col_one_third col_last">
+                            <label for="template-contactform-phone">Max Waste Quantity (Kg):</label>
+                            {!! Form::text('max_waste',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Max Waste Quantity (Kg)"]) !!}
+                        </div>
 
-                            <div class="col_one_third col_last">
-                                <label for="template-contactform-phone">Max Waste Quantity (Kg):</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="68"/>
-                            </div>
+                        <div class="clear"></div>
 
-                            <div class="clear"></div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-service">Preferred Timeslot:</label>
+                            {!! Form::select('timeslot_id',$timeslot,null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Preferred Timeslot"]) !!}
+                        </div>
 
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">Preferred Timeslot:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="3PM - 6 PM"/>
-                            </div>
+                        <div class="col_one_third">
+                            <label for="">Service Start Date:</label>
+                            {!! Form::text('start_date',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Service Start Date"]) !!}
+                        </div>
+                        
+                        <div class="col_one_third col_last">
+                            <label for="template-contactform-service">Agreement End Date:</label>
+                            {!! Form::text('end_date',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Agreement End Date"]) !!}
+                        </div>
+                        <div class="clear"></div>
+                        
+                        <div class="col_one_third">
+                            <label for="template-contactform-service">Return oF Compost:</label>
+                            {!! Form::select('return_of_compost',[0=>'No','Yes'],null, ["class"=>"sm-form-control" ,"disabled"=>"disabled"]) !!}
+                        </div>
+                        <div class="col_one_third" style="{{$subscription->return_of_compost?'display:block;':'display:none;'}}" id="weightpas">
+                            <label for="login-form-password">Weekly Quantity :</label>
+                            {!! Form::text('weekly_quantity',null, ["class"=>"sm-form-control" ,"disabled"=>"disabled","placeholder"=>"Weekly Quantity"]) !!}
+                        </div>
+                        <div class="clear"></div>
 
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">Package:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="XYZ"/>
-                            </div>
-
-                            <div class="col_one_third col_last">
-                                <label for="">Service Start Date:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="15/04/2016"/>
-                            </div>
-                            <div class="clear"></div>
-                            <div class="col_full">
-                                <label for="login-form-username">Return oF Compost: <span class="tab-space"><a href="javascript:void(0);" id="yesweight">Yes</a></span></label>
-                            </div>
-                            <div class="col_full" style="display:none;" id="weightpas">
-                                <label for="login-form-password">Weekly Quantity :</label>
-                                <input type="text" id="login-form-password" name="login-form-password" value="" class="form-control" disabled/>
-                            </div>
-                            <div class="clear"></div>
-                            <div class="col_one_third">
-                                <label for="template-contactform-service">Agreement Duration:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="12 Months"/>
-                            </div>
-
-                            <div class="col_two_third col_last">
-                                <label for="template-contactform-phone">Remarks:</label>
-                                <input type="text" id="template-contactform-phone" name="template-contactform-phone" value="" class="sm-form-control" disabled placeholder="Come only within prefered time slot"/>
-                            </div>
-
-                            <center>
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <button class="button button-3d button-black nomargin" id="register-form-submit" name="register-form-submit" value="register">Add New Subscription</button>
-                                </div>
-                            </center>
-
-                        </form>
+                        <div class="col_two_third col_last">
+                            <label for="template-contactform-phone">Remarks:</label>
+                            {!! Form::text('remark',null, ["class"=>"sm-form-control" ,"disabled"=>"disabled","placeholder"=>"Remark"]) !!}
+                        </div>
+                        {!! Form::hidden('id',null) !!}
+                        {!! Form::close() !!}  
 
                     </div>
                 </div><!-- .portfolio-single-image end -->

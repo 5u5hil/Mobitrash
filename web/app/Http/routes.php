@@ -198,6 +198,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
         Route::get('/', ["as" => "/", "uses" => "PageController@index"]);
         Route::get('/login', ["as" => "user.login", "uses" => "UsersController@login"]);
+        Route::get('/forgot-password', ["as" => "user.forgot.password", "uses" => "UsersController@forgotPassword"]);
+        Route::post('/forgot-update', ["as" => "user.forgotpassword.update", "uses" => "UsersController@updateForgotPassword"]);
         Route::post('/check-login', ["as" => "user.check.login", "uses" => "UsersController@checkUserLogin"]);
         Route::get('/register', ["as" => "user.register", "uses" => "UsersController@register"]);
         Route::post('/register-user', ["as" => "user.register.save", "uses" => "UsersController@registerUser"]);

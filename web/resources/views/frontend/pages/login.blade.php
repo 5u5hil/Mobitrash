@@ -27,7 +27,10 @@
                             </div>
 
                             <div class="panel panel-default divcenter noradius noborder loginpanel">
-                                <div class="panel-body" style="padding: 40px;">
+                                <div class="panel-body" style="padding: 40px;">                                    
+                                    <div class="flash-message red">
+                                        {{Session::pull('invalidUser')}}                            
+                                    </div>
                                     <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('user.check.login') }}" method="post">
                                         <h3>Login to your Account</h3>
 
@@ -43,7 +46,7 @@
 
                                         <div class="col_full nobottommargin">
                                             <button type="submit" class="button button-3d button-black nomargin" id="login-form-submit">Login</button>
-                                            <a href="forgotpassword.html" class="fright">Forgot Password?</a>
+                                            <a href="{{route('user.forgot.password')}}" class="fright">Forgot Password?</a>
                                         </div>
                                     </form>
 

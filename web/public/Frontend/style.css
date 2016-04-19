@@ -13087,3 +13087,16 @@ color: #95BB56;
 -webkit-color: #95BB56;
 -o-color: #95BB56;
 }
+
+.flash-message{
+    width: 100%; 
+    text-align: center;
+    font-size: 15px;
+}
+
+.red{
+    color:red;
+}
+.green{
+    color: green;
+}
