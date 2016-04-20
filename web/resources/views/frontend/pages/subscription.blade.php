@@ -56,7 +56,7 @@
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">City:</label>
-                            {!! Form::select('city_id',$cities,$address->city_id, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('city_id',$cities['name'], ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
@@ -68,12 +68,12 @@
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Occupancy Category:</label>
-                            {!! Form::select('occupancy_id',$occupancy,null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Occupancy Category"]) !!}
-                        </div>
+                            {!! Form::text('occupancy_id',$subscription->occupancy->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Occupancy Category"]) !!}
+                        </div> 
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Waste Category:</label>
-                            {!! Form::select('wastetype',$wastetype,$wastetype_selected, ["class"=>"sm-form-control validate[required]","multiple" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('wastetype_id', $subscription->wastetypes->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
@@ -85,29 +85,26 @@
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Preferred Timeslot:</label>
-                            {!! Form::select('timeslot_id',$timeslot,null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Preferred Timeslot"]) !!}
+                            {!! Form::text('timeslot_id',$subscription->timeslot->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Preferred Timeslot"]) !!}
                         </div>
 
                         <div class="col_one_third">
                             <label for="">Service Start Date:</label>
                             {!! Form::text('start_date',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Service Start Date"]) !!}
                         </div>
-                        
+
                         <div class="col_one_third col_last">
                             <label for="template-contactform-service">Agreement End Date:</label>
                             {!! Form::text('end_date',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Agreement End Date"]) !!}
                         </div>
                         <div class="clear"></div>
-                        
-                        <div class="col_one_third">
-                            <label for="template-contactform-service">Return oF Compost:</label>
-                            {!! Form::select('return_of_compost',[0=>'No','Yes'],null, ["class"=>"sm-form-control" ,"disabled"=>"disabled"]) !!}
+                        <div class="col_full">
+                            <label for="login-form-username">Return oF Compost: <span class="tab-space">{{$subscription->return_of_compost ? 'Yes':'No'}}</span></label>
                         </div>
                         <div class="col_one_third" style="{{$subscription->return_of_compost?'display:block;':'display:none;'}}" id="weightpas">
                             <label for="login-form-password">Weekly Quantity :</label>
                             {!! Form::text('weekly_quantity',null, ["class"=>"sm-form-control" ,"disabled"=>"disabled","placeholder"=>"Weekly Quantity"]) !!}
                         </div>
-                        <div class="clear"></div>
 
                         <div class="col_two_third col_last">
                             <label for="template-contactform-phone">Remarks:</label>

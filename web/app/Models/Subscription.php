@@ -23,22 +23,26 @@ class Subscription extends \Eloquent {
         return $this->belongsTo('App\Models\Frequency', 'frequency_id');
     }
 
+    public function occupancy() {
+        return $this->belongsTo('App\Models\Frequency', 'frequency_id');
+    }
+
     public function servicetype() {
         return $this->belongsTo('App\Models\Servicetype', 'servicetype_id');
     }
-    
+
     public function packages() {
         return $this->belongsTo('App\Models\Package', 'package_id');
     }
-    
+
     public function atts() {
         return $this->hasMany('App\Models\Attachment', 'subscription_id');
     }
-    
+
     public function wastetypes() {
-        return $this->belongsToMany('App\Models\Wastetype', 'subscription_wastetype', 'subscription_id', 'wastetype_id');
+        return $this->belongsTo('App\Models\Wastetype', 'wastetype_id');
     }
-    
+
     public function address() {
         return $this->belongsTo('App\Models\Address', 'user_address_id');
     }

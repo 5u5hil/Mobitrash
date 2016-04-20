@@ -24,7 +24,7 @@ class AssetsController extends Controller {
         foreach ($atypes as $value) {
             $types[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'Filter By', 'name' => 'Asset Name', 'type_id' => 'Type', 'city_id' => 'City');
+        $filter = array('' => 'All', 'name' => 'Asset Name', 'type_id' => 'Type', 'city_id' => 'City');
         
         $filter_type = NULL;
         $filter_value = NULL;

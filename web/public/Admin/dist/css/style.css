@@ -44,9 +44,12 @@
 
 .filter-box{
     float: right;
-    width: 450px;
+    width: 495px;
     position: absolute;
     right: 15px;
+}
+.filter-box label{
+    margin-right: 10px;
 }
 .filter-box input, .filter-box select{
     width: 185px; 

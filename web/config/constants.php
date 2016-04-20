@@ -28,6 +28,7 @@ $adminConstants = [
 
 $frontendConstants = [
     'frontendView' => 'frontend.pages',
+    'frontendEmail' => 'frontend.emails',
 ];
 
 

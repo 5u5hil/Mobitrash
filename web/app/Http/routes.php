@@ -209,6 +209,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
         Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']); 
         Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']); 
-        
+        Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']); 
+        Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']); 
     });
 });

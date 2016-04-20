@@ -51,10 +51,9 @@ class SystemUsersController extends Controller {
             $user->save();
             if (!empty(Input::get('roles'))) {
                 $user->roles()->sync([Input::get('roles')]);
-                if(Input::get('roles') == 2){
+                if (Input::get('roles') == 2) {
                     return redirect()->route('admin.users.view');
-                }
-                else{
+                } else {
                     return redirect()->route('admin.systemusers.view');
                 }
             } else {
@@ -62,8 +61,6 @@ class SystemUsersController extends Controller {
             }
         } else {
             Session::flash('message', "Email address already exist");
-            
-            var_dump( Session::all() );
             return redirect()->route('admin.systemusers.add');
         }
     }
@@ -81,9 +78,14 @@ class SystemUsersController extends Controller {
 
         if (!empty(Input::get('roles'))) {
             $user->roles()->sync([Input::get('roles')]);
+            if (Input::get('roles') == 2) {
+                return redirect()->route('admin.users.view');
+            } else {
+                return redirect()->route('admin.systemusers.view');
+            }
+        } else {
+            return redirect()->route('admin.systemusers.view');
         }
-
-        return redirect()->route('admin.systemusers.view');
     }
 
     public function edit() {

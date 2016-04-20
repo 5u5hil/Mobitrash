@@ -91,7 +91,7 @@
                     <div class="form-group">
                         {!!Form::label('dop','Waste Type',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('wastetype[]',$wastetype,$wastetype_selected, ["class"=>'form-control', "required", "multiple" => true]) !!}
+                            {!! Form::select('wastetype_id',$wastetype,null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

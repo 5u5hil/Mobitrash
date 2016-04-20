@@ -38,10 +38,11 @@
                         }
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.record.view' , 'class' => 'form-horizontal' ]) !!}
+                        <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        {!! Form::select('filter_value',$recordtypes, $record_type, ["class"=>'form-control record_type', "style"=>$show_record, $dis_record]) !!}
-                        {!! Form::select('filter_value',$vans, $assets_type, ["class"=>'form-control assets_type', "style"=>$show_assets, $dis_assets]) !!}
-                        {!! Form::text('filter_value',$filter_date, ["class"=>'form-control filter_value datepicker', "style"=>$show_val, $dis_val]) !!}
+                        {!! Form::select('filter_value',$recordtypes, $record_type, ["class"=>'form-control f2', "style"=>$show_record, $dis_record]) !!}
+                        {!! Form::select('filter_value',$vans, $assets_type, ["class"=>'form-control f3', "style"=>$show_assets, $dis_assets]) !!}
+                        {!! Form::text('filter_value',$filter_date, ["class"=>'form-control f1 datepicker', "style"=>$show_val, $dis_val]) !!}
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
@@ -104,26 +105,16 @@
 <script>
     $(".filter_type").change(function () {
         if ($(this).val() == 'date') {
-            $(".filter_value").show();
-            $(".filter_value").prop('disabled', false);
-            $(".record_type").hide();
-            $(".record_type").prop('disabled', true);
-            $(".assets_type").hide();
-            $(".assets_type").prop('disabled', true);
+            $(".f1").show().prop('disabled', false);
+            $(".f2, .f3").hide().prop('disabled', true);
         } else if ($(this).val() == 'recordtype_id') {
-            $(".filter_value").hide();
-            $(".filter_value").prop('disabled', true);
-            $(".record_type").show();
-            $(".record_type").prop('disabled', false);
-            $(".assets_type").hide();
-            $(".assets_type").prop('disabled', true);
+            $(".f2").show().prop('disabled', false);
+            $(".f1, .f3").hide().prop('disabled', true);
         } else if ($(this).val() == 'asset_id') {
-            $(".filter_value").hide();
-            $(".filter_value").prop('disabled', true);
-            $(".record_type").hide();
-            $(".record_type").prop('disabled', true);
-            $(".assets_type").show();
-            $(".assets_type").prop('disabled', false);
+            $(".f3").show().prop('disabled', false);
+            $(".f1, .f2").hide().prop('disabled', true);
+        } else{
+            $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });
 </script>

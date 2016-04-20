@@ -52,15 +52,7 @@
                     <li class="{{ preg_match("/user.myprofile.view/",Route::currentRouteName()) || preg_match("/user.subscription.view/",Route::currentRouteName()) || preg_match("/user.myaccount.view/",Route::currentRouteName()) ? 'current' : ''}}"><a href="{{ route('user.myprofile.view') }}"><div>Profile</div></a></li>
                     <li><a href="{{ route('user.logout') }}"><div>Logout</div></a></li>
                     @else
-                    @if(!preg_match("/user.login/",Route::currentRouteName()))
                     <li class="{{ preg_match("/user.login/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.login') }}"><div>Login</div></a></li>
-                    @else
-                    @endif
-
-                    @if(!preg_match("/user.register/",Route::currentRouteName()))
-                    <li class="{{ preg_match("/user.register/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.register') }}"><div>Register</div></a></li>
-                    @else
-                    @endif
                     @endif
                 </ul>
 

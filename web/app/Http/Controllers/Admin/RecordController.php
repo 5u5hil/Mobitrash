@@ -24,7 +24,7 @@ class RecordController extends Controller {
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
-        $filter = array('' => 'Filter By', 'recordtype_id' => 'Record Type', 'asset_id' => 'Record For', 'date' => 'Receipt Date');
+        $filter = array('' => 'All', 'recordtype_id' => 'Record Type', 'asset_id' => 'Record For', 'date' => 'Receipt Date');
         
         $filter_type = NULL;
         $record_type = NULL;

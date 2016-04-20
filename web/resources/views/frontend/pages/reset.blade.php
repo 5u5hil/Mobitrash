@@ -29,30 +29,31 @@
                             <div class="panel panel-default divcenter noradius noborder loginpanel">
                                 <div class="panel-body" style="padding: 40px;">                                    
                                     <div class="flash-message red">
-                                        {{@Session::pull('invalidUser')}}                            
+                                        {{Session::pull('invalidUser')}}                            
                                     </div>
-                                    <div class="flash-message green">
-                                        {{@Session::pull('PasswordSuccess')}}                            
-                                    </div>
-                                    <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('user.check.login') }}" method="post" style="margin-top: 15px;">
-                                        <h3>Login to your Account</h3>
+                                    @if($user)
+                                    <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('user.password.update') }}" method="post"  style="margin-top: 15px;">
+                                        <h3>Reset Password</h3>
 
                                         <div class="col_full">
-                                            <label for="email">Email Id:</label>
-                                            <input type="text" id="email" name="email" value="" class="sm-form-control" />
+                                            <label for="password">New Password:</label>
+                                            <input type="text" id="password" name="new_password" value="" class="sm-form-control validate[required]" />
                                         </div>
 
                                         <div class="col_full">
-                                            <label for="password">Password:</label>
-                                            <input type="text" id="password" name="password" value="" class="sm-form-control" />
+                                            <label for="confirm-password">Confirm Password:</label>
+                                            <input type="text" id="confirm-password" name="confirm_password" value="" class="sm-form-control validate[equals[password]]" />
                                         </div>
 
                                         <div class="col_full nobottommargin">
-                                            <button type="submit" class="button button-3d button-black nomargin" id="login-form-submit">Login</button>
-                                            <a href="{{route('user.forgot.password')}}" class="fright">Forgot Password?</a>
+                                            <button type="submit" class="button button-3d button-black nomargin" id="login-form-submit">Reset</button>
+                                            
                                         </div>
+                                        <input type="hidden" name="var_code" value="{{ base64_encode($user->varification_code) }}"  />
                                     </form>
-
+                                    @else
+                                    <div>Link Expired! Please try again.</div>
+                                    @endif
                                 </div>
                             </div>
 

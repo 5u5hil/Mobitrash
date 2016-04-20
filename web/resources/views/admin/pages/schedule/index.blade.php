@@ -18,6 +18,7 @@
             <div class="box">
                 <div class="box-header">
                     <div class="filter-box">
+
                         <?php
                         $show_f1 = 'display:none;';
                         $show_f2 = 'display:none;';
@@ -29,17 +30,17 @@
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        if ($field2) {                            
-                            $show_f2 = ''; 
+                        if ($field2) {
+                            $show_f2 = '';
                             $dis_f2 = '';
                         }
                         if ($field3) {
                             $show_f3 = '';
                             $dis_f3 = '';
                         }
-                      
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.schedule.view' , 'class' => 'form-horizontal' ]) !!}
+                        <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
                         {!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker', "style"=>$show_f2, $dis_f2]) !!}
@@ -106,19 +107,18 @@
 @section('myscripts')
 
 <script>
-     $(".filter_type").change(function () {
+    $(".filter_type").change(function () {
         if ($(this).val() == 'name') {
             $(".f1").show().prop('disabled', false);
-            $(".f2").hide().prop('disabled', true);
-            $(".f3").hide().prop('disabled', true);
+            $(".f2, .f3").hide().prop('disabled', true);
         } else if ($(this).val() == 'for') {
-            $(".f1").hide().prop('disabled', true);
             $(".f2").show().prop('disabled', false);
-            $(".f3").hide().prop('disabled', true);
+            $(".f1, .f3").hide().prop('disabled', true);
         } else if ($(this).val() == 'van_id') {
-            $(".f1").hide().prop('disabled', true);
-            $(".f2").hide().prop('disabled', true);
             $(".f3").show().prop('disabled', false);
+            $(".f1, .f2").hide().prop('disabled', true);
+        } else{
+            $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });
 </script>

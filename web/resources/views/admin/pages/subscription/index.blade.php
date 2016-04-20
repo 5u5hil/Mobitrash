@@ -33,8 +33,8 @@
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        if ($field2) {                            
-                            $show_f2 = ''; 
+                        if ($field2) {
+                            $show_f2 = '';
                             $dis_f2 = '';
                         }
                         if ($field3) {
@@ -49,9 +49,9 @@
                             $show_f5 = '';
                             $dis_f5 = '';
                         }
-                      
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.subscription.view' , 'class' => 'form-horizontal' ]) !!}
+                        <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::select('filter_value',$timeslot,$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
                         {!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}
@@ -99,11 +99,7 @@
                                 <td>{{ date('d M Y', strtotime($asset->start_date)) }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->end_date)) }}</td>
                                 <td>{{ $asset->max_waste }}</td>
-                                <td>
-                                    @foreach($asset->wastetypes as $wastetype)
-                                    <div>{{$wastetype->name}}</div>
-                                    @endforeach
-                                </td>
+                                <td>{{ @$asset->wastetypes()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
 
@@ -135,36 +131,22 @@
     $(".filter_type").change(function () {
         if ($(this).val() == 'timeslot_id') {
             $(".f1").show().prop('disabled', false);
-            $(".f2").hide().prop('disabled', true);
-            $(".f3").hide().prop('disabled', true);
-            $(".f4").hide().prop('disabled', true);
-            $(".f5").hide().prop('disabled', true);
+            $(".f2, .f3, .f4, .f5").hide().prop('disabled', true);
         } else if ($(this).val() == 'frequency_id') {
-            $(".f1").hide().prop('disabled', true);
             $(".f2").show().prop('disabled', false);
-            $(".f3").hide().prop('disabled', true);
-            $(".f4").hide().prop('disabled', true);
-            $(".f5").hide().prop('disabled', true);
+            $(".f1, .f3, .f4, .f5").hide().prop('disabled', true);
+
         } else if ($(this).val() == 'amt_paid') {
-            $(".f1").hide().prop('disabled', true);
-            $(".f2").hide().prop('disabled', true);
             $(".f3").show().prop('disabled', false);
-            $(".f4").hide().prop('disabled', true);
-            $(".f5").hide().prop('disabled', true);
-        }
-        else if ($(this).val() == 'start_date') {
-            $(".f1").hide().prop('disabled', true);
-            $(".f2").hide().prop('disabled', true);
-            $(".f3").hide().prop('disabled', true);
+            $(".f1, .f2, .f4, .f5").hide().prop('disabled', true);
+        } else if ($(this).val() == 'start_date') {
             $(".f4").show().prop('disabled', false);
-            $(".f5").hide().prop('disabled', true);
-        }
-        else if ($(this).val() == 'end_date') {
-            $(".f1").hide().prop('disabled', true);
-            $(".f2").hide().prop('disabled', true);
-            $(".f3").hide().prop('disabled', true);
-            $(".f4").hide().prop('disabled', true);
+            $(".f1, .f2, .f3, .f5").hide().prop('disabled', true);
+        } else if ($(this).val() == 'end_date') {
             $(".f5").show().prop('disabled', false);
+            $(".f1, .f2, .f3, .f4").hide().prop('disabled', true);
+        } else {
+            $(".f1, .f2, .f3, .f4, .f5").hide().prop('disabled', true);
         }
     });
 </script>

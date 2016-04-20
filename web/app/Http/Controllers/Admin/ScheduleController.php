@@ -20,7 +20,7 @@ class ScheduleController extends Controller {
             $vans[$value['id']] = $value['name'];
         }
         
-        $filter = array('' => 'Filter By', 'name' => 'Schedule Name', 'for' => 'Schedule Date', 'van_id' => 'Van');
+        $filter = array('' => 'All', 'name' => 'Schedule Name', 'for' => 'Schedule Date', 'van_id' => 'Van');
         
         $filter_type = NULL;
         $filter_value = NULL;

@@ -27,7 +27,7 @@ class SubscriptionController extends Controller {
         foreach ($t as $value) {
             $timeslot[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'Filter By', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+        $filter = array('' => 'All', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
 
         $filter_type = NULL;
         $filter_value = NULL;
@@ -72,7 +72,7 @@ class SubscriptionController extends Controller {
         foreach ($t as $value) {
             $timeslot[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'Filter By', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+        $filter = array('' => 'All', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
 
         $filter_type = NULL;
         $filter_value = NULL;
@@ -124,12 +124,7 @@ class SubscriptionController extends Controller {
             $wastetype[$value['id']] = $value['name'];
         }
         $return_of_compost = false;
-
-        $wastetype_selected = [];
-        $wastetype_selecteds = $subscription->wastetypes->toArray();
-        foreach ($wastetype_selecteds as $val)
-            array_push($wastetype_selected, $val['id']);
-
+        
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -179,11 +174,7 @@ class SubscriptionController extends Controller {
             $occupancy[$value['id']] = $value['name'];
         }
 
-        $wastetype_selected = [];
-        $wastetype_selecteds = $subscription->wastetypes->toArray();
-        foreach ($wastetype_selecteds as $val)
-            array_push($wastetype_selected, $val['id']);
-
+        
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -208,8 +199,7 @@ class SubscriptionController extends Controller {
 
     public function save() {
         $subscription = Subscription::findOrNew(Input::get('id'));
-        $subscription->fill(Input::except('wastetype', 'att'))->save();
-        $subscription->wastetypes()->sync(Input::get('wastetype'));
+        $subscription->fill(Input::except('att'))->save();
         foreach (Input::file('att') as $key => $att) {
             if ($att) {
                 $destinationPath = public_path() . '/uploads/records/';
