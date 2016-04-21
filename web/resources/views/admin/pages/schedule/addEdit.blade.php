@@ -29,8 +29,11 @@
                     <div class="form-group"> 
                         {!!Form::label('user','For',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('for',null, ["class"=>'form-control datepicker',  'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+                            <div class="multidatepicker"></div>
+                            {!! Form::text('multiple_dates',null, ["class"=>'form-control', "style"=>"display:none", "id"=>"multiple-dates", 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+
                         </div>
+
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
@@ -189,9 +192,9 @@
                 //console.log(data.length);
                 if (data.length == 1) {
                     options = $([]);
-                    var opt = $("<option />", {text: data[0].address, value: data[0].id, selected:'selected'});
+                    var opt = $("<option />", {text: data[0].address, value: data[0].id, selected: 'selected'});
                     options = options.add(opt);
-                    getAddress(select.parent().parent().find(".select_add"),data[0].id);
+                    getAddress(select.parent().parent().find(".select_add"), data[0].id);
                 } else {
                     $.each(data, function (k, v) {
                         var opt = $("<option />", {text: v.address, value: v.id});
@@ -199,12 +202,12 @@
                     });
                 }
                 select.parent().parent().find(".select_add").html(options);
-               
+
             }
         });
     });
 
-    function getAddress(select,address_id) {
+    function getAddress(select, address_id) {
         var userid = select.parent().parent().find(".select_user").val();
         console.log(address_id);
         if (address_id == 0) {
@@ -226,7 +229,7 @@
         });
     }
     $("body").on("change", ".select_add", function () {
-        getAddress($(this),$(this).val());
+        getAddress($(this), $(this).val());
     });
 
     $("body").on("click", ".delete-pickup", function () {
@@ -249,7 +252,26 @@
     $("body").on("click", ".delete-new-pickup", function () {
         $(this).parent().parent().remove();
     });
+    var default_date = new Date();
+<?php
+$date_selected = '';
+if ($schedule_dates) {
+    $date_selected = 'addDates: [';
+    foreach ($schedule_dates as $sdate) {
+        $date_selected .= (strtotime($sdate['schedule_date']) * 1000) . ',';
+    }
+    $date_selected .= ']';
+    echo 'default_date = "' . $schedule_dates[0]['schedule_date'] . '";';
+}
+?>
 
+    $('.multidatepicker').multiDatesPicker({
+        dateFormat: "yy-mm-dd",
+        defaultDate: default_date,
+//        minDate: new Date(),
+        altField: "#multiple-dates",
+<?php echo $date_selected; ?>
+    });
 
 </script>
 

@@ -27,7 +27,8 @@
                             <tr>
                                 <td>For</td>
                                 <td>
-                                    {{$schedule->for}}
+                                    <div style="height: 178px;width: 237px;margin-top: 36px; position: absolute;z-index: 9999;"></div>
+                                    <div class="multidatepicker"></div>
                                 </td>
                             </tr>
                             <tr>
@@ -181,6 +182,26 @@
                 select.parent().parent().find(".approx_time").val(data.approximate_processing_time);
             }
         });
+    });
+
+    var default_date = new Date();
+<?php
+$date_selected = '';
+if ($schedule_dates) {
+    $date_selected = 'addDates: [';
+    foreach ($schedule_dates as $sdate) {
+        $date_selected .= (strtotime($sdate['schedule_date']) * 1000) . ',';
+    }
+    $date_selected .= ']';
+    echo 'default_date = "' . $schedule_dates[0]['schedule_date'] . '";';
+}
+?>
+
+    $('.multidatepicker').multiDatesPicker({
+        dateFormat: "yy-mm-dd",
+        defaultDate: default_date,
+        altField: "#multiple-dates",
+        <?php echo $date_selected; ?>
     });
 
 </script>

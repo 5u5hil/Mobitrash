@@ -64,7 +64,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Schedule Name</th>
-                                <th>Schedule For</th>
+                                <!--<th>Schedule For</th>-->
                                 <th>Van</th>
                                 <th>Last Updated By</th>
                                 <th>Last Updated At</th>
@@ -76,7 +76,7 @@
                             <tr>
                                 <td>{{ $asset->id }}</td> 
                                 <td>{{ $asset->name }}</td> 
-                                <td>{{ date('d M Y', strtotime($asset->for)) }}</td>
+                                <!--<td>{{ date('d M Y', strtotime($asset->for)) }}</td>-->
                                 <td>{{ @$asset->van()->first()->name }}</td>
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>

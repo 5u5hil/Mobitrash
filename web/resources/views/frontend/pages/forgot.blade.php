@@ -57,10 +57,10 @@
 @section("myscripts")
 <script>
     $(document).ready(function () {
-        $('.forgot').click(function (e) {
-            $('.small-loading').show();
+        $('.forgot').click(function (e) {            
             e.preventDefault();
             if ($("#forgot-password").validationEngine('validate') == true) {
+                $('.small-loading').show();
                 $('#flash-message').html('');
                 $.ajax({
                     url: '<?= route('user.forgotpassword.update') ?>',

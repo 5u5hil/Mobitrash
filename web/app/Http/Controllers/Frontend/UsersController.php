@@ -19,6 +19,7 @@ use App\Models\City;
 use App\Models\Occupancy;
 use App\Models\Address;
 use App\Models\Subscription;
+use App\Models\Service;
 use Mail;
 
 class UsersController extends Controller {
@@ -196,8 +197,11 @@ class UsersController extends Controller {
         return redirect()->route('user.myprofile.view');
     }
 
-    public function myAccount() {
-        return view(Config('constants.frontendView') . '.myaccount');
+    public function serviceSummary() {
+        $user = User::find(Auth::id());
+        $services = Service::where('user_id',Auth::id())->get();
+        //Controller::pr($services);
+        return view(Config('constants.frontendView') . '.myaccount', compact('user','services'));
     }
 
     public function showUserSubscription() {

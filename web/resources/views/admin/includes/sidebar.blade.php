@@ -76,13 +76,13 @@
                 <ul class="treeview-menu">
                     <li class="{{ preg_match("/admin.cities.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.cities.view') }}"><i class="fa fa-building-o"></i>Cities</a></li>
                     <li class="{{ preg_match("/admin.frquency.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.frequency.view') }}"><i class="fa fa-tasks"></i>Frequency</a></li>
-                    <li class="{{ preg_match("/admin.timeslot.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.timeslot.view') }}"><i class="fa fa-calendar"></i>Timeslot</a></li>
+                    <!--<li class="{{ preg_match("/admin.timeslot.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.timeslot.view') }}"><i class="fa fa-calendar"></i>Timeslot</a></li>-->
                     <!--<li class="{{ preg_match("/admin.servicetype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.servicetype.view') }}"><i class="fa fa-circle-o"></i>Servicetype</a></li>-->
                     <li class="{{ preg_match("/admin.wastetype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.wastetype.view') }}"><i class="fa fa-trash"></i>Wastetype</a></li>
                     <li class="{{ preg_match("/admin.fueltype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.fueltype.view') }}"><i class="fa fa-truck"></i>Fueltype</a></li>
                     <li class="{{ preg_match("/admin.additive.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.additive.view') }}"><i class="fa fa-circle-o"></i>Additive</a></li>
                     <li class="{{ preg_match("/admin.recordtype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.recordtype.view') }}"><i class="fa fa-file-o"></i>Recordtype</a></li>
-                    <li class="{{ preg_match("/admin.additive.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.package.view') }}"><i class="fa fa-archive"></i>Package</a></li>
+                    <!--<li class="{{ preg_match("/admin.package.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.package.view') }}"><i class="fa fa-archive"></i>Package</a></li>-->
                     <li class="{{ preg_match("/admin.recordtype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.occupancy.view') }}"><i class="fa fa-check-circle"></i>Occupancy</a></li>
 
 

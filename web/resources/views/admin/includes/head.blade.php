@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/skins/_all-skins.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">
+<link rel="stylesheet" href="{{ asset('public/Admin/dist/css/mdp.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/style.css') }}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

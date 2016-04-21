@@ -37,12 +37,12 @@
 
                                         <div class="col_full">
                                             <label for="password">New Password:</label>
-                                            <input type="text" id="password" name="new_password" value="" class="sm-form-control validate[required]" />
+                                            <input type="password" id="password" name="new_password" value="" class="sm-form-control validate[required]" />
                                         </div>
 
                                         <div class="col_full">
                                             <label for="confirm-password">Confirm Password:</label>
-                                            <input type="text" id="confirm-password" name="confirm_password" value="" class="sm-form-control validate[equals[password]]" />
+                                            <input type="password" id="confirm-password" name="confirm_password" value="" class="sm-form-control validate[equals[password]]" />
                                         </div>
 
                                         <div class="col_full nobottommargin">

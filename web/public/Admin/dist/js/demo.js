@@ -344,4 +344,6 @@
     $('.timepicker-f2').timepicker({
         timeFormat: 'hh:mm TT'
     });
+    
+
 })(jQuery, $.AdminLTE);

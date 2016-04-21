@@ -44,7 +44,7 @@
 
                                         <div class="col_full">
                                             <label for="password">Password:</label>
-                                            <input type="text" id="password" name="password" value="" class="sm-form-control" />
+                                            <input type="password" id="password" name="password" value="" class="sm-form-control" />
                                         </div>
 
                                         <div class="col_full nobottommargin">

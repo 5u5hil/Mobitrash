@@ -204,7 +204,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/register', ["as" => "user.register", "uses" => "UsersController@register"]);
         Route::post('/register-user', ["as" => "user.register.save", "uses" => "UsersController@registerUser"]);
         Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
-        Route::get('/my-account', ["as" => "user.myaccount.view", "uses" => "UsersController@myAccount"]);
+        Route::get('/my-account', ["as" => "user.myaccount.view", "uses" => "UsersController@serviceSummary"]);
         Route::get('/user-logout', ["as" => "user.logout", "uses" => "UsersController@userLogout"]);
         Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
         Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']); 
