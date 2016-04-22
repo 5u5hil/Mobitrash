@@ -27,8 +27,4 @@ class Schedule extends \Eloquent {
         return $this->hasMany('App\Models\Pickup', 'schedule_id');
     }
     
-    public function ScheduleDates() {
-        return $this->hasMany('App\Models\ScheduleDate', 'schedule_id');
-    }
-
 }

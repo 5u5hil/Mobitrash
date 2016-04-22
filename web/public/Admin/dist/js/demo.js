@@ -340,7 +340,9 @@
         changeMonth: true,
         changeYear: true
     });
-    $('.timepicker').timepicker();
+    $('.timepicker').timepicker({
+        stepMinute: 15
+    });
     $('.timepicker-f2').timepicker({
         timeFormat: 'hh:mm TT'
     });

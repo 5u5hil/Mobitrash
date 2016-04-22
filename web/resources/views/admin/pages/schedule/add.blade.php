@@ -159,7 +159,9 @@
 
     $(".addMore").click(function () {
         $(".existing").append($(".addNew").html());
-        $('.existing .timepicker-new').timepicker();
+        $('.existing .timepicker-new').timepicker({
+            stepMinute: 15
+        });
         $('[name*="user_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][user_id]");
         });
@@ -253,24 +255,10 @@
         $(this).parent().parent().remove();
     });
     var default_date = new Date();
-<?php
-$date_selected = '';
-if ($schedule_dates) {
-    $date_selected = 'addDates: [';
-    foreach ($schedule_dates as $sdate) {
-        $date_selected .= (strtotime($sdate['schedule_date']) * 1000) . ',';
-    }
-    $date_selected .= ']';
-    echo 'default_date = "' . $schedule_dates[0]['schedule_date'] . '";';
-}
-?>
-
     $('.multidatepicker').multiDatesPicker({
         dateFormat: "yy-mm-dd",
         defaultDate: default_date,
-//        minDate: new Date(),
-        altField: "#multiple-dates",
-<?php echo $date_selected; ?>
+        altField: "#multiple-dates"
     });
 
 </script>

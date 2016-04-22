@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Subscription;
 use App\Models\Asset;
 use App\Models\ScheduleDate;
+use Session;
 use App\Http\Controllers\Controller;
 
 class ScheduleController extends Controller {
@@ -30,17 +31,14 @@ class ScheduleController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'name') {
                 $field1 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE' ,"%".Input::get('filter_value')."%")->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'for') {
                 $field2 = Input::get('filter_value');
-                $schedule = Schedule::whereHas('ScheduleDates', function($q) {
-                    $q->where('schedule_date', Input::get('filter_value'));
-                })->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'van_id') {
                 $field3 = Input::get('filter_value');
                 $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             }
-            
         } else {
             $schedule = Schedule::paginate(Config('constants.paginateNo'));
         }
@@ -50,13 +48,11 @@ class ScheduleController extends Controller {
     public function add() {
         $schedule = new Schedule();
         $pickups = $schedule->pickups()->with('user', 'address')->get();
-        $schedule_dates = NULL;
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
             $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
-
         $ops = [];
         $opss = $schedule->operators->toArray();
         foreach ($opss as $val) {
@@ -87,13 +83,12 @@ class ScheduleController extends Controller {
             $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
         $action = "admin.schedule.save";
-        return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'ops', 'customers', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd', 'schedule_dates'));
+        return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'customers', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd'));
     }
 
     public function edit() {
         $schedule = Schedule::find(Input::get('id'));
         $pickups = $schedule->pickups()->with('user', 'address')->get();
-        $schedule_dates = $schedule->ScheduleDates()->get()->toArray();
         foreach ($pickups as $key => $pickup) {
             $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         }
@@ -131,9 +126,9 @@ class ScheduleController extends Controller {
         foreach ($c as $value) {
             $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
         }
-        $action = "admin.schedule.save";
+        $action = "admin.schedule.update";
 
-        return view(Config('constants.adminScheduleView') . '.addEdit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd', 'schedule_dates'));
+        return view(Config('constants.adminScheduleView') . '.edit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd'));
     }
 
     public function show() {
@@ -142,14 +137,10 @@ class ScheduleController extends Controller {
         foreach ($pickups as $key => $pickup) {
             $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         }
-        $schedule_dates = $schedule->ScheduleDates()->get()->toArray();
-        foreach ($pickups as $key => $pickup) {
-            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
-        }
         $operators = $schedule->operators->toArray();
         $drivers = $schedule->drivers->toArray();
 
-        return view(Config('constants.adminScheduleView') . '.show', compact('schedule', 'drivers', 'pickups', 'users', 'vans', 'operators', 'schedule_dates'));
+        return view(Config('constants.adminScheduleView') . '.show', compact('schedule', 'drivers', 'pickups', 'users', 'vans', 'operators'));
     }
 
     public function removePickup() {
@@ -162,31 +153,47 @@ class ScheduleController extends Controller {
     }
 
     public function save() {
+        $schedule_dates = explode(', ', Input::get('multiple_dates'));
+        foreach ($schedule_dates as $sdate) {
+            $schedule = new Schedule;
+            $schedule->for = $sdate;
+            $schedule->fill(Input::except('operators', 'drivers', 'pickup', 'multiple_dates'))->save();
+            $schedule->operators()->sync(Input::get('operators'));
+            $schedule->drivers()->sync(Input::get('drivers'));
+            Pickup::where("schedule_id", $schedule->id)->delete();
+
+            if (Input::get("pickup")) {
+                foreach (Input::get("pickup") as $pickup) {
+                    $pickup['schedule_id'] = $schedule->id;
+                    Pickup::create($pickup);
+                }
+            }
+        }
+
+        Session::flash('Success', 'Schedule Added Successfully!');
+        return redirect()->route('admin.schedule.view');
+    }
+
+    public function update() {
 
         $schedule = Schedule::findOrNew(Input::get('id'));
-        $schedule->fill(Input::except('operators', 'drivers', 'pickup', 'multiple_dates'))->save();
+        $schedule->fill(Input::except('operators', 'drivers', 'pickup'))->save();
         $schedule->operators()->sync(Input::get('operators'));
         $schedule->drivers()->sync(Input::get('drivers'));
         Pickup::where("schedule_id", $schedule->id)->delete();
-        ScheduleDate::where("schedule_id", $schedule->id)->delete();
-        $schedule_dates = explode(', ', Input::get('multiple_dates'));
-        foreach ($schedule_dates as $sdate) {
-            $new_sdate['schedule_id'] = $schedule->id;
-            $new_sdate['schedule_date'] = $sdate;
-            ScheduleDate::create($new_sdate);
-        }
         if (Input::get("pickup")) {
             foreach (Input::get("pickup") as $pickup) {
                 $pickup['schedule_id'] = $schedule->id;
                 Pickup::create($pickup);
             }
         }
+        Session::flash('Success', 'Schedule Edited Successfully!');
         return redirect()->route('admin.schedule.view');
     }
 
     public function duplicate() {
         $schedule = Schedule::find(Input::get('id'));
-        $schedule->for = Date('Y-m-d', strtotime($schedule->for . ' +1 day'));
+//        $schedule->for = Date('Y-m-d', strtotime($schedule->for . ' +1 day'));
 
         $op = [];
         $oprators = $schedule->operators()->get()->toArray();
@@ -199,6 +206,7 @@ class ScheduleController extends Controller {
             array_push($dr, $value['id']);
         }
         $pickups = $schedule->pickups()->get();
+        $ScheduleDates = $schedule->ScheduleDates()->get();
         $new_schedule = $schedule->replicate();
         $new_schedule->push();
         $new_schedule->operators()->sync($op);
@@ -208,6 +216,12 @@ class ScheduleController extends Controller {
             $new_pickup = $pickup->replicate();
             $new_pickup->push();
         }
+        foreach ($ScheduleDates as $key => $ScheduleDate) {
+            $ScheduleDate->schedule_id = $new_schedule->id;
+            $new_ScheduleDate = $ScheduleDate->replicate();
+            $new_ScheduleDate->push();
+        }
+        Session::flash('duplicateSuccess', 'Schedule Duplicated Successfully! <div class="red">Shedule dates already exist! Please change schedule dates.</div>');
         return redirect()->route('admin.schedule.edit', array('id' => $new_schedule->id))->with("message", "Schedule duplicated sucessfully");
     }
 

@@ -49,7 +49,7 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.schedule.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Schedule</a>      
+                        <a href="{!! route('admin.schedule.add') !!}" class="btn btn-default pull-right" type="button">Add New Schedule</a>      
                     </h3>
 
                     <div>
@@ -64,10 +64,10 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Schedule Name</th>
-                                <!--<th>Schedule For</th>-->
                                 <th>Van</th>
+                                <th>Schedule For</th>                               
                                 <th>Last Updated By</th>
-                                <th>Last Updated At</th>
+                                <!--<th>Last Updated At</th>-->
 
                             </tr>
                         </thead>
@@ -76,14 +76,14 @@
                             <tr>
                                 <td>{{ $asset->id }}</td> 
                                 <td>{{ $asset->name }}</td> 
-                                <!--<td>{{ date('d M Y', strtotime($asset->for)) }}</td>-->
                                 <td>{{ @$asset->van()->first()->name }}</td>
+                                <td>{{ date('d M Y', strtotime($asset->for)) }}</td>                                
                                 <td>{{ @$asset->addedBy()->first()->first_name }}</td>
-                                <td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>
+                                <!--<td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>-->
                                 <td>
-                                    <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">view</a>
+                                    <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}" target="_BLANK"  class="label label-success active" ui-toggle-class="">view</a>
                                     <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">Edit</a>
-                                    <a href="{{ route('admin.schedule.duplicate',['id' => $asset->id ])  }}" class="label label-primary active" onclick="return confirm('Schedule will duplicated for next day of schedule date! Are you sure?')" ui-toggle-class="">Duplicate</a>
+                                    <a class="label label-primary active" data-toggle="modal" data-scheduleid="{{$asset->id}}" data-target="#duplicate-schedule">Duplicate</a>
                                     <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
@@ -96,6 +96,31 @@
                     <?= $schedule->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value])->render() ?> 
 
                 </div>
+                <div class="modal fade" id="duplicate-schedule" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" style="text-align: center;">
+                        <div class="modal-content">
+                            <form action="" method="post">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Duplicate Schedule</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Select Dates for Schedule:</label>
+                                        <div class="multidatepicker" style="width: 240px; margin: 0 auto;"></div>
+                                        <input type="text" style="display: none;" id="multiple-dates" required="required" class="form-control">
+                                        <input type="hidden" name="schedule_id" id="schedule-id" /> 
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div><!-- /.box -->
         </div><!-- /.col -->
 
@@ -117,9 +142,24 @@
         } else if ($(this).val() == 'van_id') {
             $(".f3").show().prop('disabled', false);
             $(".f1, .f2").hide().prop('disabled', true);
-        } else{
+        } else {
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
+    });
+
+    $('#duplicate-schedule').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var scheduleid = button.data('scheduleid')
+        var modal = $(this)
+        modal.find('.modal-title').text('Duplicate Schedule id: ' + scheduleid)
+        modal.find('.modal-body #schedule-id').val(scheduleid)
+    });
+    
+    var default_date = new Date();
+    $('.multidatepicker').multiDatesPicker({
+        dateFormat: "yy-mm-dd",
+        defaultDate: default_date,
+        altField: "#multiple-dates"
     });
 </script>
 
