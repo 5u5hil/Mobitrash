@@ -58,7 +58,7 @@
                                     <div>{{@$additive->name}} : {{@$additive->pivot->quantity}} kg</div>
                                     @endforeach</td>
                                 <td>@foreach($service->wastetypes as $waste)
-                                    <div>{{@$waste->name}} : {{@$additive->pivot->quantity}} kg</div>
+                                    <div>{{@$waste->name}} : {{@$waste->pivot->quantity}} kg</div>
                                     @endforeach
                                 </td>
                                 <td>{{$service->crates_filled}}</td>

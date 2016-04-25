@@ -73,7 +73,7 @@ class OperatorController extends Controller {
         $service->crates_filled = $service_data['crates_filled'];
         $service->compost = $service_data['compost'];
         $service->sawdust = $service_data['sawdust'];
-        $service->time_taken = date('H:i:s',  strtotime($service_data['time_taken']));
+        $service->time_taken = $service_data['time_taken'];
         $service->save();
         $service->wastetypes()->sync($service_data['wastetype']);        
         return ['flash' => 'success'];
