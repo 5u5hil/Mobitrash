@@ -55,10 +55,10 @@
                                 <td><div>{{$service->user->first_name}} {{$service->user->last_name}}</div><div>{{$service->address->address}}</div></td>
                                 <td> 
                                     @foreach($service->additives as $additive)
-                                    <div>{{$additive->name}} : {{$additive->pivot->quantity}} kg</div>
+                                    <div>{{@$additive->name}} : {{@$additive->pivot->quantity}} kg</div>
                                     @endforeach</td>
                                 <td>@foreach($service->wastetypes as $waste)
-                                    <div>{{$waste->name}} : {{$additive->pivot->quantity}} kg</div>
+                                    <div>{{@$waste->name}} : {{@$additive->pivot->quantity}} kg</div>
                                     @endforeach
                                 </td>
                                 <td>{{$service->crates_filled}}</td>

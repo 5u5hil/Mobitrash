@@ -32,7 +32,19 @@ class OperatorController extends Controller {
     public function schedules() {
         $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user', 'pickups.address'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
-                })->get();
+                })->orderBy('created_at', 'DESC')->get();
+        $services = Service::get(['pickup_id']);
+        $pickupids = array();
+        foreach ($services as $service){
+            array_push($pickupids, $service->pickup_id);
+        }
+        foreach ($schedules as $key1 => $schedule){
+            foreach ($schedule['pickups'] as $key2 => $pickup){
+               if(in_array($pickup->id, $pickupids)){
+                   unset($schedules[$key1]['pickups'][$key2]);
+               }
+            }
+        }
         if ($schedules) {
             return ['flash' => 'success', 'Schedules' => $schedules];
         } else {
@@ -61,9 +73,9 @@ class OperatorController extends Controller {
         $service->crates_filled = $service_data['crates_filled'];
         $service->compost = $service_data['compost'];
         $service->sawdust = $service_data['sawdust'];
+        $service->time_taken = date('H:i:s',  strtotime($service_data['time_taken']));
         $service->save();
-        $service->wastetypes()->sync($service_data['wastetype']);
-        
+        $service->wastetypes()->sync($service_data['wastetype']);        
         return ['flash' => 'success'];
     }
 
