@@ -213,4 +213,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']); 
         Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']); 
     });
+    Route::group(['namespace' => 'Frontend', 'prefix' => 'operator'], function() {
+        Route::post('/login', ["as" => "operator.login", "uses" => "OperatorController@login"]);
+        Route::post('/schedules', ["as" => "operator.schedules", "uses" => "OperatorController@schedules"]);
+        Route::post('/pickup-details', ["as" => "operator.pickup.details", "uses" => "OperatorController@pickupDetails"]);
+        Route::post('/save-service-details', ["as" => "operator.service.save", "uses" => "OperatorController@serviceSave"]);
+    });
 });
