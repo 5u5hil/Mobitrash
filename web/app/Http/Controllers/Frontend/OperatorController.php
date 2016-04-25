@@ -62,6 +62,8 @@ class OperatorController extends Controller {
         $service->compost = $service_data['compost'];
         $service->sawdust = $service_data['sawdust'];
         $service->save();
+        $service->wastetypes()->sync($service_data['wastetype']);
+        
         return ['flash' => 'success'];
     }
 
