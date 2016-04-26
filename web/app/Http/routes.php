@@ -208,15 +208,18 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/my-account', ["as" => "user.myaccount.view", "uses" => "UsersController@serviceSummary"]);
         Route::get('/user-logout', ["as" => "user.logout", "uses" => "UsersController@userLogout"]);
         Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
-        Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']); 
-        Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']); 
-        Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']); 
-        Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']); 
+        Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']);
+        Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']);
+        Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']);
+        Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => 'operator'], function() {
         Route::post('/login', ["as" => "operator.login", "uses" => "OperatorController@login"]);
         Route::post('/schedules', ["as" => "operator.schedules", "uses" => "OperatorController@schedules"]);
         Route::post('/pickup-details', ["as" => "operator.pickup.details", "uses" => "OperatorController@pickupDetails"]);
         Route::post('/save-service-details', ["as" => "operator.service.save", "uses" => "OperatorController@serviceSave"]);
+        Route::post('/receipt-data', ["as" => "operator.receipt.data", "uses" => "OperatorController@receiptData"]);
+        Route::post('/cleaning-data', ["as" => "operator.cleaning.data", "uses" => "OperatorController@cleaningData"]);
+        Route::post('/save-receipt-details', ["as" => "operator.receipt.save", "uses" => "OperatorController@receiptSave"]);
     });
 });
