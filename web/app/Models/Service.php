@@ -4,7 +4,6 @@ namespace App\Models;
 
 class Service extends \Eloquent {
     protected $table = "services";
-    public $timestamps = false;
     protected $guarded = [];
     
     public function schedule() {

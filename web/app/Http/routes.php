@@ -220,6 +220,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/save-service-details', ["as" => "operator.service.save", "uses" => "OperatorController@serviceSave"]);
         Route::post('/receipt-data', ["as" => "operator.receipt.data", "uses" => "OperatorController@receiptData"]);
         Route::post('/cleaning-data', ["as" => "operator.cleaning.data", "uses" => "OperatorController@cleaningData"]);
+        Route::post('/attendance', ["as" => "operator.attendance", "uses" => "OperatorController@attendance"]);
         Route::post('/save-receipt-details', ["as" => "operator.receipt.save", "uses" => "OperatorController@receiptSave"]);
     });
 });

@@ -18,6 +18,7 @@ use App\Models\Asset;
 use App\Models\Fueltype;
 use App\Models\Record;
 use App\Models\Attachment;
+use App\Models\Attendance;
 use App\Models\Subscription;
 use File;
 use App\Http\Controllers\Controller;
@@ -117,6 +118,21 @@ class OperatorController extends Controller {
                 Attachment::create(['record_id' => $record->id, 'file' => $fileName, 'filename' => $att['name'], 'is_active' => 1, "added_by" => Input::get("added_by")]);
             }
         }
+        return ['flash' => 'success'];
+    }
+    
+    public function attendance() {
+        $attendance = new Attendance();
+        $attendance->user_id = Input::get('id');
+        
+        if (Input::get('image_data')) {
+            $destinationPath = public_path() . '/uploads/attendance/';
+            $fileName = time() . '.jpg';
+            if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
+               $attendance->image = $fileName;
+            }
+        }
+        $attendance->save();
         return ['flash' => 'success'];
     }
 
