@@ -18,6 +18,7 @@ use App\Models\Asset;
 use App\Models\Fueltype;
 use App\Models\Record;
 use App\Models\Attachment;
+use App\Models\Subscription;
 use File;
 use App\Http\Controllers\Controller;
 use Session;
@@ -65,8 +66,9 @@ class OperatorController extends Controller {
         $wastetype = Wastetype::where('is_active', 1)->get();
         $additives = Additive::where('is_active', 1)->get();
         $pickup = Pickup::where('id', Input::get("id"))->with(['user', 'address'])->first();
+        $maxwaste = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['max_waste']);
         if ($wastetype && $pickup && $additives) {
-            return ['flash' => 'success', 'Wastetype' => $wastetype, 'Pickup' => $pickup, 'Additive' => $additives];
+            return ['flash' => 'success', 'Wastetype' => $wastetype, 'Pickup' => $pickup, 'Additive' => $additives, 'Max_waste'=>$maxwaste];
         } else {
             return ['flash' => 'error'];
         }
