@@ -34,10 +34,12 @@
                                 <th>id</th>
                                 <th>Van</th>
                                 <th>Staff Names</th>
-                                <th>Date</th>
+                                <th style="min-width: 88px;">Date</th>
                                 <th>Username & Address</th>
-                                <th>Additives</th>
-                                <th>Waste Collected</th>
+                                <th style="min-width: 125px;">Additives</th>
+                                <th style="min-width: 135px;">Waste Collected</th>
+                                <th>Time Taken</th>
+                                <th>Compost</th>
                                 <th>No of Crates</th>
                                 <th></th>
                             </tr>
@@ -61,9 +63,11 @@
                                     <div>{{@$waste->name}} : {{@$waste->pivot->quantity}} kg</div>
                                     @endforeach
                                 </td>
+                                <td>{{$service->time_taken}}</td>
+                                <td>{{$service->compost}}</td>
                                 <td>{{$service->crates_filled}}</td>
                                 <td>
-                                    <a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    <!--<a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>-->
                                     <a href="{{ route('admin.servicehistory.delete',['id' => $service->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
