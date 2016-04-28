@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileZilla3 version="3.13.1" platform="windows">
+	<Servers>
+		<Server>
+			<Host>103.26.97.151</Host>
+			<Port>2229</Port>
+			<Protocol>1</Protocol>
+			<Type>0</Type>
+			<User>esense</User>
+			<Pass encoding="base64">Y2x1Z3IxZA==</Pass>
+			<Logontype>1</Logontype>
+			<TimezoneOffset>0</TimezoneOffset>
+			<PasvMode>MODE_DEFAULT</PasvMode>
+			<MaximumMultipleConnections>0</MaximumMultipleConnections>
+			<EncodingType>Auto</EncodingType>
+			<BypassProxy>0</BypassProxy>
+			<Name>esense</Name>
+			<Comments />
+			<LocalDir />
+			<RemoteDir />
+			<SyncBrowsing>0</SyncBrowsing>
+			<DirectoryComparison>0</DirectoryComparison>esense</Server>
+	</Servers>
+</FileZilla3>

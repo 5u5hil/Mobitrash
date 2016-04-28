@@ -1,13 +1,23 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="page-title">
 
-    <div class="container clearfix">
-        <h1>My Account</h1>
+<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+            <div class="slider-parallax-inner">
+                <div class="container clearfix">
+                    <div class="vertical-middle">
 
-    </div>
+                        <div class="heading-block nobottomborder">
+                            <h1>
+                                <div>
+                                 <span>My Profile</span>
+                                </div>
+                            </h1>
+                        </div>
 
-</section><!-- #page-title end -->
+                    </div>
+                </div>
+            </div>
+        </section>
 
 <!-- Content
 ============================================= -->
@@ -27,6 +37,7 @@
                                 <li><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
                                 <li class="actives"><a href="{{route('user.subscription.view')}}">My Subscriptions</a></li>
                                 <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
+                                <li><a href="{{route('user.mypassword.view')}}">Password</a></li>
                             </ul>
 
                         </div>

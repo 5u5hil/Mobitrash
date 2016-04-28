@@ -111,7 +111,7 @@ dl, dt, dd, ol, ul, li {
 }
 
 ::selection {
-	background: #87C540;
+	background: #1ABC9C;
 	color: #FFF;
 	text-shadow: none;
 }
@@ -521,7 +521,7 @@ span.middot {
 
 .section {
 	position: relative;
-	margin: 0px 0;
+	margin: 60px 0;
 	padding: 60px 0;
 	background-color: #F9F9F9;
 	overflow: hidden;
@@ -1147,7 +1147,7 @@ body.stretched #header.full-header .container {
 }
 
 #primary-menu ul li:hover > a,
-#primary-menu ul li.current > a { color: #95C25F; }
+#primary-menu ul li.current > a { color: #1ABC9C; }
 
 #primary-menu > ul > li.sub-menu > a > div { }
 
@@ -6422,7 +6422,7 @@ body:not(.device-touch) .button {
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
 
-.button.button-dark:hover { background-color: #87C540; }
+.button.button-dark:hover { background-color: #1ABC9C; }
 
 .button.button-mini {
 	padding: 0 14px;
@@ -6716,7 +6716,7 @@ body:not(.device-touch) .button.button-reveal span {
 	margin: 0;
 	height: auto;
 	line-height: 1.6;
-	padding: 93px 0;
+	padding: 30px 0;
 	font-size: 30px;
 	font-weight: 300;
 	text-transform: none;
@@ -7248,7 +7248,7 @@ body:not(.device-touch) .button.button-full strong {
 .feature-box.fbox-plain .fbox-icon img {
 	border: none !important;
 	background-color: transparent !important;
-	color: #6c973b;
+	color: #1ABC9C;
 	border-radius: 0;
 }
 
@@ -7478,7 +7478,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .feature-box.fbox-bg.fbox-center.fbox-plain .fbox-icon,
 .feature-box.fbox-bg.fbox-center.fbox-border .fbox-icon,
-.feature-box.fbox-bg.fbox-center.fbox-outline .fbox-icon { /*background-color: #FFF; */}
+.feature-box.fbox-bg.fbox-center.fbox-outline .fbox-icon { background-color: #FFF; }
 
 
 /* Animated Icon Hovers
@@ -9374,7 +9374,7 @@ body:not(.device-touch) .clients-grid li a {
 .team-desc { text-align: center; }
 
 .team-desc.team-desc-bg {
-	/*background-color: #FFF;*/
+	background-color: #FFF;
 	padding: 10px 0 30px;
 }
 
@@ -9404,7 +9404,7 @@ body:not(.device-touch) .clients-grid li a {
 
 .team-title span {
 	display: block;
-	color: #87C540;
+	color: #1ABC9C;
 	font-weight: 400;
 	font-family: 'Crete Round', serif;
 	font-style: italic;
@@ -10856,7 +10856,7 @@ label.error { display: none !important; }
 	display: block;
 	background: transparent;
 	padding: 0 0 10px;
-	border-bottom: 2px solid #6E9D35;
+	border-bottom: 2px solid #1ABC9C;
 }
 
 
@@ -11102,7 +11102,7 @@ body:not(.device-touch) #gotoTop {
 
 .stretched #gotoTop { bottom: 30px; }
 
-#gotoTop:hover { background-color: #59BA41; }
+#gotoTop:hover { background-color: #1ABC9C; }
 
 
 /* ----------------------------------------------------------------
@@ -12992,103 +12992,3 @@ body:not(.no-transition) #wrapper,
 	padding:0!important
 }
 
-.conback{
-width: 100%; 
-height: 100%; 
-position: absolute; 
-left:0; 
-top:0; 
-background: url('images/parallax/home/hand-holding-plant-ftr.jpg') center center no-repeat;
-background-size: cover;
-}
-#headsub ul li.actives > a{
-color:#95BB56;
-}
-
-
-.forgot-title{
-  font-size: 23px !important;
-  line-height: 44px !important;
-  padding-left: 30px !important;
-   font-weight: 400 !important;
-}
-
-.col-xs {
-    float: left;
-    width: 10%;
-}
-.forgot-icon {
-    width: 20px !important;
-    font-size: 20px !important;
-    line-height: 64px !important;
-}
-
-.forgotspan{
-font-size:16px;
-}
-
-.resettex{
-    border: solid 5px #95BB56;
-    padding: 23px 16px 19px 21px;
-    background-color: #95BB56;
-    color: #fff;
-}
-
-.resetpass{
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.footcolor{
-color: #95BB56;
--moz-color: #95BB56;
--webkit-color: #95BB56;
--o-color: #95BB56;
-}
-
-.bordercolors{
-border: 3px double #bfd630 !important;
--moz-border: 3px double #bfd630 !important;
--webkit-border: 3px double #bfd630 !important;
--o-border: 3px double #bfd630 !important;
-
-}
-
-.contex{
- color: #86c63c !important;
- -moz-color: #86c63c !important;
- -webkit-color: #86c63c !important;
- -o-color: #86c63c !important;
-
-}
-
-.consub{
- color: #fff;
- -moz-color: #fff;
- -webkit-color: #fff;
- -webkit-color: #fff;
- text-decoration: underline;
-
-}
-
-.context{
-line-height: 1.43 !important;
-}
-
-.col_md{
-width: 25%;
-float:left;	
-}
-
-.flash-message{
-    width: 100%; 
-    text-align: center;
-    font-size: 15px;
-}
-
-.red{
-    color:red;
-}
-.green{
-    color: green;
-}

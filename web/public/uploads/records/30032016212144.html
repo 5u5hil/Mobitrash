@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>REGISTRATION FORM</title>
+<body>
+
+<form name="registration" method="post" action="registration.php">
+NAME:<input type="text" name="name" value=""></br>
+LAST NAME:<input type="text" name="name" value=""></br>
+DOB:<input type="date" name="date of birth" value=""></br>
+
+EMAIL-ID:<input type="text" name="email" value=""></br>
+PASSWORD:<input type="password" name="password" value=""></br>
+RE-PASSWORD:<input type="password" name="repassword" value=""></br>
+<input type="submit" name="submit" value="submit">
+</form>
+<?php
+$hostname="localhost"; 
+$username="root";  
+$password="";      
+$database="student";  
+$con=mysql_connect($hostname,$username,$password);
+if(! $con)
+{
+die('Connection Failed'.mysql_error());
+}
+
+mysql_select_db($database,$con);
+?>
+
+</body>
+</head>
+</html>

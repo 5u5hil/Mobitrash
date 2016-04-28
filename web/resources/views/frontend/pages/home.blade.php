@@ -1,17 +1,22 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="slider" class="slider-parallax" style="background-color: #222;">
+ <section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="500" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+            <div class="slider-parallax-inner">
+                <div class="container clearfix">
+                    <div class="vertical-middle">
 
-    <div id="oc-slider" class="owl-carousel carousel-widget" data-margin="0" data-items="1" data-pagi="false" data-loop="true" data-animate-in="rollIn" data-speed="450" data-animate-out="rollOut" data-autoplay="5000">
+                        <div class="heading-block nobottomborder">
+                            <h1>
+                                <div>
+                                 <span>Home Page</span>
+                                </div>
+                            </h1>
+                        </div>
 
-        <a href="#"><img src="{{ asset('public/Frontend/images/slider/rev/ken-2.jpg')}}" alt="Slider"></a>
-        <a href="#"><img src="{{ asset('public/Frontend/images/slider/rev/bg1-thumb.jpg')}}" alt="Slider"></a>
-        <a href="#"><img src="{{ asset('public/Frontend/images/slider/rev/bg2.jpg')}}" alt="Slider"></a>
-        <a href="#"><img src="{{ asset('public/Frontend/images/slider/rev/bg2.jpg')}}" alt="Slider"></a>
-
-    </div>
-
-</section>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 <!-- Content
 ============================================= -->

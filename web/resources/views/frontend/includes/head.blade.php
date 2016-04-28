@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/font-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/magnific-popup.css') }}">
+<link rel="icon" href="{{ asset('public/Frontend/images/favicon.png') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/fullcalendar.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/validationEngine.jquery.css') }}">

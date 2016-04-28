@@ -18,6 +18,7 @@ use App\Models\Package;
 use App\Models\City;
 use App\Models\Occupancy;
 use App\Models\Address;
+use App\Models\Contactus;
 use App\Models\Subscription;
 use App\Models\Service;
 use Mail;
@@ -169,6 +170,24 @@ class UsersController extends Controller {
         return view(Config('constants.frontendView') . '.myprofile', compact('user', 'action'));
     }
 
+    public function password() {
+        $user = User::find(Auth::id());
+        $action = 'user.password.change';
+        return view(Config('constants.frontendView') . '.password', compact('user', 'action'));
+    }
+    
+    public function contact() {
+        $action = 'user.contact.save';
+        return view(Config('constants.frontendView') . '.contact', compact('action'));
+    }
+    
+    public function saveContact() {
+        $contact_us = new Contactus();
+        $contact_us->fill(Input::all())->save();
+        Session::flash('contactSuccess', 'Details saved successfully!');
+        return redirect()->route('user.contact.view');
+    }
+
     public function update() {
 
         $user = User::find(Input::get('id'));
@@ -176,32 +195,38 @@ class UsersController extends Controller {
         $user->last_name = Input::get('last_name');
         $user->phone_number = Input::get('phone_number');
         $user->email = Input::get('email');
+        $user->user_type = 1;
+        $user->update();
+        Session::flash('profileSuccess', 'Profile Updated successfully!');
+        return redirect()->route('user.myprofile.view');
+    }
+
+    public function changePassword() {
+
+        $user = User::find(Input::get('id'));
+        
         if (Input::get('old_password') && Input::get('new_password') && Input::get('confirm_password')) {
             $check = Hash::check(Input::get('old_password'), $user->password);
             if ($check == true) {
                 if ((Input::get('new_password')) == Input::get('confirm_password')) {
                     $user->password = Hash::make(Input::get('new_password'));
-                    Session::flash('PasswordSuccess', 'Password updated successfully!');
+                    $user->update();
+                    Session::flash('profileSuccess', 'Password updated successfully!');
                 } else {
-                    Session::flash('PasswordError', 'Password not changed: Confirmed Password does not match');
+                    Session::flash('ProfileError', 'Password not changed: Confirmed Password does not match');
                 }
             } else {
-                Session::flash('PasswordError', 'Password not changed: Incorrect Old Password');
+                Session::flash('ProfileError', 'Password not changed: Incorrect Old Password');
             }
         }
-
-        $user->user_type = 1;
-        $user->update();
-        Session::flash('profileSuccess', 'Profile Updated successfully!');
-
-        return redirect()->route('user.myprofile.view');
+        return redirect()->route('user.mypassword.view');
     }
 
     public function serviceSummary() {
         $user = User::find(Auth::id());
-        $services = Service::where('user_id',Auth::id())->get();
+        $services = Service::where('user_id', Auth::id())->get();
         //Controller::pr($services);
-        return view(Config('constants.frontendView') . '.myaccount', compact('user','services'));
+        return view(Config('constants.frontendView') . '.myaccount', compact('user', 'services'));
     }
 
     public function showUserSubscription() {
