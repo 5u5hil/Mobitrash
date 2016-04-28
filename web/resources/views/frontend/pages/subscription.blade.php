@@ -1,7 +1,7 @@
 @extends('frontend.layouts.site')
 @section('content')
 
-<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
             <div class="slider-parallax-inner">
                 <div class="container clearfix">
                     <div class="vertical-middle">
@@ -9,7 +9,7 @@
                         <div class="heading-block nobottomborder">
                             <h1>
                                 <div>
-                                 <span>My Profile</span>
+                                 <span>My Subscription</span>
                                 </div>
                             </h1>
                         </div>
@@ -18,6 +18,14 @@
                 </div>
             </div>
         </section>
+<!-- <section id="page-title">
+
+    <div class="container clearfix">
+        <h1>My Account</h1>
+
+    </div>
+
+</section>  --> <!-- #page-title end -->
 
 <!-- Content
 ============================================= -->

@@ -76,6 +76,7 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
+                                <th>Name</th>
                                 <th>User</th>
                                 <th>Preferred Timeslot</th>
                                 <th>Frequency</th>
@@ -92,6 +93,7 @@
                             @foreach($subscription as $asset)
                             <tr>
                                 <td>{{ $asset->id }}</td>
+                                <td>{{ $asset->name }}</td>
                                 <td>{{ @$asset->user()->first()->first_name }}</td>
                                 <td>{{ @$asset->timeslot()->first()->name }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>

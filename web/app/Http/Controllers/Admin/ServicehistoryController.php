@@ -11,7 +11,7 @@ class ServicehistoryController extends Controller {
 
     function index() {
         $services = Service::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
-//        Controller::pr($services);
+        
         return view(Config('constants.adminServiceHistoryView') . '.index', compact('services'));
     }
 

@@ -26,6 +26,13 @@
 
                     {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal', 'files'=>true ]) !!}
                     <div class="form-group">
+                        {!!Form::label('dop','Subscription Name',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('name',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('user','Customer',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('user_id',$users,null, ["class"=>'form-control selectpicker select_user', "data-show-content" => "false", "required", "data-live-search" => "true"]) !!}
@@ -131,9 +138,30 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('dop','On field Person Name',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('onfield_person_name',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','On field Person Contact Number',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('onfield_person_contact_number',null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('dop','Attachments',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('att[]', ["class"=>'form-control' , "multiple"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('dop','Remark',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('remark',null, ["class"=>'form-control']) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

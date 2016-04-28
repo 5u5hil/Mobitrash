@@ -40,20 +40,17 @@ class OperatorController extends Controller {
     public function schedules() {
         $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user', 'pickups.address'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
-                })->orderBy('created_at', 'DESC')->get();
+                })->orderBy('created_at', 'DESC')->first();
         $services = Service::get(['pickup_id']);
         $pickupids = array();
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
-        foreach ($schedules as $key1 => $schedule) {
-            foreach ($schedule['pickups'] as $key2 => $pickup) {
-                if (in_array($pickup->id, $pickupids)) {
-                    unset($schedules[$key1]['pickups'][$key2]);
-                }
-            }
-            if (count($schedule['pickups']) == 0) {
-                unset($schedules[$key1]);
+        foreach ($schedules['pickups'] as $key => $pickup) {
+            if (in_array($pickup->id, $pickupids)) {
+                unset($schedules['pickups'][$key]);
+            } else {
+                $schedules['pickups'][$key]['subscription'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['id', 'name', 'max_waste', 'onfield_person_name', 'onfield_person_contact_number']);
             }
         }
         if ($schedules) {
@@ -67,9 +64,9 @@ class OperatorController extends Controller {
         $wastetype = Wastetype::where('is_active', 1)->get();
         $additives = Additive::where('is_active', 1)->get();
         $pickup = Pickup::where('id', Input::get("id"))->with(['user', 'address'])->first();
-        $maxwaste = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['max_waste']);
+
         if ($wastetype && $pickup && $additives) {
-            return ['flash' => 'success', 'Wastetype' => $wastetype, 'Pickup' => $pickup, 'Additive' => $additives, 'Max_waste'=>$maxwaste];
+            return ['flash' => 'success', 'Wastetype' => $wastetype, 'Pickup' => $pickup, 'Additive' => $additives];
         } else {
             return ['flash' => 'error'];
         }
@@ -85,8 +82,6 @@ class OperatorController extends Controller {
         $service->pickup_id = $pickup_data['id'];
         $service->crates_filled = $service_data['crates_filled'];
         $service->compost = $service_data['compost'];
-        $service->start_kilometer = $service_data['start_kilometer'];
-        $service->end_kilometer = $service_data['end_kilometer'];
         $service->time_taken = $service_data['time_taken'];
         $service->save();
         $service->wastetypes()->sync($service_data['wastetype']);
@@ -120,16 +115,16 @@ class OperatorController extends Controller {
         }
         return ['flash' => 'success'];
     }
-    
+
     public function attendance() {
         $attendance = new Attendance();
         $attendance->user_id = Input::get('id');
-        
+
         if (Input::get('image_data')) {
             $destinationPath = public_path() . '/uploads/attendance/';
             $fileName = time() . '.jpg';
             if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
-               $attendance->image = $fileName;
+                $attendance->image = $fileName;
             }
         }
         $attendance->save();
@@ -139,6 +134,21 @@ class OperatorController extends Controller {
     public function cleaningData() {
         $record = Record::where('recordtype_id', 3)->where('date', date('Y-m-d'))->count();
         return ['flash' => 'success', 'Records' => $record];
+    }
+
+    public function kilometerUpdate() {
+        if (Input::get('schedule_id')) {
+            $schedule = Schedule::find(Input::get('schedule_id'));
+            if (Input::get('start')) {
+                $schedule->start_kilometer = Input::get('start');
+            } else if (Input::get('end')) {
+                $schedule->end_kilometer = Input::get('end');
+            }
+            $schedule->update();
+            return ['flash' => 'success'];
+        } else {
+            return ['flash' => 'error', 'message' => 'Invalid request! Please try again.'];
+        }
     }
 
 }

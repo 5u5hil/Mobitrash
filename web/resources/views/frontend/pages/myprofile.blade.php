@@ -3,33 +3,42 @@
 
 <!-- Content ============================================= -->
 
-<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
-    <div class="slider-parallax-inner">
-        <div class="container clearfix">
-            <div class="vertical-middle">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+            <div class="slider-parallax-inner">
+                <div class="container clearfix">
+                    <div class="vertical-middle">
 
-                <div class="heading-block nobottomborder">
-                    <h1>
-                        <div>
-                            <span>My Profile</span>
+                        <div class="heading-block nobottomborder">
+                            <h1>
+                                <div>
+                                 <span>My Profile</span>
+                                </div>
+                            </h1>
                         </div>
-                    </h1>
+
+                    </div>
                 </div>
-
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+<!--  <section id="page-title">
 
+    <div class="container clearfix">
+        <h1>My Profile</h1>
+        <div class="flash-message green">
+            {{Session::pull('profileSuccess')}}  
+            {{Session::pull('PasswordSuccess')}}  
+        </div>
+        <div class="flash-message red">
+            {{Session::pull('PasswordError')}}                            
+        </div>
+
+    </div>
+
+</section> -->    <!-- #page-title end -->
 
 <section id="content">
     <div class="content-wrap">
-        <div class="flash-message green">
-            {{Session::pull('profileSuccess')}} 
-        </div>
-        <div class="flash-message red">
-            {{Session::pull('profileError')}}                            
-        </div>
+
         <div class="container clearfix">
             <div class="sidebar nobottommargin">
                 <div class="sidebar-widgets-wrap">
@@ -79,6 +88,25 @@
                             <label for="email">Email Id:</label><small>*</small>
                             {!! Form::text('email',null, ["class"=>"sm-form-control validate[required,custom[email]]" ,"placeholder"=>"Phone No"]) !!}
                         </div>
+
+                        <div class="clear"></div>
+
+                        <div class="col_one_third">
+                            <label for="old-password">Old Password:</label>
+                            {!! Form::text('old_password',null, ["class"=>"sm-form-control " ,"placeholder"=>"Old Password"]) !!}
+                        </div>
+
+
+                        <div class="col_one_third">
+                            <label for="password">New Password:</label>
+                            {!! Form::text('new_password',null, ["class"=>"sm-form-control " ,"placeholder"=>"New Password"]) !!}
+                        </div>
+
+                        <div class="col_one_third col_last">
+                            <label for="confirm-password">Reenter New Password:</label>
+                            {!! Form::text('confirm_password',null, ["class"=>"sm-form-control" ,"placeholder"=>"Reenter New Password"]) !!}
+                        </div>
+
                         <div class="clear"></div>
 
                         <center>

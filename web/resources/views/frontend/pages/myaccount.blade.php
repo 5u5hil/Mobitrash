@@ -1,7 +1,7 @@
 @extends('frontend.layouts.site')
 @section('content')
 
-<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
             <div class="slider-parallax-inner">
                 <div class="container clearfix">
                     <div class="vertical-middle">
@@ -19,6 +19,15 @@
             </div>
         </section>
 
+<!-- <section id="page-title">
+
+    <div class="container clearfix">
+        <h1>My Account</h1>
+
+    </div>
+
+</section> -->  <!-- #page-title end -->
+
 <!-- Content
 ============================================= -->
 <section id="content">
@@ -30,7 +39,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{$user->first_name. ' '. $user->last_name}}</h4>
+                            <h4>{{$user->name}}</h4>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
