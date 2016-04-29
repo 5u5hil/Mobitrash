@@ -157,7 +157,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/update', ['as' => 'admin.schedule.update', 'uses' => 'ScheduleController@update']);
             Route::get('/edit', ['as' => 'admin.schedule.edit', 'uses' => 'ScheduleController@edit']);
             Route::get('/show', ['as' => 'admin.schedule.show', 'uses' => 'ScheduleController@show']);
-            Route::get('/duplicate', ['as' => 'admin.schedule.duplicate', 'uses' => 'ScheduleController@duplicate']);
+            Route::post('/duplicate', ['as' => 'admin.schedule.duplicate', 'uses' => 'ScheduleController@duplicate']);
             Route::get('/delete', ['as' => 'admin.schedule.delete', 'uses' => 'ScheduleController@delete']);
         });
 
@@ -192,6 +192,10 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::group(['prefix' => 'users'], function() {
                 Route::get('/', ['as' => 'admin.users.view', 'uses' => 'SystemUsersController@users']);
+                Route::get('/add', ['as' => 'admin.users.add', 'uses' => 'SystemUsersController@addUser']);
+                Route::post('/save', ['as' => 'admin.users.save', 'uses' => 'SystemUsersController@saveUser']);
+                Route::get('/edit', ['as' => 'admin.users.edit', 'uses' => 'SystemUsersController@editUser']);
+                Route::post('/update', ['as' => 'admin.users.update', 'uses' => 'SystemUsersController@updateUser']);
             });
         });
 // });

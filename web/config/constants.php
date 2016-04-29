@@ -23,7 +23,9 @@ $adminConstants = [
     'adminPackageView' => 'admin.pages.masters.package',
     'adminOccupancyView' => 'admin.pages.masters.occupancy',
     'paginateNo' => 20,
-    'uploadRecord'=>'/public/uploads/records/'
+    'uploadRecord'=>'/public/uploads/records/',
+    'uploadAttendance'=>'/public/uploads/attendance/',
+    'uploadProfile'=>'/public/uploads/profile/'
 ];
 
 

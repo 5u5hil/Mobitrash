@@ -72,7 +72,7 @@
 
                         <div class="row form-group">
                             <div class="col-sm-2">
-                                {!! Form::text('user',$pickup->user->first_name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
+                                {!! Form::text('user',$pickup->user->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
                             <div class="col-sm-3">
                                 {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
@@ -190,13 +190,13 @@
             },
             success: function (data) {
                 //console.log(data.length);
-                if (data.length == 1) {
+                if (data.addresses.length == 1) {
                     options = $([]);
-                    var opt = $("<option />", {text: data[0].address, value: data[0].id, selected: 'selected'});
+                    var opt = $("<option />", {text: data.addresses[0].address, value: data.addresses[0].id, selected: 'selected'});
                     options = options.add(opt);
-                    getAddress(select.parent().parent().find(".select_add"), data[0].id);
+                    getAddress(select.parent().parent().find(".select_add"), data.addresses[0].id);
                 } else {
-                    $.each(data, function (k, v) {
+                    $.each(data.addresses, function (k, v) {
                         var opt = $("<option />", {text: v.address, value: v.id});
                         options = options.add(opt);
                     });
@@ -224,7 +224,7 @@
             success: function (data) {
                 select.parent().parent().find(".approx_time").html(data[0].approximate_processing_time);
                 select.parent().parent().find(".frequency_name").html(data[0].frequency.name);
-                select.parent().parent().find(".time_slot").html(data[0].timeslot.name);
+                select.parent().parent().find(".time_slot").html(data[0].prefered_timeslot);
             }
         });
     }

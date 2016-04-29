@@ -35,8 +35,8 @@
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Picture</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Date</th>
@@ -45,9 +45,10 @@
                         </thead>
                         <tbody>
                             @foreach($system_users as $system_user)
-                            <tr> <td>{{$system_user->id }}</td>
-                                <td>{{$system_user->first_name }}</td>
-                                <td>{{$system_user->last_name }}</td>
+                            <tr> 
+                                <td>{{$system_user->id }}</td>
+                                <td><img src="{{ Config('constants.uploadProfile').$system_user->profile_picture }}" style="height: 80px;" /></td>
+                                <td>{{$system_user->name }}</td>
                                 <td>{{ $system_user->email }}</td>
                                 <td>{{ $system_user->roles[0]->name }}</td>
                                 <td>{{ date("d-M-Y",strtotime($system_user->created_at)) }}</td>

@@ -22,7 +22,7 @@
 
                         <p style="color:red;text-align: center;">{{ Session::get('message') }}</p>
 
-                        {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal', 'files'=>true ]) !!}
+                        {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                         <div class="form-group">
                             {!!Form::label('Name','Name',['class'=>'col-sm-2 control-label required']) !!}
                             {!! Form::hidden('id',null) !!}
@@ -30,7 +30,6 @@
                                 {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Name', "required"]) !!}
                             </div>
                         </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             {!!Form::label('Phone','Phone Number',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
@@ -54,21 +53,15 @@
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
+                        
                         <div class="form-group">
-                            {!!Form::label('Profile Picture','Profile Picture',['class'=>'col-sm-2 control-label required']) !!}
+                            {!!Form::label('address','Address',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
-                                {!! Form::file('profile_picture', ["class"=>'form-control' ,"placeholder"=>'Profile Picture' , "required"]) !!}
+                                {!! Form::text('address',null, ["class"=>'form-control location' ,"placeholder"=>'Address' , "required"]) !!}
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            {!!Form::label('Role','Role',['class'=>'col-sm-2 control-label required']) !!}
-                            <div class="col-sm-10">
-                                {!! Form::select('roles',$roles_name,!empty($user->roles()->first()->id)?$user->roles()->first()->id:null,["class"=>'form-control m-b' , "required"]) !!}
-                            </div>
-                        </div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
+                       
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
                                 {!! Form::submit('Submit',["class" => "btn btn-primary SustemUserSubmit"]) !!}

@@ -51,7 +51,7 @@ class ScheduleController extends Controller {
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
-            $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $users[$value['id']] = $value['name'];
         }
         $ops = [];
         $opss = $schedule->operators->toArray();
@@ -62,7 +62,7 @@ class ScheduleController extends Controller {
         $driverss = Role::find(4)->users->toArray();
         $drivers = [];
         foreach ($driverss as $value) {
-            $drivers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $drivers[$value['id']] = $value['name'];
         }
 
         $opsd = [];
@@ -80,7 +80,7 @@ class ScheduleController extends Controller {
         $c = Role::find(2)->users->toArray();
         $customers = [0 => "Select a Customer"];
         foreach ($c as $value) {
-            $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $customers[$value['id']] = $value['name'];
         }
         $action = "admin.schedule.save";
         return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'customers', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd'));
@@ -95,7 +95,7 @@ class ScheduleController extends Controller {
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
-            $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $users[$value['id']] = $value['name'];
         }
         $ops = [];
         $opss = $schedule->operators->toArray();
@@ -107,7 +107,7 @@ class ScheduleController extends Controller {
         $driverss = Role::find(4)->users->toArray();
         $drivers = [];
         foreach ($driverss as $value) {
-            $drivers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $drivers[$value['id']] = $value['name'];
         }
 
         $opsd = [];
@@ -124,7 +124,7 @@ class ScheduleController extends Controller {
         $c = Role::find(2)->users->toArray();
         $customers = [0 => "Select a Customer"];
         foreach ($c as $value) {
-            $customers[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $customers[$value['id']] = $value['name'];
         }
         $action = "admin.schedule.update";
 
@@ -192,43 +192,39 @@ class ScheduleController extends Controller {
     }
 
     public function duplicate() {
-        $schedule = Schedule::find(Input::get('id'));
-//        $schedule->for = Date('Y-m-d', strtotime($schedule->for . ' +1 day'));
-
-        $op = [];
-        $oprators = $schedule->operators()->get()->toArray();
-        foreach ($oprators as $value) {
-            array_push($op, $value['id']);
+        $schedule = Schedule::find(Input::get('schedule_id'));
+        $schedule_dates = explode(', ', Input::get('multiple_dates'));
+        foreach ($schedule_dates as $sdate) {
+            $schedule->for = $sdate;
+            $op = [];
+            $oprators = $schedule->operators()->get()->toArray();
+            foreach ($oprators as $value) {
+                array_push($op, $value['id']);
+            }
+            $dr = [];
+            $drivers = $schedule->drivers()->get()->toArray();
+            foreach ($drivers as $value) {
+                array_push($dr, $value['id']);
+            }
+            $pickups = $schedule->pickups()->get();
+            $new_schedule = $schedule->replicate();
+            $new_schedule->push();
+            $new_schedule->operators()->sync($op);
+            $new_schedule->drivers()->sync($dr);
+            foreach ($pickups as $key => $pickup) {
+                $pickup->schedule_id = $new_schedule->id;
+                $new_pickup = $pickup->replicate();
+                $new_pickup->push();
+            }
         }
-        $dr = [];
-        $drivers = $schedule->drivers()->get()->toArray();
-        foreach ($drivers as $value) {
-            array_push($dr, $value['id']);
-        }
-        $pickups = $schedule->pickups()->get();
-        $ScheduleDates = $schedule->ScheduleDates()->get();
-        $new_schedule = $schedule->replicate();
-        $new_schedule->push();
-        $new_schedule->operators()->sync($op);
-        $new_schedule->drivers()->sync($dr);
-        foreach ($pickups as $key => $pickup) {
-            $pickup->schedule_id = $new_schedule->id;
-            $new_pickup = $pickup->replicate();
-            $new_pickup->push();
-        }
-        foreach ($ScheduleDates as $key => $ScheduleDate) {
-            $ScheduleDate->schedule_id = $new_schedule->id;
-            $new_ScheduleDate = $ScheduleDate->replicate();
-            $new_ScheduleDate->push();
-        }
-        Session::flash('duplicateSuccess', 'Schedule Duplicated Successfully! <div class="red">Shedule dates already exist! Please change schedule dates.</div>');
-        return redirect()->route('admin.schedule.edit', array('id' => $new_schedule->id))->with("message", "Schedule duplicated sucessfully");
+        Session::flash('duplicateSuccess', 'Schedule Duplicated Successfully!');
+        return redirect()->route('admin.schedule.view');
     }
 
     public function delete() {
         $schedule = Schedule::find(Input::get('id'));
         $schedule->delete();
-        return redirect()->back()->with("message", "Schedule deleted sucessfully");
+        return redirect()->back()->with("message", "Schedule deleted sucessfully!");
     }
 
 }

@@ -80,9 +80,9 @@
                                 <td>{{ @$city->addedBy->first_name }}</td>
                                 <td>{{ date("d M Y",strtotime($city->updated_at)) }}</td>
                                 <td>
-                                    <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>
-                                    <a href="{{ route('admin.record.edit',['id' => $city->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
-                                    <a href="{{ route('admin.record.delete',['id' => $city->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>
+                                    <a href="{{ route('admin.record.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    <a href="{{ route('admin.record.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>

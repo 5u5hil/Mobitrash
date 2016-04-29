@@ -109,7 +109,7 @@ class SubscriptionController extends Controller {
         $users = [];
         $users = [0 => "Select a Customer"];
         foreach ($userss as $value) {
-            $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $users[$value['id']] = $value['name'];
         }
 
         $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
@@ -155,7 +155,7 @@ class SubscriptionController extends Controller {
         $users = [];
         $users = [0 => "Select a Customer"];
         foreach ($userss as $value) {
-            $users[$value['id']] = $value['first_name'] . " " . $value['last_name'];
+            $users[$value['id']] = $value['name'];
         }
 
         $wastetypess = Wastetype::where("is_active", 1)->get()->toArray();

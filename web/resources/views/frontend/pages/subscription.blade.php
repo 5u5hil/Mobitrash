@@ -38,7 +38,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{$subscription->user->first_name.' '.$subscription->user->last_name}}</h4>
+                            <h4>{{$subscription->user->name}}</h4>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
@@ -63,11 +63,14 @@
                         <h4>User Subscription</h4>
                     </div>
                     <div class="contact-widget">
-
                         <div class="contact-form-result"></div>
                         {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin' ]) !!}
 
                         <div class="form-process"></div>
+                        <div class="col_one_third">
+                            <label for="template-contactform-phone">Subscription Name:</label>
+                            {!! Form::text('name',$subscription->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                        </div>
                         <div class="col_one_third">
                             <label for="template-contactform-phone">Address:</label>
                             {!! Form::text('address',$address->address, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
@@ -104,7 +107,7 @@
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Preferred Timeslot:</label>
-                            {!! Form::text('timeslot_id',$subscription->timeslot->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Preferred Timeslot"]) !!}
+                            {!! Form::text('prefered_timeslot',null, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Preferred Timeslot"]) !!}
                         </div>
 
                         <div class="col_one_third">
@@ -130,8 +133,7 @@
                             {!! Form::text('remark',null, ["class"=>"sm-form-control" ,"disabled"=>"disabled","placeholder"=>"Remark"]) !!}
                         </div>
                         {!! Form::hidden('id',null) !!}
-                        {!! Form::close() !!}  
-
+                        {!! Form::close() !!} 
                     </div>
                 </div><!-- .portfolio-single-image end -->
                 <div class="clear"></div>

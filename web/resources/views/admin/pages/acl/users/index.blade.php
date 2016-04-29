@@ -23,20 +23,19 @@
 
                 <div class="box-header">
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.systemusers.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New User</a>      
+                        <a href="{!! route('admin.users.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New User</a>      
                     </h3>
 
                 </div>
                 <div>
-                    <p style="color: red;text-align: center;">{{ Session::get('message') }}</p>
+                    <p style="color: green;text-align: center;">{{ Session::get('message') }}</p>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Date</th>
@@ -45,14 +44,14 @@
                         </thead>
                         <tbody>
                             @foreach($users as $system_user)
-                            <tr> <td>{{$system_user->id }}</td>
-                                <td>{{$system_user->first_name }}</td>
-                                <td>{{$system_user->last_name }}</td>
+                            <tr> 
+                                <td>{{$system_user->id }}</td>
+                                <td>{{$system_user->name }}</td>
                                 <td>{{ $system_user->email }}</td>
                                 <td>{{ $system_user->roles[0]->name }}</td>
                                 <td>{{ date("d-M-Y",strtotime($system_user->created_at)) }}</td>
                                 <td>
-                                    <a href="{!! route('admin.systemusers.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    <a href="{!! route('admin.users.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
                                 </td>
 
                                 <td>

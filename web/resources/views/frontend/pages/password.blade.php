@@ -32,7 +32,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{$user->first_name. ' '. $user->last_name}}</h4>
+                            <h4>{{$user->name}}</h4>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">

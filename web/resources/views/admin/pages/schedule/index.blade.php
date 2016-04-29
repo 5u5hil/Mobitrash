@@ -52,8 +52,9 @@
                         <a href="{!! route('admin.schedule.add') !!}" class="btn btn-default pull-right" type="button">Add New Schedule</a>      
                     </h3>
 
-                    <div>
-                        <p style="color:red;text-align: center">{{ Session::get('message') }}</p>
+                    <div style="text-align: center;">
+                        <p style="color:green;">{{ Session::get('message') }}</p>
+                        <p style="color:green;">{{ html_entity_decode(Session::get('duplicateSuccess')) }}</p>
                     </div>
 
                 </div>
@@ -99,7 +100,7 @@
                 <div class="modal fade" id="duplicate-schedule" tabindex="-1" role="dialog">
                     <div class="modal-dialog" style="text-align: center;">
                         <div class="modal-content">
-                            <form action="" method="post">
+                            <form action="{{ route('admin.schedule.duplicate') }}" method="post" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <h4 class="modal-title">Duplicate Schedule</h4>
@@ -108,10 +109,9 @@
                                     <div class="form-group">
                                         <label class="control-label">Select Dates for Schedule:</label>
                                         <div class="multidatepicker" style="width: 240px; margin: 0 auto;"></div>
-                                        <input type="text" style="display: none;" id="multiple-dates" required="required" class="form-control">
+                                        <input type="text" name="multiple_dates" style="display: none;" id="multiple-dates" required="required" class="form-control">
                                         <input type="hidden" name="schedule_id" id="schedule-id" /> 
-                                    </div>
-                                    
+                                    </div>                                    
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

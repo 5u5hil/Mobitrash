@@ -95,7 +95,7 @@
                                 <td>{{ $asset->id }}</td>
                                 <td>{{ $asset->name }}</td>
                                 <td>{{ @$asset->user()->first()->first_name }}</td>
-                                <td>{{ @$asset->timeslot()->first()->name }}</td>
+                                <td>{{ @$asset->prefered_timeslot }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->start_date)) }}</td>

@@ -50,11 +50,11 @@
                                 <td>{{$service->id}}</td>
                                 <td>{{@$service->schedule->van->name}} - {{@$service->schedule->van->asset_no}}</td>
                                 <td>@foreach(@$service->schedule->operators as $operator)
-                                    <div>{{@$operator->first_name}} {{@$operator->last_name}}</div>
+                                    <div>{{@$operator->name}}</div>
                                     @endforeach
                                 </td>
                                 <td><div>{{date('d M Y', strtotime($service->created_at))}}</div><div>{{date('h:i:s A', strtotime($service->created_at))}}</div></td>
-                                <td><div>{{@$service->user->first_name}} {{@$service->user->last_name}}</div><div>{{@$service->address->address}}</div></td>
+                                <td><div>{{@$service->user->name}}</div><div>{{@$service->address->address}}</div></td>
                                 <td> 
                                     @foreach($service->additives as $additive)
                                     <div>{{@$additive->name}} : {{@$additive->pivot->quantity}} kg</div>

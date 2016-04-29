@@ -38,7 +38,7 @@ class OperatorController extends Controller {
     }
 
     public function schedules() {
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user', 'pickups.address'])->whereHas('operators', function($q) {
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
                 })->orderBy('created_at', 'DESC')->first();
         $services = Service::get(['pickup_id']);

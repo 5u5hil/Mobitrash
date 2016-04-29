@@ -61,19 +61,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Timeslot',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('user','Prefered Timeslot',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('timeslot_id',$timeslot,null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('prefered_timeslot',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('user','Package',['class'=>'col-sm-2 required']) !!}
-                        <div class="col-sm-10">
-                            {!! Form::select('package_id',$packages, null, ["class"=>'form-control', "required"]) !!}
-                        </div>
-                    </div> 
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    
                     <div class="form-group">
                         {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
@@ -140,14 +134,14 @@
                     <div class="form-group">
                         {!!Form::label('dop','On field Person Name',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('onfield_person_name',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('onfield_person_name',null, ["class"=>'form-control', "id"=>"person_name", "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','On field Person Contact Number',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('onfield_person_contact_number',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::text('onfield_person_contact_number',null, ["class"=>'form-control', "id"=>"person_number", "required"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -211,7 +205,9 @@
                 uid: select.val()
             },
             success: function (data) {
-                $.each(data, function (k, v) {
+                $.each(data.addresses, function (k, v) {
+                    $('#person_name').val(data.name);
+                    $('#person_number').val(data.phone_number);
                     var selected = '';
                     <?php 
                     if($subscription->user_address_id){echo "var addressid = ".$subscription->user_address_id.";"; }else { echo 'var addressid = 0;';}
