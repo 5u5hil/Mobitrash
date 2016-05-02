@@ -43,7 +43,7 @@
                         <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::select('filter_value',$vans,$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
-                        {!! Form::select('filter_value',$vans,$field2, ["class"=>'form-control f2 ', "style"=>$show_f2, $dis_f2]) !!}
+                        {!! Form::select('filter_value',$operators,$field2, ["class"=>'form-control f2 ', "style"=>$show_f2, $dis_f2]) !!}
                         {!! Form::text('filter_value', $field3, ["class"=>'form-control f3 datepicker', "style"=>$show_f3, $dis_f3]) !!}
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
@@ -80,10 +80,7 @@
                             <tr>
                                 <td>{{$service->id}}</td>
                                 <td>{{@$service->schedule->van->name}} - {{@$service->schedule->van->asset_no}}</td>
-                                <td>@foreach(@$service->schedule->operators as $operator)
-                                    <div>{{@$operator->name}}</div>
-                                    @endforeach
-                                </td>
+                                <td>{{@$service->operator->name}}</td>
                                 <td><div>{{date('d M Y', strtotime($service->created_at))}}</div><div>{{date('h:i:s A', strtotime($service->created_at))}}</div></td>
                                 <td><div>{{@$service->user->name}}</div><div>{{@$service->address->address}}</div></td>
                                 <td> 
@@ -127,7 +124,7 @@
         if ($(this).val() == 'van_id') {
             $(".f1").show().prop('disabled', false);
             $(".f2, .f3").hide().prop('disabled', true);
-        } else if ($(this).val() == 'staff') {
+        } else if ($(this).val() == 'operator_id') {
             $(".f2").show().prop('disabled', false);
             $(".f1, .f3").hide().prop('disabled', true);
         } else if ($(this).val() == 'created_at') {

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\Service;
 use App\Models\Schedule;
 use App\Models\Asset;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class ServicehistoryController extends Controller {
@@ -15,9 +16,16 @@ class ServicehistoryController extends Controller {
         $v = Asset::where("is_active", 1)->where("type_id", 1)->get()->toArray();
         $vans = [];
         foreach ($v as $value) {
-            $vans[$value['id']] = $value['name'];
+            $vans[$value['id']] = $value['name'].'-'.$value['asset_no'];
         }
-        $filter = array('' => 'All', 'van_id' => 'Van', 'staff' => 'Staff Name', 'created_at' => 'Date');
+        $op = User::whereHas('roles', function($q) {
+                    $q->where('id', 3);
+                })->get()->toArray();
+        $operators = [];
+        foreach ($op as $value) {
+            $operators[$value['id']] = $value['name'];
+        }
+        $filter = array('' => 'All', 'van_id' => 'Van', 'operator_id' => 'Staff Name', 'created_at' => 'Date');
         $filter_type = NULL;
         $filter_value = NULL;
         $field1 = NULL;
@@ -28,8 +36,10 @@ class ServicehistoryController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'van_id') {
                 $field1 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
-            } else if ($filter_type == 'staff') {
+                $services = Service::whereHas('schedule.van', function($q) {
+                    $q->where('id', Input::get('filter_value'));
+                })->paginate(Config('constants.paginateNo'));
+            } else if ($filter_type == 'operator_id') {
                 $field2 = Input::get('filter_value');
                 $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'created_at') {
@@ -39,7 +49,7 @@ class ServicehistoryController extends Controller {
         } else {
             $services = Service::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
-        return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
+        return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'operators', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
     public function add() {
