@@ -28,10 +28,11 @@ class OperatorController extends Controller {
 
     public function login() {
         $user = User::where('id', Input::get("id"))->whereHas('roles', function($q) {
-                    $q->where('id', 3);
+                    $q->where('id', '!=', 1);
                 })->first();
+        $attendance = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         if ($user) {
-            return ['flash' => 'success', 'User' => $user];
+            return ['flash' => 'success', 'User' => $user, 'Attendance' => $attendance];
         } else {
             return ['flash' => 'error'];
         }
@@ -46,11 +47,13 @@ class OperatorController extends Controller {
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
-        foreach ($schedules['pickups'] as $key => $pickup) {
-            if (in_array($pickup->id, $pickupids)) {
-                unset($schedules['pickups'][$key]);
-            } else {
-                $schedules['pickups'][$key]['subscription'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['id', 'name', 'max_waste', 'onfield_person_name', 'onfield_person_contact_number']);
+        if ($schedules) {
+            foreach ($schedules['pickups'] as $key => $pickup) {
+                if (in_array($pickup->id, $pickupids)) {
+                    unset($schedules['pickups'][$key]);
+                } else {
+                    $schedules['pickups'][$key]['subscription'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['id', 'name', 'max_waste', 'onfield_person_name', 'onfield_person_contact_number']);
+                }
             }
         }
         if ($schedules) {
@@ -118,23 +121,33 @@ class OperatorController extends Controller {
     }
 
     public function attendance() {
-        $attendance = new Attendance();
-        $attendance->user_id = Input::get('id');
-
-        if (Input::get('image_data')) {
-            $destinationPath = public_path() . '/uploads/attendance/';
-            $fileName = time() . '.jpg';
-            if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
-                $attendance->image = $fileName;
+        $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
+        if ($attendance_exist > 0) {
+            return ['flash' => 'exist'];
+        } else {
+            $attendance = new Attendance();
+            $attendance->user_id = Input::get('id');
+            $attendance->date = date('Y-m-d');
+            $user = User::where('id', Input::get('id'))->first();
+            if (Input::get('image_data')) {
+                $destinationPath = public_path() . '/uploads/attendance/';
+                $fileName = time() . '.jpg';
+                if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
+                    $attendance->image = $fileName;
+                }
+            }
+            if ($attendance->save()) {
+                return ['flash' => 'success', 'User' => $user];
+            } else {
+                return ['flash' => 'error'];
             }
         }
-        $attendance->save();
-        return ['flash' => 'success'];
     }
 
     public function cleaningData() {
         $record = Record::where('recordtype_id', 3)->where('date', date('Y-m-d'))->count();
-        return ['flash' => 'success', 'Records' => $record];
+        $vans = Asset::where('is_active', 1)->get()->toArray();
+        return ['flash' => 'success', 'Records' => $record, 'Vans' => $vans];
     }
 
     public function kilometerUpdate() {

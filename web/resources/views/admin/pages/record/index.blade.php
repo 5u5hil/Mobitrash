@@ -67,6 +67,7 @@
                                 <th>Receipt Date</th>
                                 <th>Last Updated By</th>
                                 <th>Last Updated At</th>
+                                <th>Attachment</th>
                             </tr>
                         </thead>
                         <tbody id="indexdata">                          
@@ -79,6 +80,14 @@
                                 <td>{{ date("d M Y",strtotime($city->date)) }}</td>
                                 <td>{{ @$city->addedBy->name }}</td>
                                 <td>{{ date("d M Y",strtotime($city->updated_at)) }}</td>
+                                <td>
+                                    @if(@$city->recordtype_id == 1 || @$city->recordtype_id == 2)
+                                    @foreach(@$city->atts->where("is_active", 1) as $at)
+
+                                    <a href="{{ Config('constants.uploadRecord').$at->file }}" target="_BLANK"><i class="fa fa-file"></i></a>
+                                     @endforeach
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>
                                     <a href="{{ route('admin.record.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>

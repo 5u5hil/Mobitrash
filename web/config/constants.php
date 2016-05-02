@@ -25,7 +25,8 @@ $adminConstants = [
     'paginateNo' => 20,
     'uploadRecord'=>'/public/uploads/records/',
     'uploadAttendance'=>'/public/uploads/attendance/',
-    'uploadProfile'=>'/public/uploads/profile/'
+    'uploadProfile'=>'/public/uploads/profile/',
+    'pipedriveApiToken'=>'0fbf69c98241b4dcc270bba263269c2fd6950f25'
 ];
 
 

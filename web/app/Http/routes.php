@@ -128,10 +128,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/delete', ['as' => 'admin.subscription.delete', 'uses' => 'SubscriptionController@delete']);
             Route::get('/rmfile', ['as' => 'admin.subscription.rmfile', 'uses' => 'SubscriptionController@rmfile']);
         });
+        
         Route::group(['prefix' => 'renewal'], function() {
             Route::get('/', ['as' => 'admin.renewal.view', 'uses' => 'SubscriptionController@renewal']);
         });
-
+        
+        Route::group(['prefix' => 'pipedrive'], function() {
+            Route::get('/get-all', ['as' => 'admin.pipedrive.all', 'uses' => 'PipedriveController@getAll']);
+        });
+        
         Route::group(['prefix' => 'servicehistory'], function() {
             Route::get('/', ['as' => 'admin.servicehistory.view', 'uses' => 'ServicehistoryController@index']);
             Route::get('/add', ['as' => 'admin.servicehistory.add', 'uses' => 'ServicehistoryController@add']);
