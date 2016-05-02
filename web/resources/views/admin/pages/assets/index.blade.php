@@ -84,7 +84,7 @@
                                 <td>{{ @$asset->city()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->dop)) }}</td>
                                 <td>{{ $asset->is_active == 1 ? 'Yes' : 'No' }}</td>
-                                <td>{{ @$asset->addedBy()->first()->first_name }}</td>
+                                <td>{{ @$asset->addedBy()->first()->name }}</td>
 
                                 <td>
                                     <!--<a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>-->

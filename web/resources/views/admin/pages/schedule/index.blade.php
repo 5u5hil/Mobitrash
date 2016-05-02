@@ -79,7 +79,7 @@
                                 <td>{{ $asset->name }}</td> 
                                 <td>{{ @$asset->van()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->for)) }}</td>                                
-                                <td>{{ @$asset->addedBy()->first()->first_name }}</td>
+                                <td>{{ @$asset->addedBy()->first()->name }}</td>
                                 <!--<td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>-->
                                 <td>
                                     <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}" target="_BLANK"  class="label label-success active" ui-toggle-class="">view</a>

@@ -94,7 +94,7 @@
                             <tr>
                                 <td>{{ $asset->id }}</td>
                                 <td>{{ $asset->name }}</td>
-                                <td>{{ @$asset->user()->first()->first_name }}</td>
+                                <td>{{ @$asset->user()->first()->name }}</td>
                                 <td>{{ @$asset->prefered_timeslot }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>
@@ -103,7 +103,7 @@
                                 <td>{{ $asset->max_waste }}</td>
                                 <td>{{ @$asset->wastetypes()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
-                                <td>{{ @$asset->addedBy()->first()->first_name }}</td>
+                                <td>{{ @$asset->addedBy()->first()->name }}</td>
 
                                 <td>
                                     <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>                                

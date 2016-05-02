@@ -72,8 +72,7 @@ class UsersController extends Controller {
 
         if (empty($chk)) {
             $user = new User();
-            $user->first_name = Input::get('first_name');
-            $user->last_name = Input::get('last_name');
+            $user->name = Input::get('name');
             $user->email = Input::get('email');
             $user->phone_number = Input::get('phone_number');
             $user->password = Hash::make(Input::get('password'));
@@ -191,8 +190,7 @@ class UsersController extends Controller {
     public function update() {
 
         $user = User::find(Input::get('id'));
-        $user->first_name = Input::get('first_name');
-        $user->last_name = Input::get('last_name');
+        $user->name = Input::get('name');
         $user->phone_number = Input::get('phone_number');
         $user->email = Input::get('email');
         $user->user_type = 1;

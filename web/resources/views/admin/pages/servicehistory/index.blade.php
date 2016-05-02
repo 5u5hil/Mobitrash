@@ -17,6 +17,37 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
+                    <div class="filter-box">
+
+                        <?php
+                        $show_f1 = 'display:none;';
+                        $show_f2 = 'display:none;';
+                        $show_f3 = 'display:none;';
+                        $dis_f1 = 'disabled';
+                        $dis_f2 = 'disabled';
+                        $dis_f3 = 'disabled';
+                        if ($field1) {
+                            $show_f1 = '';
+                            $dis_f1 = '';
+                        }
+                        if ($field2) {
+                            $show_f2 = '';
+                            $dis_f2 = '';
+                        }
+                        if ($field3) {
+                            $show_f3 = '';
+                            $dis_f3 = '';
+                        }
+                        ?>
+                        {!! Form::open(['method'=>'GET','route' => 'admin.servicehistory.view' , 'class' => 'form-horizontal' ]) !!}
+                        <label>Filter </label>
+                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
+                        {!! Form::select('filter_value',$vans,$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
+                        {!! Form::select('filter_value',$vans,$field2, ["class"=>'form-control f2 ', "style"=>$show_f2, $dis_f2]) !!}
+                        {!! Form::text('filter_value', $field3, ["class"=>'form-control f3 datepicker', "style"=>$show_f3, $dis_f3]) !!}
+                        {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
+                        {!! Form::close() !!}
+                    </div>
                     <h3 class="box-title">  
                         <a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Service History</a>      
                     </h3>
@@ -86,9 +117,26 @@
     </div> 
 </section>
 
-
-
-
-
-
 @stop 
+
+
+@section('myscripts')
+
+<script>
+    $(".filter_type").change(function () {
+        if ($(this).val() == 'van_id') {
+            $(".f1").show().prop('disabled', false);
+            $(".f2, .f3").hide().prop('disabled', true);
+        } else if ($(this).val() == 'staff') {
+            $(".f2").show().prop('disabled', false);
+            $(".f1, .f3").hide().prop('disabled', true);
+        } else if ($(this).val() == 'created_at') {
+            $(".f3").show().prop('disabled', false);
+            $(".f1, .f2").hide().prop('disabled', true);
+        } else {
+            $(".f1, .f2, .f3").hide().prop('disabled', true);
+        }
+    });
+</script>
+
+@stop

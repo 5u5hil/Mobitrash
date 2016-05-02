@@ -76,6 +76,7 @@ class OperatorController extends Controller {
         $pickup_data = Input::get("pickup");
         $service_data = Input::get("service");
         $service = new Service;
+        $service->operator_id = $pickup_data['operator_id'];
         $service->user_id = $pickup_data['user_id'];
         $service->address_id = $pickup_data['user_address_id'];
         $service->schedule_id = $pickup_data['schedule_id'];

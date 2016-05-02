@@ -23,14 +23,11 @@
                 <div class="acc_content clearfix">
                     <form id="login-form" name="login-form" class="nobottommargin" action="{{ route('user.register.save') }}" method="post">
                         <div class="col_full">
-                            <label for="first_name">First Name <small>*</small></label>
+                            <label for="name">Name <small>*</small></label>
 
-                            <input type="text" id="first_name" name="first_name" value="" class="sm-form-control required validate[required]" />
+                            <input type="text" id="name" name="name" value="" class="sm-form-control required validate[required]" />
                         </div>
-                        <div class="col_full">
-                            <label for="last_name">Last Name <small></small></label>
-                            <input type="text" id="last_name" name="last_name" value="" class="sm-form-control required" />
-                        </div>
+                       
                         <div class="col_full">
                             <label for="phone_number">Phone No: <small>*</small></label>
                             <input type="number" id="phone_number" name="phone_number" value=""  class="sm-form-control required validate[required]" />

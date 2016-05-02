@@ -157,14 +157,8 @@
         </div>
         <div class="form-group col-md-4">
             <div class="col-md-12">
-                {!! Form::label('First Name', 'First Name',['class'=>'control-label']) !!}
-                {!! Form::text('first_name',$orders->first_name, ["class"=>'form-control' ,"placeholder"=>'Voucher Amount Used', "required"]) !!}
-            </div>
-        </div>
-        <div class="form-group col-md-4">
-            <div class="col-md-12">
-                {!! Form::label('Last Name', 'Last Name',['class'=>'control-label']) !!}
-                {!! Form::text('last_name',$orders->last_name, ["class"=>'form-control' ,"placeholder"=>'Voucher Amount Used', "required"]) !!}
+                {!! Form::label('Name', 'Name',['class'=>'control-label']) !!}
+                {!! Form::text('name',$orders->name, ["class"=>'form-control' ,"placeholder"=>'Voucher Amount Used', "required"]) !!}
             </div>
         </div>
         <div class="form-group col-md-4">

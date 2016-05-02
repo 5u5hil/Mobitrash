@@ -77,7 +77,7 @@
                                 <td>{{ @$city->asset->name ." " . @$city->asset->asset_no }}</td>
                                 <td>{{ $city->remarks }}</td>
                                 <td>{{ date("d M Y",strtotime($city->date)) }}</td>
-                                <td>{{ @$city->addedBy->first_name }}</td>
+                                <td>{{ @$city->addedBy->name }}</td>
                                 <td>{{ date("d M Y",strtotime($city->updated_at)) }}</td>
                                 <td>
                                     <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>

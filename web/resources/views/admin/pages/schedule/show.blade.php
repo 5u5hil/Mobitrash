@@ -46,7 +46,7 @@
                                     @foreach($operators as $key => $operator)
                                     <div class="row form-group">
                                         <div class="col-sm-4">
-                                            {{$operator['first_name'].' '.$operator['last_name']}}                                                                              
+                                            {{$operator['name']}}                                                                              
                                         </div> 
                                     </div>
                                     @endforeach 
@@ -58,7 +58,7 @@
                                     @foreach($drivers as $key => $driver)
                                     <div class="row form-group">
                                         <div class="col-sm-4">
-                                            {{$driver['first_name'].' '.$driver['last_name']}}                                                                              
+                                            {{$driver['name']}}                                                                              
                                         </div> 
                                     </div>
                                     @endforeach 
@@ -88,7 +88,7 @@
 
                                     <div class="row form-group">
                                         <div class="col-sm-2">
-                                            {{$pickup->user->first_name}}
+                                            {{$pickup->user->name}}
                                         </div>
                                         <div class="col-sm-3">
                                             {{$pickup->address->address}}
