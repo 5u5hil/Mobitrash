@@ -85,7 +85,6 @@ class OperatorController extends Controller {
         $service->schedule_id = $pickup_data['schedule_id'];
         $service->pickup_id = $pickup_data['id'];
         $service->crates_filled = $service_data['crates_filled'];
-        $service->compost = $service_data['compost'];
         $service->time_taken = $service_data['time_taken'];
         $service->save();
         $service->wastetypes()->sync($service_data['wastetype']);

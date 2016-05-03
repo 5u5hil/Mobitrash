@@ -27,7 +27,7 @@ class SubscriptionController extends Controller {
         foreach ($t as $value) {
             $timeslot[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'All', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+        $filter = array('' => 'All', 'renewal' => 'Due for Renewal', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
 
         $filter_type = NULL;
         $filter_value = NULL;
@@ -51,6 +51,11 @@ class SubscriptionController extends Controller {
                 $field5 = Input::get('filter_value');
             }
             $subscription = Subscription::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else if (Input::get('filter_type') == 'renewal') {
+            $filter_type = Input::get('filter_type');
+            $now = Date('Y-m-d');
+            $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
+            $subscription = Subscription::where('end_date', '<=', $now_10days)->paginate(Config('constants.paginateNo'));
         } else {
             $subscription = Subscription::paginate(Config('constants.paginateNo'));
         }
@@ -124,7 +129,7 @@ class SubscriptionController extends Controller {
             $wastetype[$value['id']] = $value['name'];
         }
         $return_of_compost = false;
-        
+
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -164,17 +169,22 @@ class SubscriptionController extends Controller {
             $wastetype[$value['id']] = $value['name'];
         }
         $return_of_compost = false;
-        if($subscription->return_of_compost){
+        if ($subscription->return_of_compost) {
             $return_of_compost = true;
         }
-        
+
+        $billing_method = false;
+        if ($subscription->billing_method == 1) {
+            $billing_method = true;
+        }
+
         $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
         $occupancy = [];
         foreach ($occupancyd as $value) {
             $occupancy[$value['id']] = $value['name'];
         }
 
-        
+
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -194,7 +204,7 @@ class SubscriptionController extends Controller {
         }
 
         $action = "admin.subscription.save";
-        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'occupancy', 'return_of_compost'));
+        return view(Config('constants.adminSubscriptionView') . '.addEdit', compact('subscription', 'users', 'frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'occupancy', 'return_of_compost', 'billing_method'));
     }
 
     public function save() {

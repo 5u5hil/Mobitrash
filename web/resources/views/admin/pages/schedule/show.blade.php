@@ -101,7 +101,7 @@
                                                 <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
                                             </div>
                                             <div class="sub-info">
-                                                <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->sub_deatils->timeslot->name}}</div>
+                                                <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->sub_deatils->prefered_timeslot}}</div>
                                             </div>                                
                                             <div class="sub-info">
                                                 <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            

@@ -27,16 +27,16 @@
                 </a>
             </li>
             <li class=" {{ preg_match("/admin.subscription.view|admin.renewal.view/",Route::currentRouteName())? 'active' : ''}}">
-                <a href="#">
+                <a href="{{ route('admin.subscription.view') }}">
                     <i class="fa fa-user-plus"></i>
                     <span>User Subscriptions</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <ul class="treeview-menu">
+<!--                <ul class="treeview-menu">
                     <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
                     <li class="{{ preg_match("/admin.renewal.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.renewal.view') }}"><i class="fa fa-calendar-check-o"></i>Due for Renewal</a></li>
                     
-                </ul>
+                </ul>-->
             </li>  
             <li class=" {{ preg_match("/admin.assets.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.assets.view') }}">

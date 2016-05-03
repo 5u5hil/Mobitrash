@@ -193,6 +193,10 @@ class SystemUsersController extends Controller {
     public function getAddresses() {
         return User::where('id', Input::get('uid'))->with('addresses')->first(['name', 'phone_number', 'id']);
     }
+    
+    public function getSubscriptions() {
+        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency')->first();
+    }
 
     public function getApproxTime() {
         $subscription = Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();

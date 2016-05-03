@@ -47,7 +47,7 @@ class ScheduleController extends Controller {
 
     public function add() {
         $schedule = new Schedule();
-        $pickups = $schedule->pickups()->with('user', 'address')->get();
+        $pickups = $schedule->pickups()->with('user', 'address','subscription')->get();
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
@@ -77,21 +77,19 @@ class ScheduleController extends Controller {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
 
-        $c = Role::find(2)->users->toArray();
-        $customers = [0 => "Select a Customer"];
+        $c = Subscription::get()->toArray();
+        $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
-            $customers[$value['id']] = $value['name'];
+            $subscriptions[$value['id']] = $value['name'];
         }
         $action = "admin.schedule.save";
-        return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'customers', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd'));
+        return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'subscriptions', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd'));
     }
 
     public function edit() {
         $schedule = Schedule::find(Input::get('id'));
-        $pickups = $schedule->pickups()->with('user', 'address')->get();
-        foreach ($pickups as $key => $pickup) {
-            $pickups[$key]['sub_deatils'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
-        }
+        $pickups = $schedule->pickups()->with('user', 'address','subscription')->get();
+        
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
@@ -121,14 +119,14 @@ class ScheduleController extends Controller {
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
-        $c = Role::find(2)->users->toArray();
-        $customers = [0 => "Select a Customer"];
+        $c = Subscription::get()->toArray();
+        $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
-            $customers[$value['id']] = $value['name'];
+            $subscriptions[$value['id']] = $value['name'];
         }
         $action = "admin.schedule.update";
 
-        return view(Config('constants.adminScheduleView') . '.edit', compact('schedule', 'customers', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd'));
+        return view(Config('constants.adminScheduleView') . '.edit', compact('schedule', 'subscriptions', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd'));
     }
 
     public function show() {

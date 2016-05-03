@@ -1540,23 +1540,23 @@
 	/*
 	* Override key up event to sync manual input changes.
 	*/
-	$.datepicker._base_doKeyUp = $.datepicker._doKeyUp;
-	$.datepicker._doKeyUp = function (event) {
-		var inst = $.datepicker._getInst(event.target),
-			tp_inst = $.datepicker._get(inst, 'timepicker');
-
-		if (tp_inst) {
-			if (tp_inst._defaults.timeOnly && (inst.input.val() !== inst.lastVal)) {
-				try {
-					$.datepicker._updateDatepicker(inst);
-				} catch (err) {
-					$.timepicker.log(err);
-				}
-			}
-		}
-
-		return $.datepicker._base_doKeyUp(event);
-	};
+//	$.datepicker._base_doKeyUp = $.datepicker._doKeyUp;
+//	$.datepicker._doKeyUp = function (event) {
+//		var inst = $.datepicker._getInst(event.target),
+//			tp_inst = $.datepicker._get(inst, 'timepicker');
+//
+//		if (tp_inst) {
+//			if (tp_inst._defaults.timeOnly && (inst.input.val() !== inst.lastVal)) {
+//				try {
+//					$.datepicker._updateDatepicker(inst);
+//				} catch (err) {
+//					$.timepicker.log(err);
+//				}
+//			}
+//		}
+//
+//		return $.datepicker._base_doKeyUp(event);
+//	};
 
 	/*
 	* override "Today" button to also grab the time and set it to input field.

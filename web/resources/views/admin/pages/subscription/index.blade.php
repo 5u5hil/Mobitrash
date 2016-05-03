@@ -53,7 +53,6 @@
                         {!! Form::open(['method'=>'GET','route' => 'admin.subscription.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        {!! Form::select('filter_value',$timeslot,$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
                         {!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}
                         {!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}
                         {!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker', "style"=>$show_f4, $dis_f4]) !!}
@@ -61,8 +60,9 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
+                    <h3 class="box-title">  <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" target="_" type="button">Import from Pipedrive</a>      
                         <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Subscription</a>      
+                        
                     </h3>
 
                     <div>

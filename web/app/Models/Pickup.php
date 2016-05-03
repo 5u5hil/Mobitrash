@@ -13,7 +13,11 @@ class Pickup extends \Eloquent {
     }
 
     public function schedule() {
-        return $this->belongsTo('App\Models\User', 'schedule');
+        return $this->belongsTo('App\Models\Schedule', 'schedule_id');
+    }
+    
+    public function subscription() {
+        return $this->belongsTo('App\Models\Subscription', 'subscription_id');
     }
 
     public function address() {

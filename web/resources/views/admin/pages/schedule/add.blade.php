@@ -73,19 +73,15 @@
                         @foreach($pickups as $key => $pickup)
 
                         <div class="row form-group">
-                            <div class="col-sm-2">
-                                {!! Form::text('user',$pickup->user->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
-                            </div>
                             <div class="col-sm-3">
-                                {!! Form::text('address',$pickup->address->address, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
+                                {!! Form::text('subscription',$pickup->subscription->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
-
-                            <div class="col-sm-2">
+                            <div class="col-sm-2">                                
                                 {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "required"]) !!}
+                                {!! Form::hidden("pickup[$key][subscription_id]",$pickup->subscription->id) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
-
-                            </div> 
+                            </div>  
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
                             </div>
@@ -124,13 +120,12 @@
 
 <div class="addNew" style="display: none;">
     <div class="row form-group">
-        <div class="col-sm-2">
-            {!! Form::select("pickup[0][user_id]",$customers,null, ["class"=>'form-control select_user', "required"]) !!}
-        </div>
-        <div class="col-sm-3"> 
-            {!! Form::select("pickup[0][user_address_id]",[], null, ["class"=>'form-control select_add', "required"]) !!}
+        <div class="col-sm-3">
+            {!! Form::select("pickup[0][subscription_id]",$subscriptions,null, ["class"=>'form-control select_subscription', "required"]) !!}
         </div>
         <div class="col-sm-2">
+            {!! Form::hidden("pickup[0][user_id]",null, ["class"=>'form-control select_user', "required"]) !!}
+            {!! Form::hidden("pickup[0][user_address_id]", null, ["class"=>'form-control select_add', "required"]) !!}
             {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
@@ -172,67 +167,33 @@
         $('[name*="pickuptime"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][pickuptime]");
         });
+        $('[name*="subscription_id"]').each(function (k, v) {
+            $(this).attr("name", "pickup[" + k + "][subscription_id]");
+        });
 
     });
 
-    $("body").on("change", ".select_user", function () {
+    $("body").on("change", ".select_subscription", function () {
         var select = $(this);
-        var options = $([]);
         select.parent().parent().find(".sub-info .approx_time, .sub-info .frequency_name, .sub-info .time_slot ").html('');
-        if (select.val() == 0) {
-            select.parent().parent().find(".select_add").html("");
-            return;
-        }
-        options = options.add($("<option />", {text: 'Select Address', value: ''}));
         $.ajax({
-            url: "<?= route('getUserAdd') ?>",
+            url: "<?= route('getUserSub') ?>",
             type: "GET",
             data: {
-                uid: select.val()
+                id: select.val()
             },
-            success: function (data) {
-                //console.log(data.length);
-                if (data.addresses.length == 1) {
-                    options = $([]);
-                    var opt = $("<option />", {text: data.addresses[0].address, value: data.addresses[0].id, selected: 'selected'});
-                    options = options.add(opt);
-                    getAddress(select.parent().parent().find(".select_add"), data.addresses[0].id);
-                } else {
-                    $.each(data.addresses, function (k, v) {
-                        var opt = $("<option />", {text: v.address, value: v.id});
-                        options = options.add(opt);
-                    });
-                }
-                select.parent().parent().find(".select_add").html(options);
+            success: function (data) { 
+                select.parent().parent().find(".select_user").val(data.user_id);
+                select.parent().parent().find(".select_add").val(data.user_address_id);
+                select.parent().parent().find(".approx_time").html(data.approximate_processing_time);
+                select.parent().parent().find(".frequency_name").html(data.frequency.name);
+                select.parent().parent().find(".time_slot").html(data.prefered_timeslot);
 
             }
         });
     });
 
-    function getAddress(select, address_id) {
-        var userid = select.parent().parent().find(".select_user").val();
-        console.log(address_id);
-        if (address_id == 0) {
-            select.parent().parent().find(".sub-info .approx_time, .sub-info .frequency_name, .sub-info .time_slot ").html('');
-            return;
-        }
-        $.ajax({
-            url: "<?= route('getUserApproxTime') ?>",
-            type: "GET",
-            data: {
-                uid: userid,
-                address_id: address_id
-            },
-            success: function (data) {
-                select.parent().parent().find(".approx_time").html(data[0].approximate_processing_time);
-                select.parent().parent().find(".frequency_name").html(data[0].frequency.name);
-                select.parent().parent().find(".time_slot").html(data[0].prefered_timeslot);
-            }
-        });
-    }
-    $("body").on("change", ".select_add", function () {
-        getAddress($(this), $(this).val());
-    });
+    
 
     $("body").on("click", ".delete-pickup", function () {
         var pickup_id = $(this).attr('data-id');

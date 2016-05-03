@@ -66,21 +66,20 @@
                             {!! Form::text('prefered_timeslot',null, ["class"=>'form-control', "required"]) !!}
                         </div>
                     </div> 
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                    
+                    <div class="line line-dashed b-b line-lg pull-in"></div>   
                     <div class="form-group">
-                        {!!Form::label('dop','Amount Paid',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('dop','Bulling Method',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('amt_paid',null, ["class"=>'form-control', "required"]) !!}
+                            {!! Form::select('billing_method',[''=>'Select Billing Method',1=>'Monthly Payment',2=>'Payment against invoice'],null, ["class"=>'form-control bulling-method', "required"]) !!}
                         </div>
-                    </div>
+                    </div>                    
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="form-group">
-                        {!!Form::label('dop','Paid On',['class'=>'col-sm-2 required']) !!}
+                    <div class="form-group billing-amount" style="{{$subscription->billing_method==1 ? 'display:block;': 'display:none;'}}">
+                        {!!Form::label('dop','Amount',['class'=>'col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('paid_on',null, ["class"=>'form-control datepicker', 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
+                            {!! Form::text('amt_paid',null, ["class"=>'form-control']) !!}
                         </div>
-                    </div>
+                    </div>                    
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         {!!Form::label('dop','Max Waste quantity (kg)',['class'=>'col-sm-2 required']) !!}
@@ -229,6 +228,15 @@
         }else{
             $('.weekly-quantity').hide();
             $('.weekly-quantity input').val('');
+        }
+    });
+    
+    $('.bulling-method').change(function(){
+        if($(this).val() == 1){
+            $('.billing-amount').show();
+        }else{
+            $('.billing-amount').hide();
+            $('.billing-amount input').val('');
         }
     });
 
