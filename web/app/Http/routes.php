@@ -155,6 +155,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/delete', ['as' => 'admin.record.delete', 'uses' => 'RecordController@delete']);
             Route::get('/rmfile', ['as' => 'admin.record.rmfile', 'uses' => 'RecordController@rmfile']);
         });
+        Route::group(['prefix' => 'payment'], function() {
+            Route::get('/', ['as' => 'admin.payment.view', 'uses' => 'PaymentController@index']);
+            Route::get('/add', ['as' => 'admin.payment.add', 'uses' => 'PaymentController@add']);
+            Route::post('/save', ['as' => 'admin.payment.save', 'uses' => 'PaymentController@save']);
+            Route::get('/edit', ['as' => 'admin.payment.edit', 'uses' => 'PaymentController@edit']);
+            Route::get('/show', ['as' => 'admin.payment.show', 'uses' => 'PaymentController@show']);
+            Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);
+            Route::get('/rmfile', ['as' => 'admin.payment.rmfile', 'uses' => 'PaymentController@rmfile']);
+        });
 
         Route::group(['prefix' => 'schedule'], function() {
             Route::get('/', ['as' => 'admin.schedule.view', 'uses' => 'ScheduleController@index']);

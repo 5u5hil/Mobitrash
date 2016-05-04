@@ -16,7 +16,8 @@ class PipedriveController extends Controller {
     public function getAll() {
         $deals = file_get_contents('https://api.pipedrive.com/v1/deals?api_token=' . Config('constants.pipedriveApiToken') . '&filter_id=16');
         $deals = json_decode($deals, true);
-        if ($deals) {
+        $count = 0;
+        if (isset($deals['data'])) {
             foreach ($deals['data'] as $key => $deal) {
                 $user = User::where('email', $deal['cc92372cd36ce0b84471f039d33f25abae52ea31'])->first();
                 if (!$user) {
@@ -61,9 +62,17 @@ class PipedriveController extends Controller {
                     $subscription->remark = $deal['42487678785cd65cddb7d01eb25440a0b02728f4'];
                     $subscription->added_by = Auth::id();
                     $subscription->save();
+                    $count++;
                 }
             }
-        }        
+            if($count > 0) {
+                Session::flash('message', $count+" Subscriptions Imported Successfully!");
+            } else {
+                Session::flash('messageError', "No data found to Import");
+            }
+        } else {
+            Session::flash('messageError', "No data found to Import");
+        }
         return redirect()->back();
     }
 

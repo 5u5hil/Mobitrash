@@ -195,7 +195,7 @@ class SystemUsersController extends Controller {
     }
     
     public function getSubscriptions() {
-        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency')->first();
+        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency','user')->first();
     }
 
     public function getApproxTime() {

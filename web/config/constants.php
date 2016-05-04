@@ -19,6 +19,7 @@ $adminConstants = [
     'adminScheduleView' => 'admin.pages.schedule',
     'adminAssetView' => 'admin.pages.assets',
     'adminRecordView' => 'admin.pages.record',
+    'adminPaymentView' => 'admin.pages.payment',
     'adminServiceHistoryView' => 'admin.pages.servicehistory',
     'adminPackageView' => 'admin.pages.masters.package',
     'adminOccupancyView' => 'admin.pages.masters.occupancy',
@@ -26,6 +27,7 @@ $adminConstants = [
     'uploadRecord'=>'/public/uploads/records/',
     'uploadAttendance'=>'/public/uploads/attendance/',
     'uploadProfile'=>'/public/uploads/profile/',
+    'adminEmail' => 'admin.emails',
     'pipedriveApiToken'=>'0fbf69c98241b4dcc270bba263269c2fd6950f25'
 ];
 

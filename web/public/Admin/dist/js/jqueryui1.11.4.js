@@ -3889,6 +3889,7 @@ function Datepicker() {
 		altFormat: "", // The date format to use for the alternate field
 		constrainInput: true, // The input is constrained by the current date format
 		showButtonPanel: false, // True to show button panel, false to not show it
+                showCalendar:true,// 
 		autoSize: false, // True to size the input for the date format, false to leave as is
 		disabled: false // The initial disabled state
 	};
@@ -5380,13 +5381,14 @@ $.extend(Datepicker.prototype, {
 			controls, buttonPanel, firstDay, showWeek, dayNames, dayNamesMin,
 			monthNames, monthNamesShort, beforeShowDay, showOtherMonths,
 			selectOtherMonths, defaultDate, html, dow, row, group, col, selectedDate,
-			cornerClass, calender, thead, day, daysInMonth, leadDays, curRows, numRows,
+			cornerClass,calenderHead, calender, thead, day, daysInMonth, leadDays, curRows, numRows,
 			printDate, dRow, tbody, daySettings, otherMonth, unselectable,
 			tempDate = new Date(),
 			today = this._daylightSavingAdjust(
 				new Date(tempDate.getFullYear(), tempDate.getMonth(), tempDate.getDate())), // clear time
 			isRTL = this._get(inst, "isRTL"),
 			showButtonPanel = this._get(inst, "showButtonPanel"),
+                        showCalendar = this._get(inst, "showCalendar"),
 			hideIfNoPrevNext = this._get(inst, "hideIfNoPrevNext"),
 			navigationAsDateFormat = this._get(inst, "navigationAsDateFormat"),
 			numMonths = this._getNumberOfMonths(inst),
@@ -5471,9 +5473,10 @@ $.extend(Datepicker.prototype, {
 			for (col = 0; col < numMonths[1]; col++) {
 				selectedDate = this._daylightSavingAdjust(new Date(drawYear, drawMonth, inst.selectedDay));
 				cornerClass = " ui-corner-all";
+                                calenderHead = "";
 				calender = "";
 				if (isMultiMonth) {
-					calender += "<div class='ui-datepicker-group";
+					calenderHead += "<div class='ui-datepicker-group";
 					if (numMonths[1] > 1) {
 						switch (col) {
 							case 0: calender += " ui-datepicker-group-first";
@@ -5483,14 +5486,15 @@ $.extend(Datepicker.prototype, {
 							default: calender += " ui-datepicker-group-middle"; cornerClass = ""; break;
 						}
 					}
-					calender += "'>";
+					calenderHead += "'>";
 				}
-				calender += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + cornerClass + "'>" +
+				calenderHead += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + cornerClass + "'>" +
 					(/all|left/.test(cornerClass) && row === 0 ? (isRTL ? next : prev) : "") +
 					(/all|right/.test(cornerClass) && row === 0 ? (isRTL ? prev : next) : "") +
 					this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate,
 					row > 0 || col > 0, monthNames, monthNamesShort) + // draw month headers
-					"</div><table class='ui-datepicker-calendar'><thead>" +
+					"</div>";
+                                calender += "<table class='ui-datepicker-calendar'><thead>" +
 					"<tr>";
 				thead = (showWeek ? "<th class='ui-datepicker-week-col'>" + this._get(inst, "weekHeader") + "</th>" : "");
 				for (dow = 0; dow < 7; dow++) { // days of the week
@@ -5549,7 +5553,8 @@ $.extend(Datepicker.prototype, {
 				}
 				calender += "</tbody></table>" + (isMultiMonth ? "</div>" +
 							((numMonths[0] > 0 && col === numMonths[1]-1) ? "<div class='ui-datepicker-row-break'></div>" : "") : "");
-				group += calender;
+				group += calenderHead;
+                                (showCalendar)?group += calender:'';
 			}
 			html += group;
 		}

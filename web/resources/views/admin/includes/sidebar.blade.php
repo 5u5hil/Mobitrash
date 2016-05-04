@@ -1,10 +1,13 @@
+<?php 
+
+?>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('public/Admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ (Auth::user()->profile_picture) ? Config('constants.uploadProfile'). Auth::user()->profile_picture : asset('public/Admin/dist/img/noimage.jpg') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p></p>
@@ -32,11 +35,11 @@
                     <span>User Subscriptions</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-<!--                <ul class="treeview-menu">
-                    <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
-                    <li class="{{ preg_match("/admin.renewal.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.renewal.view') }}"><i class="fa fa-calendar-check-o"></i>Due for Renewal</a></li>
-                    
-                </ul>-->
+                <!--                <ul class="treeview-menu">
+                                    <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
+                                    <li class="{{ preg_match("/admin.renewal.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.renewal.view') }}"><i class="fa fa-calendar-check-o"></i>Due for Renewal</a></li>
+                                    
+                                </ul>-->
             </li>  
             <li class=" {{ preg_match("/admin.assets.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.assets.view') }}">
@@ -52,7 +55,12 @@
                 </a>
             </li>
 
-
+            <li class=" {{ preg_match("/admin.payment.view/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="{{ route('admin.payment.view') }}">
+                    <i class="fa fa-money"></i>
+                    <span>Payment Management</span>
+                </a>
+            </li>
 
             <li class="treeview {{ preg_match("/admin.roles.view|admin.systemusers.view|admin.users.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="#">

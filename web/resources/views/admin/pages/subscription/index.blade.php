@@ -60,13 +60,14 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" target="_" type="button">Import from Pipedrive</a>      
-                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Subscription</a>      
+                    <h3 class="box-title">  <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" type="button">Import from Pipedrive</a>      
+                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default pull-right" type="button">Add New Subscription</a>      
                         
                     </h3>
 
                     <div>
-                        <p style="color:red;text-align: center">{{ Session::get('message') }}</p>
+                        <p style="color:green;text-align: center">{{ Session::pull('message') }}</p>
+                        <p style="color:red;text-align: center">{{ Session::pull('messageError') }}</p>
                     </div>
 
                 </div>

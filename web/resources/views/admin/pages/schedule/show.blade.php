@@ -70,12 +70,9 @@
                                     @if($pickups->count()>0)
                                     <div class="row form-group; border-bottom: 1px solid #ECECEC;">
                                         <div style="font-weight: bold;">
-                                            <div class="col-sm-2">
-                                                Name
-                                            </div>
                                             <div class="col-sm-3">
-                                                Address
-                                            </div>                                            
+                                                Subscription Name
+                                            </div>                                         
                                             <div class="col-sm-2">
                                                 Pickup Time                                            
                                             </div> 
@@ -87,24 +84,22 @@
                                     @foreach($pickups as $key => $pickup)
 
                                     <div class="row form-group">
-                                        <div class="col-sm-2">
-                                            {{$pickup->user->name}}
-                                        </div>
                                         <div class="col-sm-3">
-                                            {{$pickup->address->address}}
+                                            {{$pickup->subscription->name}}
                                         </div>
+                                        
                                         <div class="col-sm-2">
                                             {{$pickup->pickuptime}}
                                         </div>
                                         <div class="col-sm-4 sub-info-block">  
                                             <div class="sub-info">
-                                                <div class="info-left">Frequency</div><div>{{ @$pickup->sub_deatils->frequency->name}}</div>
+                                                <div class="info-left">Frequency</div><div>{{ @$pickup->subscription->frequency->name}}</div>
                                             </div>
                                             <div class="sub-info">
-                                                <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->sub_deatils->prefered_timeslot}}</div>
+                                                <div class="info-left">Preferred Time Slot</div><div>{{ @$pickup->subscription->prefered_timeslot}}</div>
                                             </div>                                
                                             <div class="sub-info">
-                                                <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->sub_deatils->approximate_processing_time}}</div>            
+                                                <div class="info-left">Approx Processing Time</div><div>{{ @$pickup->subscription->approximate_processing_time}}</div>            
                                             </div>
                                         </div> 
                                     </div>
