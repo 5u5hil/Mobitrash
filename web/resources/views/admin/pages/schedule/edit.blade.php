@@ -75,7 +75,7 @@
                                 {!! Form::text('subscription',$pickup->subscription->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
                             <div class="col-sm-2">                                
-                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "required"]) !!}
+                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
                                 {!! Form::hidden("pickup[$key][subscription_id]",$pickup->subscription->id) !!}
                                 {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
@@ -124,7 +124,7 @@
         <div class="col-sm-2">
             {!! Form::hidden("pickup[0][user_id]",null, ["class"=>'form-control select_user', "required"]) !!}
             {!! Form::hidden("pickup[0][user_address_id]", null, ["class"=>'form-control select_add', "required"]) !!}
-            {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time", "required"]) !!}
+            {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
             <a  data-value="" class="label label-danger active  DelImg delete-new-pickup" >Delete</a> 

@@ -20,6 +20,7 @@ $adminConstants = [
     'adminAssetView' => 'admin.pages.assets',
     'adminRecordView' => 'admin.pages.record',
     'adminPaymentView' => 'admin.pages.payment',
+    'adminAttendanceView' => 'admin.pages.attendance',
     'adminServiceHistoryView' => 'admin.pages.servicehistory',
     'adminPackageView' => 'admin.pages.masters.package',
     'adminOccupancyView' => 'admin.pages.masters.occupancy',

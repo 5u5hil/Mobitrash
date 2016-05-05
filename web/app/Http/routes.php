@@ -160,9 +160,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/add', ['as' => 'admin.payment.add', 'uses' => 'PaymentController@add']);
             Route::post('/save', ['as' => 'admin.payment.save', 'uses' => 'PaymentController@save']);
             Route::get('/edit', ['as' => 'admin.payment.edit', 'uses' => 'PaymentController@edit']);
-            Route::get('/show', ['as' => 'admin.payment.show', 'uses' => 'PaymentController@show']);
             Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);
-            Route::get('/rmfile', ['as' => 'admin.payment.rmfile', 'uses' => 'PaymentController@rmfile']);
+            Route::post('/update', ['as' => 'admin.payment.update', 'uses' => 'PaymentController@update']);
+        });
+        
+        Route::group(['prefix' => 'attendance'], function() {
+            Route::get('/', ['as' => 'admin.attendance.view', 'uses' => 'AttendanceController@index']);
+            Route::get('/add', ['as' => 'admin.attendance.add', 'uses' => 'AttendanceController@add']);
+            Route::get('/delete', ['as' => 'admin.attendance.delete', 'uses' => 'AttendanceController@delete']);
         });
 
         Route::group(['prefix' => 'schedule'], function() {

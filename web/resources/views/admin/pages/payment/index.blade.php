@@ -50,7 +50,7 @@
                         <a href="{!! route('admin.payment.add') !!}" class="btn btn-default pull-right" type="button">Create New Invoice</a>      
                     </h3>
                     <div>
-                        <p style="color:red;text-align: center">{{ @Session::get('message') }}</p>
+                        <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
                     </div>
                 </div>
 
@@ -87,8 +87,7 @@
                                 </td>
                                 <td>{{@$payment->addedBy->name}}</td>
                                 <td>
-                                    <!--<a href="{{ route('admin.payment.show',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>-->
-                                    <!--<a href="{{ route('admin.payment.edit',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>-->
+                                    <a href="{{ route('admin.payment.edit',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                                     <a href="{{ route('admin.payment.delete',['id' => @$payment->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 

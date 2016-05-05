@@ -126,7 +126,7 @@
         <div class="col-sm-2">
             {!! Form::hidden("pickup[0][user_id]",null, ["class"=>'form-control select_user', "required"]) !!}
             {!! Form::hidden("pickup[0][user_address_id]", null, ["class"=>'form-control select_add', "required"]) !!}
-            {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time", "required"]) !!}
+            {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">
             <a  data-value="" class="label label-danger active  DelImg delete-new-pickup" >Delete</a> 

@@ -61,6 +61,13 @@
                     <span>Payment Management</span>
                 </a>
             </li>
+            
+            <li class=" {{ preg_match("/admin.attendance.view/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="{{ route('admin.attendance.view') }}">
+                    <i class="fa fa-check-square"></i>
+                    <span>Attendance Management</span>
+                </a>
+            </li>
 
             <li class="treeview {{ preg_match("/admin.roles.view|admin.systemusers.view|admin.users.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="#">

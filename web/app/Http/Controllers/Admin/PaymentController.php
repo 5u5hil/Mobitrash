@@ -58,19 +58,19 @@ class PaymentController extends Controller {
             $subscription[$value['id']] = $value['name'];
         }
         $action = "admin.payment.save";
-        return view(Config('constants.adminPaymentView') . '.addEdit', compact('payment', 'action', 'subscription'));
+        return view(Config('constants.adminPaymentView') . '.add', compact('payment', 'action', 'subscription'));
     }
 
     public function edit() {
         $payment = Payment::find(Input::get('id'));
-        $action = "admin.payment.save";
-        return view(Config('constants.adminPaymentView') . '.addEdit', compact('payment', 'action'));
-    }
-
-    public function show() {
-        $payment = Payment::find(Input::get('id'));
-        $atts = $payment->atts()->get();
-        return view(Config('constants.adminPaymentView') . '.show', compact('payment', 'atts'));
+        $sub = Subscription::all()->toArray();
+        $subscription = [];
+        $subscription = ["" => "Select Subscription"];
+        foreach ($sub as $value) {
+            $subscription[$value['id']] = $value['name'];
+        }
+        $action = "admin.payment.update";
+        return view(Config('constants.adminPaymentView') . '.edit', compact('payment', 'action', 'subscription'));
     }
 
     public function save() {
@@ -102,6 +102,16 @@ class PaymentController extends Controller {
         Session::flash('message', "Invoice has been sent successfully!");
         return redirect()->route('admin.payment.view');
     }
+    
+    public function update() {
+        $payment = Payment::find(Input::get('id'));
+        $payment->payment_made = Input::get('payment_made');
+        $payment->payment_date = Input::get('payment_date');
+        $payment->remark = Input::get('remark');
+        $payment->update();
+        Session::flash('message', "Invoice Modified successfully!");
+        return redirect()->route('admin.payment.view');
+    }
 
     public function delete() {
         $payment = Payment::find(Input::get('id'));
@@ -109,12 +119,5 @@ class PaymentController extends Controller {
         return redirect()->back()->with("message", "Payment deleted sucessfully");
     }
 
-    public function rmfile() {
-        $atta = Attachment::find(Input::get('id'));
-        $atta->is_active = '0';
-        $atta->save();
-        return redirect()->back()->with("message", "Attachment Removed sucessfully");
-        exit();
-    }
 
 }
