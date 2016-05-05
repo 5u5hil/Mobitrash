@@ -49,7 +49,7 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Service History</a>      
+                        <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Service History</a>-->      
                     </h3>
 
                     <div>

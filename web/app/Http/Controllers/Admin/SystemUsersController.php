@@ -148,14 +148,15 @@ class SystemUsersController extends Controller {
             $user->user_type = 1;
             $user->save();
             $user->roles()->sync([2]);
-            $address = new Address();
-            $address->user_id = $user->id;
-            $address->address = Input::get('address');
-            $address->latitude = '19.184753';
-            $address->longitude = '72.978853';
-            $address->city = 1;
-            $address->save();
-
+            if (Input::get('address')) {
+                $address = new Address();
+                $address->user_id = $user->id;
+                $address->address = Input::get('address');
+                $address->latitude = Input::get('latitude');
+                $address->longitude = Input::get('longitude');
+                $address->city = 1;
+                $address->save();
+            }
             Session::flash('message', "Customer Added Successfully");
             return redirect()->route('admin.users.view');
         } else {
@@ -173,14 +174,15 @@ class SystemUsersController extends Controller {
         $user->phone_number = Input::get('phone_number');
         $user->user_type = 1;
         $user->update();
-
-        $address = Address::where('user_id',Input::get('id'))->first();
-        $address->user_id = $user->id;
-        $address->address = Input::get('address');
-        $address->latitude = '19.184753';
-        $address->longitude = '72.978853';
-        $address->city = 1;
-        $address->update();
+        if (Input::get('address')) {
+            $address = new Address();
+            $address->user_id = $user->id;
+            $address->address = Input::get('address');
+            $address->latitude = Input::get('latitude');
+            $address->longitude = Input::get('longitude');
+            $address->city = 1;
+            $address->save();
+        }
         return redirect()->route('admin.users.view');
     }
 
@@ -193,14 +195,20 @@ class SystemUsersController extends Controller {
     public function getAddresses() {
         return User::where('id', Input::get('uid'))->with('addresses')->first(['name', 'phone_number', 'id']);
     }
-    
+
     public function getSubscriptions() {
-        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency','user')->first();
+        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency', 'user')->first();
     }
 
     public function getApproxTime() {
         $subscription = Subscription::where('user_id', Input::get('uid'))->where('user_address_id', Input::get('address_id'))->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first();
         return [$subscription];
+    }
+
+    public function rmAddress() {
+        Address::find(Input::get('id'))->delete();
+        return redirect()->back()->with("message", "Address Removed sucessfully");
+        exit();
     }
 
 }

@@ -24,5 +24,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('public/Admin/dist/js/demo.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 
 

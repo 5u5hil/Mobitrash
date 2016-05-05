@@ -216,6 +216,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/save', ['as' => 'admin.users.save', 'uses' => 'SystemUsersController@saveUser']);
                 Route::get('/edit', ['as' => 'admin.users.edit', 'uses' => 'SystemUsersController@editUser']);
                 Route::post('/update', ['as' => 'admin.users.update', 'uses' => 'SystemUsersController@updateUser']);
+                Route::get('/rmaddress', ['as' => 'admin.users.rmaddress', 'uses' => 'SystemUsersController@rmAddress']);
             });
         });
 // });
