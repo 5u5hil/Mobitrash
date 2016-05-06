@@ -250,6 +250,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/receipt-data', ["as" => "operator.receipt.data", "uses" => "OperatorController@receiptData"]);
         Route::post('/cleaning-data', ["as" => "operator.cleaning.data", "uses" => "OperatorController@cleaningData"]);
         Route::post('/attendance', ["as" => "operator.attendance", "uses" => "OperatorController@attendance"]);
+        Route::post('/get-attendance', ["as" => "operator.attendance.get", "uses" => "OperatorController@getAttendance"]);
         Route::post('/update-km', ["as" => "operator.kilometer.update", "uses" => "OperatorController@kilometerUpdate"]);
         Route::post('/save-receipt-details', ["as" => "operator.receipt.save", "uses" => "OperatorController@receiptSave"]);
     });

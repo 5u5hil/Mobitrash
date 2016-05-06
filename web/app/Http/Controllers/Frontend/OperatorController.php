@@ -39,7 +39,7 @@ class OperatorController extends Controller {
     }
 
     public function schedules() {
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user'])->whereHas('operators', function($q) {
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user', 'pickups.address'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
                 })->orderBy('created_at', 'DESC')->first();
         $services = Service::get(['pickup_id']);
@@ -79,7 +79,7 @@ class OperatorController extends Controller {
         $pickup_data = Input::get("pickup");
         $service_data = Input::get("service");
         $service = new Service;
-        $service->operator_id = $pickup_data['operator_id'];
+        $service->operator_id = $service_data['operator_id'];
         $service->user_id = $pickup_data['user_id'];
         $service->address_id = $pickup_data['user_address_id'];
         $service->schedule_id = $pickup_data['schedule_id'];
@@ -143,6 +143,15 @@ class OperatorController extends Controller {
         }
     }
 
+    public function getAttendance() {
+        $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
+        if ($attendance_exist > 0) {
+            return ['attendance' => true];
+        } else {
+            return ['attendance' => false];
+        }
+    }
+
     public function cleaningData() {
         $record = Record::where('recordtype_id', 3)->where('date', date('Y-m-d'))->count();
         $vans = Asset::where('is_active', 1)->get()->toArray();
@@ -158,7 +167,7 @@ class OperatorController extends Controller {
                 $schedule->end_kilometer = Input::get('end');
             }
             $schedule->update();
-            return ['flash' => 'success'];
+            return ['flash' => 'success', 'start' => $schedule->start_kilometer, 'end' => $schedule->end_kilometer];
         } else {
             return ['flash' => 'error', 'message' => 'Invalid request! Please try again.'];
         }

@@ -34,6 +34,9 @@ class SystemUsersController extends Controller {
         $roles = Role::get(['id', 'display_name'])->toArray();
         $roles_name = ["" => "Please Select"];
         foreach ($roles as $role) {
+            if($role['id'] == 2){
+                continue;
+            }
             $roles_name[$role['id']] = $role['display_name'];
         }
         return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
@@ -106,6 +109,9 @@ class SystemUsersController extends Controller {
         $roles = Role::get(['id', 'display_name'])->toArray();
         $roles_name = ["" => "Please Select"];
         foreach ($roles as $role) {
+            if($role['id'] == 2){
+                continue;
+            }
             $roles_name[$role['id']] = $role['display_name'];
         }
         return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
@@ -197,7 +203,7 @@ class SystemUsersController extends Controller {
     }
 
     public function getSubscriptions() {
-        return Subscription::where('id', Input::get('id'))->orderBy('created_at', 'DESC')->with('frequency', 'user')->first();
+        return Subscription::where('id', Input::get('id'))->with('frequency', 'user')->first();
     }
 
     public function getApproxTime() {

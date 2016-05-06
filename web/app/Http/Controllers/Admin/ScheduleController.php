@@ -188,6 +188,8 @@ class ScheduleController extends Controller {
 
     public function duplicate() {
         $schedule = Schedule::find(Input::get('schedule_id'));
+        $schedule->start_kilometer = NULL;
+        $schedule->end_kilometer = NULL;
         $schedule_dates = explode(', ', Input::get('multiple_dates'));
         foreach ($schedule_dates as $sdate) {
             $schedule->for = $sdate;

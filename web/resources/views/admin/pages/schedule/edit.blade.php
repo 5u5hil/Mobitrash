@@ -81,7 +81,7 @@
                                 {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
                             </div> 
                             <div class="col-sm-1" style=" text-align: right;">
-                                <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
+                                <a data-id="{{ @$pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
                             </div>
                             <div class="col-sm-4 sub-info-block">  
                                 <div class="sub-info">
