@@ -84,7 +84,9 @@ class OperatorController extends Controller {
         $service->address_id = $pickup_data['user_address_id'];
         $service->schedule_id = $pickup_data['schedule_id'];
         $service->pickup_id = $pickup_data['id'];
-        $service->crates_filled = $service_data['crates_filled'];
+        if (isset($service_data['crates_filled'])) {
+            $service->crates_filled = $service_data['crates_filled'];
+        }
         $service->time_taken = $service_data['time_taken'];
         $service->save();
         $service->wastetypes()->sync($service_data['wastetype']);
@@ -107,7 +109,6 @@ class OperatorController extends Controller {
         $record = new Record();
         $record->date = date('Y-m-d');
         $record->fill(Input::except('attachment'))->save();
-        //Controller::pr(Input::all());
         if (Input::get('attachment')) {
             $att = Input::get('attachment');
             $destinationPath = public_path() . '/uploads/records/';

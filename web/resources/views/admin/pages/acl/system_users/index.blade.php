@@ -47,7 +47,7 @@
                             @foreach($system_users as $system_user)
                             <tr>
                                 <td>{{$system_user->id }}</td>
-                                <td><img src="{{ $system_user->profile_picture ? Config('constants.uploadProfile').$system_user->profile_picture : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;" /></td>
+                                <td><img src="{{ $system_user->profile_picture ? Config('constants.uploadProfile').$system_user->profile_picture : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;max-width: 80px;" /></td>
                                 <td>{{$system_user->name }}</td>
                                 <td>{{ $system_user->email }}</td>
                                 <td>{{ $system_user->roles[0]->name }}</td>
