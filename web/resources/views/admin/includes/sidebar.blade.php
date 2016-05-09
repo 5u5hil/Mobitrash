@@ -33,7 +33,6 @@
                 <a href="{{ route('admin.subscription.view') }}">
                     <i class="fa fa-user-plus"></i>
                     <span>User Subscriptions</span>
-                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <!--                <ul class="treeview-menu">
                                     <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>

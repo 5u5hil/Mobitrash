@@ -68,7 +68,7 @@
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div>   
                     <div class="form-group">
-                        {!!Form::label('dop','Bulling Method',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('dop','Billing Method',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('billing_method',[''=>'Select Billing Method',1=>'Monthly Payment',2=>'Payment against invoice'],null, ["class"=>'form-control bulling-method', "required"]) !!}
                         </div>

@@ -229,13 +229,13 @@ class UsersController extends Controller {
 
     public function showUserSubscription() {
         $subscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->with('frequency', 'timeslot', 'user', 'wastetypes', 'occupancy')->first();
-        $address;$cities;
+        
+        $address;
         if($subscription){
-        $address = Address::where("id", $subscription->user_address_id)->first();
-        $cities = City::where("id", $address->city)->first()->toArray();
+        $address = Address::where("id", $subscription->user_address_id)->first();        
         }
         $action = 'user.subscription.save';
-        return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'cities', 'action'));
+        return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'action'));
     }
 
     public function saveSubscription() {

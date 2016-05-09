@@ -335,11 +335,22 @@
         }
 
     }
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd',
-        changeMonth: true,
-        changeYear: true
+//    $('.datepicker').after('<input type="text" class="altdate" />');
+    $(".datepicker").each(function () {
+        var date = $(this).val();
+        $(this).datepicker({
+            dateFormat: 'dd M yy',
+            changeMonth: true,
+            changeYear: true,
+            altFormat: 'yy-mm-dd',
+            defaultDate: '26 Apr 2016',
+            altField: $(this).parent().find('.altdate')
+        });
+//        $(this).parent().find('.altdate').attr('name',$(this).attr('name'));
+//        $(this).parent().find('.altdate').val($(this).val());
+//        $(this).val(moment(date, 'YYYY-MM-DD').format('DD MMM YYYY'));
     });
+
     $('.monthpicker').datepicker({
         changeMonth: true,
         changeYear: true,

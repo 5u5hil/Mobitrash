@@ -17,7 +17,27 @@
             <div class="box">
                 <div class="box-header">
                     <div class="filter-box">
-                        
+                        <?php
+                        $show_f1 = 'display:none;';
+                        $show_f2 = 'display:none;';
+                        $dis_f1 = 'disabled';
+                        $dis_f2 = 'disabled';
+                        if ($field1) {
+                            $show_f1 = '';
+                            $dis_f1 = '';
+                        }
+                        if ($field2) {                            
+                            $show_f2 = ''; 
+                            $dis_f2 = '';
+                        }                  
+                        ?>
+                        {!! Form::open(['method'=>'GET','route' => 'admin.attendance.view' , 'class' => 'form-horizontal' ]) !!}
+                        <label>Filter </label>
+                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
+                        {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
+                        {!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker', "style"=>$show_f2, $dis_f2]) !!}
+                        {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
+                        {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
                         <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default pull-right" type="button">Add Attendance</a>-->      
@@ -72,17 +92,14 @@
 
 <script>
     $(".filter_type").change(function () {
-        if ($(this).val() == 'subscription_name') {
+        if ($(this).val() == 'user_id') {
             $(".f1").show().prop('disabled', false);
-            $(".f2, .f3").hide().prop('disabled', true);
-        } else if ($(this).val() == 'invoice_date') {
+            $(".f2").hide().prop('disabled', true);
+        } else if ($(this).val() == 'date') {
             $(".f2").show().prop('disabled', false);
-            $(".f1, .f3").hide().prop('disabled', true);
-        } else if ($(this).val() == 'invoice_month') {
-            $(".f3").show().prop('disabled', false);
-            $(".f1, .f2").hide().prop('disabled', true);
+            $(".f1").hide().prop('disabled', true);
         } else{
-            $(".f1, .f2, .f3").hide().prop('disabled', true);
+            $(".f1, .f2").hide().prop('disabled', true);
         }
     });
 </script>

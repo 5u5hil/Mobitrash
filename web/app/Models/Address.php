@@ -10,5 +10,8 @@ class Address extends \Eloquent {
     public function user() {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+    public function cities() {
+        return $this->belongsTo('App\Models\City', 'city');
+    }
 
 }

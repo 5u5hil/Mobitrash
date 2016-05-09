@@ -1,7 +1,7 @@
 @extends('frontend.layouts.site')
 @section('content')
 
-<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
             <div class="vertical-middle">
@@ -24,7 +24,7 @@
 
     <div class="content-wrap nopadding">
 
-        <div class="section nopadding nomargin" style="width: 100%; height: 100%; position: absolute; left: 0; top: 0; background: url('{{asset('public/Frontend/images/parallax/home/1.jpg')}}') center center no-repeat; background-size: cover;"></div>
+        <div class="section nopadding nomargin loginback" style="background: url('{{asset('public/Frontend/images/parallax/home/1.jpg')}}') center center no-repeat;"></div>
 
         <div class="section nobg full-screen nopadding nomargin">
             <div class="container vertical-middle divcenter clearfix">
@@ -33,7 +33,7 @@
                     <a href="index.html"><img src="{{asset('public/Frontend/images/loginlogo.png')}}" alt="Mobitrash"></a>
                 </div>
 
-                <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">
+                <div class="panel panel-default divcenter noradius noborder loginpan">
                     <div class="panel-body" style="padding: 40px;">                                    
                         <div class="flash-message red">
                             {{@Session::pull('invalidUser')}}                            

@@ -38,7 +38,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{$subscription->user->name}}</h4>
+                            <h4>{{Auth::user()->name}}</h4>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
@@ -64,38 +64,39 @@
                     </div>
                     <div class="contact-widget">
                         <div class="contact-form-result"></div>
-                        {!! Form::model($subscription, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin' ]) !!}
+                        <?php if($subscription):?>
+                        {!! Form::model(@$subscription, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin' ]) !!}
 
                         <div class="form-process"></div>
                         <div class="col_one_third">
                             <label for="template-contactform-phone">Subscription Name:</label>
-                            {!! Form::text('name',$subscription->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('name',@$subscription->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
                         <div class="col_one_third">
                             <label for="template-contactform-phone">Address:</label>
-                            {!! Form::text('address',$address->address, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('address',@$address->address, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">City:</label>
-                            {!! Form::text('city_id',$cities['name'], ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('city_id',@$address->cities->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
                             <label for="template-contactform-phone">Pincode:</label>
-                            {!! Form::text('pincode',$address->pincode, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Pincode"]) !!}
+                            {!! Form::text('pincode',@$address->pincode, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Pincode"]) !!}
                         </div>
 
                         <div class="clear"></div>
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Occupancy Category:</label>
-                            {!! Form::text('occupancy_id',$subscription->occupancy->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Occupancy Category"]) !!}
+                            {!! Form::text('occupancy_id',@$subscription->occupancy->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled","placeholder"=>"Occupancy Category"]) !!}
                         </div> 
 
                         <div class="col_one_third">
                             <label for="template-contactform-service">Waste Category:</label>
-                            {!! Form::text('wastetype_id', $subscription->wastetypes->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
+                            {!! Form::text('wastetype_id', @$subscription->wastetypes->name, ["class"=>"sm-form-control validate[required]" ,"disabled"=>"disabled"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
@@ -121,9 +122,9 @@
                         </div>
                         <div class="clear"></div>
                         <div class="col_full">
-                            <label for="login-form-username">Return oF Compost: <span class="tab-space">{{$subscription->return_of_compost ? 'Yes':'No'}}</span></label>
+                            <label for="login-form-username">Return oF Compost: <span class="tab-space">{{@$subscription->return_of_compost ? 'Yes':'No'}}</span></label>
                         </div>
-                        <div class="col_one_third" style="{{$subscription->return_of_compost?'display:block;':'display:none;'}}" id="weightpas">
+                        <div class="col_one_third" style="{{@$subscription->return_of_compost?'display:block;':'display:none;'}}" id="weightpas">
                             <label for="login-form-password">Weekly Quantity :</label>
                             {!! Form::text('weekly_quantity',null, ["class"=>"sm-form-control" ,"disabled"=>"disabled","placeholder"=>"Weekly Quantity"]) !!}
                         </div>
@@ -134,6 +135,10 @@
                         </div>
                         {!! Form::hidden('id',null) !!}
                         {!! Form::close() !!} 
+                        <?php
+                        else:
+                            echo '<div>You are not subscribed!</div>';
+                        endif; ?>
                     </div>
                 </div><!-- .portfolio-single-image end -->
                 <div class="clear"></div>
