@@ -38,7 +38,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
 //      Route::group(['middleware' => 'CheckUser'], function() {
         Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "LoginController@dashboard"]);
-
         Route::group(['prefix' => 'master'], function() {
             Route::group(['prefix' => 'cities'], function() {
                 Route::get('/', ['as' => 'admin.cities.view', 'uses' => 'CitiesController@index']);
@@ -129,15 +128,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/delete', ['as' => 'admin.subscription.delete', 'uses' => 'SubscriptionController@delete']);
             Route::get('/rmfile', ['as' => 'admin.subscription.rmfile', 'uses' => 'SubscriptionController@rmfile']);
         });
-        
+
         Route::group(['prefix' => 'renewal'], function() {
             Route::get('/', ['as' => 'admin.renewal.view', 'uses' => 'SubscriptionController@renewal']);
         });
-        
+
         Route::group(['prefix' => 'pipedrive'], function() {
             Route::get('/get-all', ['as' => 'admin.pipedrive.all', 'uses' => 'PipedriveController@getAll']);
         });
-        
+
         Route::group(['prefix' => 'servicehistory'], function() {
             Route::get('/', ['as' => 'admin.servicehistory.view', 'uses' => 'ServicehistoryController@index']);
             Route::get('/add', ['as' => 'admin.servicehistory.add', 'uses' => 'ServicehistoryController@add']);
@@ -163,7 +162,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);
             Route::post('/update', ['as' => 'admin.payment.update', 'uses' => 'PaymentController@update']);
         });
-        
+
         Route::group(['prefix' => 'attendance'], function() {
             Route::get('/', ['as' => 'admin.attendance.view', 'uses' => 'AttendanceController@index']);
             Route::get('/add', ['as' => 'admin.attendance.add', 'uses' => 'AttendanceController@add']);
@@ -223,6 +222,7 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
         Route::get('/', ["as" => "/", "uses" => "PageController@index"]);
+        Route::get('/faq', ["as" => "faq", "uses" => "OperatorController@faq"]);
         Route::get('/login', ["as" => "user.login", "uses" => "UsersController@login"]);
         Route::get('/forgot-password', ["as" => "user.forgot.password", "uses" => "UsersController@forgotPassword"]);
         Route::post('/forgot-update', ["as" => "user.forgotpassword.update", "uses" => "UsersController@updateForgotPassword"]);

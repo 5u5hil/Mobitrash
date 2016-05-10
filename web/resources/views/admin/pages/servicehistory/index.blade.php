@@ -66,7 +66,7 @@
                                 <th>Van</th>
                                 <th>Staff Names</th>
                                 <th style="min-width: 88px;">Date</th>
-                                <th>Username & Address</th>
+                                <th style="width: 160px;">Username & Address</th>
                                 <th style="min-width: 125px;">Additives</th>
                                 <th style="min-width: 135px;">Waste Collected</th>
                                 <th>Time Taken</th>
@@ -80,7 +80,11 @@
                             <tr>
                                 <td>{{$service->id}}</td>
                                 <td>{{@$service->schedule->van->name}} - {{@$service->schedule->van->asset_no}}</td>
-                                <td>{{@$service->operator->name}}</td>
+                                <td>@foreach($service->schedule->operators as $operator)
+                                    <div>{{$operator->name}}</div>
+                                    @endforeach
+                                </td>
+                                </td>
                                 <td><div>{{date('d M Y', strtotime($service->created_at))}}</div><div>{{date('h:i:s A', strtotime($service->created_at))}}</div></td>
                                 <td><div>{{@$service->user->name}}</div><div>{{@$service->address->address}}</div></td>
                                 <td> 

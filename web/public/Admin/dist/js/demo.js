@@ -335,8 +335,10 @@
         }
 
     }
-//    $('.datepicker').after('<input type="text" class="altdate" />');
+    $('.datepicker').after('<input type="hidden" class="altdate" />');
     $(".datepicker").each(function () {
+        $(this).attr('readonly', 'readonly');
+        $(this).attr('placeholder', 'Select Date');
         var date = $(this).val();
         $(this).datepicker({
             dateFormat: 'dd M yy',
@@ -344,13 +346,17 @@
             changeYear: true,
             altFormat: 'yy-mm-dd',
             defaultDate: '26 Apr 2016',
-            altField: $(this).parent().find('.altdate')
+            altField: $(this).parent().find('.altdate'),
         });
-//        $(this).parent().find('.altdate').attr('name',$(this).attr('name'));
-//        $(this).parent().find('.altdate').val($(this).val());
-//        $(this).val(moment(date, 'YYYY-MM-DD').format('DD MMM YYYY'));
+        $(this).parent().find('.altdate').attr('name', $(this).attr('name'));
+        $(this).parent().find('.altdate').addClass($(this).attr('class'));
+        $(this).parent().find('.altdate').val($(this).val());
+        if (date) { 
+            $(this).val(moment(date, 'YYYY-MM-DD').format('DD MMM YYYY'));
+        }        
+        $(this).attr('name', '');
     });
-
+ 
     $('.monthpicker').datepicker({
         changeMonth: true,
         changeYear: true,

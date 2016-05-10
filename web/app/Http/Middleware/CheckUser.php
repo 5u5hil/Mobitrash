@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Miscellaneous;
+use Auth;
 use Session;
 
 class CheckUser {

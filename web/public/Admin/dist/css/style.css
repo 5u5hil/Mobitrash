@@ -62,3 +62,7 @@
     display: inline-block;
     margin-top: -4px;
 }
+
+.datepicker{
+    background: #fff!important;
+}

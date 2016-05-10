@@ -8,7 +8,7 @@
                         <div class="heading-block nobottomborder">
                             <h1>
                                 <div>
-                                 <span>Home Page</span>
+                                 <span>Banner Will Go Here</span>
                                 </div>
                             </h1>
                         </div>
@@ -23,95 +23,62 @@
 <section id="content">
 
     <div class="content-wrap">
-
-        <!-- <div class="section topmargin nobottommargin nobottomborder">
-                <div class="container clearfix">
-                        <div class="heading-block center nomargin">
-                                <h3>Our Latest Works</h3>
-                        </div>
-                </div>
-        </div> -->
-
         <div class="container clearfix">
-
-            <div class="col_one_third bottommargin-sm center">
+            <!-- <div class="col_one_third bottommargin-sm center">
                 <img data-animate="fadeInLeft" src="{{ asset('public/Frontend/images/bulb.png')}}" alt="Iphone">
-            </div>
-
-            <div class="col_two_third bottommargin-sm col_last">
-
-                <div class="topmargin-sm">
-                    <h3>Optimized for Mobile &amp; Touch Enabled Devices.</h3>
+            </div> -->
+            <div class="col-md-12 col-xs-12 col-sm-12">
+               <div class="center fruittop">
+                    <h1>What is MobiTrash?</h1>
                 </div>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero quod consequuntur quibusdam, enim expedita sed quia nesciunt incidunt accusamus necessitatibus modi adipisci officia libero accusantium esse hic, obcaecati, ullam, laboriosam!</p>
-
-
-                <p><strong> Join Today and Inspire Others!</strong></p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti vero, animi suscipit id facere officia. Aspernatur, quo, quos nisi dolorum aperiam fugiat deserunt velit rerum laudantium cum magnam.</p>
-
+                <p>MobiTrash is a mobile van waste treatment service which treats your segregated organic waste from your own site. MobiTrash provides primary treatment to segregated organic waste and turns it into odour free raw compost, which is carted away for further curing.</p>
             </div>
 
         </div>
+ </section>       
 
-        <div class="section">
+        <div class="section bottommargin">
             <div class="container clearfix">
-
                 <div class="row topmargin-sm">
+                    <div class="col-md-4 col-sm-6 bottommargin">
 
-                    <div class="col-md-3 col-sm-6 bottommargin">
+                       <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-pagelines"></i></a>
+							</div>
 
+							<h3>Green<span class="subtitle">Make Your Waste Green</span></h3>
+							<p>Make your waste green! We collect your segregated organic waste and composts it on-the-go.</p>
+						</div> 
+                           
+                        </div> 
+
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 bottommargin">
                         <div class="team">
-                            <div class="team-image">
-                                <img src="{{ asset('public/Frontend/images/leaf5.png')}}" alt="John Doe">
-                            </div>
-                            <div class="team-desc team-desc-bg">
-                                <div class="team-title"><h4>Mobi Trash</h4><span>What Is It?</span></div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            </div>
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i><img src="{{ asset('public/Frontend/images/Smart_icon.png')}}" alt="Mobitrash"></i></a>
+							</div>
+							<h3>Smart<span class="subtitle">Be A Smart Citizen</span></h3>
+							<p>Become a smart citizen of a smart city and inspire your next generation to live in a cleaner surrounding.</p>
+						</div>
                         </div>
 
                     </div>
 
-                    <div class="col-md-3 col-sm-6 bottommargin">
+                    <div class="col-md-4 col-sm-6 bottommargin">
 
                         <div class="team">
-                            <div class="team-image">
-                                <img src="{{ asset('public/Frontend/images/leaf1.png')}}" alt="Mobitrash">
-                            </div>
-                            <div class="team-desc team-desc-bg">
-                                <div class="team-title"><h4>Green</h4><span>Make Your Waste Green</span></div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 bottommargin">
-
-                        <div class="team">
-                            <div class="team-image">
-                                <img src="{{ asset('public/Frontend/images/leafs2.png')}}" alt="Mobitrash">
-                            </div>
-                            <div class="team-desc team-desc-bg">
-                                <div class="team-title"><h4>Smart</h4><span>Be A Smart Citizens</span></div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 bottommargin">
-
-                        <div class="team">
-                            <div class="team-image">
-                                <img src="{{ asset('public/Frontend/images/leaf4.png')}}" alt="Mobitrash">
-                            </div>
-                            <div class="team-desc team-desc-bg">
-                                <div class="team-title"><h4>Swachh</h4><span>Make Our Country Swachh</span></div>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                            </div>
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i><img src="{{ asset('public/Frontend/images/Swachh_icon.png')}}" alt="Mobitrash"></i></a>
+							</div>
+							<h3>Swachh<span class="subtitle">Make Our Country Swachh</span></h3>
+							<p>Together, lets make India 'swachh'. Start from your house and spread the message across.</p>
+						</div>
                         </div>
 
                     </div>
@@ -122,20 +89,99 @@
         </div>
 
         <div class="clear"></div>
-
-        <a href="#" class="button button-full button-dark center tright">
-            <div class="container clearfix bottommargin">
-                <h1 style="color:#fff;">Treat Your Waste Professionally</h1> <span>Five steps goes right below the heading</span>
-            </div>
-        </a>
-
-
-
-        <div class="section">
+        <section id="content">
             <div class="container clearfix">
                 <div class="center fruittop">
-                    <span>What Can Be Treated In</span>
-                    <h1>MobiTrash</h1>
+                    <h1>Treat your Waste. Professionally!</h1>
+                </div>
+                <div class="row topmargin-sm">
+
+                    <div class="col-xs hidden-col-md-15 hidden-col-sm-15 hidden-col-xs-15 bottommargin clearfix"></div>
+                    <div class="col-md-2 col-sm-6 bottommargin">
+                     <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="treatimg">
+								<a href="#"><img src="{{ asset('public/Frontend/images/sign_up.png')}}" alt="John Doe"></a>
+							</div>
+
+							<h3>SIGN UP</h3>
+							<p>Sign up to fix a meeting & further start a free trial. </p>
+						</div>  
+                        </div> 
+
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 bottommargin">
+
+                     <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="treatimg">
+								<a href="#"><img src="{{ asset('public/Frontend/images/subscribe.png')}}" alt="Mobitrash"></a>
+							</div>
+
+							<h3>SUBSCRIBE</h3>
+							<p>After the free trial, get registered by remitting a fee of INR 199 per household per month.</p>
+						</div>  
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 bottommargin">
+
+                     <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="treatimg">
+								<a href="#"><img src="{{ asset('public/Frontend/images/segregate.png')}}" alt="Mobitrash"></a>
+							</div>
+
+							<h3>SEGREGATE</h3>
+							<p>Segregate wet waste from dry and other mixed waste.</p>
+						</div>  
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 bottommargin">
+
+                    <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="treatimg">
+								<a href="#"><img src="{{ asset('public/Frontend/images/handover.png')}}" alt="Mobitrash"></a>
+							</div>
+
+							<h3>HANDOVER</h3>
+							<p>A MobiTrash van will come to your premises everyday to collect your wet waste & treat it within 20 minutes from your site.</p>
+						</div>  
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-6 bottommargin">
+
+                     <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="treatimg">
+								<a href="#"><img src="{{ asset('public/Frontend/images/We-Compost_icon.png')}}" alt="Mobitrash"></a>
+							</div>
+
+							<h3>WE COMPOST</h3>
+							<p>The MobiTrash van would cart away for further composting.</p>
+						</div>  
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- <a href="#" class="button button-full button-dark center tright">
+
+            <div class="container clearfix bottommargin">
+                <h1 style="color:#fff;">Treat Your Waste Professionally</h1>
+            </div>
+        </a> -->
+        <div class="section bottommargin">
+            <div class="container clearfix">
+                <div class="center fruittop">
+                    <h1>MobiTrash Treats</h1>
                 </div>
                 <div class="row topmargin-sm">
 
@@ -212,11 +258,123 @@
 
             </div>
         </div>
-        <div class="section parallax dark bottommargin" style="background-image: url('{{ asset('public/Frontend/images/services/home-testi-bg.jpg')}}'); padding: 100px 0;" data-stellar-background-ratio="0.4">
+         <div class="bottommargin">
+            <div class="container clearfix">
+                <div class="center fruittop">
+                    <h1>We cater to</h1>
+                </div>
+                <div class="row topmargin-sm">
+                    <div class="col-md-3 col-sm-6 bottommargin">
+                       <div class="team">
+                          <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i><img src="{{ asset('public/Frontend/images/residency_icon.png')}}" alt="Mobitrash"></i></a>
+							</div>
+							<h3>Residential Buildings</h3>
+						</div> 
+                           
+                        </div> 
+
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-building" aria-hidden="true"></i></a>
+							</div>
+							<h3>Corporate Offices</h3>
+						</div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-cutlery" aria-hidden="true"></i></a>
+							</div>
+							<h3>Restaurants & Hotels</h3>
+						</div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i><img src="{{ asset('public/Frontend/images/commercial.png')}}" alt="Mobitrash"></i></a>
+							</div>
+							<h3>Commercial Complexes</h3>
+						</div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i><img src="{{ asset('public/Frontend/images/education.png')}}" alt="Mobitrash"></i></a>
+							</div>
+							<h3>Educational Institutes</h3>
+						</div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-hospital-o" aria-hidden="true"></i></a>
+							</div>
+							<h3>Hospital Canteens</h3>
+							
+						</div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 bottommargin">
+
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-industry" aria-hidden="true"></i></a>
+							</div>
+							<h3>Factories / Industries</h3>
+							
+						</div>
+                        </div>
+
+                    </div>
+                     <div class="col-md-3 col-sm-6 bottommargin">
+                        <div class="team">
+                            <div class="feature-box fbox-center fbox-outline fbox-effect nobottomborder">
+							<div class="fbox-icon">
+								<a href="#"><i class="fa fa-list" aria-hidden="true"></i></a>
+							</div>
+							<h3>MORE</h3>
+						</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="section parallax dark " style="background-image: url('{{ asset('public/Frontend/images/services/home-testi-bg.jpg')}}');" data-stellar-background-ratio="0.4">
 
             <div class="center">
                 <h1  class="fadeInUp animated">Start Recycling Now</h1>
-                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h4>
+                <h4>Join Today & Inspire Others!</h4>
 
                 <div class="team-desc">
                     <a href="#"><img src="{{ asset('public/Frontend/images/mobgreen.png')}}"/></a>
@@ -226,54 +384,7 @@
 
         </div>
 
-        <div class="container bottommargin clearfix">
-            <div class="row">
-                <div class="center">
-                    <span>We Are Happy To Answers Your Questions</span>
-                    <h1>FAQS</h1>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-
-                    <div class="accordion accordion-border clearfix" data-state="closed">
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, dolorum, vero ipsum molestiae minima odio quo voluptate illum excepturi quam cum voluptates doloribus quae nisi tempore necessitatibus dolores ducimus enim libero eaque explicabo suscipit animi at quaerat aliquid ex expedita perspiciatis? Saepe, aperiam, nam unde quas beatae vero vitae nulla.</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-comments-alt"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, placeat, architecto rem dolorem dignissimos repellat veritatis in et eos doloribus magnam aliquam ipsa alias assumenda officiis quasi sapiente suscipit veniam odio voluptatum. Enim at asperiores quod velit minima officia accusamus cumque eligendi consequuntur fuga? Maiores, quasi, voluptates, exercitationem fuga voluptatibus a repudiandae expedita omnis molestiae alias repellat perferendis dolores dolor.</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                        <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-lock3"></i>Is Mobitrash Just A Private Garbage Transport Service Providers.</div>
-                        <div class="acc_content clearfix">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, fugiat iste nisi tempore nesciunt nemo fuga? Nesciunt, delectus laboriosam nisi repudiandae nam fuga saepe animi recusandae. Asperiores, provident, esse, doloremque, adipisci eaque alias dolore molestias assumenda quasi saepe nisi ab illo ex nesciunt nobis laboriosam iusto quia nulla ad voluptatibus iste beatae voluptas corrupti facilis accusamus recusandae sequi debitis reprehenderit quibusdam. Facilis eligendi a exercitationem nisi et placeat excepturi velit!</div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-        </div>
-
-
-    </div>
-
-</section><!-- #content end -->
-
+        <div class="clear"></div>
+</div>
+</div>
 @stop

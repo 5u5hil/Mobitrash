@@ -12,7 +12,7 @@
             ============================================= -->
             <div id="logo">
                 <a href="{{ route('/') }}" class="standard-logo" data-dark-logo="/public/images/mobgreen.png"><img src="{{ asset('public/Frontend/images/mobgreen.png')}}" alt="Mobitrash"></a>
-                <a href="{{ route('/') }}" class="retina-logo" data-dark-logo="public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/moblogo@2x.png')}}" alt="Mobitrash"></a>
+                <a href="{{ route('/') }}" class="retina-logo" data-dark-logo="public/images/moblogo.png"><img src="{{ asset('public/Frontend/images/mobgreen.png')}}" alt="Mobitrash"></a>
             </div><!-- #logo end -->
 
             <!-- Primary Navigation
@@ -23,6 +23,8 @@
                     <li class="{{ preg_match("/\//",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('/') }}"><div>Home</div></a>
                     </li>
                     <li class="{{ preg_match("/about/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('/') }}"><div>About</div></a>
+                    </li>
+                    <li class="{{ preg_match("/faq/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('faq') }}"><div>FAQ</div></a>
                     </li>
 <!--                    <li class="{{ preg_match("/pricing/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('/') }}"><div>Pricing</div></a>
                     </li>-->

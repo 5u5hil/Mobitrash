@@ -52,11 +52,11 @@
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.subscription.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
-                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        {!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}
-                        {!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}
-                        {!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker', "style"=>$show_f4, $dis_f4]) !!}
-                        {!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker', "style"=>$show_f5, $dis_f5]) !!}
+                        <span>{!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}</span>
+                        <span>{!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}</span>
+                        <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}<span>
+                        <span>{!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker', "style"=>$show_f4, $dis_f4]) !!}</span>
+                        <span>{!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker', "style"=>$show_f5, $dis_f5]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
