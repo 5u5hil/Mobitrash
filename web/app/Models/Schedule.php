@@ -24,7 +24,7 @@ class Schedule extends \Eloquent {
     }
 
     public function pickups() {
-        return $this->hasMany('App\Models\Pickup', 'schedule_id')->orderBy('pickuptime','ASC');;
+        return $this->hasMany('App\Models\Pickup', 'schedule_id')->orderBy('pickuptime','ASC');
     }
     
 }

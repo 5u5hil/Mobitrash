@@ -6,8 +6,11 @@ use Route;
 use Illuminate\Support\Facades\Input;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Asset;
 use App\Models\Subscription;
+use App\Models\Service;
 use App\Models\Payment;
+use App\Models\Wastetype;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Permission;
 use App\Http\Controllers\Controller;
@@ -45,10 +48,67 @@ class LoginController extends Controller {
                     $query->where('invoice_date', '<=', $last_month['end']);
                     $query->where('payment_made', 0);
                 })->orWhere(function($query) {
-                    $query->where('invoice_month', date('Y-m', strtotime(date('Y-m')." -1 month")));
+                    $query->where('invoice_month', date('Y-m', strtotime(date('Y-m') . " -1 month")));
                     $query->where('payment_made', 0);
                 })->count();
-        return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment']));
+
+        $vans = Asset::where("is_active", 1)->where("type_id", 1)->with('schedules')->get()->toArray();
+        $services = Service::where('created_at', 'LIKE', "%" . date('Y-m-d') . "%")->get(['pickup_id']);
+        $pickupids = array(); //        
+        foreach ($services as $service) {
+            array_push($pickupids, $service->pickup_id);
+        }
+        foreach ($vans as $key => $van) {
+            if (isset($van['schedules'][0])) {
+                foreach ($van['schedules'][0]['pickups'] as $pkey => $pickup) {
+                    if (in_array($pickup['id'], $pickupids)) {
+                        $vans[$key]['schedules'][0]['pickups'][$pkey]['isPicked'] = true;
+                    } else {
+                        $vans[$key]['schedules'][0]['pickups'][$pkey]['isPicked'] = false;
+                    }
+                }
+            }
+        }
+        $monthly_sub_amt = Payment::where('billing_method', 1)->where('invoice_month', date('Y-m'))->sum('invoice_amount');
+        $wastes = array();
+        $totalwastes = Service::where('created_at', 'LIKE', date('Y-m-d') . "%")->with('wastetypes')->get()->toArray();
+        $pia_colors = ['#607b8b', '#f6546a', '#12bbf0', '#42b48e', '#8470ff', '#7fffd4', '#53802d', '#7fffd4', '#ff5bc7'];
+        foreach ($totalwastes as $totalwaste) {
+            foreach ($totalwaste['wastetypes'] as $key => $wastetype) {
+                $wastes[$wastetype['id']]['id'] = $wastetype['id'];
+                $wastes[$wastetype['id']]['name'] = $wastetype['name'];
+                if (isset($wastes[$wastetype['id']]['total_quantity'])) {
+                    $wastes[$wastetype['id']]['total_quantity'] += $wastetype['pivot']['quantity'];
+                } else {
+                    $wastes[$wastetype['id']]['total_quantity'] = $wastetype['pivot']['quantity'];
+                }
+            }
+        }
+
+        $additives = array();
+        $totaladditives = Service::where('created_at', 'LIKE', date('Y-m-d') . "%")->with('additives')->get()->toArray();
+
+        foreach ($totaladditives as $totaladditive) {
+            foreach ($totaladditive['additives'] as $key => $additive) {
+                $additives[$additive['id']]['id'] = $additive['id'];
+                $additives[$additive['id']]['name'] = $additive['name'];
+                if (isset($additives[$additive['id']]['total_quantity'])) {
+                    $additives[$additive['id']]['total_quantity'] += $additive['pivot']['quantity'];
+                } else {
+                    $additives[$additive['id']]['total_quantity'] = $additive['pivot']['quantity'];
+                }
+            }
+        }
+        foreach ($wastes as $key => $waste) {
+            $wastes[$key]['color'] = $pia_colors[$key];
+        }
+        foreach ($additives as $key => $additive) {
+            $additives[$key]['color'] = $pia_colors[$key];
+        }
+
+//        Controller::pr($wastes);
+
+        return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'wastes', 'additives']));
     }
 
     public function unauthorized() {

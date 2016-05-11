@@ -81,7 +81,7 @@
                                 <th>User</th>
                                 <th>Preferred Timeslot</th>
                                 <th>Frequency</th>
-                                <th>Amount Paid</th>
+                                <th>Amount</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>    
                                 <th>Max Waste Quantity</th>    

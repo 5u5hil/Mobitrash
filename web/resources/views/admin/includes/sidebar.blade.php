@@ -17,6 +17,12 @@
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
+            <li class=" {{ preg_match("/admin.dashboard/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="{{ route('admin.dashboard') }}">
+                    <i class="fa fa-bar-chart"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
             <li class=" {{ preg_match("/admin.schedule.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.schedule.view') }}">
                     <i class="fa fa-clock-o"></i>
