@@ -30,7 +30,7 @@
             <div class="container divcenter clearfix">
 
                 <div class="row center">
-                    <a href="index.html"><img src="{{asset('public/Frontend/images/loginlogo.png')}}" alt="Mobitrash"></a>
+                    <a href="{{ route('/') }}"><img src="{{asset('public/Frontend/images/loginlogo.png')}}" alt="Mobitrash"></a>
                 </div>
 
                 <div class="panel panel-default divcenter noradius noborder" style="max-width: 400px; background-color: rgba(255,255,255,0.93);">

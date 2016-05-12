@@ -180,6 +180,10 @@ class UsersController extends Controller {
         return view(Config('constants.frontendView') . '.contact', compact('action'));
     }
     
+    public function faq() {
+        return view(Config('constants.frontendView') . '.faq');
+    }
+    
     public function saveContact() {
         $contact_us = new Contactus();
         $contact_us->fill(Input::all())->save();
