@@ -36,24 +36,53 @@
 @section('myscripts')
 
 <script>
-    var locations = [
+
+    
+
+   
+    
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeControl: false,
+        streetViewControl: false,
+        panControl: false,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
+    });
 <?php
-foreach ($pickups as $pickup):
-    if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
-        echo "['<h4>" . $pickup['subscription']['name'] . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
+$index = 0;
+foreach ($pickups as $key => $pickup):
+    if($index == 0){
+        $index++;
+        continue;
     }
+    ?>   
+
+var directionsService<?php echo $key; ?> = new google.maps.DirectionsService;
+    var directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer;
+    directionsService<?php echo $key; ?>.route({
+        origin: new google.maps.LatLng(<?php echo $pickups[$key-1]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key-1]['subscription']['address']['longitude']; ?>),
+        destination: new google.maps.LatLng(<?php echo $pickups[$key]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key]['subscription']['address']['longitude']; ?>),
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function (response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay<?php echo $key; ?>.setDirections(response);
+        } else {
+            alert(status);
+        }
+    });
+    directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true
+    });
+    directionsDisplay<?php echo $key; ?>.setMap(map);
+<?php
+$index++;
 endforeach;
 ?>
-    ];
-     var pickupCoordinates = [
-    <?php
-foreach ($pickups as $pickup):
-    if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
-        echo "{lat: ".$pickup['subscription']['address']['latitude'].", lng: ".$pickup['subscription']['address']['longitude']."},";
-    }
-endforeach;
-?>  
-  ];
+    ////////////////////////////////Marker
     var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
     var icons = [
         iconURLPrefix + 'red-dot.png',
@@ -63,33 +92,22 @@ endforeach;
         iconURLPrefix + 'purple-dot.png',
         iconURLPrefix + 'pink-dot.png',
         iconURLPrefix + 'yellow-dot.png'
-    ]
-    var iconsLength = icons.length;
-    
-   
-  var pickupPath = new google.maps.Polyline({
-    path: pickupCoordinates,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3
-  });
+    ];
 
-  
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: new google.maps.LatLng(-37.92, 151.25),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        streetViewControl: false,
-        panControl: false,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_BOTTOM
-        }
-    });
+    var locations = [
+<?php
+foreach ($pickups as $pickup):
+    if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
+        echo "['<h4>" . $pickup['subscription']['name'] . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
+    }
+endforeach;
+?>
+    ];
+
     var infowindow = new google.maps.InfoWindow({
         maxWidth: 160
     });
+    var iconsLength = icons.length;
     var markers = new Array();
     var iconCounter = 0;
     for (var i = 0; i < locations.length; i++) {
@@ -111,9 +129,6 @@ endforeach;
             iconCounter = 0;
         }
     }
-    
-    pickupPath.setMap(map);
-
     function autoCenter() {
         var bounds = new google.maps.LatLngBounds();
         for (var i = 0; i < markers.length; i++) {
