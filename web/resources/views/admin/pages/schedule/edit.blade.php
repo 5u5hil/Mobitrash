@@ -201,7 +201,7 @@
             },
             success: function (response) {
                 if (response.flash == 'success') {
-                    $this.parent().parent().fadeOut();
+                    $this.parent().parent().remove();
                 }
             }
         });

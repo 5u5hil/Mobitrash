@@ -137,6 +137,13 @@ class ScheduleController extends Controller {
 
         return view(Config('constants.adminScheduleView') . '.show', compact('schedule', 'drivers', 'pickups', 'users', 'vans', 'operators'));
     }
+    
+    public function map() {
+        $schedule = Schedule::find(Input::get('id'));
+        $pickups = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();   
+//        Controller::pr($pickups);
+        return view(Config('constants.adminScheduleView') . '.map', compact('schedule', 'pickups', 'users', 'vans'));
+    }
 
     public function removePickup() {
         $pickup = Pickup::find(Input::get('id'));

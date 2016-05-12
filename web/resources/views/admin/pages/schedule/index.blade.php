@@ -82,10 +82,11 @@
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
                                 <!--<td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>-->
                                 <td>
-                                    <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}" target="_BLANK"  class="label label-success active" ui-toggle-class="">view</a>
+                                    <a href="{{ route('admin.schedule.map',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Map</a>
+                                    <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>                                    
                                     <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">Edit</a>
                                     <a class="label label-primary active" data-toggle="modal" data-scheduleid="{{$asset->id}}" data-target="#duplicate-schedule">Duplicate</a>
-                                    <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>                                    
                                 </td>
 
                             </tr>
@@ -150,11 +151,15 @@
     $('#duplicate-schedule').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var scheduleid = button.data('scheduleid')
-        var modal = $(this)
-        modal.find('.modal-title').text('Duplicate Schedule id: ' + scheduleid)
-        modal.find('.modal-body #schedule-id').val(scheduleid)
+        var modal = $(this);
+        modal.find('.modal-title').text('Duplicate Schedule id: ' + scheduleid);
+        modal.find('.modal-body #schedule-id').val(scheduleid);
     });
-    
+    $('#duplicate-schedule').on('hidden.bs.modal', function (event) {
+        var modal = $(this);
+        modal.find('.modal-body #multiple-dates').val('');
+    });
+
     var default_date = new Date();
     $('.multidatepicker').multiDatesPicker({
         dateFormat: "yy-mm-dd",

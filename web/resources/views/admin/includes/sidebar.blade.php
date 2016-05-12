@@ -55,7 +55,7 @@
 
             <li class=" {{ preg_match("/admin.record.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.record.view') }}">
-                    <i class="fa fa-bar-chart"></i>
+                    <i class="fa fa-list-alt"></i>
                     <span>Record Management</span>
                 </a>
             </li>

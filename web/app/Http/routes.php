@@ -176,6 +176,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/update', ['as' => 'admin.schedule.update', 'uses' => 'ScheduleController@update']);
             Route::get('/edit', ['as' => 'admin.schedule.edit', 'uses' => 'ScheduleController@edit']);
             Route::get('/show', ['as' => 'admin.schedule.show', 'uses' => 'ScheduleController@show']);
+            Route::get('/map', ['as' => 'admin.schedule.map', 'uses' => 'ScheduleController@map']);
             Route::post('/duplicate', ['as' => 'admin.schedule.duplicate', 'uses' => 'ScheduleController@duplicate']);
             Route::get('/delete', ['as' => 'admin.schedule.delete', 'uses' => 'ScheduleController@delete']);
         });

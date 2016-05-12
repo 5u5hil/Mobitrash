@@ -39,7 +39,7 @@ class OperatorController extends Controller {
     }
 
     public function schedules() {
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.user', 'pickups.address'])->whereHas('operators', function($q) {
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
                 })->orderBy('created_at', 'DESC')->first();
         $services = Service::get(['pickup_id']);
@@ -51,9 +51,7 @@ class OperatorController extends Controller {
             foreach ($schedules['pickups'] as $key => $pickup) {
                 if (in_array($pickup->id, $pickupids)) {
                     unset($schedules['pickups'][$key]);
-                } else {
-                    $schedules['pickups'][$key]['subscription'] = Subscription::where('user_id', $pickup->user_id)->where('user_address_id', $pickup->user_address_id)->orderBy('created_at', 'DESC')->with('frequency', 'timeslot')->first(['id', 'name', 'max_waste', 'onfield_person_name', 'onfield_person_contact_number']);
-                }
+                } 
             }
         }
         if ($schedules) {

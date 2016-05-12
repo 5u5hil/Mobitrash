@@ -72,7 +72,7 @@ class LoginController extends Controller {
         $monthly_sub_amt = Payment::where('billing_method', 1)->where('invoice_month', date('Y-m'))->sum('invoice_amount');
         $wastes = array();
         $totalwastes = Service::where('created_at', 'LIKE', date('Y-m-d') . "%")->with('wastetypes')->get()->toArray();
-        $pia_colors = ['#607b8b', '#f6546a', '#12bbf0', '#42b48e', '#8470ff', '#7fffd4', '#53802d', '#7fffd4', '#ff5bc7'];
+        
         foreach ($totalwastes as $totalwaste) {
             foreach ($totalwaste['wastetypes'] as $key => $wastetype) {
                 $wastes[$wastetype['id']]['id'] = $wastetype['id'];
@@ -99,11 +99,17 @@ class LoginController extends Controller {
                 }
             }
         }
+        
+        $pia_colors = ['#F15854', '#5DA5DA', '#60BD68', '#FAA43A', '#F17CB0', '#B2912F', '#B276B2', '#DECF3F', '#00FF66', '#5668E2', '#3B3178', '#3B5323'];
+        $cnt = 0;
         foreach ($wastes as $key => $waste) {
-            $wastes[$key]['color'] = $pia_colors[$key];
+            $wastes[$key]['color'] = $pia_colors[$cnt];
+            $cnt++;
         }
+        $cnt = 0;
         foreach ($additives as $key => $additive) {
-            $additives[$key]['color'] = $pia_colors[$key];
+            $additives[$key]['color'] = $pia_colors[$cnt];
+            $cnt++;
         }
 
 //        Controller::pr($wastes);
