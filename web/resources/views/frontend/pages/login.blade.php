@@ -73,4 +73,3 @@
 @stop
 <!-- External JavaScripts
 ============================================= -->
-@include('frontend.includes.foot')

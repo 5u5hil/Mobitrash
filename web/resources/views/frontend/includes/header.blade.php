@@ -41,13 +41,13 @@
                 <!-- Top Search
                 ============================================= -->
                 <div id="top-search">
-                    <a href="#"><i class="icon-facebook"></i><i class="icon-line-cross"></i></a>
+                    <a href="https://m.facebook.com/MobiTrashIndia/?fref=ts" target="_BLANK" ><i class="icon-facebook"></i><i class="icon-line-cross"></i></a>
                 </div><!-- #top-search end -->
                 <div id="top-search" class="hidden-xs hidden-sm">
-                    <a href="#"><i class="icon-twitter"></i><i class="icon-line-cross"></i></a>
+                    <a href="https://mobile.twitter.com/mobitrashIN" target="_BLANK" ><i class="icon-twitter"></i><i class="icon-line-cross"></i></a>
                 </div><!-- #top-search end -->
                 <div id="top-search" class="hidden-xs hidden-sm">
-                    <a href="#"><i class="icon-youtube"></i><i class="icon-line-cross"></i></a>
+                    <a href="https://m.youtube.com/channel/UCiH6PGG2frydhLmDyl5e7Aw" target="_BLANK" ><i class="icon-youtube"></i><i class="icon-line-cross"></i></a>
 
                 </div><!-- #top-search end -->
             </nav><!-- #primary-menu end -->

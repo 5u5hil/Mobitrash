@@ -1,5 +1,5 @@
 
-<title>Mobitrash | Home</title>
+<title>Mobitrash</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -12,10 +12,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/dark.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/font-icons.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/animate.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/magnific-popup.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/magnific-popup.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/responsive.css') }}">
 <link rel="icon" href="{{ asset('public/Frontend/images/favicon.png') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/fullcalendar.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/responsive.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/validationEngine.jquery.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Admin/dist/css/jqueryui.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">

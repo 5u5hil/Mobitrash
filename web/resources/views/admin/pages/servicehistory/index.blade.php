@@ -3,7 +3,6 @@
 <section class="content-header">
     <h1>
         Service History
-        <small>Add/Edit/Delete</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
@@ -53,7 +52,7 @@
                     </h3>
 
                     <div>
-                        <p style="color:red;text-align: center">{{ Session::get('message') }}</p>
+                        <p style="color:red;text-align: center">{{ Session::get('message') }}  </p>
                     </div>
 
                 </div>

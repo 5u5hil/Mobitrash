@@ -29,7 +29,7 @@ $adminConstants = [
     'uploadAttendance'=>'/public/uploads/attendance/',
     'uploadProfile'=>'/public/uploads/profile/',
     'adminEmail' => 'admin.emails',
-    'pipedriveApiToken'=>'0fbf69c98241b4dcc270bba263269c2fd6950f25'
+    'pipedriveApiToken'=>'819ad0c94828e443a7674934ace2b4c433e034b0'
 ];
 
 

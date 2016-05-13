@@ -7,7 +7,7 @@
     <div id="copyrights">
 
         <div class="container center clearfix">
-            Copyrights &copy; 2016. MobiTrash. All Rights Reserved. Developed by <a href="http://infinisystem.com/" target="_blank" class="footcolor">Infini Systems</a>.
+            Copyrights &copy; 2016. <a href="{{route('/')}}" class="footcolor">MobiTrash</a>. All Rights Reserved. Developed by <a href="http://infinisystem.com/" target="_blank" class="footcolor">Infini Systems</a>.
         </div>
 
     </div><!-- #copyrights end -->

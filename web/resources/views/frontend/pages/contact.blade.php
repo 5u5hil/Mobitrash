@@ -39,7 +39,7 @@
                 <div class="panel-default divcenter noradius noborder" style="max-width:500px;">
                     <div class="panel-body" style="padding:2px;">
                         <form id="login-form" name="login-form" class="nobottommargin" action="{{ route($action)}}" method="post">
-                            <center><h4 class="consub">Become a Mobitrasher</h4></center>
+                           @if(!Auth::id())<center><h4 class="consub">Become a Mobitrasher</h4></center>@endif
 
                             <div class="col_full">
                                 <input type="text" id="name" name="name" value="" class="sm-form-control required bordercolors validate[required]" aria-required="true" placeholder="Name ">
@@ -123,4 +123,5 @@
 @stop
 <!-- External JavaScripts
 ============================================= -->
-@include('frontend.includes.foot')
+
+
