@@ -32,11 +32,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/get-user-subscriptions', ["as" => "getUserSub", "uses" => "SystemUsersController@getSubscriptions"]);
         Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
         Route::get('/remove-schedule-pickup', ["as" => "removeSchedulePickup", "uses" => "ScheduleController@removePickup"]);
+        Route::get('/unauthorised', ["as" => "user.unauthorised", "uses" => "LoginController@unauthorised"]);
         Route::get('/record-index-filter', ["as" => "recordIndexFilter", "uses" => "RecordController@indexFilter"]);
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
-//      Route::group(['middleware' => 'CheckUser'], function() {
+      Route::group(['middleware' => 'CheckUser'], function() {
         Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "LoginController@dashboard"]);
         Route::group(['prefix' => 'master'], function() {
             Route::group(['prefix' => 'cities'], function() {
@@ -219,7 +220,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/rmaddress', ['as' => 'admin.users.rmaddress', 'uses' => 'SystemUsersController@rmAddress']);
             });
         });
-// });
+ });
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
         Route::get('/', ["as" => "/", "uses" => "PageController@index"]);

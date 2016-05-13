@@ -29,7 +29,7 @@
                 <div class="row center">
                     <div class="container clearfix">
                         <h1 class="contex conhead">Thank you</h1>
-                        <h4 class="contex">For Being A Concerned Citizens </h4>
+                        <h4 class="contex">For Being A Concerned Citizen </h4>
                     </div>
                 </div>
                 <div class="flash-message" style="color: #fff;">

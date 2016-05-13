@@ -68,12 +68,12 @@
                         
                         <div class="col_one_third">
                             <label for="phone-number">Phone No:</label><small>*</small>
-                            {!! Form::text('phone_number',null, ["class"=>"sm-form-control validate[required,custom[number]]" ,"placeholder"=>""]) !!}
+                            {!! Form::text('phone_number',null, ["class"=>"sm-form-control validate[required,custom[number]]" ,"placeholder"=>"Phone No"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
                             <label for="email">Email Id:</label><small>*</small>
-                            {!! Form::text('email',null, ["class"=>"sm-form-control validate[required,custom[email]]" ,"placeholder"=>"Phone No"]) !!}
+                            {!! Form::text('email',null, ["class"=>"sm-form-control validate[required,custom[email]]" ,"placeholder"=>"Email Address", "disabled"]) !!}
                         </div>
 
                         

@@ -31,28 +31,34 @@ class CheckUser {
 
     public function handle($request, Closure $next) {
 
-       // $chk = Miscellaneous::findBySlug('acl')->value;
+        // $chk = Miscellaneous::findBySlug('acl')->value;
 //dd($chk);
-      //  if ($chk == "Yes") {
+        //  if ($chk == "Yes") {
 
-            $user = User::with('roles')->find(Auth::id());
-            $roles = $user->roles;
-            $roles_data = $roles->toArray();
-            $r = Role::find($roles_data[0]['id']);
-            $per = $r->perms()->get(['name'])->toArray();
+        $user = User::with('roles')->find(Auth::id());
 
-            $curRoute = $request->route()->getName();
-
-            if (!in_array($curRoute, array_flatten($per))) {
-
-                // return response('<br />Unauthorized.', 401);
-                return view('admin.pages.unauthorized');
+        $roles = $user->roles;
+        $roles_data = $roles->toArray();
+        $r = Role::find($roles_data[0]['id']);
+        $per = $r->perms()->get(['name'])->toArray();
+        foreach ($roles_data as $role) {
+            if ($role['id'] == 1) {
+                return $next($request);
             }
+        }
 
-            return $next($request);
+        return redirect()->route('adminLogin');
+        //$curRoute = $request->route()->getName();
+//            if (!in_array($curRoute, array_flatten($per))) {
+//
+//                // return response('<br />Unauthorized.', 401);
+//                return view('admin.pages.unauthorized');
+//            }
+//
+//            return $next($request);
         //}else{
-       //     return $next($request);
-       // }
+        //     return $next($request);
+        // }
     }
 
 }

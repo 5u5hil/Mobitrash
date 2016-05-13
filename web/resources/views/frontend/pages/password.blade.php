@@ -62,18 +62,18 @@
 
                         <div class="col_one_third">
                             <label for="old-password">Old Password:</label>
-                            {!! Form::text('old_password',null, ["class"=>"sm-form-control " ,"placeholder"=>"Old Password"]) !!}
+                            {!! Form::text('old_password',null, ["class"=>"sm-form-control validate[required]" ,"placeholder"=>"Old Password"]) !!}
                         </div>
 
 
                         <div class="col_one_third">
                             <label for="password">New Password:</label>
-                            {!! Form::text('new_password',null, ["class"=>"sm-form-control " ,"placeholder"=>"New Password"]) !!}
+                            {!! Form::text('new_password',null, ["class"=>"sm-form-control validate[required]", "id"=>"new_password" ,"placeholder"=>"New Password"]) !!}
                         </div>
 
                         <div class="col_one_third col_last">
                             <label for="confirm-password">Reenter New Password:</label>
-                            {!! Form::text('confirm_password',null, ["class"=>"sm-form-control" ,"placeholder"=>"Reenter New Password"]) !!}
+                            {!! Form::text('confirm_password',null, ["class"=>"sm-form-control validate[required, equals[new_password]]"  ,"placeholder"=>"Reenter New Password", ]) !!}
                         </div>
                         <div class="clear"></div>
 

@@ -117,7 +117,7 @@ class LoginController extends Controller {
         return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'wastes', 'additives']));
     }
 
-    public function unauthorized() {
+    public function unauthorised() {
 
         return view(Config('constants.adminView') . '.unauthorized');
     }
@@ -138,7 +138,7 @@ class LoginController extends Controller {
         } else {
 
             Session::flash('invalidUser', 'Invalid Username or Password');
-            return redirect()->route('adminLogin');
+            return redirect()->route('user.unauthorised');
         }
     }
 

@@ -196,7 +196,6 @@ class UsersController extends Controller {
         $user = User::find(Input::get('id'));
         $user->name = Input::get('name');
         $user->phone_number = Input::get('phone_number');
-        $user->email = Input::get('email');
         $user->user_type = 1;
         $user->update();
         Session::flash('profileSuccess', 'Profile Updated successfully!');
