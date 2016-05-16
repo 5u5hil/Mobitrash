@@ -32,8 +32,9 @@
                         <h4 class="contex">For Being A Concerned Citizen </h4>
                     </div>
                 </div>
-                <div class="flash-message" style="color: #fff;">
-                    {{@Session::pull('contactSuccess')}}                            
+                <div class="flash-message" style="color: #fff;padding: 15px;">
+                    {{@Session::pull('contactSuccess')}}
+                    {{@Session::pull('contactError')}}
                 </div>
 
                 <div class="panel-default divcenter noradius noborder" style="max-width:500px;">

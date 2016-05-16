@@ -44,7 +44,7 @@ class ServicehistoryController extends Controller {
                 $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'created_at') {
                 $field3 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'),'LIKE', "%".Input::get('filter_value')."%")->paginate(Config('constants.paginateNo'));
+                $services = Service::where(Input::get('filter_type'),'LIKE', "%".date("Y-m-d", strtotime(Input::get('filter_value')))."%")->paginate(Config('constants.paginateNo'));
             }
         } else {
             $services = Service::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));

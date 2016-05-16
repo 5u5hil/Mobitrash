@@ -54,8 +54,8 @@
                         <span>{!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}</span>
                         <span>{!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}</span>
                         <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}<span>
-                        <span>{!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker', "style"=>$show_f4, $dis_f4]) !!}</span>
-                        <span>{!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker', "style"=>$show_f5, $dis_f5]) !!}</span>
+                        <span>{!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker2', "style"=>$show_f4, $dis_f4]) !!}</span>
+                        <span>{!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker2', "style"=>$show_f5, $dis_f5]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
@@ -98,8 +98,8 @@
                                 <td>{{ @$asset->prefered_timeslot }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>
-                                <td>{{ date('d M Y', strtotime($asset->start_date)) }}</td>
-                                <td>{{ date('d M Y', strtotime($asset->end_date)) }}</td>
+                                <td>{{ $asset->start_date ? date('d M Y', strtotime($asset->start_date)) : '' }}</td>
+                                <td>{{ $asset->end_date ? date('d M Y', strtotime($asset->end_date)): '' }}</td>
                                 <td>{{ $asset->max_waste }}</td>
                                 <td>{{ @$asset->wastetypes()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
@@ -137,7 +137,6 @@
         } else if ($(this).val() == 'frequency_id') {
             $(".f2").show().prop('disabled', false);
             $(".f1, .f3, .f4, .f5").hide().prop('disabled', true);
-
         } else if ($(this).val() == 'amt_paid') {
             $(".f3").show().prop('disabled', false);
             $(".f1, .f2, .f4, .f5").hide().prop('disabled', true);

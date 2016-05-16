@@ -31,7 +31,7 @@ class PaymentController extends Controller {
                 })->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'invoice_date') {
                 $field2 = Input::get('filter_value');
-                $payments = Payment::where('invoice_date', Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $payments = Payment::where('invoice_date', date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'invoice_month') {
                 $field3 = Input::get('filter_value');
                 $payments = Payment::where('invoice_month', Input::get('filter_value'))->paginate(Config('constants.paginateNo'));

@@ -41,7 +41,7 @@
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::select('filter_value',$recordtypes, $record_type, ["class"=>'form-control f2', "style"=>$show_record, $dis_record]) !!}
                         {!! Form::select('filter_value',$vans, $assets_type, ["class"=>'form-control f3', "style"=>$show_assets, $dis_assets]) !!}
-                        {!! Form::text('filter_value',$filter_date, ["class"=>'form-control f1 datepicker', "style"=>$show_val, $dis_val]) !!}
+                        {!! Form::text('filter_value',$filter_date, ["class"=>'form-control f1 datepicker2', "style"=>$show_val, $dis_val]) !!}
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>

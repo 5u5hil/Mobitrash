@@ -33,8 +33,8 @@
                         {!! Form::open(['method'=>'GET','route' => 'admin.attendance.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
-                        {!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker', "style"=>$show_f2, $dis_f2]) !!}
+                        <span>{!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}</span>
+                        <span>{!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker2', "style"=>$show_f2, $dis_f2]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
@@ -90,6 +90,9 @@
 @section('myscripts')
 
 <script>
+    if($(".filter_type") != 'date'){
+        $('.datepicker').prop('disabled', true);
+    }
     $(".filter_type").change(function () {
         if ($(this).val() == 'user_id') {
             $(".f1").show().prop('disabled', false);

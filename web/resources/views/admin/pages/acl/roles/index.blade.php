@@ -43,7 +43,7 @@
                 <td>{{ $role->display_name }}</td>
                 <td>{{ $role->name }}</td>
                 <td>{{ $role->description }}</td>
-                <td>{{ $role->created_at }}</td>
+                <td>{{ date("d M Y h:i:s A", strtotime($role->created_at)) }}</td>
                 <td>
                     <a href="{{ route('admin.roles.edit',['id' => $role->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
                 </td>

@@ -14,12 +14,11 @@ use Auth;
 class PipedriveController extends Controller {
 
     public function getAll() {
-        $deals = file_get_contents('https://api.pipedrive.com/v1/deals?api_token=' . Config('constants.pipedriveApiToken'));
+        $deals = file_get_contents('https://api.pipedrive.com/v1/pipelines/3/deals?api_token=' . Config('constants.pipedriveApiToken'));
         $deals = json_decode($deals, true);
         $count = 0;
         if (isset($deals['data'])) {
-            foreach ($deals['data'] as $key => $deal) {  
-                
+            foreach ($deals['data'] as $key => $deal) {
                 if (!$deal['f9717f095c375ebfc91312429b54821df8972fb3']) {
                     continue;
                 } else {
@@ -41,11 +40,13 @@ class PipedriveController extends Controller {
                         $address->user_id = $user->id;
                         $address->pipedrive_id = $deal['id'];
                         $address->address = $deal['0f564b10f66aa6eba1294de86c0ffcb670039947'];
-                        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . urlencode($address->address) . '&sensor=false');
-                        if ($geocode) {
+                        if ($address->address) {
+                            $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . urlencode($address->address) . '&sensor=false');
                             $geocode = json_decode($geocode);
-                            $address->latitude = $geocode->results[0]->geometry->location->lat;
-                            $address->longitude = $geocode->results[0]->geometry->location->lng;
+                            if ($geocode->results) {
+                                $address->latitude = $geocode->results[0]->geometry->location->lat;
+                                $address->longitude = $geocode->results[0]->geometry->location->lng;
+                            }
                         }
                         $address->pincode = $deal['0f564b10f66aa6eba1294de86c0ffcb670039947_postal_code'];
                         $address->save();
@@ -76,12 +77,12 @@ class PipedriveController extends Controller {
                 }
             }
             if ($count > 0) {
-                Session::flash('message', "Subscriptions Imported Successfully! Missing Data for fields in subscription required to be filled manually!");
+                Session::flash('message', "Subscriptions Imported Successfully! Missing Data for fields in customers and subscriptions required to be filled manually!");
             } else {
-                Session::flash('messageError', "No data found to Import");
+                Session::flash('messageError', "No new data found to Import");
             }
         } else {
-            Session::flash('messageError', "No data found to Import");
+            Session::flash('messageError', "No new data found to Import");
         }
         return redirect()->back();
     }

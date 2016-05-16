@@ -25,7 +25,7 @@ class AttendanceController extends Controller {
                 $attendances = Attendance::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'date') {
                 $field2 = Input::get('filter_value');
-                $attendances = Attendance::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $attendances = Attendance::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
             }            
         } else {
             $attendances = Attendance::paginate(Config('constants.paginateNo'));

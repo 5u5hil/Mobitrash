@@ -40,10 +40,10 @@
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.schedule.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
-                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
-                        {!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker', "style"=>$show_f2, $dis_f2]) !!}
-                        {!! Form::select('filter_value',$vans, $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}
+                        <span>{!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}</span>
+                        <span>{!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}</span>
+                        <span>{!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker2', "style"=>$show_f2, $dis_f2]) !!}</span>
+                        <span>{!! Form::select('filter_value',$vans, $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>

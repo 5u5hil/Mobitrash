@@ -174,20 +174,44 @@ class UsersController extends Controller {
         $action = 'user.password.change';
         return view(Config('constants.frontendView') . '.password', compact('user', 'action'));
     }
-    
+
     public function contact() {
         $action = 'user.contact.save';
         return view(Config('constants.frontendView') . '.contact', compact('action'));
     }
-    
+
     public function faq() {
         return view(Config('constants.frontendView') . '.faq');
     }
-    
+
     public function saveContact() {
         $contact_us = new Contactus();
         $contact_us->fill(Input::all())->save();
-        Session::flash('contactSuccess', 'Details saved successfully!');
+        $postData = array(
+            'name' => Input::get('name'),
+            'email' => Input::get('email'),
+            'phone' => Input::get('phone'),
+            'visible_to' => 1,
+            'add_time' => date('Y-m-d H:i:s'),
+        );
+
+        $ch = curl_init('https://api.pipedrive.com/v1/persons?api_token=' . Config('constants.pipedriveApiToken'));
+        curl_setopt_array($ch, array(
+            CURLOPT_POST => TRUE,
+            CURLOPT_RETURNTRANSFER => TRUE,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json'
+            ),
+            CURLOPT_POSTFIELDS => json_encode($postData)
+        ));
+        $output = curl_exec($ch);
+        $output = json_decode($output, true);
+        if ($output['success'] == true) {
+            Session::flash('contactSuccess', 'Details saved successfully!');
+        } else {
+            Session::flash('contactError', 'Error Occured! Please try again!');
+        }
+        curl_close($ch);
         return redirect()->route('user.contact.view');
     }
 
@@ -205,7 +229,7 @@ class UsersController extends Controller {
     public function changePassword() {
 
         $user = User::find(Input::get('id'));
-        
+
         if (Input::get('old_password') && Input::get('new_password') && Input::get('confirm_password')) {
             $check = Hash::check(Input::get('old_password'), $user->password);
             if ($check == true) {
@@ -232,10 +256,10 @@ class UsersController extends Controller {
 
     public function showUserSubscription() {
         $subscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->with('frequency', 'timeslot', 'user', 'wastetypes', 'occupancy')->first();
-        
+
         $address;
-        if($subscription){
-        $address = Address::where("id", $subscription->user_address_id)->first();        
+        if ($subscription) {
+            $address = Address::where("id", $subscription->user_address_id)->first();
         }
         $action = 'user.subscription.save';
         return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'action'));

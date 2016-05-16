@@ -138,7 +138,7 @@ class LoginController extends Controller {
         } else {
 
             Session::flash('invalidUser', 'Invalid Username or Password');
-            return redirect()->route('user.unauthorised');
+            return redirect()->route('adminLogin');
         }
     }
 

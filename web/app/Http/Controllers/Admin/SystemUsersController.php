@@ -15,17 +15,69 @@ use App\Http\Controllers\Controller;
 class SystemUsersController extends Controller {
 
     public function index() {
-        $system_users = User::whereHas('roles', function($q) {
-                    $q->where('id', '!=', 2);
-                })->paginate(Config('constants.paginateNo'));
-        $roles = Role::get(['id', 'name'])->toArray();
-        return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles'));
+        $filter = array('' => 'All', 'name' => 'Customer Name', 'email' => 'Email', 'roles' => 'Role');
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'name') {
+                $field1 = Input::get('filter_value');
+                $system_users = User::whereHas('roles', function($q) {
+                            $q->where('id', '!=', 2);
+                        })->where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
+            } else if ($filter_type == 'email') {
+                $field2 = Input::get('filter_value');
+                $system_users = User::whereHas('roles', function($q) {
+                            $q->where('id', '!=', 2);
+                        })->where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
+            } else if ($filter_type == 'roles') {
+                $field3 = Input::get('filter_value');
+                $system_users = User::whereHas('roles', function($q) {
+                            $q->where('id', Input::get('filter_value'));
+                        })->paginate(Config('constants.paginateNo'));
+            }
+        } else {
+            $system_users = User::whereHas('roles', function($q) {
+                        $q->where('id', '!=', 2);
+                    })->paginate(Config('constants.paginateNo'));
+        }
+        $rolesa = Role::get(['id', 'name'])->toArray();
+        $roles = [];
+        foreach ($rolesa as $value) {
+            $roles[$value['id']] = $value['name'];
+        }
+
+        return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
     public function users() {
-        $users = Role::find(2)->users()->paginate(Config('constants.paginateNo'));
-        $roles = Role::get(['id', 'name'])->toArray();
-        return view(Config('constants.adminUsersView') . '.index', compact('users', 'roles'));
+        $filter = array('' => 'All', 'name' => 'Customer Name', 'email' => 'Email', 'phone_number' => 'Phone Number');
+        $filter_type = NULL;
+        $filter_value = NULL;
+        $field1 = NULL;
+        $field2 = NULL;
+        $field3 = NULL;
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            $filter_value = Input::get('filter_value');
+            if ($filter_type == 'name') {
+                $field1 = Input::get('filter_value');
+            } else if ($filter_type == 'email') {
+                $field2 = Input::get('filter_value');
+            } else if ($filter_type == 'phone_number') {
+                $field3 = Input::get('filter_value');
+            }
+            $users = User::whereHas('roles', function($q) {
+                        $q->where('id', 2);
+                    })->where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
+        } else {
+            $users = Role::find(2)->users()->paginate(Config('constants.paginateNo'));
+        }
+        return view(Config('constants.adminUsersView') . '.index', compact('users', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
     public function add() {
@@ -34,7 +86,7 @@ class SystemUsersController extends Controller {
         $roles = Role::get(['id', 'display_name'])->toArray();
         $roles_name = ["" => "Please Select"];
         foreach ($roles as $role) {
-            if($role['id'] == 2){
+            if ($role['id'] == 2) {
                 continue;
             }
             $roles_name[$role['id']] = $role['display_name'];
@@ -109,7 +161,7 @@ class SystemUsersController extends Controller {
         $roles = Role::get(['id', 'display_name'])->toArray();
         $roles_name = ["" => "Please Select"];
         foreach ($roles as $role) {
-            if($role['id'] == 2){
+            if ($role['id'] == 2) {
                 continue;
             }
             $roles_name[$role['id']] = $role['display_name'];

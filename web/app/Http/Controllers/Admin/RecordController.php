@@ -36,12 +36,13 @@ class RecordController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'date') {
                 $filter_date = Input::get('filter_value');
+                $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
             } else if ($filter_type == 'recordtype_id') {
                 $record_type = Input::get('filter_value');
             } else if ($filter_type == 'asset_id') {
                 $assets_type = Input::get('filter_value');
             }
-            $record = Record::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+            $record = Record::where(Input::get('filter_type'),$filter_value)->paginate(Config('constants.paginateNo'));
         } else {
             $record = Record::with(['rtype', 'addedBy', 'asset'])->paginate(Config('constants.paginateNo'));
         }

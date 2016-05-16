@@ -47,17 +47,19 @@ class SubscriptionController extends Controller {
                 $field3 = Input::get('filter_value');
             } else if ($filter_type == 'start_date') {
                 $field4 = Input::get('filter_value');
+                $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
             } else if ($filter_type == 'end_date') {
                 $field5 = Input::get('filter_value');
+                $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
             }
-            $subscription = Subscription::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::where(Input::get('filter_type'), $filter_value)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         } else if (Input::get('filter_type') == 'renewal') {
             $filter_type = Input::get('filter_type');
             $now = Date('Y-m-d');
             $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
-            $subscription = Subscription::where('end_date', '<=', $now_10days)->paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::where('end_date', '<=', $now_10days)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         } else {
-            $subscription = Subscription::paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
 
         return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5'));

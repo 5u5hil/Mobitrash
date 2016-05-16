@@ -1,22 +1,9 @@
 @extends('frontend.layouts.site')
 @section('content')
- <section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="500" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
-            <div class="slider-parallax-inner">
-                <div class="container clearfix">
-                    <div class="vertical-middle verticalmid">
-
-                        <div class="heading-block nobottomborder">
-                            <h1>
                                 <div>
-                                 <span>Banner Will Go Here</span>
+                                <img id="img" src="1.jpg"/>
                                 </div>
-                            </h1>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
+                           
 
 <!-- Content
 ============================================= -->

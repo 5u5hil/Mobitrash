@@ -35,11 +35,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Date of Receipt</td>
+                                <td>Date</td>
                                 <td>
-                                    {{$record->date}}
+                                    {{ @date("d M Y",strtotime(@$record->date)) }}
                                 </td>
                             </tr>
+                            @if($record->recordtype_id != 3)  
                             <tr>
                                 <td>Remarks</td>
                                 <td>
@@ -80,6 +81,7 @@
                                     @endforeach
                                 </td>
                             </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

@@ -345,18 +345,25 @@
             changeMonth: true,
             changeYear: true,
             altFormat: 'yy-mm-dd',
-            defaultDate: '26 Apr 2016',
+            defaultDate: new Date(),
             altField: $(this).parent().find('.altdate'),
         });
         $(this).parent().find('.altdate').attr('name', $(this).attr('name'));
         $(this).parent().find('.altdate').addClass($(this).attr('class'));
         $(this).parent().find('.altdate').val($(this).val());
-        if (date) { 
+        if (date) {
             $(this).val(moment(date, 'YYYY-MM-DD').format('DD MMM YYYY'));
-        }        
+        }
         $(this).attr('name', '');
     });
- 
+    
+    $('.datepicker2').datepicker({
+            dateFormat: 'dd M yy',
+            changeMonth: true,
+            changeYear: true,
+            defaultDate: new Date(),
+        });
+
     $('.monthpicker').datepicker({
         changeMonth: true,
         changeYear: true,

@@ -33,7 +33,7 @@ class ScheduleController extends Controller {
                 $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'for') {
                 $field2 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'van_id') {
                 $field3 = Input::get('filter_value');
                 $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
