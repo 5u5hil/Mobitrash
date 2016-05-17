@@ -359,7 +359,7 @@
 		margin-top: 0;
 		left: 0;
 		z-index: 1;
-		color: #fff;
+		color: #444;
 	}
 
 	#primary-menu .container #primary-menu-trigger {
@@ -1769,12 +1769,19 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
 	#logo a.retina-logo { display: inline-block; }
 }
 
- @media (min-width: 768px) and (max-width: 1024px) {
- 
+@media (min-width: 768px) and (max-width: 1024px) {
  .col-xs{
  float:left;
  width:0% !important;
  }
+ 
+ }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+.col_md {
+    width: 0% !important;
+    float: left;
+}
  
  }
 

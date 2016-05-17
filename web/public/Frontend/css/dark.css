@@ -40,7 +40,7 @@ body #side-panel.dark { background-color: #383838; }
 
 .dark .section,
 .section.dark {
-	background-color: #282828;
+	background-color: #444;
 	border-color: rgba(255,255,255,0.1);
 }
 

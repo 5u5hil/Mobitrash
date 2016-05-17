@@ -23,11 +23,13 @@
                         $show_f3 = 'display:none;';
                         $show_f4 = 'display:none;';
                         $show_f5 = 'display:none;';
+                        $show_f6 = 'display:none;';
                         $dis_f1 = 'disabled';
                         $dis_f2 = 'disabled';
                         $dis_f3 = 'disabled';
                         $dis_f4 = 'disabled';
                         $dis_f5 = 'disabled';
+                        $dis_f6 = 'disabled';
                         if ($field1) {
                             $show_f1 = '';
                             $dis_f1 = '';
@@ -48,14 +50,19 @@
                             $show_f5 = '';
                             $dis_f5 = '';
                         }
+                        if ($field6) {
+                            $show_f6 = '';
+                            $dis_f6 = '';
+                        }
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.subscription.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
                         <span>{!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}</span>
                         <span>{!! Form::select('filter_value',$frequency,$field2, ["class"=>'form-control f2', "style"=>$show_f2, $dis_f2]) !!}</span>
-                        <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}<span>
+                        <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}</span>
                         <span>{!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker2', "style"=>$show_f4, $dis_f4]) !!}</span>
                         <span>{!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker2', "style"=>$show_f5, $dis_f5]) !!}</span>
+                        <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f6', "style"=>$show_f6, $dis_f6]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
@@ -146,8 +153,11 @@
         } else if ($(this).val() == 'end_date') {
             $(".f5").show().prop('disabled', false);
             $(".f1, .f2, .f3, .f4").hide().prop('disabled', true);
-        } else {
+        } else if ($(this).val() == 'user_id') {
+            $(".f6").show().prop('disabled', false);
             $(".f1, .f2, .f3, .f4, .f5").hide().prop('disabled', true);
+        } else {
+            $(".f1, .f2, .f3, .f4, .f5, .f6").hide().prop('disabled', true);
         }
     });
 </script>

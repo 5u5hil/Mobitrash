@@ -9,9 +9,10 @@
                 <div class="heading-block nobottomborder">
                     <h1>
                         <div>
-                            <span>Login Page</span>
+                            <span>Login</span>
                         </div>
                     </h1>
+                    <p>Login To Your MobiTrash Account</p>
                 </div>
 
             </div>

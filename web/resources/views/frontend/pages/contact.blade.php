@@ -9,9 +9,10 @@
                 <div class="heading-block nobottomborder">
                     <h1>
                         <div>
-                            <span>Contact Us</span>
+                            <span>Contact</span>
                         </div>
                     </h1>
+                    <p>Get In Touch With Us</p>
                 </div>
 
             </div>

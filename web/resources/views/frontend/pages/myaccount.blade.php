@@ -9,9 +9,10 @@
                         <div class="heading-block nobottomborder">
                             <h1>
                                 <div>
-                                 <span>My Account</span>
+                                 <span>Profile</span>
                                 </div>
                             </h1>
+                             <p>Your Account Information</p>
                         </div>
 
                     </div>
@@ -44,9 +45,9 @@
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
                                 <li class="actives"><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
-                                <li><a href="{{route('user.subscription.view')}}">My Subscriptions</a></li>
+                                <li><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
                                 <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
-                                <li><a href="{{route('user.mypassword.view')}}">Password</a></li>
+                                <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
                             </ul>
 
                         </div>
@@ -61,7 +62,7 @@
                 ============================================= -->
                 <div class="col_full portfolio-single-image">
                     <div class="fancy-title title-bottom-border">
-                        <h4>SERVICE SUMMARY</h4>
+                        <h4>Service Summary</h4>
                     </div>
                     <div id='calendar'></div>
                 </div><!-- .portfolio-single-image end -->

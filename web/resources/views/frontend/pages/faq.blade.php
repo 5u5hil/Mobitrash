@@ -7,7 +7,7 @@
                 <div class="heading-block nobottomborder">
                     <h1>
                         <div>
-                            <span>FAQ Page</span>
+                            <span>FAQ</span>
                         </div>
                     </h1>
                     <p>We Are Happy To Answers Your Questions</p>

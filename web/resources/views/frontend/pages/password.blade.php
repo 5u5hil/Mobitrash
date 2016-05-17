@@ -1,7 +1,7 @@
 @extends('frontend.layouts.site')
 @section('content')
 
-<section id="slider" class="slider-parallax" style="background-size: cover;background-color:#6e9d35" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
             <div class="vertical-middle">
@@ -9,9 +9,10 @@
                 <div class="heading-block nobottomborder">
                     <h1>
                         <div>
-                            <span>Password</span>
+                            <span>Profile</span>
                         </div>
                     </h1>
+                     <p>Your Account Information</p>
                 </div>
 
             </div>
@@ -37,9 +38,9 @@
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
                                 <li><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
-                                <li><a href="{{route('user.subscription.view')}}">My Subscriptions</a></li>
+                                <li><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
                                 <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
-                                <li class="actives"><a href="{{route('user.mypassword.view')}}">Password</a></li>
+                                <li class="actives"><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
                             </ul>
 
                         </div>
