@@ -1,8 +1,8 @@
 @extends('frontend.layouts.site')
 @section('content')
-                                <div>
-                                <img id="img" src="1.jpg"/>
-                                </div>
+        <div>
+            <img id="img" src="1.jpg"/>
+    </div>
                            
 
 <!-- Content
@@ -17,7 +17,10 @@
                <div class="center fruittop">
                     <h1>What is MobiTrash?</h1>
                 </div>
-                <p>MobiTrash is a mobile van waste treatment service which treats your segregated organic waste from your own site. MobiTrash provides primary treatment to segregated organic waste and turns it into odour free raw compost, which is carted away for further curing.</p>
+                <p class="texts">MobiTrash is a mobile van waste treatment service which treats your segregated organic waste from your own site. MobiTrash provides primary treatment to segregated organic waste and turns it into odour free raw compost, which is carted away for further curing.</p>
+                <center>
+                <a href="#" class="button button-3d button-rounded button-green">Read More</a>
+                </center>
             </div>
 
         </div>
@@ -355,6 +358,7 @@
 
             </div>
         </div>
+        <div class="clear"></div>
         <?php if(!Auth::id()): ?>
         <div class="section parallax dark " style="background-image: url('{{ asset('public/Frontend/images/services/home-testi-bg.jpg')}}');" data-stellar-background-ratio="0.4">
             <div class="center">
@@ -364,7 +368,7 @@
                 <div class="team-desc">
                     <img src="{{ asset('public/Frontend/images/mobgreen.png')}}"/>
                 </div>
-                <a href="#" class="button button-rounded button-reveal button-large button-border tright"><span>Get Started</span></a>
+                <a href="{{ route('user.login') }}" class="button button-rounded button-reveal button-large button-border tright"><span>Get Started</span></a>
             </div>
 
         </div>

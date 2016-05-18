@@ -183,6 +183,15 @@ class UsersController extends Controller {
     public function faq() {
         return view(Config('constants.frontendView') . '.faq');
     }
+    public function about() {
+        return view(Config('constants.frontendView') . '.about');
+    }
+    public function terms() {
+        return view(Config('constants.frontendView') . '.terms');
+    }
+    public function privacy() {
+        return view(Config('constants.frontendView') . '.privacy');
+    }
 
     public function saveContact() {
         $contact_us = new Contactus();

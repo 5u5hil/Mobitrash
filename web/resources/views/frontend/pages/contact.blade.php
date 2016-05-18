@@ -66,7 +66,7 @@
 
 
                     </div>
-                    <div><center><h1 class="contex">500+ Mobitrasher</h1>
+                    <div><center><h1 class="contex">500+ Mobitrashers</h1>
                             <h5 class="dark">Featured In : </h5>
                         </center>
                     </div>
@@ -99,7 +99,7 @@
                             <div class="fbox-icon">
                                 <a href="#"><i class="icon-email"></i></a>
                             </div>
-                            <h3>Write Us Email<span class="subtitle">mobitrash@gmail.com</span></h3>
+                            <h3>Email Us<span class="subtitle">mobitrash@gmail.com</span></h3>
                         </div>
                     </div>
 

@@ -22,7 +22,7 @@
                 <ul>
                     <li class="{{ preg_match("/\//",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('/') }}"><div>Home</div></a>
                     </li>
-                    <li class="{{ preg_match("/about/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('/') }}"><div>About</div></a>
+                    <li class="{{ preg_match("/about/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.about') }}"><div>About</div></a>
                     </li>
                     <li class="{{ preg_match("/user.faq/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.faq') }}"><div>FAQ</div></a>
                     </li>

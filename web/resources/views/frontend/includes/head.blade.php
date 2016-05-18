@@ -1,9 +1,11 @@
 
-<title>Mobitrash</title>
+<title>Quick fix for City's Garbage Problems</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="author" content="SemiColonWeb" />
+<meta name="description" content="Before the garbage piles around eat us alive, let us together turn it, into 'green'! Introducing MOBITRASH, India's first comprehensive mobile organic waste.">
+<meta name="keywords" content="Waste treatment, Garbage treatment, Compost, Recycle, Organic, Trash Treatment, Trash collection, Wet waste, Dry waste, Trash, Waste management, Trash management, Garbage management">
+<meta name="author" content="Infini Systems">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet" type="text/css" href="{{ asset('public/Frontend/css/bootstrap.css') }}">
