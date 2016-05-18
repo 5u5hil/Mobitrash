@@ -18,8 +18,9 @@
           <tbody>
             <tr>
               <td width="10"></td>
-              <td style="font-family:calibri;font-size:15px;color:#1b1b1b;text-align:justify;line-height:20px"> Your Payment invoice for {{$user['invoice']['billing_method'] == 1 ? $user['invoice']['invoice_month'] : $user['invoice']['invoice_date']}}<br>
-                  
+              <td style="font-family:calibri;font-size:15px;color:#1b1b1b;text-align:justify;line-height:20px">
+                  Your payment for {{$user['invoice']['billing_method'] == 1 ? date('M Y', strtotime($user['invoice']['invoice_month'])) : date('d M Y', strtotime($user['invoice']['invoice_date']))}} for an amount of Rs {{$user['invoice']['invoice_amount']}} has been received. PFA the invoice.<br>
+                                    
                 <strong>Thanks,<br>
                 Mobitrash Team</strong>. </td>
               <td width="10"></td>

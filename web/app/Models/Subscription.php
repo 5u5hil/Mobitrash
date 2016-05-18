@@ -40,7 +40,7 @@ class Subscription extends \Eloquent {
     }
 
     public function wastetypes() {
-        return $this->belongsTo('App\Models\Wastetype', 'wastetype_id');
+        return $this->belongsToMany('App\Models\Wastetype', 'has_sub_wastetypes', 'subscription_id', 'wastetype_id');
     }
 
     public function address() {

@@ -108,7 +108,10 @@
                                 <td>{{ $asset->start_date ? date('d M Y', strtotime($asset->start_date)) : '' }}</td>
                                 <td>{{ $asset->end_date ? date('d M Y', strtotime($asset->end_date)): '' }}</td>
                                 <td>{{ $asset->max_waste }}</td>
-                                <td>{{ @$asset->wastetypes()->first()->name }}</td>
+                                <td>@foreach($asset->wastetypes as $waste)
+                                    <div>{{ $waste->name }}</div>
+                                    @endforeach
+                                </td>
                                 <td>{{ date('d M Y', strtotime($asset->created_at)) }}</td>
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
 

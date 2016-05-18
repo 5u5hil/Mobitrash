@@ -69,7 +69,6 @@ class SubscriptionController extends Controller {
         } else {
             $subscription = Subscription::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
-
         return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6'));
     }
 
@@ -139,7 +138,7 @@ class SubscriptionController extends Controller {
             $wastetype[$value['id']] = $value['name'];
         }
         $return_of_compost = false;
-
+        $wastetype_selected = [];
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -194,6 +193,10 @@ class SubscriptionController extends Controller {
             $occupancy[$value['id']] = $value['name'];
         }
 
+        $wastetype_selected = [];
+        $wastetype_selecteds = $subscription->wastetypes->toArray();
+        foreach ($wastetype_selecteds as $val)
+            array_push($wastetype_selected, $val['id']);
 
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
@@ -219,7 +222,8 @@ class SubscriptionController extends Controller {
 
     public function save() {
         $subscription = Subscription::findOrNew(Input::get('id'));
-        $subscription->fill(Input::except('att'))->save();
+        $subscription->fill(Input::except('wastetype', 'att'))->save();
+        $subscription->wastetypes()->sync(Input::get('wastetype'));
         foreach (Input::file('att') as $key => $att) {
             if ($att) {
                 $destinationPath = public_path() . '/uploads/records/';

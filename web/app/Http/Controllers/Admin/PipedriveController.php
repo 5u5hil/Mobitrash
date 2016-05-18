@@ -14,7 +14,7 @@ use Auth;
 class PipedriveController extends Controller {
 
     public function getAll() {
-        $deals = file_get_contents('https://api.pipedrive.com/v1/pipelines/3/deals?api_token=' . Config('constants.pipedriveApiToken'));
+        $deals = file_get_contents('https://api.pipedrive.com/v1/pipelines/3/deals?filter_id=2&api_token=' . Config('constants.pipedriveApiToken'));
         $deals = json_decode($deals, true);
         $count = 0;
         if (isset($deals['data'])) {

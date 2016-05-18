@@ -1,24 +1,28 @@
 @extends('frontend.layouts.site')
 @section('content')
-
+<style>
+    p, pre, ul, ol, dl, dd, blockquote, address, table, fieldset, form {
+    margin-bottom: 10px;
+}
+</style>
 <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
-            <div class="slider-parallax-inner">
-                <div class="container clearfix">
-                    <div class="vertical-middle">
+    <div class="slider-parallax-inner">
+        <div class="container clearfix">
+            <div class="vertical-middle">
 
-                        <div class="heading-block nobottomborder">
-                            <h1>
-                                <div>
-                                 <span>Profile</span>
-                                </div>
-                            </h1>
-                             <p>Your Account Information</p>
+                <div class="heading-block nobottomborder">
+                    <h1>
+                        <div>
+                            <span>Profile</span>
                         </div>
-
-                    </div>
+                    </h1>
+                    <p>Your Account Information</p>
                 </div>
+
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
 <!-- <section id="page-title">
 
@@ -78,28 +82,45 @@
 
 @section("myscripts")
 <script>
+
     $(document).ready(function () {
+<?php
+$data = '[';
+foreach ($services as $service) {
+
+    $data .= "{
+                    title:'',
+                    start: '" . $service->created_at . "'
+                }, ";
+    foreach ($service->wastetypes as $waste):
+        $data .= "{
+                    title: '" . $waste->name . ": " . $waste->pivot->quantity . " kg.',
+                    allDay: true,
+                    start: '" . $service->created_at . "'
+                }, ";
+    endforeach;
+}
+$data .= ']';
+?>
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'month'
             },
             defaultDate: new Date(),
-            defaultView: 'month',            
+            defaultView: 'month',
             editable: false,
-            <?php 
-            $data = '[';
-            foreach($services as $service){
-                $data .= '{
-                    title:\'Service\',
-                    start: \''.$service->created_at.'\'
-                },';
-            }
-               $data .= ']';
-                ?>
-            events: <?php echo $data; ?>
+            timeFormat: 'LT',
+            events: <?php echo $data;
+?>
         });
+<?php
+foreach ($services as $service) {
+    $day = explode(' ', $service->created_at);
+    echo "$('.fc-day[data-date=\"" . $day[0] . "\"]').css('background', '#95BB56');";
+}
+?>
     });
 </script>
 
