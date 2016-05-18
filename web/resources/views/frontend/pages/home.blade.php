@@ -19,7 +19,7 @@
                 </div>
                 <p class="texts">MobiTrash is a mobile van waste treatment service which treats your segregated organic waste from your own site. MobiTrash provides primary treatment to segregated organic waste and turns it into odour free raw compost, which is carted away for further curing.</p>
                 <center>
-                <a href="#" class="button button-3d button-rounded button-green">Read More</a>
+                <a href="{{ route('user.about') }}" class="button button-3d button-rounded button-green">Read More</a>
                 </center>
             </div>
 

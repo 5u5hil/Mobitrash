@@ -25,11 +25,7 @@
 
                     <div class="col_full">
 
-                        <div class="heading-block center fancy-title nobottomborder title-bottom-border">
-                            <h3>About</h3>
-                        </div>
-
-                        <p>There is a flipside to the euphoria of economic growth - the problem of waste. Every day,our growing cities generate thousands of tons of waste, overloading municipal systems.An intelligent and responsible waste management system is the only smart solution to this vicious issue of waste.</p>
+                        <p>There is a flipside to the euphoria of economic growth - the problem of waste. Every day, our growing cities generate thousands of tons of waste, overloading municipal systems. An intelligent and responsible waste management system is the only smart solution to this vicious issue of waste.</p>
 
                         <p>MobiTrash is India's first comprehensive mobile organic waste collection and solution. MobiTrash makes your everyday waste management easy as never before Segregate, Handover & get it Composted!</p>
 
