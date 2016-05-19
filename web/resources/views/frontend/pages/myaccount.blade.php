@@ -1,10 +1,6 @@
 @extends('frontend.layouts.site')
 @section('content')
-<style>
-    p, pre, ul, ol, dl, dd, blockquote, address, table, fieldset, form {
-    margin-bottom: 10px;
-}
-</style>
+
 <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="400" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
@@ -50,8 +46,10 @@
                             <ul class="icons iconlist-large iconlist-color">
                                 <li class="actives"><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
                                 <li><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
+                                <li><a href="{{route('user.payment.info')}}">Payment Info</a></li>
                                 <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
                                 <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
+                                
                             </ul>
 
                         </div>

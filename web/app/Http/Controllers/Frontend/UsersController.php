@@ -21,6 +21,7 @@ use App\Models\Address;
 use App\Models\Contactus;
 use App\Models\Subscription;
 use App\Models\Service;
+use App\Models\Payment;
 use Mail;
 
 class UsersController extends Controller {
@@ -183,12 +184,15 @@ class UsersController extends Controller {
     public function faq() {
         return view(Config('constants.frontendView') . '.faq');
     }
+
     public function about() {
         return view(Config('constants.frontendView') . '.about');
     }
+
     public function terms() {
         return view(Config('constants.frontendView') . '.terms');
     }
+
     public function privacy() {
         return view(Config('constants.frontendView') . '.privacy');
     }
@@ -264,16 +268,25 @@ class UsersController extends Controller {
 //        Controller::pr($services);
         return view(Config('constants.frontendView') . '.myaccount', compact('user', 'services'));
     }
+    
+    public function paymentInfo() {
+        $user = User::find(Auth::id());
+        $payments = Payment::where('user_id',Auth::id())->get();
+        return view(Config('constants.frontendView') . '.paymentinfo', compact('user', 'payments'));
+    }
 
     public function showUserSubscription() {
         $subscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->with('frequency', 'timeslot', 'user', 'wastetypes', 'occupancy')->first();
-
+        $wastetypes = "";
+        foreach ($subscription->wastetypes as $waste) {
+            $wastetypes .= $waste->name . ', ';
+        }
         $address;
         if ($subscription) {
             $address = Address::where("id", $subscription->user_address_id)->first();
         }
         $action = 'user.subscription.save';
-        return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'action'));
+        return view(Config('constants.frontendView') . '.subscription', compact('subscription', 'address', 'action', 'wastetypes'));
     }
 
     public function saveSubscription() {

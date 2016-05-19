@@ -36,7 +36,7 @@
 								<i class="fa fa-pagelines"></i>
 							</div>
 
-							<h3>Green<span class="subtitle">Make Your Waste Green</span></h3>
+							<h3 class="mobiupper">Green<span class="subtitle">Make Your Waste Green</span></h3>
 							<p>Make your waste green! We collect your segregated organic waste and composts it on-the-go.</p>
 						</div> 
                            
@@ -50,7 +50,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/Smart_icon.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3>Smart<span class="subtitle">Be A Smart Citizen</span></h3>
+							<h3 class="mobiupper">Smart<span class="subtitle">Be A Smart Citizen</span></h3>
 							<p>Become a smart citizen of a smart city and inspire your next generation to live in a cleaner surrounding.</p>
 						</div>
                         </div>
@@ -64,7 +64,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/Swachh_icon.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3>Swachh<span class="subtitle">Make Our Country Swachh</span></h3>
+							<h3 class="mobiupper">Swachh<span class="subtitle">Make Our Country Swachh</span></h3>
 							<p>Together, lets make India 'swachh'. Start from your house and spread the message across.</p>
 						</div>
                         </div>
@@ -92,7 +92,7 @@
 								<img src="{{ asset('public/Frontend/images/sign_up.png')}}" alt="John Doe">
 							</div>
 
-							<h3>SIGN UP</h3>
+							<h3 class="mobiupper">SIGN UP</h3>
 							<p>Sign up to fix a meeting & further start a free trial. </p>
 						</div>  
                         </div> 
@@ -107,7 +107,7 @@
 								<img src="{{ asset('public/Frontend/images/subscribe.png')}}" alt="Mobitrash">
 							</div>
 
-							<h3>SUBSCRIBE</h3>
+							<h3 class="mobiupper">SUBSCRIBE</h3>
 							<p>After the free trial, get registered by remitting a fee of INR 199 per household per month.</p>
 						</div>  
                         </div>
@@ -121,7 +121,7 @@
 								<img src="{{ asset('public/Frontend/images/segregate.png')}}" alt="Mobitrash">
 							</div>
 
-							<h3>SEGREGATE</h3>
+							<h3 class="mobiupper">SEGREGATE</h3>
 							<p>Segregate wet waste from dry and other mixed waste.</p>
 						</div>  
                         </div>
@@ -135,7 +135,7 @@
 								<img src="{{ asset('public/Frontend/images/handover.png')}}" alt="Mobitrash">
 							</div>
 
-							<h3>HANDOVER</h3>
+							<h3 class="mobiupper">HANDOVER</h3>
 							<p>A MobiTrash van will come to your premises everyday to collect your wet waste & treat it within 20 minutes from your site.</p>
 						</div>  
                         </div>
@@ -149,7 +149,7 @@
 								<img src="{{ asset('public/Frontend/images/We-Compost_icon.png')}}" alt="Mobitrash">
 							</div>
 
-							<h3>WE COMPOST</h3>
+							<h3 class="mobiupper">WE COMPOST</h3>
 							<p>The MobiTrash van would cart away for further composting.</p>
 						</div>  
                         </div>
@@ -180,7 +180,7 @@
                                 <img src="{{ asset('public/Frontend/images/fruit1.png')}}" alt="John Doe">
                             </div>
                             <div class="team-desc team-desc-bg">
-                                <div class="team-title"><span>Fruit and vegetable waste</span></div>
+                                <div class="team-title"><h5 class="mobiupper">Fruit and vegetable waste</h5></div>
 
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                                 <img src="{{ asset('public/Frontend/images/fruit2.png')}}" alt="Mobitrash">
                             </div>
                             <div class="team-desc team-desc-bg">
-                                <div class="team-title"><span>Cooked food waste</span></div>
+                                <div class="team-title"><h5 class="mobiupper">Cooked food waste</h5></div>
 
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                                 <img src="{{ asset('public/Frontend/images/fruit3.png')}}" alt="Mobitrash">
                             </div>
                             <div class="team-desc team-desc-bg">
-                                <div class="team-title"><span>Non-vegetarian waste</span></div>
+                                <div class="team-title"><h5 class="mobiupper">Non-vegetarian waste</h5></div>
 
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                                 <img src="{{ asset('public/Frontend/images/fruit4.png')}}" alt="Mobitrash">
                             </div>
                             <div class="team-desc team-desc-bg">
-                                <div class="team-title"><span>Processed food waste</span></div>
+                                <div class="team-title"><h5 class="mobiupper">Processed food waste</h5></div>
 
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                                 <img src="{{ asset('public/Frontend/images/fruit5.png')}}" alt="Mobitrash">
                             </div>
                             <div class="team-desc team-desc-bg">
-                                <div class="team-title"><span>Garden waste</span></div>
+                                <div class="team-title"><h5 class="mobiupper">Garden waste</h5></div>
 
                             </div>
                         </div>
@@ -258,7 +258,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/residency_icon.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3>Residential Buildings</h3>
+							<h3 class="mobiupper">Residential Buildings</h3>
 						</div> 
                            
                         </div> 
@@ -272,7 +272,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-building" aria-hidden="true"></i>
 							</div>
-							<h3>Corporate Offices</h3>
+							<h3 class="mobiupper">Corporate Offices</h3>
 						</div>
                         </div>
 
@@ -285,7 +285,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-cutlery" aria-hidden="true"></i>
 							</div>
-							<h3>Restaurants & Hotels</h3>
+							<h3 class="mobiupper">Restaurants & Hotels</h3>
 						</div>
                         </div>
 
@@ -297,7 +297,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/commercial.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3>Commercial Complexes</h3>
+							<h3 class="mobiupper">Commercial Complexes</h3>
 						</div>
                         </div>
 
@@ -309,7 +309,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/education.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3>Educational Institutes</h3>
+							<h3 class="mobiupper">Educational Institutes</h3>
 						</div>
                         </div>
 
@@ -322,7 +322,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-hospital-o" aria-hidden="true"></i>
 							</div>
-							<h3>Hospital Canteens</h3>
+							<h3 class="mobiupper">Hospital Canteens</h3>
 							
 						</div>
                         </div>
@@ -336,7 +336,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-industry" aria-hidden="true"></i>
 							</div>
-							<h3>Factories / Industries</h3>
+							<h3 class="mobiupper">Factories / Industries</h3>
 							
 						</div>
                         </div>
@@ -348,7 +348,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-list" aria-hidden="true"></i>
 							</div>
-							<h3>... And More</h3>
+							<h3 class="mobiupper">any bulk waste generator</h3>
 						</div>
                         </div>
 

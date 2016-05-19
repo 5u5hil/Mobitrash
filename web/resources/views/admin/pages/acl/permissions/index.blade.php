@@ -6,7 +6,7 @@
 <div class="panel panel-default">
     <div class="row wrapper">
         <div class="col-sm-3 pull-right">           
-            <a href="{!! route('permission_add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Permission</a>      
+            <a href="{!! route('permission_add') !!}" class="btn btn-default pull-right" type="button">Add New Permission</a>      
         </div>
     </div>
 </div>

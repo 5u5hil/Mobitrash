@@ -55,9 +55,9 @@
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
-                            {!!Form::label('Profile Picture','Profile Picture',['class'=>'col-sm-2 control-label required']) !!}
+                            {!!Form::label('Profile Picture','Profile Picture',['class'=>'col-sm-2 control-label optional']) !!}
                             <div class="col-sm-10">
-                                {!! Form::file('profile_picture', ["class"=>'form-control' ,"placeholder"=>'Profile Picture' , "required"]) !!}
+                                {!! Form::file('profile_picture', ["class"=>'form-control' ,"placeholder"=>'Profile Picture']) !!}
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>

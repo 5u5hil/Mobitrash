@@ -45,7 +45,7 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.users.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New User</a>      
+                        <a href="{!! route('admin.users.add') !!}" class="btn btn-default pull-right" type="button">Add New User</a>      
                     </h3>
 
                 </div>

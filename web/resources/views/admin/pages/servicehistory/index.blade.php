@@ -48,7 +48,7 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
-                        <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Service History</a>-->      
+                        <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" type="button">Add New Service History</a>-->      
                     </h3>
 
                     <div>
@@ -98,8 +98,8 @@
                                 <td>{{$service->compost}}</td>
                                 <td>{{$service->crates_filled}}</td>
                                 <td>
-                                    <!--<a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>-->
-                                    <a href="{{ route('admin.servicehistory.delete',['id' => $service->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <!--<a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>-->
+                                    <a href="{{ route('admin.servicehistory.delete',['id' => $service->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>

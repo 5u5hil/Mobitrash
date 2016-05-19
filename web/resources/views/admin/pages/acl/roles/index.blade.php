@@ -17,7 +17,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">  
-            <a href="{!! route('admin.roles.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Role</a>      
+            <a href="{!! route('admin.roles.add') !!}" class="btn btn-default pull-right" type="button">Add New Role</a>      
                     </h3>
                     
                     <div>
@@ -45,11 +45,11 @@
                 <td>{{ $role->description }}</td>
                 <td>{{ date("d M Y h:i:s A", strtotime($role->created_at)) }}</td>
                 <td>
-                    <a href="{{ route('admin.roles.edit',['id' => $role->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
+                    <a href="{{ route('admin.roles.edit',['id' => $role->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                 </td>
                 
                 <td>
-                    <a href="{{ route('admin.roles.delete',['id' => $role->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                    <a href="{{ route('admin.roles.delete',['id' => $role->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                 </td>
                 
             </tr>

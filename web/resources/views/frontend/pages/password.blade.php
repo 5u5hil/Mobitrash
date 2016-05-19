@@ -39,6 +39,7 @@
                             <ul class="icons iconlist-large iconlist-color">
                                 <li><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
                                 <li><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
+                                <li><a href="{{route('user.payment.info')}}">Payment Info</a></li>
                                 <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
                                 <li class="actives"><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
                             </ul>

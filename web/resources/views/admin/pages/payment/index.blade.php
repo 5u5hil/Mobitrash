@@ -79,7 +79,7 @@
                                 <td>{{@$payment->billing_method == 1 ? date('M Y', strtotime($payment->invoice_month)) : date('d M Y', strtotime($payment->invoice_date))}}</td>
                                 <td>{{@$payment->invoice_amount}}</td>                                
                                 <td>{{@$payment->payment_made == 1? 'Yes' : 'No'}}</td>
-                                <td>{{ date('d M Y', strtotime(@$payment->payment_date)) }}</td>
+                                <td>{{ $payment->payment_date ? date('d M Y', strtotime(@$payment->payment_date)) : '' }}</td>
                                 <td>{{@$payment->remark}}</td>
                                 <td>  
                                     <a href="{{ Config('constants.uploadRecord').@$payment->file }}" target="_BLANK"><i class="fa fa-file"></i></a>

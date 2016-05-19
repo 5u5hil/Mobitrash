@@ -116,8 +116,8 @@
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
 
                                 <td>
-                                    <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>                                
-                                    <a href="{{ route('admin.subscription.delete',['id' => $asset->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>                                
+                                    <a href="{{ route('admin.subscription.delete',['id' => $asset->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>

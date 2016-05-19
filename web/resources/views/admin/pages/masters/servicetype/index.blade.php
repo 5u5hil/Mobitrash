@@ -17,7 +17,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.servicetype.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Servicetype</a>      
+                        <a href="{!! route('admin.servicetype.add') !!}" class="btn btn-default pull-right" type="button">Add New Servicetype</a>      
                     </h3>
 
                     <div>
@@ -43,11 +43,11 @@
                                 <td>{{ $city->name }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>
                                 <td>
-                                    <a href="{{ route('admin.servicetype.edit',['id' => $city->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    <a href="{{ route('admin.servicetype.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                                 </td>
 
                                 <td>
-                                    <a href="{{ route('admin.servicetype.delete',['id' => $city->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <a href="{{ route('admin.servicetype.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>

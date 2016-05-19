@@ -47,7 +47,7 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.assets.add') !!}" class="btn btn-default pull-right" target="_" type="button">Add New Asset</a>      
+                        <a href="{!! route('admin.assets.add') !!}" class="btn btn-default pull-right" type="button">Add New Asset</a>      
                     </h3>
 
                     <div>
@@ -86,9 +86,9 @@
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
 
                                 <td>
-                                    <!--<a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">View</a>-->
-                                    <a href="{{ route('admin.assets.edit',['id' => $asset->id ])  }}" target="_" class="label label-success active" ui-toggle-class="">Edit</a>                                
-                                    <a href="{{ route('admin.assets.delete',['id' => $asset->id ])  }}" target="_" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    <!--<a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>-->
+                                    <a href="{{ route('admin.assets.edit',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>                                
+                                    <a href="{{ route('admin.assets.delete',['id' => $asset->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                 </td>
 
                             </tr>
