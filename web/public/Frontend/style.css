@@ -169,7 +169,7 @@ h4,
 h5,
 h6 {
 	color: #444;
-	font-weight: 600;
+	/*font-weight: 600;*/
 	line-height: 1.5;
 	margin: 0 0 14px 0;
 	font-family: 'Raleway', sans-serif;
@@ -1117,9 +1117,9 @@ body.stretched #header.full-header .container {
 #primary-menu ul li > a {
 	display: block;
 	line-height: 22px;
-	padding: 39px 15px;
+	padding: 19px 15px;
 	color: #444;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-size: 13px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -1639,7 +1639,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 #top-cart,
 #side-panel-trigger {
 	float: right;
-	margin: 40px 0 40px 15px;
+	margin: 20px 0 26px 15px;
 }
 
 #top-cart { position: relative; }
@@ -1893,7 +1893,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #header.transparent-header
 #header,
 #header-wrap,
 #logo img {
-	height: 100px;
+	height: 60px;
 	-webkit-transition: height .4s ease, opacity .3s ease;
 	-o-transition: height .4s ease, opacity .3s ease;
 	transition: height .4s ease, opacity .3s ease;
@@ -6757,7 +6757,7 @@ body:not(.device-touch) .button.button-full strong {
 .button-3d.button-yellow:hover,
 .button-reveal.button-yellow:hover { background-color: #ECD078 !important; }
 
-.button-green { background-color: #59BA41; }
+.button-green { background-color: #87C540; }
 .button-3d.button-green:hover,
 .button-reveal.button-green:hover { background-color: #59BA41 !important; }
 
@@ -7106,7 +7106,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .feature-box p {
 	margin: 8px 0 0 0;
-	color: #999;
+	color: #555;
 }
 
 .feature-box .before-heading { font-size: 14px; }
@@ -7448,7 +7448,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .feature-box.fbox-bg.fbox-center {
 	margin-top: 68px;
-	padding: 68px 30px 30px;
+	padding: 112px 34px 30px;
 	background-color: #FFF;
 	border: 1px solid #E5E5E5;
 	border-radius: 5px;
@@ -7467,7 +7467,7 @@ body:not(.device-touch) .button.button-full strong {
 	position: absolute;
 	top: -48px;
 	left: 50%;
-	margin: 0 0 0 -48px;
+	margin: 63px 0 0 -50px;
 }
 
 .feature-box.fbox-bg.fbox-center.fbox-large .fbox-icon {
@@ -7523,7 +7523,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .fbox-effect .fbox-icon i:hover,
 .fbox-effect:hover .fbox-icon i {
-	background-color: #333;
+	/*background-color: #333;*/
 	color: #FFF;
 }
 
@@ -13136,7 +13136,7 @@ margin: 0px 4px 0px;
 .treatimg{
     background: none !important;
     border: none !important;
-    width: 125px;
+    width: 160px;
     padding-bottom: 5px;
     margin: 0 auto 30px;	
 }
@@ -13149,4 +13149,19 @@ padding-top:0px;
 padding-bottom: 0px; 
 margin-top: -14px; 
 opacity: -1.1295;	
+}
+
+.texts{
+text-align:center; 	
+}
+
+.mobiupper{
+     font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;	
+}
+
+.attachfileicon{
+  margin: 0px 30px;
 }

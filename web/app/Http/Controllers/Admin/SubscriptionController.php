@@ -9,6 +9,7 @@ use App\Models\Wastetype;
 use App\Models\Frequency;
 use App\Models\Timeslot;
 use App\Models\Package;
+use App\Models\Pickup;
 use App\Models\Attachment;
 use App\Http\Controllers\Controller;
 use App\Models\Occupancy;
@@ -239,6 +240,7 @@ class SubscriptionController extends Controller {
     public function delete() {
         $subscription = Subscription::find(Input::get('id'));
         $subscription->delete();
+        Pickup::where('subscription_id', Input::get('id'))->delete();
         return redirect()->back()->with("message", "Subscription deleted sucessfully");
     }
 

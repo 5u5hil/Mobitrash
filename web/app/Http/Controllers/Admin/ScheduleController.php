@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\Schedule;
 use App\Models\Pickup;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\Subscription;
 use App\Models\Asset;
 use Session;
@@ -228,6 +229,8 @@ class ScheduleController extends Controller {
     public function delete() {
         $schedule = Schedule::find(Input::get('id'));
         $schedule->delete();
+        Pickup::where('schedule_id', Input::get('id'))->delete();
+        Service::where('schedule_id', Input::get('id'))->delete();
         return redirect()->back()->with("message", "Schedule deleted sucessfully!");
     }
 

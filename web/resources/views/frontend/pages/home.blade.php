@@ -258,7 +258,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/residency_icon.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3 class="mobiupper">Residential Buildings</h3>
+                            <span class="subtitle mobiupper">Residential Buildings</span>
 						</div> 
                            
                         </div> 
@@ -272,7 +272,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-building" aria-hidden="true"></i>
 							</div>
-							<h3 class="mobiupper">Corporate Offices</h3>
+                              <span class="subtitle mobiupper">Corporate Offices</span>
 						</div>
                         </div>
 
@@ -285,7 +285,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-cutlery" aria-hidden="true"></i>
 							</div>
-							<h3 class="mobiupper">Restaurants & Hotels</h3>
+                            <span class="subtitle mobiupper">Restaurants & Hotels</span>
 						</div>
                         </div>
 
@@ -297,7 +297,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/commercial.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3 class="mobiupper">Commercial Complexes</h3>
+                            <span class="subtitle mobiupper">Commercial Complexes</span>
 						</div>
                         </div>
 
@@ -309,7 +309,7 @@
 							<div class="fbox-icon">
 								<i><img src="{{ asset('public/Frontend/images/education.png')}}" alt="Mobitrash"></i>
 							</div>
-							<h3 class="mobiupper">Educational Institutes</h3>
+                            <span class="subtitle mobiupper">Educational Institutes</span>
 						</div>
                         </div>
 
@@ -322,7 +322,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-hospital-o" aria-hidden="true"></i>
 							</div>
-							<h3 class="mobiupper">Hospital Canteens</h3>
+                            <span class="subtitle mobiupper">Hospital Canteens</span>
 							
 						</div>
                         </div>
@@ -336,7 +336,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-industry" aria-hidden="true"></i>
 							</div>
-							<h3 class="mobiupper">Factories / Industries</h3>
+                            <span class="subtitle mobiupper">Factories / Industries</span>
 							
 						</div>
                         </div>
@@ -348,7 +348,7 @@
 							<div class="fbox-icon">
 								<i class="fa fa-list" aria-hidden="true"></i>
 							</div>
-							<h3 class="mobiupper">any bulk waste generator</h3>
+                            <span class="subtitle mobiupper">any bulk waste generator</span>
 						</div>
                         </div>
 

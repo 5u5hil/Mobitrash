@@ -66,19 +66,19 @@
                     <br />
 
                     <div class="existing">
-                        @if($pickups->count()>0)
-
+                       <?php 
+                       
+                       if(count($pickups) >0){ ?>
                         @foreach($pickups as $key => $pickup)
-
+                         
                         <div class="row form-group">
                             <div class="col-sm-3">
-                                {!! Form::text('subscription',$pickup->subscription->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
+                                {!! Form::text('subscription',@$pickup->subscription->name, ["class"=>'form-control', "required", "disabled" => "disabled"]) !!}
                             </div>
                             <div class="col-sm-2">                                
-                                {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
-                                {!! Form::hidden("pickup[$key][subscription_id]",$pickup->subscription->id) !!}
-                                {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
-                                {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
+                                {!! Form::text("pickup[$key][pickuptime]",@$pickup->pickuptime, ["class"=>'form-control timepicker', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
+                                {!! Form::hidden("pickup[$key][subscription_id]",@$pickup->subscription->id) !!}
+                                
                             </div> 
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ @$pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
@@ -98,7 +98,7 @@
 
                         </div>
                         @endforeach
-                        @endif
+                       <?php } ?>
                     </div>
 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -121,9 +121,7 @@
         <div class="col-sm-3">
             {!! Form::select("pickup[0][subscription_id]",$subscriptions,null, ["class"=>'form-control select_subscription', "required"]) !!}
         </div>
-        <div class="col-sm-2">
-            {!! Form::hidden("pickup[0][user_id]",null, ["class"=>'form-control select_user', "required"]) !!}
-            {!! Form::hidden("pickup[0][user_address_id]", null, ["class"=>'form-control select_add', "required"]) !!}
+        <div class="col-sm-2">            
             {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">

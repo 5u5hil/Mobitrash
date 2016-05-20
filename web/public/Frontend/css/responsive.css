@@ -1785,3 +1785,19 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
  
  }
 
+ @media (min-width: 320px) and (max-width: 480px) {
+.col-xs{
+    width: 0% !important;
+    float: left;
+}
+ 
+ }
+
+  @media (min-width: 360px) and (max-width: 640px) {
+.col-xs{
+    width: 0% !important;
+    float: left;
+}
+ 
+ }
+

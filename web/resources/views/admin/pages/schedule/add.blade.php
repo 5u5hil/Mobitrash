@@ -79,8 +79,7 @@
                             <div class="col-sm-2">                                
                                 {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][subscription_id]",$pickup->subscription->id) !!}
-                                {!! Form::hidden("pickup[$key][user_id]",$pickup->user_id) !!}
-                                {!! Form::hidden("pickup[$key][user_address_id]",$pickup->user_address_id) !!}
+                               
                             </div>  
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
@@ -124,8 +123,6 @@
             {!! Form::select("pickup[0][subscription_id]",$subscriptions,null, ["class"=>'form-control select_subscription', "required"]) !!}
         </div>
         <div class="col-sm-2">
-            {!! Form::hidden("pickup[0][user_id]",null, ["class"=>'form-control select_user', "required"]) !!}
-            {!! Form::hidden("pickup[0][user_address_id]", null, ["class"=>'form-control select_add', "required"]) !!}
             {!! Form::text("pickup[0][pickuptime]",null, ["class"=>'form-control timepicker-new', "placeholder" => "Pickup Time HH:MM", "required"]) !!}
         </div>
         <div class="col-sm-1" style=" text-align: right;">

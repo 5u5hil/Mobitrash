@@ -97,7 +97,7 @@
                     <div class="col-md-3 col-sm-6 bottommargin clearfix">
                         <div class="feature-box fbox-center fbox-bg fbox-plain">
                             <div class="fbox-icon">
-                                <a href="#"><i class="icon-email"></i></a>
+                                <a href="#"><i class="icon-envelope"></i></a>
                             </div>
                             <h3>Email Us<span class="subtitle">mobitrash@gmail.com</span></h3>
                         </div>

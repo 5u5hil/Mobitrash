@@ -10,6 +10,7 @@
                             <span>About</span>
                         </div>
                     </h1>
+                    <p>Know Us In Detail</p>
                 </div>
             </div> 
         </div>
