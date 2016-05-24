@@ -1774,7 +1774,10 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
  float:left;
  width:0% !important;
  }
- 
+ .conhead {
+    font-size: 48px;
+    margin: 44px 4px 0px;
+}
  }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1782,7 +1785,10 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
     width: 0% !important;
     float: left;
 }
- 
+ .conhead {
+    font-size: 48px;
+    margin: 51px 4px 0px;
+}
  }
 
  @media (min-width: 320px) and (max-width: 480px) {
@@ -1790,7 +1796,10 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
     width: 0% !important;
     float: left;
 }
- 
+ .conhead {
+    font-size: 48px;
+    margin: 0px 4px 0px;
+}
  }
 
   @media (min-width: 360px) and (max-width: 640px) {
@@ -1798,6 +1807,9 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
     width: 0% !important;
     float: left;
 }
- 
+ .conhead {
+    font-size: 48px;
+    margin: 0px 4px 0px;
+}
  }
 

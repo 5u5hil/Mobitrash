@@ -1,12 +1,23 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="page-title">
+<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
+    <div class="slider-parallax-inner">
+        <div class="container clearfix">
+            <div class="vertical-middle">
 
-    <div class="container clearfix">
-        <h1>Register</h1>
+                <div class="heading-block nobottomborder">
+                    <h1>
+                        <div>
+                            <span>Register</span>
+                        </div>
+                    </h1>
+                    <p></p>
+                </div>
+
+            </div>
+        </div>
     </div>
-
-</section><!-- #page-title end -->
+</section>
 
 <!-- Content
 ============================================= -->

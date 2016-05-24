@@ -268,18 +268,20 @@ class UsersController extends Controller {
 //        Controller::pr($services);
         return view(Config('constants.frontendView') . '.myaccount', compact('user', 'services'));
     }
-    
+
     public function paymentInfo() {
         $user = User::find(Auth::id());
-        $payments = Payment::where('user_id',Auth::id())->get();
+        $payments = Payment::where('user_id', Auth::id())->get();
         return view(Config('constants.frontendView') . '.paymentinfo', compact('user', 'payments'));
     }
 
     public function showUserSubscription() {
         $subscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->with('frequency', 'timeslot', 'user', 'wastetypes', 'occupancy')->first();
         $wastetypes = "";
-        foreach ($subscription->wastetypes as $waste) {
-            $wastetypes .= $waste->name . ', ';
+        if (isset($subscription->wastetypes)) {
+            foreach ($subscription->wastetypes as $waste) {
+                $wastetypes .= $waste->name . ', ';
+            }
         }
         $address;
         if ($subscription) {
