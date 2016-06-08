@@ -17,7 +17,9 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">  
+                        @permission('admin.recordtype.add')
                         <a href="{!! route('admin.recordtype.add') !!}" class="btn btn-default pull-right" type="button">Add New Recordtype</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -43,11 +45,12 @@
                                 <td>{{ $city->name }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>
                                 <td>
+                                    @permission('admin.recordtype.edit')
                                     <a href="{{ route('admin.recordtype.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @endpermission
+                                    @permission('admin.recordtype.delete')
                                     <a href="{{ route('admin.recordtype.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>

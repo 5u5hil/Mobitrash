@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                     <div class="filter-box">
+                    <div class="filter-box">
                         <?php
                         $show_f1 = 'display:none;';
                         $show_f2 = 'display:none;';
@@ -44,8 +44,10 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
+                    <h3 class="box-title"> 
+                        @permission('admin.users.add')  
                         <a href="{!! route('admin.users.add') !!}" class="btn btn-default pull-right" type="button">Add New User</a>      
+                        @endpermission
                     </h3>
 
                 </div>
@@ -73,11 +75,12 @@
                                 <td>{{ $system_user->phone_number }}</td>
                                 <td>{{ date("d-M-Y",strtotime($system_user->created_at)) }}</td>
                                 <td>
+                                    @permission('admin.users.edit')       
                                     <a href="{!! route('admin.users.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @endpermission
+                                    @permission('admin.users.delete')
                                     <a href="{!! route('admin.systemusers.delete',['id'=>$system_user->id]) !!}" onclick="return confirm('Are you sure you want to continue?')" class="label label-danger active" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
                             </tr>
                             @endforeach

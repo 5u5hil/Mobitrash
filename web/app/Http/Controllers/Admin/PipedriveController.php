@@ -18,6 +18,8 @@ class PipedriveController extends Controller {
         $deals = json_decode($deals, true);
         $count = 0;
         if (isset($deals['data'])) {
+            $usercount = 0;
+            $flashMessage = "";
             foreach ($deals['data'] as $key => $deal) {
                 if (!$deal['f9717f095c375ebfc91312429b54821df8972fb3']) {
                     continue;
@@ -30,9 +32,10 @@ class PipedriveController extends Controller {
                         $user->password = Hash::make($random);
                         $user->email = $deal['f9717f095c375ebfc91312429b54821df8972fb3'];
                         $user->phone_number = $deal['f856d0351336a040cbe422113dbcf31736fa29a6'];
-                        $user->user_type = 1;
+                        $user->user_type = 2;
                         $user->save();
                         $user->roles()->sync([2]);
+                        $usercount++;
                     }
                     $address = Address::where('user_id', $user->id)->where('pipedrive_id', $deal['id'])->first();
                     if (!$address) {
@@ -61,10 +64,20 @@ class PipedriveController extends Controller {
                             $subscription->amt_paid = $deal['value'];
                         }
                         $subscription->return_of_compost = 0;
-                        $subscription->occupancy_id = $deal['48fdb5f9798aa624c6b3bdcd322edd091757a28f'];
-                        $wastetype_id = array(9 => 1, 10 => 2, 11 => 3);
-                        if ($deal['cd9bd35d3a76ea6c6dce0703a962081eba45f727']) {
-                            $subscription->wastetype_id = $wastetype_id[$deal['cd9bd35d3a76ea6c6dce0703a962081eba45f727']];
+                        $occupancy_id = array(13 => 1, 14 => 3, 15 => 2, 16 => 6, 17 => 5, 18 => 7, 19 => 8,);
+                        if ($deal['48fdb5f9798aa624c6b3bdcd322edd091757a28f']) {
+                            $subscription->occupancy_id = $occupancy_id[$deal['48fdb5f9798aa624c6b3bdcd322edd091757a28f']];
+                        }
+                        $wastetype_id = array(20 => 1, 21 => 2, 22 => 3);
+                        if ($deal['1c4a26787973f885f4c7f68f852c34cd8191486d']) {
+                            $west_ids = explode(',', $deal['1c4a26787973f885f4c7f68f852c34cd8191486d']);
+                            $watetype_category = array();
+                            foreach ($west_ids as $west_id) {
+                                array_push($watetype_category, $wastetype_id[$west_id]);
+                            }
+                            if ($subscription->id) {
+                                $subscription->wastetypes()->sync($watetype_category);
+                            }
                         }
                         $subscription->max_waste = $deal['2409d0d57ae03b6dad63635eb89b31b531ca9cc0'];
                         $subscription->onfield_person_name = $deal['person_name'];
@@ -76,11 +89,15 @@ class PipedriveController extends Controller {
                     }
                 }
             }
-            if ($count > 0) {
-                Session::flash('message', "Subscriptions Imported Successfully! Missing Data for fields in customers and subscriptions required to be filled manually!");
-            } else {
-                Session::flash('messageError', "No new data found to Import");
+            if ($usercount > 0) {
+                $flashMessage = "Users Imported Successfully. ";
             }
+            if ($count > 0) {
+                $flashMessage .= "Subscriptions Imported Successfully! Missing Data for fields in customers and subscriptions required to be filled manually!";
+            } else {
+                $flashMessage .= "No Subscription data found";
+            }
+            Session::flash('message', $flashMessage);
         } else {
             Session::flash('messageError', "No new data found to Import");
         }

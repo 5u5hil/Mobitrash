@@ -28,14 +28,14 @@
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        if ($field2) {                            
-                            $show_f2 = ''; 
+                        if ($field2) {
+                            $show_f2 = '';
                             $dis_f2 = '';
                         }
                         if ($field3) {
                             $show_f3 = '';
                             $dis_f3 = '';
-                        }                      
+                        }
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.assets.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
@@ -47,7 +47,9 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
+                        @permission('admin.assets.add')  
                         <a href="{!! route('admin.assets.add') !!}" class="btn btn-default pull-right" type="button">Add New Asset</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -87,8 +89,12 @@
 
                                 <td>
                                     <!--<a href="{{ route('admin.assets.show',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>-->
+                                    @permission('admin.assets.edit')  
                                     <a href="{{ route('admin.assets.edit',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>                                
+                                    @endpermission
+                                    @permission('admin.assets.delete')  
                                     <a href="{{ route('admin.assets.delete',['id' => $asset->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>
@@ -120,7 +126,7 @@
         } else if ($(this).val() == 'city_id') {
             $(".f3").show().prop('disabled', false);
             $(".f1, .f2").hide().prop('disabled', true);
-        } else{
+        } else {
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });

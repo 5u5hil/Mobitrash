@@ -17,7 +17,9 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">  
+                        @permission('admin.occupancy.add')
                         <a href="{!! route('admin.occupancy.add') !!}" class="btn btn-default pull-right" type="button">Add New Occupancy</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -43,11 +45,12 @@
                                 <td>{{ $city->name }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>
                                 <td>
+                                    @permission('admin.occupancy.edit')
                                     <a href="{{ route('admin.occupancy.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @endpermission
+                                    @permission('admin.occupancy.delete')
                                     <a href="{{ route('admin.occupancy.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>

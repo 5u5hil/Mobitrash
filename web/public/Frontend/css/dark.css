@@ -574,7 +574,7 @@ body.top-search-open .dark #header-wrap:not(.not-dark) #top-search a,
 .dark .rounded-skill { color: #EEE; }
 
 .dark .button-dark:not(.button-border),
-.dark .button:hover { background-color: rgba(0,0,0,0.3); }
+.dark .button:hover { background-color: #87C540; }
 
 .dark .button-dark:hover { background-color: #87C540; }
 

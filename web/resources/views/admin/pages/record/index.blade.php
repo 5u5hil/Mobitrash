@@ -46,7 +46,9 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
+                        @permission('admin.record.add')
                         <a href="{!! route('admin.record.add') !!}" class="btn btn-default pull-right" type="button">Add New Record</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -84,13 +86,19 @@
                                     @foreach(@$city->atts->where("is_active", 1) as $at)
 
                                     <a href="{{ Config('constants.uploadRecord').$at->file }}" target="_BLANK"><i class="fa fa-file"></i></a>
-                                     @endforeach
+                                    @endforeach
                                     @endif
                                 </td>
                                 <td>
+                                    @permission('admin.record.show')
                                     <a href="{{ route('admin.record.show',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>
+                                    @endpermission
+                                    @permission('admin.record.edit')
                                     <a href="{{ route('admin.record.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    @endpermission
+                                    @permission('admin.record.delete')
                                     <a href="{{ route('admin.record.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>
@@ -121,7 +129,7 @@
         } else if ($(this).val() == 'asset_id') {
             $(".f3").show().prop('disabled', false);
             $(".f1, .f2").hide().prop('disabled', true);
-        } else{
+        } else {
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });

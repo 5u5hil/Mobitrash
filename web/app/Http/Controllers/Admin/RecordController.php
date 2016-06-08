@@ -21,6 +21,7 @@ class RecordController extends Controller {
             $recordtypes[$value['id']] = $value['name'];
         }
         $v = Asset::where("is_active", 1)->get()->toArray();
+        $vans = [];
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }

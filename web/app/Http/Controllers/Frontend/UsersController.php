@@ -222,7 +222,7 @@ class UsersController extends Controller {
         $output = curl_exec($ch);
         $output = json_decode($output, true);
         if ($output['success'] == true) {
-            Session::flash('contactSuccess', 'Details saved successfully!');
+            Session::flash('contactSuccess', 'Thank you! We shall get in touch with you soon.'); 
         } else {
             Session::flash('contactError', 'Error Occured! Please try again!');
         }
@@ -314,6 +314,14 @@ class UsersController extends Controller {
         $subscription->remark = Input::get('remark');
         $subscription->save();
         return redirect()->route('user.myprofile.view');
+    }
+    
+    
+    public function paymentSuccess(){
+        return "Payment Sucsess";
+        $user = User::find(Auth::id());
+//        echo $user->hasRole(1);
+//        exit();
     }
 
 }

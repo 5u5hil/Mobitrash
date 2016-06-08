@@ -11,12 +11,14 @@
 <script type="text/javascript" src="{{ asset('public/Frontend/js/jquery.validationEngine-en.js') }}"></script>
 
  <script type = "text/javascript">
-          function displayNextImage() {
-		  console.log(images[x]);
+
+    jQuery(window).load(function($) {
+    	
+
+     function displayNextImage() {
            //   x = (x === images.length - 1) ? 0 : x + 1;
 		   x=x+1;
 		      document.getElementById("img").src = 'public/Frontend/images/bannerimg/'+x+'.jpg';
-			  
 			 if(x==38){
 			 	x=1;
 			 	}
@@ -27,5 +29,12 @@
 var myVar = setInterval(function(){ displayNextImage() }, 500);
 function myStopFunction() {
     clearInterval(myVar);
-}
+}	
+    });
+         
+ </script>
+<script type="text/javascript">
+  setTimeout(function () {
+   jQuery('#footer').css('margin-top', '0px');
+  }, 2000)
  </script>

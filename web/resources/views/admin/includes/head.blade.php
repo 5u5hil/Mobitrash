@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>InfiCart | Admin Panel</title>
+<title>MobiTrash | Admin Panel</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <!-- Bootstrap 3.3.5 -->
@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/AdminLTE.min.css') }}">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
+ <link rel="icon" href="{{ asset('public/Frontend/images/favicon.png') }}">    
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/skins/_all-skins.min.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">

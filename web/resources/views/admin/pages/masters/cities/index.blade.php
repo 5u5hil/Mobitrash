@@ -40,12 +40,14 @@
                             <tr>
                                 <td>{{ $city->id }}</td>
                                 <td>{{ $city->name }}</td>
-                                <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>                                <td>
-                                    <a href="{{ route('admin.cities.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
+                                <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>                                
                                 <td>
+                                    @permission('admin.cities.edit')                                    
+                                    <a href="{{ route('admin.cities.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    @endpermission
+                                    @permission('admin.cities.delete')
                                     <a href="{{ route('admin.cities.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>

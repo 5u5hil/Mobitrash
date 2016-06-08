@@ -17,7 +17,11 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">   <a href="{!! route('admin.miscellaneous.add') !!}" class="btn btn-default pull-right" type="button">Add New</a> </h3>
+                    <h3 class="box-title">   
+                        @permission('admin.schedule.show')
+                        <a href="{!! route('admin.miscellaneous.add') !!}" class="btn btn-default pull-right" type="button">Add New</a> 
+                        @endpermission
+                    </h3>
                     <div class="box-tools">
                     </div>
                 </div>
@@ -38,7 +42,7 @@
                                 <th>Name</th>
                                 <th>Value</th>
                                 <th>URL Key</th>
-                              
+
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -50,14 +54,16 @@
 
                                 <td>{{$set->value }}</td>
                                 <td>{{$set->url_key }}</td>
-                               
+
                                 <td>
+                                    @permission('admin.miscellaneous.edit')
                                     <a href="{!! route('admin.miscellaneous.edit',['id'=>$set->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    @endpermission
+                                    @permission('admin.miscellaneous.delete')
+                                    <a href="{!! route('admin.miscellaneous.delete',['id'=>$set->id]) !!}" class="label label-danger active" ui-toggle-class="" onclick="return confirm('Are you sure you want to continue?')">Delete</a>
+                                    @endpermission
                                 </td>
 
-                              
-                                    <td><a href="{!! route('admin.miscellaneous.delete',['id'=>$set->id]) !!}" class="label label-danger active" ui-toggle-class="" onclick="return confirm('Are you sure you want to continue?')">Delete</a></td>
-                               
 
 
                             </tr>

@@ -45,8 +45,10 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
+                    <h3 class="box-title"> 
+                        @permission('admin.payment.add')
                         <a href="{!! route('admin.payment.add') !!}" class="btn btn-default pull-right" type="button">Create New Invoice</a>      
+                        @endpermission
                     </h3>
                     <div>
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
@@ -86,8 +88,12 @@
                                 </td>
                                 <td>{{@$payment->addedBy->name}}</td>
                                 <td>
+                                    @permission('admin.payment.edit')
                                     <a href="{{ route('admin.payment.edit',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
+                                    @endpermission
+                                    @permission('admin.payment.delete')
                                     <a href="{{ route('admin.payment.delete',['id' => @$payment->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>
@@ -118,7 +124,7 @@
         } else if ($(this).val() == 'invoice_month') {
             $(".f3").show().prop('disabled', false);
             $(".f1, .f2").hide().prop('disabled', true);
-        } else{
+        } else {
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });

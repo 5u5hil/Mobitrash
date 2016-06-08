@@ -60,11 +60,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <h4>Pickups</h4>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="row clearfix" >
-                        <div class="col-sm-2 pull-right">
-                            <a class="label label-success active addMore" >Add a Pickup</a> 
-                        </div>
-                    </div>
+
                     <br />
 
                     <div class="existing">
@@ -79,7 +75,7 @@
                             <div class="col-sm-2">                                
                                 {!! Form::text("pickup[$key][pickuptime]",$pickup->pickuptime, ["class"=>'form-control timepicker', "required"]) !!}
                                 {!! Form::hidden("pickup[$key][subscription_id]",$pickup->subscription->id) !!}
-                               
+
                             </div>  
                             <div class="col-sm-1" style=" text-align: right;">
                                 <a data-id="{{ $pickup->id }}" class="label label-danger active delete-pickup DelImg" >Delete</a> 
@@ -108,6 +104,9 @@
                             {!! Form::hidden('id',null) !!}
                             {!! Form::hidden('added_by',Auth::id()) !!}
                             {!! Form::submit('Submit',["class" => "btn btn-primary"]) !!}
+                        </div>
+                        <div class="col-sm-2 pull-right">
+                            <a class=" btn btn-primary active addMore" >Add a Pickup</a> 
                         </div>
                     </div>
                     {!! Form::close() !!} 
@@ -168,6 +167,10 @@
             $(this).attr("name", "pickup[" + k + "][subscription_id]");
         });
 
+        $('html, body').animate({
+            scrollTop: document.body.scrollHeight
+        }, 1000);
+
     });
 
     $("body").on("change", ".select_subscription", function () {
@@ -179,7 +182,7 @@
             data: {
                 id: select.val()
             },
-            success: function (data) { 
+            success: function (data) {
                 select.parent().parent().find(".select_user").val(data.user_id);
                 select.parent().parent().find(".select_add").val(data.user_address_id);
                 select.parent().parent().find(".approx_time").html(data.approximate_processing_time);
@@ -190,7 +193,7 @@
         });
     });
 
-    
+
 
     $("body").on("click", ".delete-pickup", function () {
         var pickup_id = $(this).attr('data-id');

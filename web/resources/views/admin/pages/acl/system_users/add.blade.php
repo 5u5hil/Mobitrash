@@ -22,14 +22,22 @@
 
                         <p style="color:red;text-align: center;">{{ Session::get('message') }}</p>
 
-                        {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
+                        {!! Form::model($user, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal', 'files'=>true ]) !!}
+                        {!! Form::hidden('id',null) !!}
+                        <div class="form-group">
+                            {!!Form::label('Role','Role',['class'=>'col-sm-2 control-label required']) !!}
+                            <div class="col-sm-10">
+                                {!! Form::select('roles',$roles_name,!empty($user->roles()->first()->id)?$user->roles()->first()->id:null,["class"=>'form-control user-role m-b' , "required"]) !!}
+                            </div>
+                        </div>
                         <div class="form-group">
                             {!!Form::label('Name','Name',['class'=>'col-sm-2 control-label required']) !!}
-                            {!! Form::hidden('id',null) !!}
+                            
                             <div class="col-sm-10">
                                 {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Name', "required"]) !!}
                             </div>
                         </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             {!!Form::label('Phone','Phone Number',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
@@ -37,14 +45,14 @@
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
+                        
+                        <div class="form-group email_id">
                             {!!Form::label('Email','Email',['class'=>'col-sm-2 control-label required']) !!}
                             <div class="col-sm-10">
-                                {!! Form::email('email',null, ["class"=>'form-control' ,"placeholder"=>'Email', "required"]) !!}
+                                {!! Form::email('email',null, ["class"=>'form-control ' ,"placeholder"=>'Email', "required"]) !!}
                             </div>
                         </div>
-
+                        
                         <div class="line line-dashed b-b line-lg pull-in"></div>
                         <div class="form-group">
                             {!!Form::label('Password','Password',['class'=>'col-sm-2 control-label required']) !!}
@@ -53,21 +61,14 @@
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
-
                         <div class="form-group">
-                            {!!Form::label('address','Address',['class'=>'col-sm-2 control-label optional']) !!}
+                            {!!Form::label('Profile Picture','Profile Picture',['class'=>'col-sm-2 control-label optional']) !!}
                             <div class="col-sm-10">
-                                {!! Form::text('address',null, ["class"=>'form-control location', "id"=>"location" ,"placeholder"=>'Address']) !!}
-                                {!! Form::hidden('latitude',null, ["id"=>"latitude"]) !!}
-                                {!! Form::hidden('longitude',null, ["id"=>"longitude"]) !!}
-                                @foreach($user->addresses as $address)
-                                <div class="filelist" style="padding: 10px;">
-                                    <div class="">{{ $address->address }}</a></div><a href="{{ route('admin.users.rmaddress',['id' => $address->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a><div></div>
-                                </div>
-                                @endforeach
+                                {!! Form::file('profile_picture', ["class"=>'form-control' ,"placeholder"=>'Profile Picture']) !!}
                             </div>
-
                         </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        
                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                         <div class="form-group">
@@ -76,7 +77,6 @@
                                 {!! Form::close() !!}
                             </div>
                         </div>
-
                         </form>
                     </div>
                 </div>
@@ -89,36 +89,19 @@
 
 @section("myscripts")
 <script>
-//   $(".SustemUserSubmit").click(function(){
-//       var username = $(".usernameAdmin").val();
-//     $.ajax({
-//         type:"POST",
-//         url:"{{ route('chk_existing_username') }}",
-//         data:{username:username},
-//         cache:false,
-//         success:function(data){
-//             alert(data);
-//         }
-//     });  
-//   }); 
-    initAutocomplete();
-    function initAutocomplete() {
-        if ($('#location').length > 0) {
-            var input1 = document.getElementById('location');
-            var autocomplete1 = new google.maps.places.Autocomplete(input1);
-            google.maps.event.addListener(autocomplete1, 'place_changed', function () {
-                var place = autocomplete1.getPlace();
-                if (!place.geometry) {
-                    alert('no such place found');
-                    $('#latitude, #longitude').val('');
-                    return;
-                }
-                $('#latitude').val(place.geometry.location.lat());
-                $('#longitude').val(place.geometry.location.lng());
-            });
-        }
-    }
-
+    $(document).ready(function () {
+        $(".user-role").change(function(){
+            if($(this).val() == 3 || $(this).val() == 4){
+                $(".email_id input").prop("required",false);
+                $(".email_id label").removeClass("required");
+                $(".email_id label").addClass("optional");
+            }else{
+                $(".email_id input").prop("required",true);
+                $(".email_id label").removeClass("optional");
+                $(".email_id label").addClass("required");
+            }
+        });
+    });
 
 </script>
 

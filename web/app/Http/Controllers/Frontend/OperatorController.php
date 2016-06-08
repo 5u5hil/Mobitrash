@@ -39,6 +39,8 @@ class OperatorController extends Controller {
     }
 
     public function schedules() {
+        $wastetype = Wastetype::where('is_active', 1)->get();
+        $additives = Additive::where('is_active', 1)->get();
         $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address'])->whereHas('operators', function($q) {
                     $q->where('user_id', Input::get("id"));
                 })->orderBy('created_at', 'DESC')->first();
@@ -48,14 +50,19 @@ class OperatorController extends Controller {
             array_push($pickupids, $service->pickup_id);
         }
         if ($schedules) {
+            foreach ($schedules['pickups'] as $key => $pickup) {                
+                unset($schedules['pickups'][$key]);
+                $schedules['pickups'][$pickup->id] = $pickup;
+            }
             foreach ($schedules['pickups'] as $key => $pickup) {
+                $schedules['pickups'][$key]['pickuptime'] = date('h:i A', strtotime($pickup['pickuptime']));
                 if (in_array($pickup->id, $pickupids)) {
                     unset($schedules['pickups'][$key]);
-                } 
+                }
             }
         }
         if ($schedules) {
-            return ['flash' => 'success', 'Schedules' => $schedules];
+            return ['flash' => 'success', 'Schedules' => $schedules, 'Wastetype' => $wastetype, 'Additive' => $additives];
         } else {
             return ['flash' => 'error'];
         }
@@ -65,7 +72,6 @@ class OperatorController extends Controller {
         $wastetype = Wastetype::where('is_active', 1)->get();
         $additives = Additive::where('is_active', 1)->get();
         $pickup = Pickup::where('id', Input::get("id"))->with(['user', 'address'])->first();
-
         if ($wastetype && $pickup && $additives) {
             return ['flash' => 'success', 'Wastetype' => $wastetype, 'Pickup' => $pickup, 'Additive' => $additives];
         } else {
@@ -77,9 +83,10 @@ class OperatorController extends Controller {
         $pickup_data = Input::get("pickup");
         $service_data = Input::get("service");
         $service = new Service;
+        $subscription = Subscription::find($pickup_data['subscription_id']);
         $service->operator_id = $service_data['operator_id'];
-        $service->user_id = $pickup_data['user_id'];
-        $service->address_id = $pickup_data['user_address_id'];
+        $service->user_id = $subscription->user_id;
+        $service->address_id = $subscription->user_address_id;
         $service->schedule_id = $pickup_data['schedule_id'];
         $service->pickup_id = $pickup_data['id'];
         if (isset($service_data['crates_filled'])) {
@@ -110,9 +117,9 @@ class OperatorController extends Controller {
         if (Input::get('attachment')) {
             $att = Input::get('attachment');
             $destinationPath = public_path() . '/uploads/records/';
-            $fileName = time() . '.' . $att['name'];
-            if (File::put($destinationPath . $fileName, base64_decode($att['data']))) {
-                Attachment::create(['record_id' => $record->id, 'file' => $fileName, 'filename' => $att['name'], 'is_active' => 1, "added_by" => Input::get("added_by")]);
+            $fileName = 'Receipt-' . time() . '.jpg';
+            if (File::put($destinationPath . $fileName, base64_decode($att))) {
+                Attachment::create(['record_id' => $record->id, 'file' => $fileName, 'filename' => $fileName, 'is_active' => 1, "added_by" => Input::get("added_by")]);
             }
         }
         return ['flash' => 'success'];
@@ -170,6 +177,47 @@ class OperatorController extends Controller {
         } else {
             return ['flash' => 'error', 'message' => 'Invalid request! Please try again.'];
         }
+    }
+
+    public function offlineDataSave() {
+        $pickups = Input::get('offlinePickup');
+        $kilometers = Input::get('offlineKM');
+        if ($pickups) {
+            $cc= 0;
+            foreach ($pickups as $pickup) {
+                $cc++;
+                $pickup_data = $pickup['pickup'];
+                $service_data = $pickup['service'];
+                $service = new Service;
+                $subscription = Subscription::find($pickup_data['subscription_id']);
+                $service->operator_id = $service_data['operator_id'];
+                $service->user_id = $subscription->user_id;
+                $service->address_id = $subscription->user_address_id;
+                $service->schedule_id = $pickup_data['schedule_id'];
+                $service->pickup_id = $pickup_data['id'];
+                if (isset($service_data['crates_filled'])) {
+                    $service->crates_filled = $service_data['crates_filled'];
+                }
+                $service->time_taken = $service_data['time_taken'];
+                $service->created_at = $service_data['created_at'];
+                $service->save();
+                $service->wastetypes()->sync($service_data['wastetype']);
+                $service->additives()->sync($service_data['additive']);
+            }
+        }
+
+        if ($kilometers) {
+            foreach ($kilometers as $kms) {
+                $schedule = Schedule::find($kms['schedule_id']);
+                if (isset($kms['start'])) {
+                    $schedule->start_kilometer = $kms['start'];
+                } else if (isset($kms['end'])) {
+                    $schedule->end_kilometer = $kms['end'];
+                }
+                $schedule->update();
+            }
+        }
+        return ['flash' => 'success','cnt'=>$cc];
     }
 
 }

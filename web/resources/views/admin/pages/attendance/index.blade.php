@@ -25,10 +25,10 @@
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        if ($field2) {                            
-                            $show_f2 = ''; 
+                        if ($field2) {
+                            $show_f2 = '';
                             $dis_f2 = '';
-                        }                  
+                        }
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.attendance.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
@@ -39,7 +39,9 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
+                        @permission('admin.attendance.add')  
                         <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default pull-right" type="button">Add Attendance</a>-->      
+                        @endpermission 
                     </h3>
                     <div>
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
@@ -69,8 +71,9 @@
                                 <td>{{date('d M Y', strtotime($attendance->date))}}</td>
                                 <td>{{date('d M Y h:i:s A', strtotime($attendance->created_at))}}</td> 
                                 <td>
-                                    
+                                    @permission('admin.attendance.delete')  
                                     <a href="{{ route('admin.attendance.delete',['id' => @$attendance->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
                             </tr>
                             @endforeach
@@ -90,7 +93,7 @@
 @section('myscripts')
 
 <script>
-    if($(".filter_type") != 'date'){
+    if ($(".filter_type") != 'date') {
         $('.datepicker').prop('disabled', true);
     }
     $(".filter_type").change(function () {
@@ -100,7 +103,7 @@
         } else if ($(this).val() == 'date') {
             $(".f2").show().prop('disabled', false);
             $(".f1").hide().prop('disabled', true);
-        } else{
+        } else {
             $(".f1, .f2").hide().prop('disabled', true);
         }
     });

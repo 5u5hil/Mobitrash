@@ -58,11 +58,6 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <h4>Pickups</h4>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                    <div class="row clearfix" >
-                        <div class="col-sm-2 pull-right">
-                            <a class="label label-success active addMore" >Add a Pickup</a> 
-                        </div>
-                    </div>
                     <br />
 
                     <div class="existing">
@@ -107,6 +102,9 @@
                             {!! Form::hidden('id',null) !!}
                             {!! Form::hidden('added_by',Auth::id()) !!}
                             {!! Form::submit('Submit',["class" => "btn btn-primary"]) !!}
+                        </div>
+                        <div class="col-sm-2 pull-right">
+                            <a class=" btn btn-primary active addMore" >Add a Pickup</a> 
                         </div>
                     </div>
                     {!! Form::close() !!} 
@@ -165,7 +163,9 @@
         $('[name*="subscription_id"]').each(function (k, v) {
             $(this).attr("name", "pickup[" + k + "][subscription_id]");
         });
-
+        $('html, body').animate({
+            scrollTop: document.body.scrollHeight
+        }, 1000);
     });
 
     $("body").on("change", ".select_subscription", function () {

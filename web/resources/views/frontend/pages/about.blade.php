@@ -1,6 +1,6 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="300" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
+<!-- <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="300" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
             <div class="vertical-middle verticalmid">
@@ -15,17 +15,21 @@
             </div> 
         </div>
     </div>
-</section>
+</section> -->
   <!-- Content
         ============================================= -->
-        <section id="content">
+        <section id="content" style="margin-bottom:-182px !important;">
 
-            <div class="content-wrap">
+            <div class="content-wrap" style="background: url('{{asset('public/Frontend/images/parallax/home/clouds-background.jpg')}}') no-repeat;
+                 background-size: 100% auto;">
 
                 <div class="container clearfix">
 
                     <div class="col_full">
-
+                      <div class="entry-title entry-title-tc" style="margin-top:30px;">
+                                <h2>About</h2>
+                            </div>
+                          <br>
                         <p>There is a flipside to the euphoria of economic growth - the problem of waste. Every day, our growing cities generate thousands of tons of waste, overloading municipal systems. An intelligent and responsible waste management system is the only smart solution to this vicious issue of waste.</p>
 
                         <p>MobiTrash is India's first comprehensive mobile organic waste collection and solution. MobiTrash makes your everyday waste management easy as never before Segregate, Handover & get it Composted!</p>

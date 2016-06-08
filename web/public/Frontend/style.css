@@ -232,7 +232,7 @@ small { font-family: 'Lato', sans-serif; }
 
 .tleft { text-align: left !important; }
 
-.fright { float: right !important; }
+.fright { float: right !important;margin: 8px -14px; }
 
 .fleft { float: left !important; }
 
@@ -1639,7 +1639,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 #top-cart,
 #side-panel-trigger {
 	float: right;
-	margin: 20px 0 26px 15px;
+	margin: 22px 0 24px 18px;
 }
 
 #top-cart { position: relative; }
@@ -1976,7 +1976,7 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 #header.sticky-header:not(.static-sticky) #top-search,
 #header.sticky-header:not(.static-sticky) #top-cart,
 #header.sticky-header:not(.static-sticky) #side-panel-trigger {
-	margin-top: 20px !important;
+	margin-top: 22px !important;
 	margin-bottom: 20px !important;
 }
 
@@ -6535,7 +6535,7 @@ body:not(.device-touch) .button {
 .button.button-border.button-desc { line-height: 1; }
 
 .button.button-border:hover {
-	background-color: #444;
+	background-color: #87C540 !important;
 	color: #FFF;
 	border-color: transparent !important;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
@@ -6759,7 +6759,7 @@ body:not(.device-touch) .button.button-full strong {
 
 .button-green { background-color: #87C540; }
 .button-3d.button-green:hover,
-.button-reveal.button-green:hover { background-color: #59BA41 !important; }
+.button-reveal.button-green:hover { background-color: #87C540 !important; }
 
 .button-brown { background-color: #774F38; }
 .button-3d.button-brown:hover,
@@ -6797,9 +6797,9 @@ body:not(.device-touch) .button.button-full strong {
 .button-3d.button-amber:hover,
 .button-reveal.button-amber:hover { background-color: #EB9C4D !important; }
 
-.button-black { background-color: #111; }
+.button-black { background-color: rgb(0, 0, 0); }
 .button-3d.button-black:hover,
-.button-reveal.button-black:hover { background-color: #111 !important; }
+.button-reveal.button-black:hover { background-color: #87C540 !important; }
 
 .button-white { background-color: #F9F9F9; }
 .button-3d.button-white:hover,
@@ -7449,7 +7449,7 @@ body:not(.device-touch) .button.button-full strong {
 .feature-box.fbox-bg.fbox-center {
 	margin-top: 68px;
 	padding: 112px 34px 30px;
-	background-color: #FFF;
+	background-color: rgba(255,255,255,0.75);
 	border: 1px solid #E5E5E5;
 	border-radius: 5px;
 }
@@ -8624,6 +8624,7 @@ body:not(.device-touch) .social-icon i {
 	border-color: #CCC;
 	line-height: 44px;
 	padding: 0 15px 0 36px;
+	background: #fff;
 }
 
 .accordion.accordion-border .acctitle i {
@@ -10453,8 +10454,8 @@ body:not(.device-touch) .text-overlay {
 	color: #555555;
 	background-color: #ffffff;
 	background-image: none;
-	border: 2px solid #DDD;
-	border-radius: 0 !important;
+	border: 2px solid #ADACAC;
+	border-radius: 5px !important;
 	-webkit-transition: border-color ease-in-out .15s;
 	-o-transition: border-color ease-in-out .15s;
 	transition: border-color ease-in-out .15s;
@@ -10856,7 +10857,7 @@ label.error { display: none !important; }
 	display: block;
 	background: transparent;
 	padding: 0 0 10px;
-	border-bottom: 2px solid #6E9D35;
+	/*border-bottom: 2px solid #6E9D35;*/
 }
 
 
@@ -12998,7 +12999,7 @@ height: 100%;
 position: absolute; 
 left:0; 
 top:0; 
-background: url('images/parallax/home/hand-holding-plant-ftr.jpg') center center no-repeat;
+background: url('images/parallax/home/mobitrashbackground.jpg') center center no-repeat;
 background-size: cover;
 }
 #headsub ul li.actives > a{
@@ -13047,7 +13048,7 @@ color: #95BB56;
 }
 
 .bordercolors{
-border: 3px double #bfd630 !important;
+border: 5px double #bfd630 !important;
 -moz-border: 3px double #bfd630 !important;
 -webkit-border: 3px double #bfd630 !important;
 -o-border: 3px double #bfd630 !important;
@@ -13055,10 +13056,10 @@ border: 3px double #bfd630 !important;
 }
 
 .contex{
- color: #86c63c !important;
- -moz-color: #86c63c !important;
- -webkit-color: #86c63c !important;
- -o-color: #86c63c !important;
+ color: #666 !important;
+ -moz-color: #666 !important;
+ -webkit-color: #666 !important;
+ -o-color: #666 !important;
 
 }
 
@@ -13110,7 +13111,8 @@ color:#6E9D35;
 
 .loginpan{
 max-width: 400px; 
-background-color: rgba(255,255,255,0.93);	
+background-color: #5b5b5b;
+	
 }
 
 .loginsec{
@@ -13164,4 +13166,46 @@ text-align:center;
 
 .attachfileicon{
   margin: 0px 30px;
+}
+
+.logintex{
+color:#fff !important;	
+}
+
+.bannersec{
+position:relative;	
+}
+
+.bannersec2{
+    position: absolute;
+    width: 266px;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 479px;
+    right: 70px;
+    /*opacity: 0.7;*/
+    border-radius: 16px;
+    top: 65px;	
+}
+
+.bannersec2 p{
+	font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    /*letter-spacing: 2px;*/
+    font-family: 'Raleway',sans-serif;
+    margin: 23px 34px 2px;
+    text-align: center;
+}
+
+.bannersec2 span{
+font-size:25px;
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 	
+}
+
+.bannerbutt{
+  border: 2px solid #fff !important;
+  background-color: #444 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;	
 }

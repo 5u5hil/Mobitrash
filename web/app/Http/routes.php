@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
         Route::get('/get-user-subscriptions', ["as" => "getUserSub", "uses" => "SystemUsersController@getSubscriptions"]);
-        Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
+        Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);        
         Route::get('/remove-schedule-pickup', ["as" => "removeSchedulePickup", "uses" => "ScheduleController@removePickup"]);
         Route::get('/unauthorised', ["as" => "user.unauthorised", "uses" => "LoginController@unauthorised"]);
         Route::get('/record-index-filter', ["as" => "recordIndexFilter", "uses" => "RecordController@indexFilter"]);
@@ -207,7 +207,9 @@ Route::group(['middleware' => ['web']], function () {
                     Route::get('/add', ['as' => 'admin.systemusers.add', 'uses' => 'SystemUsersController@add']);
                     Route::post('/save', ['as' => 'admin.systemusers.save', 'uses' => 'SystemUsersController@save']);
                     Route::get('/edit', ['as' => 'admin.systemusers.edit', 'uses' => 'SystemUsersController@edit']);
+                    Route::get('/profile', ['as' => 'admin.systemusers.profile', 'uses' => 'SystemUsersController@Profile']);
                     Route::post('/update', ['as' => 'admin.systemusers.update', 'uses' => 'SystemUsersController@update']);
+                    Route::post('/update-password', ['as' => 'admin.systemusers.update.password', 'uses' => 'SystemUsersController@passwordUpdate']);
                     Route::get('/delete', ['as' => 'admin.systemusers.delete', 'uses' => 'SystemUsersController@delete']);
                 });
 
@@ -224,6 +226,7 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
         Route::get('/', ["as" => "/", "uses" => "PageController@index"]);
+        Route::get('/payment-success', ["as" => "payment.success", "uses" => "UsersController@paymentSuccess"]);
         Route::get('/faq', ["as" => "user.faq", "uses" => "UsersController@faq"]);
         Route::get('/about', ["as" => "user.about", "uses" => "UsersController@about"]);
         Route::get('/contact-us', ['as' => 'user.contact.view', 'uses' => 'UsersController@contact']);
@@ -235,6 +238,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/forgot-password', ["as" => "user.forgot.password", "uses" => "UsersController@forgotPassword"]);
         Route::post('/forgot-update', ["as" => "user.forgotpassword.update", "uses" => "UsersController@updateForgotPassword"]);
         Route::post('/check-login', ["as" => "user.check.login", "uses" => "UsersController@checkUserLogin"]);
+        Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']);
+        Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
         Route::group(['middleware' => 'CheckWebUser'], function() {
             Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
             Route::get('/my-password', ["as" => "user.mypassword.view", "uses" => "UsersController@password"]);
@@ -243,9 +248,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
             Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']);
             Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']);
-            Route::post('/password-change', ['as' => 'user.password.change', 'uses' => 'UsersController@changePassword']);
-            Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']);
-            Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
+            Route::post('/password-change', ['as' => 'user.password.change', 'uses' => 'UsersController@changePassword']);            
+            
         });
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => 'operator'], function() {
@@ -259,5 +263,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/get-attendance', ["as" => "operator.attendance.get", "uses" => "OperatorController@getAttendance"]);
         Route::post('/update-km', ["as" => "operator.kilometer.update", "uses" => "OperatorController@kilometerUpdate"]);
         Route::post('/save-receipt-details', ["as" => "operator.receipt.save", "uses" => "OperatorController@receiptSave"]);
+        Route::post('/upload-offline-data', ["as" => "upload.offline.data", "uses" => "OperatorController@offlineDataSave"]);
     });
 });

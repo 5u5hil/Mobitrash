@@ -47,8 +47,10 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
+                    <h3 class="box-title">
+                        @permission('admin.schedule.add')
                         <a href="{!! route('admin.schedule.add') !!}" class="btn btn-default pull-right" type="button">Add New Schedule</a>      
+                        @endpermission
                     </h3>
 
                     <div style="text-align: center;">
@@ -81,11 +83,21 @@
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
                                 <!--<td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>-->
                                 <td>
+                                    @permission('admin.schedule.map')
                                     <a href="{{ route('admin.schedule.map',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Map</a>
+                                    @endpermission
+                                    @permission('admin.schedule.show')
                                     <a href="{{ route('admin.schedule.show',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">View</a>                                    
+                                    @endpermission
+                                    @permission('admin.schedule.edit')
                                     <a href="{{ route('admin.schedule.edit',['id' => $asset->id ])  }}"  class="label label-success active" ui-toggle-class="">Edit</a>
+                                    @endpermission
+                                    @permission('admin.schedule.duplicate')
                                     <a class="label label-primary active" data-toggle="modal" data-scheduleid="{{$asset->id}}" data-target="#duplicate-schedule">Duplicate</a>
+                                    @endpermission
+                                    @permission('admin.schedule.delete')
                                     <a href="{{ route('admin.schedule.delete',['id' => $asset->id ])  }}"  class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>                                    
+                                    @endpermission
                                 </td>
 
                             </tr>

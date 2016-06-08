@@ -6,8 +6,8 @@
             <div id="posts">
                        <div class="entry clearfix">  
                             <div class=" entry-title entry-title-tc" style="margin-top:30px;">
-                                <h2>Terms and Conditions</h2>
-                                <p>Please read the following terms and conditions carefully before registering, accessing, browsing, downloading or using the Site.
+                                <h2>Terms & Conditions</h2>
+                                <p>Please read the following terms & conditions carefully before registering, accessing, browsing, downloading or using the Site.
                                 </p>
                             </div>
                             

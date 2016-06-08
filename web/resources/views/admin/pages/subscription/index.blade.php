@@ -66,9 +66,13 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" type="button">Import from Pipedrive</a>      
+                    <h3 class="box-title">
+                        @permission('admin.pipedrive.all')
+                        <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" type="button">Import from Pipedrive</a>      
+                        @endpermission
+                        @permission('admin.subscription.add')
                         <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default pull-right" type="button">Add New Subscription</a>      
-                        
+                        @endpermission
                     </h3>
 
                     <div>
@@ -116,10 +120,13 @@
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
 
                                 <td>
+                                    @permission('admin.subscription.edit')    
                                     <a href="{{ route('admin.subscription.edit',['id' => $asset->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>                                
+                                    @endpermission
+                                    @permission('admin.subscription.delete')    
                                     <a href="{{ route('admin.subscription.delete',['id' => $asset->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
-
                             </tr>
                             @endforeach
                         </tbody>

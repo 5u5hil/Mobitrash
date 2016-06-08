@@ -1,85 +1,85 @@
-# Webalizer V2.01-10 Incremental Data - 04/12/2016 18:55:43
-2016 4 12 18 55 43
-15648 3172 9 110 56 5 27878596 3834 22 0 0 0
-2 368 1088 1 12
-1 1 4664 1 1 1 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-118 67 1592010 2 18 5 0 0
-1534 408 2408910 6 487 6 0 0
-3306 617 2293933 2 778 2 0 0
-3472 707 2949750 3 943 3 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-2300 545 2461624 2 620 3 0 0
-4917 827 16167705 2 987 2 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
+# Webalizer V2.01-10 Incremental Data - 05/29/2016 17:32:31
+2016 5 29 17 32 31
+115810 63621 40 295 69 26 15057385314 6977 132 0 0 0
+2 2 8662 1 29
+27 27 2794824 1 2 1 0 0
+1206 322 9269131 6 253 9 0 0
+1845 384 6807270 3 362 5 0 0
+2630 352 7757434 2 354 4 0 0
+2722 352 16630827 2 410 6 0 0
+769 413 8293654 6 322 17 0 0
+4 4 5056 3 4 3 0 0
+155 129 2615064 3 91 3 0 0
+13105 4842 362149822 5 763 10 0 0
+11295 6597 466670822 4 712 6 0 0
+4121 420 8133175 5 370 8 0 0
+5624 1799 110260746 2 564 2 0 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
+6532 2491 382988467 5 787 8 0 0
+15064 7755 2751415902 2 395 4 0 0
+2974 876 83043183 5 490 11 0 0
+32449 26448 9019128560 8 603 16 0 0
+10413 6485 1025631624 4 339 2 0 0
+0 0 0 0 0 0 0 0
+8 8 16773 5 6 3 0 0
+4537 3706 777817813 4 95 4 0 0
+44 16 288361 3 13 3 0 0
+2 2 6949 2 1 1 0 0
+191 102 4186166 1 34 1 0 0
+89 87 11459793 4 5 3 0 0
+2 2 6949 2 1 1 0 0
+2 2 6949 2 1 1 0 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
+28 27 2794824 2 0 0
 0 0 0 0 0 0
+36 0 0 0 0 0
+1 0 0 0 0 0
 0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-881 188 7433018 227 0 0
-1471 307 2178870 356 0 0
-1361 398 2208913 506 0 0
-1457 278 1044751 322 0 0
-1999 415 6252546 487 0 0
-2221 418 1886943 532 0 0
-1929 277 2113301 356 0 0
-1992 416 2016300 523 0 0
-1315 273 1140233 339 0 0
-1022 202 1603721 186 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-0 0 0 0 0 0
-2
+36 0 0 0 0 0
+1 0 0 0 0 0
+130 43 1674342 7 0 0
+150 128 12872068 23 0 0
+2173 2095 111438504 70 0 0
+5300 3706 628612806 313 0 0
+23720 13405 4001280379 1123 0 0
+14928 7826 1672462158 1054 0 0
+7076 2938 203570055 608 0 0
+9514 6107 2087611689 556 0 0
+17124 9511 2402484466 923 0 0
+7765 2539 364891699 776 0 0
+6855 3931 312601327 670 0 0
+12200 6960 1599709248 488 0 0
+6966 3625 1541141283 235 0 0
+1548 710 110254625 99 0 0
+164 14 683331 3 0 0
+51 48 3292163 19 0 0
+44 8 10347 8 0 0
+321
 0
 0
-3172
+63621
 0
 0
 0
 0
 0
+10375
+0
+41
+430
+0
+33823
 0
 0
-0
-309
-0
-11436
+3
 0
 0
-0
-0
-0
-0
-0
-0
+61
+6780
+1
 0
 0
 0
@@ -87,403 +87,940 @@
 0
 0
 0
+1
 0
 0
 0
 0
-0
-729
+353
 0
 0
 0
 0
 0
 # -urls- 
+/public/uploads/attendance/1463640007.jpg
+1 1 0 5442 0 0 0 0
+/public/Frontend/images/residency_icon.png
+1 356 0 496474 0 0 0 0
+/
+0 750 0 3554576 38 7 0 0
+/public/uploads/records/1463555002.jpg
+1 2 0 5740 0 0 0 0
+/public/Frontend/images/leaf4.png
+1 16 0 201080 0 0 0 0
+/public/uploads/attendance/1463121364.jpg
+1 8 0 17584 0 0 0 0
+/public/uploads/profile/1462276252.jpg
+1 8 0 25134 0 0 0 0
+/public/uploads/records/1463564687.jpg
+1 1 0 5316 0 0 0 0
+/public/Frontend/images/bannerimg/4.jpg
+1 1353 0 371706669 0 0 0 0
 /public/Admin/dist/js/app.min.js
-0 663 0 28260 0 0 0 0
+0 731 0 574620 0 0 0 0
 /public/Admin/plugins/fastclick/fastclick.min.js
-0 665 0 43880 0 0 0 0
+0 731 0 526560 0 0 0 0
+/privacy
+0 59 0 439020 0 1 0 0
+/my-account
+0 97 0 317206 0 1 0 0
+/public/Frontend/js/functions.js
+0 948 0 67904900 0 0 0 0
 /admin
-0 9 0 15155 5 0 0 0
+0 95 0 161436 15 0 0 0
+/public/uploads/attendance/1462446029.jpg
+1 34 0 70312 0 0 0 0
 /public/Admin/dist/css/jqueryui.css
-0 76 0 70434 0 0 0 0
-/admin/schedule/delete
-0 2 0 256 0 0 0 0
+0 1668 0 21012732 0 0 0 0
+/faq
+0 148 0 523564 1 0 0 0
 /public/Admin/dist/img/default-50x50.gif
-1 3 0 552 0 0 0 0
-/admin/master/package/edit
-0 1 0 4869 0 0 0 0
+1 117 0 1288 0 0 0 0
+/operator/attendance
+0 27 0 10156 0 1 0 0
+/public/Frontend/css/fonts/H2DMvhDLycM56KNuAtbJYA.woff2
+0 417 0 8600467 0 0 0 0
+/public/Frontend/css/fonts/Simple-Line-Icons.woff
+0 2 0 118648 0 0 0 0
+/public/uploads/records/1461664365.2.png
+1 1 0 52493 0 0 0 0
+/about
+0 71 0 238833 1 0 0 0
+/public/Frontend/style.css
+0 1050 0 171314213 0 0 0 0
+/public/Frontend/images/bannerimg/19.jpg
+1 1308 0 350676957 0 0 0 0
+/public/Frontend/css/fonts/EsvMC5un3kjyUhB9ZEPPwg.woff2
+0 2 0 25408 0 0 0 0
+/public/Frontend/images/sign_up.png
+1 415 0 4572526 0 0 0 0
 /public/uploads/records/30032016212144.xml
-0 1 0 704 0 0 0 0
+0 2 0 1408 0 0 0 0
+/public/Admin/dist/css/mdp.css
+0 756 0 49984 0 0 0 0
+/operator/faq
+0 22 0 66358 0 0 0 0
+/contact-us
+0 184 0 615481 1 0 0 0
+/operator/receipt-data
+0 37 0 34772 0 1 0 0
+/public/Frontend/images/bannerimg/3.jpg
+1 1425 0 363573811 0 0 0 0
 /public/Admin/plugins/jvectormap/jquery-jvectormap-world-mill-en.js
-0 663 0 432939 0 0 0 0
+0 731 0 8658780 0 0 0 0
 /admin/master/wastetype/edit
-0 5 0 24237 0 0 0 0
-/public/uploads/records/14604460360.jpg
-1 1 0 10675 0 0 0 0
+0 1 0 5185 0 0 0 0
+/public/uploads/records/1462772421.download.jpg
+1 1 0 5316 0 0 0 0
 /public/Admin/dist/js/jquery-ui-timepicker-addon.js
-0 70 0 79671 0 0 0 0
+0 1683 0 47114393 0 0 0 0
+/public/uploads/records/14621881060.jpg
+1 3 0 25134 0 0 0 0
 /admin/assets/add
-0 18 0 93598 0 0 0 0
+0 3 0 16469 0 0 0 0
+/public/uploads/attendance/1462771664.jpg
+1 19 0 32207 0 0 0 0
 /public/Admin/plugins/iCheck/icheck.min.js
-0 3 0 13548 0 0 0 0
+0 22 0 76772 0 0 0 0
+/public/Frontend/images/preloader@2x.gif
+1 10 0 64490 0 0 0 0
+/public/Frontend/css/responsive.css
+0 983 0 24245018 0 0 0 0
 /public/Admin/dist/img/user4-128x128.jpg
-1 3 0 10431 0 0 0 0
-/admin/master/servicetype
-0 11 0 51257 0 0 0 0
-/public/uploads/records/14598577222.jpg
-1 1 0 12567 0 0 0 0
-/admin/master/timeslot/add
-0 7 0 35100 0 0 0 0
+1 43 0 24339 0 0 0 0
+/public/uploads/attendance/1462776529.jpg
+1 17 0 43596 0 0 0 0
+/public/Frontend/css/fullcalendar.css
+0 935 0 14529700 0 0 0 0
+/public/uploads/attendance/1461768411.jpg
+1 30 0 74160 0 0 0 0
+/public/Frontend/images/bannerimg/18.jpg
+1 1349 0 357074747 0 0 0 0
+/public/Frontend/css/fonts/font-icons.ttf
+0 1 0 180780 0 0 0 0
+/public/Frontend/css/validationEngine.jquery.css
+0 934 0 1812608 0 0 0 0
+/public/Frontend/images/bannerimg/2.jpg
+1 1435 0 356488345 0 0 0 0
+/public/Frontend/images/bannerimg/29.jpg
+1 1290 0 341121160 0 0 0 0
 /admin/get-user-approx-time
-0 166 0 57241 0 0 0 0
+0 8 0 4904 0 0 0 0
 /admin/get-user-addresses
-0 351 0 79755 0 0 0 0
+0 178 0 46523 0 1 0 0
 /admin/acl/users
-0 38 0 178003 0 0 0 0
-/admin/master/occupancy/edit
-0 1 0 4865 0 0 0 0
-/public/uploads/records/14598577221.jpg
-1 2 0 10675 0 0 0 0
+0 109 0 645628 1 0 0 0
+/public/uploads/attendance/1463549865.jpg
+1 4 0 29200 0 0 0 0
+/public/Admin/uploads/coupons/moblogo.png
+1 25 0 42228 0 0 0 0
+/operator/save-service-details
+0 19 0 570 1 0 0 0
+/admin/payment/edit
+0 20 0 114368 0 0 0 0
+/public/Frontend/images/bg.jpg
+1 268 0 14549935 0 0 0 0
+/public/uploads/profile/1463638968.jpg
+1 51 0 5413898 0 0 0 0
+/admin/servicehistory
+0 214 0 1514912 3 1 0 0
+/public/Frontend/images/handover.png
+1 409 0 3862711 0 0 0 0
+/public/Frontend/images/leaf1.png
+1 31 0 669372 0 0 0 0
+/public/Frontend/images/bannerimg/17.jpg
+1 1324 0 356319519 0 0 0 0
+/payment-info
+0 69 0 234780 0 1 0 0
+/public/Frontend/script.js
+0 926 0 1053582 0 0 0 0
+/public/Frontend/js/jquery.validationEngine-en.js
+0 915 0 5962200 0 0 0 0
+/public/Frontend/images/bannerimg/1.jpg
+1 148 0 117481678 0 0 0 0
+/public/Frontend/images/bannerimg/28.jpg
+1 1265 0 343583994 0 0 0 0
+/public/uploads/records/14605516950.jpg
+1 2 0 25134 0 0 0 0
+/public/uploads/records/1461755632.IMG-20160426-WA0000.jpg
+1 1 0 93399 0 0 0 0
 /public/Admin/plugins/sparkline/jquery.sparkline.min.js
-0 664 0 172988 0 0 0 0
+0 732 0 2638067 0 0 0 0
+/public/Frontend/css/magnific-popup.css
+0 933 0 4011456 0 0 0 0
 /admin/record/edit
-0 70 0 376836 0 0 0 0
+0 22 0 128774 0 0 0 0
+/public/uploads/records/1463120855.jpg
+1 1 0 5316 0 0 0 0
 /admin/assets/edit
-0 18 0 96189 0 0 0 0
+0 4 0 22061 0 0 0 0
+/admin/payment/add
+0 86 0 531512 2 2 0 0
 /public/Admin/dist/js/jqueryui1.11.4.js
-0 70 0 470596 0 0 0 0
+0 1682 0 274485867 0 0 0 0
+/operator/save-receipt-details
+0 8 0 240 0 0 0 0
+/public/Frontend/css/fonts/-_Ctzj9b56b8RgXW8FArifk_vArhqVIZ0nv9q090hN8.woff2
+0 291 0 4311152 0 0 0 0
 /admin/acl/roles
-0 23 0 110180 0 0 0 0
+0 20 0 103240 0 0 0 0
 /admin/acl/systemusers/edit
-0 10 0 51698 0 0 0 0
-/public/uploads/records/14598577220.jpg
-1 2 0 10000 0 0 0 0
+0 21 0 115171 0 1 0 0
+/public/uploads/records/1462428707.jpg
+1 3 0 30000 0 0 0 0
+/public/uploads/attendance/1462947644.jpg
+1 9 0 59910 0 0 0 0
+/public/Frontend/images/bannerimg/16.jpg
+1 1310 0 360449480 0 0 0 0
+/public/uploads/attendance/1462776499.jpg
+1 17 0 56538 0 0 0 0
 /admin/subscription
-0 241 0 1235987 2 0 0 0
+0 432 0 2980316 3 2 0 0
+/public/Frontend/images/Swachh_icon.png
+1 502 0 2094788 0 0 0 0
 /admin/subscription/add
-0 146 0 801169 0 1 0 0
+0 89 0 627800 0 0 0 0
+/public/Frontend/images/bannerimg/27.jpg
+1 1154 0 332453594 0 0 0 0
 /public/Admin/dist/css/AdminLTE.min.css
-0 664 0 345576 0 0 0 0
-/admin/record/rmfile
-0 1 0 38 0 0 0 0
+0 762 0 5442823 0 0 0 0
+/public/Frontend/images/bulb.png
+1 197 0 8169840 0 0 0 0
+/public/uploads/records/1462366833.jpg
+1 2 0 18256 0 0 0 0
+/public/Frontend/images/bannerimg/38.jpg
+1 1247 0 333667004 0 0 0 0
+/public/uploads/records/1462367894.jpg
+1 1 0 5740 0 0 0 0
+/public/Frontend/js/jquery.js
+0 929 0 51556205 0 0 0 0
 /public/Admin/bootstrap/css/bootstrap.min.css
-0 664 0 490160 0 0 0 0
-/admin/schedule/save
-0 25 0 3334 0 0 0 0
+0 747 0 7720020 0 0 0 0
 /public/Admin/dist/img/user3-128x128.jpg
-1 3 0 10533 0 0 0 0
+1 49 0 24577 0 0 0 0
 /admin/master/frequency/add
-0 12 0 58699 0 0 0 0
+0 1 0 5192 0 0 0 0
 /public/Admin/bootstrap/js/bootstrap.min.js
-0 664 0 143804 0 0 0 0
-/public/uploads/records/05042016114232.jpg
-1 4 0 10675 0 0 0 0
-/public/Admin/plugins/datepicker/datepicker3.css
-0 115 0 101235 0 0 0 0
+0 737 0 2228962 0 0 0 0
+/public/Frontend/images/bannerimg/15.jpg
+1 1329 0 360867916 0 0 0 0
+/public/Frontend/images/education.png
+1 351 0 897582 0 0 0 0
 /admin/record/add
-0 35 0 186500 0 0 0 0
-/public/Admin/plugins/timepicker/bootstrap-timepicker.min.css
-0 95 544 7230 0 0 0 0
-/admin/master/package
-0 16 0 75147 0 0 0 0
+0 16 0 91309 0 0 0 0
+/public/Frontend/css/swiper.css
+0 934 0 9365504 0 0 0 0
+/public/Frontend/images/bannerimg/26.jpg
+1 1282 0 346729684 0 0 0 0
+/public/Frontend/images/leaf_icon.png
+1 17 0 71019 0 0 0 0
+/public/Frontend/images/bannerimg/37.jpg
+1 1272 0 343877304 0 0 0 0
+/public/Frontend/images/icons/iconalt.svg
+0 38 0 11544 0 0 0 0
+/admin/schedule/map
+0 153 0 542036 0 0 0 0
+/public/Admin/bootstrap/fonts/glyphicons-halflings-regular.eot
+0 2 0 40254 0 0 0 0
 /public/Admin/plugins/jQuery/jQuery-2.1.4.min.js
-0 664 0 421725 0 0 0 0
+0 737 0 5229390 0 0 0 0
+/public/uploads/attendance/1463376021.jpg
+1 12 0 33035 0 0 0 0
+/public/Frontend/images/bannerimg/b1.jpg
+1 1 0 1347938 0 0 0 0
 /public/Admin/dist/img/user8-128x128.jpg
-1 3 0 15180 0 0 0 0
+1 45 0 35420 0 0 0 0
+/public/uploads/records/1462362650.jpg
+1 6 0 21264 0 0 0 0
+/public/Frontend/images/bannerimg/14.jpg
+1 1349 0 361652660 0 0 0 0
 /admin/schedule
-0 415 0 2064909 2 0 0 0
+0 370 0 2596802 7 8 0 0
+/public/Frontend/images/bannerimg/25.jpg
+1 1287 0 349944126 0 0 0 0
+/public/uploads/attendance/1463551850.jpg
+1 4 0 34668 0 0 0 0
+/public/Frontend/images/commercial.png
+1 354 0 1933065 0 0 0 0
+/public/Frontend/images/bannerimg/36.jpg
+1 1275 0 342008568 0 0 0 0
+/operator/schedules
+0 158 0 321290 3 6 0 0
+/public/Frontend/css/font-icons.css
+0 934 0 26709312 0 0 0 0
+/public/uploads/records/14625201322.jpg
+1 2 0 11480 0 0 0 0
+/public/Frontend/css/fonts/font-icons.woff
+0 629 0 92746362 0 0 0 0
+/public/uploads/profile/1463641603.jpg
+1 4 0 9128 0 0 0 0
+/public/uploads/records/1462962303.jpg
+1 1 0 5316 0 0 0 0
 /admin/master/wastetype
-0 33 0 155067 0 0 0 0
+0 21 0 106343 2 0 0 0
 /admin/master/frequency
-0 16 0 78461 0 1 0 0
+0 11 0 57236 0 0 0 0
 /admin/acl/systemusers
-0 66 0 313799 0 0 0 0
+0 109 0 627257 0 0 0 0
+/operator/pickup-details
+0 30 0 36859 0 1 0 0
 /admin/acl/roles/add
-0 8 0 50833 0 0 0 0
-/admin/schedule/view
-0 3 0 93 0 0 0 0
+0 2 0 14401 0 0 0 0
+/public/Frontend/images/bannerimg/13.jpg
+1 1353 0 363831107 0 0 0 0
+/public/Frontend/images/fruit5.png
+1 500 0 8595033 0 0 0 0
+/admin/attendance
+0 115 0 655306 2 1 0 0
+/public/Frontend/images/bannerimg/24.jpg
+1 1306 0 349521140 0 0 0 0
+/public/Frontend/css/fonts/JbtMzqLaYbbbCL9X6EvaI_k_vArhqVIZ0nv9q090hN8.woff2
+0 449 0 7251200 0 0 0 0
+/public/Admin/dist/js/moment.js
+0 628 0 8336700 0 0 0 0
+/public/uploads/records/1462772388.download.jpg
+1 1 0 5316 0 0 0 0
 /admin/subscription/edit
-0 127 0 723624 0 1 0 0
+0 59 0 430156 0 0 0 0
+/public/Frontend/images/mobgreen.png
+1 1023 0 4851409 0 0 0 0
 /admin/assets
-0 79 0 387120 0 0 0 0
+0 83 0 481082 1 1 0 0
+/public/uploads/records/1462358858.jpg
+1 3 0 5740 0 0 0 0
+/public/Frontend/images/bannerimg/35.jpg
+1 1273 0 344316792 0 0 0 0
+/public/uploads/attendance/1463635013.jpg
+1 1 0 4828 0 0 0 0
+/public/Frontend/images/midday.png
+1 111 0 380960 0 0 0 0
+/public/uploads/records/14625201321.jpg
+1 2 0 21350 0 0 0 0
+/public/Frontend/css/fonts/PLygLKRVCQnA5fhu3qk5fQ.woff2
+0 1 0 27000 0 0 0 0
+/public/Frontend/js/fullcalendar.js
+0 932 0 185294400 0 0 0 0
+/public/uploads/profile/1462432773.jpg
+1 529 0 319480 0 0 0 0
 /public/Admin/dist/js/demo.js
-0 718 0 524542 0 0 0 0
+0 865 0 2435306 0 0 0 0
+/public/uploads/attendance/1462448734.jpg
+1 33 0 79104 0 0 0 0
 /admin/schedule/show
-0 87 0 6870480 0 0 0 0
-/admin/master/servicetype/edit
-0 1 0 4887 0 0 0 0
+0 43 0 257627 0 0 0 0
+/operator/login
+0 56 0 18354 11 0 0 0
+/public/Frontend/images/bannerimg/12.jpg
+1 1343 0 365801369 0 0 0 0
 /public/Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js
-0 663 0 99969 0 0 0 0
+0 731 0 1999380 0 0 0 0
 /admin/master/cities
-0 8 0 37709 0 0 0 0
+0 12 0 60562 0 0 0 0
+/public/uploads/profile/1462776244.jpg
+1 38 0 21028622 0 0 0 0
 /public/Admin/dist/css/style.css
-0 175 0 5377 0 0 0 0
-/public/uploads/records/14604560940.jpg
-1 1 0 10000 0 0 0 0
-/public/Admin/plugins/timepicker/bootstrap-timepicker.min.js
-0 95 0 46359 0 0 0 0
-/admin/master/timeslot/edit
-0 8 0 40625 0 0 0 0
+0 776 0 68617 0 0 0 0
+/public/Frontend/images/fruit4.png
+1 498 0 7990080 0 0 0 0
+/public/uploads/profile/1462776328.jpg
+1 38 0 15045024 0 0 0 0
+/public/Frontend/images/bannerimg/23.jpg
+1 1278 0 349003206 0 0 0 0
+/public/uploads/attendance/1463572061.jpg
+1 1 0 13087 0 0 0 0
+/public/Frontend/css/animate.css
+0 933 0 36621361 0 0 0 0
+/admin/pipedrive/get-all
+0 41 0 179082 0 0 0 0
+/public/uploads/attendance/1462948273.jpg
+1 8 0 30656 0 0 0 0
+/public/Frontend/css/fonts/CcKI4k9un7TZVWzRVT-T8_k_vArhqVIZ0nv9q090hN8.woff2
+0 57 0 1018024 0 0 0 0
+/public/Frontend/images/bannerimg/34.jpg
+1 1259 0 340791043 0 0 0 0
+/public/uploads/records/14625201320.jpg
+1 2 0 10000 0 0 0 0
+/login
+0 88 0 260252 1 1 0 0
+/public/uploads/profile/1462517267.jpg
+1 40 0 143532 0 0 0 0
 /public/Admin/dist/img/user7-128x128.jpg
-1 3 0 19302 0 0 0 0
+1 45 0 45038 0 0 0 0
+/public/Frontend/js/jquery.validationEngine.js
+0 919 0 39715784 0 0 0 0
+/public/Frontend/images/bannerimg/11.jpg
+1 1216 0 346313018 0 0 0 0
 /admin/record
-0 101 0 444782 0 0 0 0
+0 136 0 924321 3 2 0 0
+/operator/cleaning-data
+0 79 0 58340 1 0 0 0
+/public/Admin/dist/css/images/ui-icons_222222_256x240.png
+1 22 0 63054 0 0 0 0
+/public/Frontend/images/fruit3.png
+1 499 0 5331168 0 0 0 0
+/public/uploads/records/14628598220.docx
+0 1 0 25136 0 0 0 0
+/public/Frontend/images/bannerimg/22.jpg
+1 1289 0 352251062 0 0 0 0
 /public/Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css
-0 664 0 3296 0 0 0 0
+0 738 0 49440 0 0 0 0
+/public/uploads/records/05042016103714.jpg
+1 1 0 10675 0 0 0 0
+/public/Frontend/images/attachfileicon.png
+1 10 0 28096 0 0 0 0
 /admin/renewal
-0 42 0 199799 0 0 0 0
+0 9 0 57529 0 0 0 0
+/public/Frontend/images/bannerimg/33.jpg
+1 1325 0 350358748 0 0 0 0
 /admin/master/recordtype
-0 9 0 42631 0 0 0 0
-/admin/master/package/add
-0 11 0 53525 0 0 0 0
-/admin/master/occupancy/add
-0 14 0 68396 0 0 0 0
-/public/uploads/records/14598579521.jpg
-1 2 0 12567 0 0 0 0
+0 3 0 14991 0 0 0 0
+/admin/payment/save
+0 4 0 1957 1 0 0 0
+/public/Frontend/css/fonts/5xAt7XK2vkUdjhGtt98uncu2Q0OS-KeTAWjgkS85mDg.woff2
+0 95 0 630000 0 0 0 0
+/public/Frontend/images/leafs2.png
+1 17 0 301081 0 0 0 0
+/public/uploads/records/1462513488.download1.jpg
+1 2 0 10000 0 0 0 0
+/public/Frontend/images/bannerimg/10.jpg
+1 1347 0 366034133 0 0 0 0
+/public/uploads/attendance/1463503067.jpg
+1 4 0 12124 0 0 0 0
+/public/uploads/records/14619319880.jpg
+1 2 0 21350 0 0 0 0
+/public/uploads/attendance/1463032185.jpg
+1 8 0 17724 0 0 0 0
 /admin/master/additive
-0 11 0 50912 0 0 0 0
+0 1 0 4936 0 0 0 0
+/public/Frontend/images/fruit2.png
+1 499 0 5466309 0 0 0 0
+/public/Frontend/images/bannerimg/21.jpg
+1 1261 0 347685320 0 0 0 0
+/public/uploads/attendance/1462448670.jpg
+1 1 0 9381 0 0 0 0
+/public/uploads/attendance/1462527334.jpg
+1 21 0 66472 0 0 0 0
 /public/Admin/bootstrap/fonts/glyphicons-halflings-regular.woff
-0 1 0 23424 0 0 0 0
-/admin/schedule/duplicate
-0 20 0 3114 0 0 0 0
+0 2 0 46848 0 0 0 0
+/admin/record/save
+0 5 0 1029 0 0 0 0
+/public/Admin/dist/img/noimage.jpg
+1 86 0 396305 0 0 0 0
+/public/uploads/records/30032016212144.html
+0 2 0 838 0 0 0 0
+/public/Frontend/images/bannerimg/32.jpg
+1 1271 0 348134156 0 0 0 0
+/operator/get-attendance
+0 84 0 2527 12 2 0 0
+/save-contact
+0 23 0 8769 2 1 0 0
+/public/uploads/attendance/1462775662.jpg
+1 16 0 36816 0 0 0 0
+/admin/acl/users/add
+0 16 0 85756 0 0 0 0
+/password-reset
+0 5 0 12590 1 0 0 0
 /admin/remove-schedule-pickup
-0 11 0 321 0 0 0 0
+0 9 0 270 0 0 0 0
 /public/Admin/dist/img/user1-128x128.jpg
-1 3 0 8637 0 0 0 0
-/public/uploads/records/14598579520.jpg
-1 3 0 10000 0 0 0 0
+1 49 0 20153 0 0 0 0
+/public/uploads/attendance/1461835374.jpg
+1 33 0 80896 0 0 0 0
+/public/Frontend/images/loginlogo.png
+1 39 0 160888 0 0 0 0
+/admin/acl/users/edit
+0 63 0 10416874 1 2 0 0
+/public/uploads/records/1462367190.jpg
+1 4 0 30000 0 0 0 0
+/public/uploads/attendance/1462545747.jpg
+1 19 0 37384 0 0 0 0
+/public/Frontend/images/fruit1.png
+1 500 0 5197724 0 0 0 0
+/public/uploads/records/1462862853.jpg
+1 2 0 391900 0 0 0 0
+/public/uploads/records/1463565016.jpg
+1 1 0 5740 0 0 0 0
+/public/Frontend/css/fonts/lined-icons.ttf
+0 1 0 34208 0 0 0 0
+/public/Frontend/images/bannerimg/20.jpg
+1 1291 0 345769285 0 0 0 0
 /admin/master/frequency/edit
-0 1 0 4919 0 0 0 0
+0 1 0 5161 0 0 0 0
+/public/Frontend/images/We-Compost_icon.png
+1 408 0 2668108 0 0 0 0
+/public/Frontend/images/bannerimg/9.jpg
+1 1368 0 377218689 0 0 0 0
+/public/Frontend/css/bootstrap.css
+0 934 0 69652007 0 0 0 0
+/forgot-password
+0 3 0 9219 0 0 0 0
+/public/Frontend/images/bannerimg/31.jpg
+1 1278 0 348257271 0 0 0 0
 /public/Admin/plugins/chartjs/Chart.min.js
-0 663 0 156276 0 0 0 0
+0 731 0 3125520 0 0 0 0
+/public/uploads/attendance/1462528517.jpg
+1 21 0 41592 0 0 0 0
+/my-password
+0 43 0 142322 0 0 0 0
+/public/uploads/attendance/1463571823.jpg
+1 2 0 14390 0 0 0 0
+/public/uploads/attendance/1462771709.jpg
+1 1 0 5341 0 0 0 0
+/public/Frontend/js/moment.min.js
+0 928 0 18656991 0 0 0 0
+/public/Frontend/css/fonts/xkvoNo9fC8O2RDydKj12b_k_vArhqVIZ0nv9q090hN8.woff2
+0 360 0 5734008 0 0 0 0
+/public/Frontend/images/moblogo.png
+1 1 0 3629 0 0 0 0
 /public/Admin/dist/img/user6-128x128.jpg
-1 3 0 13026 0 0 0 0
+1 45 0 30394 0 0 0 0
 /admin/acl/roles/edit
-0 7 0 44354 0 0 0 0
-/public/uploads/records/14598576440jpg
-0 1 0 10000 0 0 0 0
+0 2 0 14490 0 0 0 0
+/public/Frontend/images/preloader.gif
+1 42 0 77520 0 0 0 0
+/public/Frontend/js/plugins.js
+0 938 0 297598104 0 0 0 0
 /admin/schedule/add
-0 187 0 1042502 0 1 0 0
-/admin/master/additive/add
-0 4 0 19238 0 0 0 0
+0 38 0 259211 1 1 0 0
+/public/Frontend/images/bannerimg/8.jpg
+1 1333 0 367519189 0 0 0 0
+/public/uploads/records/1461662203.download1.jpg
+1 1 0 10000 0 0 0 0
 /public/Admin/plugins/slimScroll/jquery.slimscroll.min.js
-0 663 0 18690 0 0 0 0
+0 731 0 373800 0 0 0 0
+/public/Frontend/images/bannerimg/30.jpg
+1 1267 0 345809794 0 0 0 0
+/public/uploads/attendance/1463639893.jpg
+1 1 0 4707 0 0 0 0
 /public/uploads/records/05042016103047.jpg
 1 1 0 10675 0 0 0 0
-/admin/master/fueltype/add
-0 6 0 29337 0 0 0 0
 /admin/master/occupancy
-0 23 0 109288 0 0 0 0
-/admin/master/recordtype/add
-0 4 0 19378 0 0 0 0
+0 1 0 5081 0 0 0 0
+/public/uploads/profile/1461932908.jpg
+1 49 0 320250 0 0 0 0
 /admin/master/wastetype/add
-0 24 0 116967 0 0 0 0
-/public/uploads/records/14604438470.jpg
-1 1 0 10675 0 0 0 0
-/admin/master/servicetype/add
-0 2 0 9770 0 0 0 0
-/admin/master/cities/edit
-0 1 0 4895 0 0 0 0
+0 6 0 31062 0 0 0 0
+/terms
+0 33 0 260089 0 1 0 0
+/admin/get-user-subscriptions
+0 128 0 120661 0 1 0 0
+/public/uploads/attendance/1462721246.jpg
+1 19 0 63072 0 0 0 0
 /admin/master/cities/add
-0 4 0 19572 0 0 0 0
+0 1 0 5160 0 0 0 0
+/public/Admin/dist/js/jquery-ui.multidatespicker.js
+0 742 0 1041000 0 0 0 0
+/public/Frontend/images/bannerimg/7.jpg
+1 1389 0 373207791 0 0 0 0
+/forgot-update
+0 1 0 30 0 0 0 0
 /admin/record/show
-0 26 0 110451 0 0 0 0
-/admin/assets/show
-0 29 0 3971122 0 0 0 0
+0 21 0 102715 1 0 0 0
 /public/Admin/dist/js/pages/dashboard2.js
-0 664 0 35860 0 0 0 0
+0 748 0 274352 0 0 0 0
+/public/Frontend/images/Smart_icon.png
+1 476 0 466197 0 0 0 0
+/public/Frontend/images/favicon.png
+1 416 0 754196 0 0 0 0
+/public/Frontend/css/fonts/0dTEPzkLWceF7z0koJaX1A.woff2
+0 258 0 4642080 0 0 0 0
+/public/uploads/attendance/1462772757.jpg
+1 2 0 8928 0 0 0 0
 /public/Admin/dist/img/user2-160x160.jpg
-1 663 0 21210 0 0 0 0
+1 221 0 49490 0 0 0 0
 /admin/schedule/edit
-0 329 0 1935958 0 0 0 0
+0 133 0 962128 0 1 0 0
 /admin/acl/systemusers/add
-0 21 0 108623 0 0 0 0
+0 18 0 97921 0 0 0 0
 /public/Admin/dist/css/skins/_all-skins.min.css
-0 664 0 167512 0 0 0 0
-/admin/subscription/save
-0 2 0 1062 0 0 0 0
+0 747 0 2638315 0 0 0 0
+/public/uploads/records/1461909615.download3.jpg
+1 4 0 21350 0 0 0 0
+/public/Frontend/css/google-font-loto.css
+0 964 0 3882612 0 0 0 0
+/public/Frontend/css/dark.css
+0 954 0 30546426 0 0 0 0
+/public/Frontend/images/bannerimg/6.jpg
+1 1360 0 372663375 0 0 0 0
 /public/Admin/dist/css/jqueryui-timepicker-adon.css
-0 67 0 1945 0 0 0 0
-/admin/master/fueltype
-0 14 0 65717 0 0 0 0
+0 1668 0 1163110 0 0 0 0
+/public/Frontend/images/subscribe.png
+1 410 0 5832216 0 0 0 0
+/admin/payment
+0 179 0 1055443 1 2 0 0
+/user-subscription
+0 78 0 225147 0 1 0 0
+/public/Frontend/images/parallax/home/1.jpg
+1 38 0 10537600 0 0 0 0
+/public/uploads/attendance/1461835724.jpg
+1 1 0 6808 0 0 0 0
 /public/Admin/dist/img/user5-128x128.jpg
-1 3 0 19338 0 0 0 0
+1 45 0 45122 0 0 0 0
+/operator/update-km
+0 22 0 1281 0 0 0 0
+/public/Admin/dist/css/images/ui-bg_fine-grain_10_f8f7f6_60x60.png
+1 21 0 28341 0 0 0 0
 /admin/
-0 13 0 21977 11 0 0 0
+0 18 0 30528 11 0 0 0
+/public/Frontend/images/segregate.png
+1 409 0 4828465 0 0 0 0
+/public/uploads/attendance/1462545023.jpg
+1 3 0 14302 0 0 0 0
+/public/Frontend/images/leaf5.png
+1 14 0 186651 0 0 0 0
 /admin/dashboard
-0 12 0 116696 0 2 0 0
-/admin/master/timeslot
-0 18 0 86012 0 0 0 0
-/public/Admin/plugins/datepicker/bootstrap-datepicker.js
-0 117 0 140514 0 0 0 0
+0 420 0 2820547 0 1 0 0
+/register
+0 6 0 26519 1 0 0 0
+/public/Frontend/images/We Compost_icon.png
+1 2 0 34972 0 0 0 0
+/admin/unauthorised
+0 1 0 4386 0 0 0 0
+/public/Frontend/images/bannerimg/5.jpg
+1 1367 0 374713180 0 0 0 0
+/public/Frontend/css/fonts/lined-icons.woff
+0 630 0 19587857 0 0 0 0
 /public/Admin/bootstrap/fonts/glyphicons-halflings-regular.woff2
-0 4 0 54084 0 0 0 0
+0 32 0 288448 0 0 0 0
+/public/Frontend/images/parallax/home/hand-holding-plant-ftr.jpg
+1 107 0 11054028 0 0 0 0
+/public/Frontend/css/fonts/1YwB1sO8YE1Lyjf12WNiUA.woff2
+0 449 0 9202688 0 0 0 0
+/my-profile
+0 105 0 352294 0 1 0 0
 # End Of Table - urls
 # -sites- (monthly)
-66.249.84.190
-0 1 1 1689 1 1459862412
+59.182.77.159
+0 66 55 328684 2 1462284542
+- 0 0
+66.249.84.195
+0 5 5 22264 4 1464439825
 - 0 0
 66.249.84.199
-0 2 2 3379 2 1460484612
-/admin/ 0 0
+0 6 6 17563 2 1464198929
+- 0 0
+208.91.115.10
+0 1 1 0 1 1462629622
+- 0 0
+180.148.38.131
+0 116 99 1858813 1 1462719262
+- 0 0
+207.102.138.158
+0 27 27 2794824 1 1462063963
+- 0 0
+182.237.191.53
+0 66 62 198707 4 1462565547
+- 0 0
+182.59.80.126
+0 89 38 3167791 1 1462209474
+- 0 0
+59.182.37.241
+0 54 37 946553 1 1462528161
+- 0 0
+1.39.47.98
+0 82 72 2808940 1 1462357475
+- 0 0
+59.182.83.17
+0 120 69 1072898 2 1462882660
+- 0 0
 203.153.53.54
-0 15631 3155 27463555 13 1460487342
-/admin/record/edit 0 0
+0 102893 61793 13464540728 50 1464371119
+- 0 0
 66.249.85.213
-0 1 1 1689 1 1459859737
+0 3 3 9525 2 1464347703
 - 0 0
 66.249.85.216
-0 3 3 5034 3 1460370557
+0 5 5 11856 1 1462187307
 - 0 0
 66.249.85.219
-0 1 1 1689 1 1460024818
+0 3 3 11013 2 1463911035
 - 0 0
-64.233.172.211
-0 3 3 79518 1 1459859737
+59.182.61.175
+0 53 46 1889752 1 1463408499
 - 0 0
-64.233.172.219
-0 3 3 207709 0 0
+43.242.227.247
+0 3 3 2844 1 1464392052
 - 0 0
-64.233.172.227
-0 3 3 114334 0 0
+59.182.67.211
+0 3 2 3816 1 1462276562
+- 0 0
+66.249.84.203
+0 4 4 10637 1 1464543151
+/ 0 0
+103.226.6.150
+0 183 93 4966933 4 1463523820
+- 0 0
+103.226.6.165
+0 4 4 2875 1 1463960111
+- 0 0
+59.182.109.123
+0 93 85 3305688 1 1463592773
+- 0 0
+1.38.15.1
+0 29 29 19097 1 1463592637
+- 0 0
+110.172.20.77
+0 172 23 680715 2 1462827891
+- 0 0
+1.38.13.2
+0 6 6 7751 1 1462967482
+- 0 0
+1.39.10.91
+0 46 46 29030 2 1463662900
+- 0 0
+59.182.97.229
+0 59 35 304234 4 1462792753
+- 0 0
+59.182.108.182
+0 60 50 1651929 1 1463420406
+- 0 0
+59.182.62.207
+0 1515 1500 129269087 3 1463659563
+- 0 0
+59.182.117.166
+0 66 57 2717688 1 1462968577
+- 0 0
+59.182.0.42
+0 4331 4254 787162227 3 1463682772
+- 0 0
+1.39.9.218
+0 29 20 754474 1 1462722576
+- 0 0
+161.69.163.20
+0 2 2 9021 2 1462916932
+- 0 0
+59.182.60.57
+0 153 87 617253 3 1462555504
+- 0 0
+219.65.79.74
+0 199 180 68084963 4 1463655741
+- 0 0
+1.39.8.243
+0 157 123 4172722 2 1462558100
+- 0 0
+183.87.29.118
+0 305 304 306060 14 1463672206
+- 0 0
+59.182.114.148
+0 4774 4756 573552888 1 1463738112
+- 0 0
+66.249.85.162
+0 2 2 6949 1 1464019788
+- 0 0
+59.182.62.88
+0 26 10 66522 1 1462210072
 - 0 0
 # End Of Table - sites (monthly)
 # -sites- (daily)
 66.249.84.199
-0 1 1 1690 1 1460484612
-/admin/ 0 0
-203.153.53.54
-0 4916 826 16166015 1 1460487342
-/admin/record/edit 0 0
+0 1 1 1844 0 0
+- 0 0
+66.249.84.203
+0 1 1 5105 1 1464543151
+/ 0 0
 # End Of Table - sites (daily)
 # -referrers- 
 http://mobitrash.cruxservers.in/admin/record/add
-1 288
+1 178
 - (Direct Request)
-0 60
+0 1423
 http://mobitrash.cruxservers.in/admin/master/occupancy
-1 75
-http://mobitrash.cruxservers.in/admin/master/package/add
-1 59
-http://mobitrash.cruxservers.in/admin/master/frequency/edit
 1 1
+http://mobitrash.cruxservers.in/admin/payment/edit
+1 113
+http://mobitrash.cruxservers.in/my-profile
+1 544
 http://mobitrash.cruxservers.in/admin/record/show
-1 235
-http://mobitrash.cruxservers.in/admin/assets/show
-1 219
+1 79
 http://mobitrash.cruxservers.in/admin/subscription
-1 976
-http://mobitrash.cruxservers.in/admin/master/recordtype/add
-1 19
-http://mobitrash.cruxservers.in/admin/master/timeslot/edit
-1 29
-http://www.google.com/search
-0 1
+1 1706
+http://mobitrash.cruxservers.in/admin/attendance
+1 1026
+http://mobitrash.cruxservers.in/my-account
+1 1446
+http://mobitrash.cruxservers.in/password-reset
+1 202
+http://mobitrash.cruxservers.in/
+1 74379
 http://mobitrash.cruxservers.in/admin/subscription/edit
-1 1108
-http://mobitrash.cruxservers.in/admin/master/occupancy/add
-1 53
-http://mobitrash.cruxservers.in/admin/renewal
-1 221
-http://mobitrash.cruxservers.in/admin/master/additive/add
-1 19
-http://mobitrash.cruxservers.in/admin/master/fueltype/add
-1 19
-http://mobitrash.cruxservers.in/admin/master/recordtype
-1 9
-http://mobitrash.cruxservers.in/admin/acl/systemusers
-1 293
-http://mobitrash.cruxservers.in/admin/acl/systemusers/add
-1 39
-http://mobitrash.cruxservers.in/public/Admin/dist/css/jqueryui.css
-1 208
-http://mobitrash.cruxservers.in/admin/master/package
-1 87
-http://mobitrash.cruxservers.in/admin/dashboard
-1 60
-http://mobitrash.cruxservers.in/admin/master/wastetype/add
-1 200
-http://mobitrash.cruxservers.in/admin/master/wastetype/edit
-1 10
-http://mobitrash.cruxservers.in/admin
-1 22
-http://mobitrash.cruxservers.in/admin/record/edit
-1 588
-http://mobitrash.cruxservers.in/admin/assets/edit
-1 91
-http://mobitrash.cruxservers.in/admin/master/occupancy/edit
-1 2
-http://mobitrash.cruxservers.in/admin/subscription/add
-1 1296
-http://mobitrash.cruxservers.in/admin/acl/roles/add
-1 8
-http://mobitrash.cruxservers.in/admin/master/additive
-1 29
-http://mobitrash.cruxservers.in/admin/master/cities/add
-1 3
-http://mobitrash.cruxservers.in/admin/master/servicetype
-1 42
-http://mobitrash.cruxservers.in/admin/schedule/show
-1 814
-http://mobitrash.cruxservers.in/admin/master/package/edit
-1 2
-http://mobitrash.cruxservers.in/admin/master/cities
-1 11
-http://mobitrash.cruxservers.in/public/Admin/bootstrap/css/bootstrap.min.css
-1 3
-http://mobitrash.cruxservers.in/admin/acl/users
-1 225
-http://mobitrash.cruxservers.in/admin/master/servicetype/add
-1 17
-http://mobitrash.cruxservers.in/admin/schedule/add
-1 1595
-http://mobitrash.cruxservers.in/admin/master/servicetype/edit
-1 1
-http://mobitrash.cruxservers.in/admin/master/wastetype
-1 54
-http://mobitrash.cruxservers.in/admin/master/frequency
-1 24
-http://mobitrash.cruxservers.in/admin/master/timeslot/add
-1 63
-http://mobitrash.cruxservers.in/admin/
-1 27
-http://mobitrash.cruxservers.in/admin/acl/roles
-1 32
-http://mobitrash.cruxservers.in/admin/assets
-1 287
-http://mobitrash.cruxservers.in/admin/assets/add
+1 514
+http://mobitrash.cruxservers.in/forgot-password
 1 76
-http://mobitrash.cruxservers.in/admin/acl/roles/edit
-1 3
-http://mobitrash.cruxservers.in/admin/master/fueltype
+http://mobitrash.cruxservers.in/contact-us
+1 2912
+http://mobitrash.cruxservers.in/user-subscription
+1 605
+http://mobitrash.cruxservers.in/terms
+1 291
+http://mobitrash.cruxservers.in/admin/schedule/map
+1 994
+http://mobitrash.cruxservers.in/public/Admin/dist/css/mdp.css
+1 21
+http://mobitrash.cruxservers.in/admin/servicehistory
+1 1176
+http://mobitrash.cruxservers.in/admin/renewal
 1 30
-http://mobitrash.cruxservers.in/admin/master/timeslot
-1 26
+http://mobitrash.cruxservers.in/privacy
+1 968
+http://mobitrash.cruxservers.in/admin/master/recordtype
+1 2
+http://mobitrash.cruxservers.in/admin/acl/systemusers
+1 1075
+http://mobitrash.cruxservers.in/operator/faq
+1 541
+http://mobitrash.cruxservers.in/admin/acl/systemusers/add
+1 18
+http://mobitrash.cruxservers.in/public/Admin/dist/css/jqueryui.css
+1 344
+http://mobitrash.cruxservers.in/admin/dashboard
+1 6490
+http://mobitrash.cruxservers.in/admin/master/wastetype/add
+1 10
+http://mobitrash.cruxservers.in/admin/master/wastetype/edit
+1 2
+http://mobitrash.cruxservers.in/admin
+1 485
+http://mobitrash.cruxservers.in/about
+1 768
+http://mobitrash.cruxservers.in/public/Frontend/css/responsive.css
+1 10
+http://www.google.com/url
+0 8
+http://mobitrash.cruxservers.in/payment-info
+1 1197
+http://mobitrash.cruxservers.in/admin/record/edit
+1 120
+http://mobitrash.cruxservers.in/admin/assets/edit
+1 7
+http://mobitrash.cruxservers.in/admin/payment/add
+1 1568
+http://mobitrash.cruxservers.in/admin/subscription/add
+1 1228
+http://mobitrash.cruxservers.in/admin/acl/roles/add
+1 1
+http://mobitrash.cruxservers.in/admin/master/additive
+1 1
+http://mobitrash.cruxservers.in/admin/master/cities/add
+1 2
+http://mobitrash.cruxservers.in/admin/payment
+1 1018
+http://mobitrash.cruxservers.in/my-password
+1 427
+http://mobitrash.cruxservers.in/admin/schedule/show
+1 103
+http://mobitrash.cruxservers.in/public/Frontend/style.css
+1 293
+http://mobitrash.cruxservers.in/admin/master/cities
+1 38
+http://mobitrash.cruxservers.in/public/Admin/bootstrap/css/bootstrap.min.css
+1 18
+http://mobitrash.cruxservers.in/admin/acl/users
+1 275
+http://mobitrash.cruxservers.in/faq
+1 1833
+http://mobitrash.cruxservers.in/admin/schedule/add
+1 239
+http://mobitrash.cruxservers.in/admin/master/wastetype
+1 96
+http://mobitrash.cruxservers.in/admin/master/frequency
+1 19
+http://mobitrash.cruxservers.in/admin/
+1 94
+http://mobitrash.cruxservers.in/admin/acl/roles
+1 90
+http://mobitrash.cruxservers.in/admin/acl/users/edit
+1 774
+http://mobitrash.cruxservers.in/admin/acl/users/add
+1 15
+http://mobitrash.cruxservers.in/admin/assets
+1 149
+http://mobitrash.cruxservers.in/public/Frontend/css/font-icons.css
+1 1120
+http://mobitrash.cruxservers.in/admin/assets/add
+1 4
+http://mobitrash.cruxservers.in/admin/acl/roles/edit
+1 2
+http://mobitrash.cruxservers.in/public/Frontend/css/google-font-loto.css
+1 2229
+http://mobitrash.cruxservers.in/admin/unauthorised
+1 4
 http://mobitrash.cruxservers.in/admin/acl/systemusers/edit
-1 8
+1 119
 http://mobitrash.cruxservers.in/admin/record
-1 402
+1 542
 http://mobitrash.cruxservers.in/admin/schedule
-1 2673
+1 1326
+http://mobitrash.cruxservers.in/register
+1 41
 http://mobitrash.cruxservers.in/admin/master/frequency/add
-1 55
+1 3
+http://mobitrash.cruxservers.in/login
+1 1010
 http://mobitrash.cruxservers.in/admin/schedule/edit
-1 2851
+1 1368
 # End Of Table - referrers
 # -agents- 
-Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
-0 15360
-Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36
-0 85
+Mozilla/4.0 (compatible; MSIE 5.5;Windows NT)
+0 1
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36
+0 20706
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
+0 95
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36
+0 40852
+Mozilla/5.0 (Linux; U; Android 4.4.4; en-gb; HM NOTE 1LTE Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Ch
+0 280
+Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1
+0 724
+Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safa
+0 6223
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36
+0 89
+Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36
+0 9998
+Mozilla/5.0 (Windows NT 6.1; rv:46.0) Gecko/20100101 Firefox/46.0
+0 2406
+Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MOB30H; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/50.0.2
+0 35
+Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; Microsoft; Lumia 640 XL
+0 109
+Mozilla/5.0 (Linux; Android 4.4.4; HM NOTE 1LTE Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/33.0.
+0 234
+Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20120101 Firefox/29.0
+0 2
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4
+0 26
+Mozilla/5.0 (Linux; Android 5.1; Micromax E313 Build/LMY47I; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/48
+0 256
+Microsoft Office Mobile/15.0
+0 2
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36
+0 731
 Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36
-0 186
-Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview) Chrome/27.0.1453 Safari/537.36
-0 9
+0 174
+Mozilla/5.0 (Linux; Android 5.1; Micromax E313 Build/LMY47I) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.95 Mobil
+0 166
+Mozilla/5.0 (Windows NT 6.1; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0
+0 1001
+curl/7.19.7 (x86_64-redhat-linux-gnu) libcurl/7.19.7 NSS/3.12.6.2 zlib/1.2.3 libidn/1.18 libssh2/1.2.2
+0 1
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36
+0 14658
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36
+0 16433
+Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Saf
+0 580
 Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.75 Safari/537.36 Google Favicon
-0 8
+0 28
 # End Of Table - agents
 # -search strings- 
+http://mobitrash.cruxservers.in/
+3
+http://mobitrash.cruxservers.in/payment-info
+1
+http://mobitrash.cruxservers.in/admin/payment
+4
 # End Of Table - search strings
 # -usernames- 
 # End Of Table - usernames

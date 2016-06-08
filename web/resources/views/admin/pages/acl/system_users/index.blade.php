@@ -45,7 +45,9 @@
                         {!! Form::close() !!}
                     </div>
                     <h3 class="box-title">  
+                        @permission('admin.systemusers.add')  
                         <a href="{!! route('admin.systemusers.add') !!}" class="btn btn-default pull-right" type="button">Add New User</a>      
+                        @endpermission
                     </h3>
                 </div>
                 <div>
@@ -74,11 +76,12 @@
                                 <td>{{ $system_user->roles[0]->name }}</td>
                                 <td>{{ date("d-M-Y",strtotime($system_user->created_at)) }}</td>
                                 <td>
-                                    <a href="{!! route('admin.systemusers.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @permission('admin.systemusers.edit')                                    
+                                    <a href="{!! route('admin.systemusers.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>  
+                                    @endpermission
+                                    @permission('admin.systemusers.delete')        
                                     <a href="{!! route('admin.systemusers.delete',['id'=>$system_user->id]) !!}" onclick="return confirm('Are you sure you want to continue?')" class="label label-danger active" ui-toggle-class="">Delete</a>
+                                    @endpermission   
                                 </td>
                             </tr>
                             @endforeach

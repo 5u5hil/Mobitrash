@@ -99,7 +99,9 @@
                                 <td>{{$service->crates_filled}}</td>
                                 <td>
                                     <!--<a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>-->
+                                    @permission('admin.servicehistory.delete')
                                     <a href="{{ route('admin.servicehistory.delete',['id' => $service->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>

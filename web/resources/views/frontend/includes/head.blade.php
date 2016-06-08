@@ -1,5 +1,5 @@
 
-<title>Quick fix for City's Garbage Problems</title>
+<title>MobiTrash</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />

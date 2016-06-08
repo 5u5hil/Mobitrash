@@ -15,17 +15,18 @@ class CheckUser {
 
         if (Auth::id()) {
             $user = User::with('roles')->find(Auth::id());
-
             $roles = $user->roles;
             $roles_data = $roles->toArray();
             $r = Role::find($roles_data[0]['id']);
             $per = $r->perms()->get(['name'])->toArray();
             foreach ($roles_data as $role) {
-                if ($role['id'] == 1) {
+                if ($role['id'] == 2) {
+                    Session::flash('invalidUser', "Access Denied!");
+                }
+                else{
                     return $next($request);
                 }
-            }
-            Session::flash('invalidUser', "Access Denied!");
+            }            
         }
         return redirect()->route('adminLogin');
     }

@@ -91,18 +91,19 @@ class SystemUsersController extends Controller {
             }
             $roles_name[$role['id']] = $role['display_name'];
         }
-        return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
+        return view(Config('constants.adminSystemUsersView') . '.add', compact('user', 'action', 'roles_name'));
     }
 
     public function save() {
         $chk = User::where("email", "=", Input::get('email'))->first();
-
-        if (empty($chk)) {
+        if (empty($chk) || Input::get('roles') == 3 || Input::get('roles') == 4) { 
             $user = new User();
             $user->name = Input::get('name');
             $user->phone_number = Input::get('phone_number');
             $user->email = Input::get('email');
-            $user->password = Hash::make(Input::get('password'));
+            if (Input::get('password')) {
+                $user->password = Hash::make(Input::get('password'));
+            }
             $user->user_type = 1;
             if (Input::file('profile_picture')) {
                 $att = Input::file('profile_picture');
@@ -126,11 +127,12 @@ class SystemUsersController extends Controller {
     }
 
     public function update() {
-
         $user = User::find(Input::get('id'));
         $user->name = Input::get('name');
         $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
+        if (Input::get('password')) {
+            $user->password = Hash::make(Input::get('password'));
+        }
         $user->phone_number = Input::get('phone_number');
         $user->user_type = 1;
         if (Input::file('profile_picture')) {
@@ -166,7 +168,35 @@ class SystemUsersController extends Controller {
             }
             $roles_name[$role['id']] = $role['display_name'];
         }
-        return view(Config('constants.adminSystemUsersView') . '.addEdit', compact('user', 'action', 'roles_name'));
+        return view(Config('constants.adminSystemUsersView') . '.edit', compact('user', 'action', 'roles_name'));
+    }
+
+    public function profile() {
+        $user = User::find(Auth::id());
+        $action = "admin.systemusers.update";
+
+        return view(Config('constants.adminSystemUsersView') . '.profile', compact('user', 'action'));
+    }
+
+    public function passwordUpdate() {
+        $user = User::find(Auth::id());
+        if (Input::get('old_password') && Input::get('new_password') && Input::get('confirm_password')) {
+            $check = Hash::check(Input::get('old_password'), $user->password);
+            if ($check == true) {
+                if ((Input::get('new_password')) == Input::get('confirm_password')) {
+                    $user->password = Hash::make(Input::get('new_password'));
+                    $user->update();
+                    Session::flash('profileSuccess', 'Password updated successfully!');
+                } else {
+                    Session::flash('ProfileError', 'Password not changed: Confirmed Password does not match');
+                }
+            } else {
+                Session::flash('ProfileError', 'Password not changed: Incorrect Old Password');
+            }
+        } else {
+            Session::flash('ProfileError', 'All Fields required');
+        }
+        return redirect()->route('admin.systemusers.profile', array('tab'=>'change-password'));
     }
 
     public function chk_existing_username() {
@@ -191,7 +221,7 @@ class SystemUsersController extends Controller {
     public function addUser() {
         $user = new User();
         $action = "admin.users.save";
-        return view(Config('constants.adminUsersView') . '.addEdit', compact('user', 'action'));
+        return view(Config('constants.adminUsersView') . '.add', compact('user', 'action'));
     }
 
     public function saveUser() {
@@ -228,9 +258,11 @@ class SystemUsersController extends Controller {
         $user = User::find(Input::get('id'));
         $user->name = Input::get('name');
         $user->email = Input::get('email');
-        $user->password = Hash::make(Input::get('password'));
+        if (Input::get('password')) {
+            $user->password = Hash::make(Input::get('password'));
+        }
         $user->phone_number = Input::get('phone_number');
-        $user->user_type = 1;
+        $user->user_type = 2;
         $user->update();
         if (Input::get('address')) {
             $address = new Address();
@@ -247,7 +279,7 @@ class SystemUsersController extends Controller {
     public function editUser() {
         $user = User::find(Input::get('id'));
         $action = "admin.users.update";
-        return view(Config('constants.adminUsersView') . '.addEdit', compact('user', 'action'));
+        return view(Config('constants.adminUsersView') . '.edit', compact('user', 'action'));
     }
 
     public function getAddresses() {
@@ -268,5 +300,6 @@ class SystemUsersController extends Controller {
         return redirect()->back()->with("message", "Address Removed sucessfully");
         exit();
     }
+    
 
 }

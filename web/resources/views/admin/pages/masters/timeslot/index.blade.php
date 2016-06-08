@@ -16,8 +16,10 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">  
+                    <h3 class="box-title">
+                        @permission('admin.timeslot.add')
                         <a href="{!! route('admin.timeslot.add') !!}" class="btn btn-default pull-right" type="button">Add New Timeslot</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -49,11 +51,12 @@
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>
 
                                 <td>
+                                    @permission('admin.timeslot.edit')
                                     <a href="{{ route('admin.timeslot.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @endpermission
+                                    @permission('admin.timeslot.delete')
                                     <a href="{{ route('admin.timeslot.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>

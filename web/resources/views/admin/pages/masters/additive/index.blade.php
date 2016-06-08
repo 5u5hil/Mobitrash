@@ -16,8 +16,10 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">  
+                    <h3 class="box-title"> 
+                        @permission('admin.additive.add')
                         <a href="{!! route('admin.additive.add') !!}" class="btn btn-default pull-right" type="button">Add New Additive</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -43,11 +45,12 @@
                                 <td>{{ $city->name }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>
                                 <td>
+                                    @permission('admin.additive.edit')  
                                     <a href="{{ route('admin.additive.edit',['id' => $city->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
-                                </td>
-
-                                <td>
+                                    @endpermission
+                                    @permission('admin.additive.delete')  
                                     <a href="{{ route('admin.additive.delete',['id' => $city->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
+                                    @endpermission
                                 </td>
 
                             </tr>
