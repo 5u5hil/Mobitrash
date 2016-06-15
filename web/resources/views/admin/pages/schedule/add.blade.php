@@ -31,9 +31,9 @@
                         <div class="col-sm-10">
                             <div class="multidatepicker"></div>
                             {!! Form::text('multiple_dates',null, ["class"=>'form-control', "style"=>"display:none", "id"=>"multiple-dates", 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
-
+                            <div class="date-error" style="color:red;padding: 5px 0px;"></div>
                         </div>
-                        <div class="date-error" style="color:red;"></div>
+                        
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
@@ -226,7 +226,7 @@
         
         var schedule_date = $('#multiple-dates').val();
         if(!schedule_date){
-            $('.date-error').html('Please select atleaste one Schedule Date');
+            $('.date-error').html('Please select at least one Schedule Date');
         }
         else{
             $('.date-error').html('');

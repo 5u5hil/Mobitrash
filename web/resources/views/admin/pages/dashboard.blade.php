@@ -86,75 +86,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!--        <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Subscriptions</span>
-                            <span class="info-box-number">Current Week</span>
-                            <span class="info-box-number">{{ @$subscription['current_week']}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Subscriptions</span>
-                            <span class="info-box-number">Last Week</span>
-                            <span class="info-box-number">{{ @$subscription['last_week'] }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix visible-sm-block"></div>
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-user-plus"></i></span>
-                        <div class="info-box-content">
-                            <span class="info-box-text">Subscriptions</span>
-                            <span class="info-box-number">Current Month</span>
-                            <span class="info-box-number">{{ @$subscription['current_month']}}</span>
-                        </div>
-                    </div>
-                </div>-->
-
+        </div>       
     </div><!-- /.row -->
 
-    <!--<div class="row">-->
-<!--        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-money"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Pending Payments</span>
-                    <span class="info-box-number">Current Month</span>
-                    <span class="info-box-number">{{ @$pending_payment['current_month']}}</span>
-                </div> /.info-box-content 
-            </div> /.info-box 
-        </div> /.col 
-        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-money"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Pending Payments</span>
-                    <span class="info-box-number">Last Month</span>
-                    <span class="info-box-number">{{ @$pending_payment['last_month'] }}</span>
-                </div> /.info-box-content 
-            </div> /.info-box 
-        </div> /.col -->
-<!--        <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">Total Monthly Revenue</span>
-                    <span class="info-box-number">Current Month</span>
-                    <span class="info-box-number">{{ @$monthly_sub_amt }}</span>
-                </div> /.info-box-content 
-            </div> /.info-box 
-        </div> /.col -->
-        <!-- fix for small devices only -->
-        <!--<div class="clearfix visible-sm-block"></div>-->        
-    <!--</div> /.row -->
     <div class="row">        
         <div class="col-md-12">
             <div class="box box-warning" style="background: transparent; border-left: 1px solid #fff;border-bottom: 1px solid #fff;border-right: 1px solid #fff;">
