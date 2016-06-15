@@ -68,6 +68,8 @@
                                 <th>Schedule Name</th>
                                 <th>Van</th>
                                 <th>Schedule For</th>                               
+                                <th>Start KM</th>                               
+                                <th>End KM</th>                               
                                 <th>Last Updated By</th>
                                 <!--<th>Last Updated At</th>-->
 
@@ -80,6 +82,8 @@
                                 <td>{{ $asset->name }}</td> 
                                 <td>{{ @$asset->van()->first()->name }}</td>
                                 <td>{{ date('d M Y', strtotime($asset->for)) }}</td>                                
+                                <td>{{ $asset->start_kilometer }}</td>                                
+                                <td>{{ $asset->end_kilometer }}</td>                                
                                 <td>{{ @$asset->addedBy()->first()->name }}</td>
                                 <!--<td>{{ date('d M Y', strtotime($asset->updated_at)) }}</td>-->
                                 <td>

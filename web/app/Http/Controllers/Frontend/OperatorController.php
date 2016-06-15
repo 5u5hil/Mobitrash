@@ -85,6 +85,7 @@ class OperatorController extends Controller {
         $service = new Service;
         $subscription = Subscription::find($pickup_data['subscription_id']);
         $service->operator_id = $service_data['operator_id'];
+        $service->subscription_id = $pickup_data['subscription_id'];
         $service->user_id = $subscription->user_id;
         $service->address_id = $subscription->user_address_id;
         $service->schedule_id = $pickup_data['schedule_id'];

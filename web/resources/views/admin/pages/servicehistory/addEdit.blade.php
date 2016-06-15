@@ -19,18 +19,38 @@
             <div class="box">
                 <div class="box-body">
 
-                    {!! Form::model($servicetype, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
+                    {!! Form::model($service, ['method' => 'post', 'route' => $action , 'class' => 'form-horizontal' ]) !!}
                     <div class="form-group">
-                        {!!Form::label('City','Servicetype',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('Waste','Waste Collected',['class'=>'col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('name',null, ["class"=>'form-control' ,"placeholder"=>'Servicetype Name', "required"]) !!}
+                            @foreach($wastetype as $waste)
+                            <div style="margin-top: 5px;">{{@$waste['name']}}</div>
+                            {!! Form::number("wastetype[".$waste['id']."][quantity]",$waste['value'], ["class"=>'form-control' ,"placeholder"=>"Qty in kg"]) !!}
+                            @endforeach
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('Active','Active',['class'=>'col-sm-2 optional']) !!}
+                        {!!Form::label('Additives','Additives',['class'=>'col-sm-2']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('is_active',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}
+                            @foreach($additives as $addt)
+                            <div style="margin-top: 5px;">{{@$addt['name']}}</div>
+                            {!! Form::number("additive[".$addt['id']."][quantity]",$addt['value'], ["class"=>'form-control' ,"placeholder"=>"Qty in kg"]) !!}
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('No of Crates','No of Crates',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::number('crates_filled',null, ["class"=>'form-control', "placeholder"=>"No of Crates"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('time_taken','Time Taken',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('time_taken',null, ["class"=>'form-control timepicker', "placeholder"=>"Time Taken"]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

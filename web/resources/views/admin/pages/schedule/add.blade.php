@@ -33,7 +33,7 @@
                             {!! Form::text('multiple_dates',null, ["class"=>'form-control', "style"=>"display:none", "id"=>"multiple-dates", 'placeholder'=>'YYYY-MM-DD', "required"]) !!}
 
                         </div>
-
+                        <div class="date-error" style="color:red;"></div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
@@ -221,6 +221,18 @@
         defaultDate: default_date,
         altField: "#multiple-dates"
     });
+    
+    $("input:submit").click(function(){
+        
+        var schedule_date = $('#multiple-dates').val();
+        if(!schedule_date){
+            $('.date-error').html('Please select atleaste one Schedule Date');
+        }
+        else{
+            $('.date-error').html('');
+        }
+    });
+    
 
 </script>
 

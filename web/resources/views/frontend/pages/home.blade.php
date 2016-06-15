@@ -10,7 +10,7 @@
             <br><br>
             <span>Join Today & Inspire Others!</span> 
             <br> <br>
-            <a href="{{ route('user.login') }}" class="button button-large resbutt1 resbutt2 resbutt1-border resbutt1-large button-border button-rounded bannerbutt">Sign Up Now!</a>
+            <a href="{{ route('user.contact.view') }}" class="button button-large resbutt1 resbutt2 resbutt1-border resbutt1-large button-border button-rounded bannerbutt">Sign Up Now!</a>
         </p>   
         </div>
 <?php endif; ?>

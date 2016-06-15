@@ -18,6 +18,9 @@ class Service extends \Eloquent {
     public function operator() {
         return $this->belongsTo('App\Models\User', 'operator_id');
     }
+    public function subscription() {
+        return $this->belongsTo('App\Models\Subscription', 'subscription_id');
+    }
     public function wastetypes() {
         return $this->belongsToMany('App\Models\Wastetype', 'has_wastetypes', 'service_id', 'wastetype_id')->withPivot('quantity');
     }
