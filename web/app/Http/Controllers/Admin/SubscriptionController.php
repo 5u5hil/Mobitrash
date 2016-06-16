@@ -43,7 +43,7 @@ class SubscriptionController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'user_id') {
                 $field6 = Input::get('filter_value');
-                $subscription = Subscription::whereHas('user', function($q) {
+                $subscription = Subscription::where('is_trial','!=', 1)->whereHas('user', function($q) {
                             $q->where('name', 'LIKE' , "%".Input::get('filter_value')."%");
                         })->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
             } else {
@@ -60,22 +60,19 @@ class SubscriptionController extends Controller {
                     $field5 = Input::get('filter_value');
                     $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
                 }
-                $subscription = Subscription::where(Input::get('filter_type'), $filter_value)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+                $subscription = Subscription::where('is_trial','!=', 1)->where(Input::get('filter_type'), $filter_value)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
             }
         } else if (Input::get('filter_type') == 'renewal') {
             $filter_type = Input::get('filter_type');
             $now = Date('Y-m-d');
             $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
-            $subscription = Subscription::where('end_date', '<=', $now_10days)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::where('is_trial','!=', 1)->where('end_date', '<=', $now_10days)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         } else {
-            $subscription = Subscription::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::where('is_trial','!=', 1)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6'));
     }
-
-    function renewal() {
-        $now = Date('Y-m-d');
-        $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
+    function indexTrial() {
         $f = Frequency::where("is_active", 1)->get()->toArray();
         $frequency = [];
         foreach ($f as $value) {
@@ -87,7 +84,7 @@ class SubscriptionController extends Controller {
         foreach ($t as $value) {
             $timeslot[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'All', 'timeslot_id' => 'Preffered Timeslot', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date');
+        $filter = array('' => 'All', 'renewal' => 'Due for Renewal', 'frequency_id' => 'Frequency', 'amt_paid' => 'Amount Paid', 'start_date' => 'Start Date', 'end_date' => 'End Date', 'user_id' => 'User Name');
 
         $filter_type = NULL;
         $filter_value = NULL;
@@ -96,26 +93,43 @@ class SubscriptionController extends Controller {
         $field3 = NULL;
         $field4 = NULL;
         $field5 = NULL;
+        $field6 = NULL;
         if (Input::get('filter_value') && Input::get('filter_type')) {
             $filter_type = Input::get('filter_type');
             $filter_value = Input::get('filter_value');
-            if ($filter_type == 'timeslot_id') {
-                $field1 = Input::get('filter_value');
-            } else if ($filter_type == 'frequency_id') {
-                $field2 = Input::get('filter_value');
-            } else if ($filter_type == 'amt_paid') {
-                $field3 = Input::get('filter_value');
-            } else if ($filter_type == 'start_date') {
-                $field4 = Input::get('filter_value');
-            } else if ($filter_type == 'end_date') {
-                $field5 = Input::get('filter_value');
+            if ($filter_type == 'user_id') {
+                $field6 = Input::get('filter_value');
+                $subscription = Subscription::where('is_trial', 1)->whereHas('user', function($q) {
+                            $q->where('name', 'LIKE' , "%".Input::get('filter_value')."%");
+                        })->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+            } else {
+                if ($filter_type == 'timeslot_id') {
+                    $field1 = Input::get('filter_value');
+                } else if ($filter_type == 'frequency_id') {
+                    $field2 = Input::get('filter_value');
+                } else if ($filter_type == 'amt_paid') {
+                    $field3 = Input::get('filter_value');
+                } else if ($filter_type == 'start_date') {
+                    $field4 = Input::get('filter_value');
+                    $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
+                } else if ($filter_type == 'end_date') {
+                    $field5 = Input::get('filter_value');
+                    $filter_value = date("Y-m-d", strtotime(Input::get('filter_value')));
+                }
+                $subscription = Subscription::where('is_trial', 1)->where(Input::get('filter_type'), $filter_value)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
             }
-            $subscription = Subscription::where('end_date', '<=', $now_10days)->where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+        } else if (Input::get('filter_type') == 'renewal') {
+            $filter_type = Input::get('filter_type');
+            $now = Date('Y-m-d');
+            $now_10days = Date('Y-m-d', strtotime($now . ' +10 day'));
+            $subscription = Subscription::where('is_trial', 1)->where('end_date', '<=', $now_10days)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         } else {
-            $subscription = Subscription::where('end_date', '<=', $now_10days)->paginate(Config('constants.paginateNo'));
+            $subscription = Subscription::where('is_trial', 1)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
-        return view(Config('constants.adminRenewalView') . '.renewal', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5'));
+        return view(Config('constants.adminSubscriptionView') . '.index_trial', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6'));
     }
+
+    
 
     public function add() {
         $subscription = new Subscription();

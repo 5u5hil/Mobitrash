@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Schedule;
+use App\Models\VanLocation;
 use App\Models\Wastetype;
 use App\Models\Additive;
 use App\Models\Pickup;
@@ -219,6 +220,22 @@ class OperatorController extends Controller {
             }
         }
         return ['flash' => 'success','cnt'=>$cc];
+    }
+    public function locationUpdate() {
+        $schedule_id = Input::get('id');
+        $latitude = Input::get('lat');
+        $longitude = Input::get('lng');
+        if ($schedule_id && $latitude && $longitude) {
+            $van_location = new VanLocation();
+            $van_location->schedule_id = $schedule_id;
+            $van_location->latitude = $latitude;
+            $van_location->longitude = $longitude;
+            $van_location->save();
+            return ['flash' => 'success'];
+        }else{
+            return ['flash' => 'error'];
+        }
+        
     }
 
 }

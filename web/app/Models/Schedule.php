@@ -22,9 +22,15 @@ class Schedule extends \Eloquent {
     public function van() {
         return $this->belongsTo('App\Models\Asset', 'van_id');
     }
+    
+    public function vanlocation() {
+        return $this->hasMany('App\Models\VanLocation', 'schedule_id');
+    }
 
     public function pickups() {
         return $this->hasMany('App\Models\Pickup', 'schedule_id')->orderBy('pickuptime','ASC');
     }
+    
+    
     
 }

@@ -112,6 +112,9 @@
                                         @foreach($van['schedules']['0']['pickups'] as $pickup)
                                         <li><a>{{$pickup['subscription']['name'] }}<span class="pull-right"><?php echo $pickup['isPicked'] ? '<i class="fa fa-check text-success"></i>' : '' ?></span></a></li>
                                         @endforeach
+                                        <li><div class="box-footer clearfix">
+                                                <a href="{{route('admin.location.map',['id' => $van['schedules'][0]['id'] ])}}" target="_BLANK" class="btn btn-sm btn-success btn-flat pull-right">View on Map</a>
+                                            </div></li>
                                     </ul>
                                 </div>
                             </div>

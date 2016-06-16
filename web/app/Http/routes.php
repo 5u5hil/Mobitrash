@@ -38,7 +38,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
         Route::group(['middleware' => 'CheckUser'], function() {
-            Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "LoginController@dashboard"]);
+            Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "PageController@dashboard"]);
+            Route::get('/map', ["as" => "admin.location.map", "uses" => "PageController@vanLocationMap"]);
+            Route::post('/location-get', ["as" => "admin.location.get", "uses" => "PageController@vanLocationGet"]);
             Route::group(['prefix' => 'master'], function() {
                 Route::group(['prefix' => 'cities'], function() {
                     Route::get('/', ['as' => 'admin.cities.view', 'uses' => 'CitiesController@index']);
@@ -123,6 +125,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::group(['prefix' => 'subscription'], function() {
                 Route::get('/', ['as' => 'admin.subscription.view', 'uses' => 'SubscriptionController@index']);
+                Route::get('/trial', ['as' => 'admin.subscription.trial', 'uses' => 'SubscriptionController@indexTrial']);
                 Route::get('/add', ['as' => 'admin.subscription.add', 'uses' => 'SubscriptionController@add']);
                 Route::post('/save', ['as' => 'admin.subscription.save', 'uses' => 'SubscriptionController@save']);
                 Route::get('/edit', ['as' => 'admin.subscription.edit', 'uses' => 'SubscriptionController@edit']);
@@ -136,6 +139,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::group(['prefix' => 'pipedrive'], function() {
                 Route::get('/get-all', ['as' => 'admin.pipedrive.all', 'uses' => 'PipedriveController@getAll']);
+                Route::get('/get-trial', ['as' => 'admin.pipedrive.trial', 'uses' => 'PipedriveController@getTrial']);
             });
 
             Route::group(['prefix' => 'servicehistory'], function() {
@@ -264,5 +268,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/update-km', ["as" => "operator.kilometer.update", "uses" => "OperatorController@kilometerUpdate"]);
         Route::post('/save-receipt-details', ["as" => "operator.receipt.save", "uses" => "OperatorController@receiptSave"]);
         Route::post('/upload-offline-data', ["as" => "upload.offline.data", "uses" => "OperatorController@offlineDataSave"]);
+        Route::post('/update-location', ["as" => "operator.location.update", "uses" => "OperatorController@locationUpdate"]);
     });
 });
