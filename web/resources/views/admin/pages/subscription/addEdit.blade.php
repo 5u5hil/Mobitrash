@@ -159,6 +159,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('dop','Tial',['class'=>'col-sm-2']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('is_trial',[0 => "No", 1 => "Yes"],null, ["class"=>'return-of-compost form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             {!! Form::hidden('id',null) !!}
                             {!! Form::hidden('added_by',Auth::id()) !!}

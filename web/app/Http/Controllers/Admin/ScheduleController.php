@@ -47,7 +47,7 @@ class ScheduleController extends Controller {
 
     public function add() {
         $schedule = new Schedule();
-        $pickups = $schedule->pickups()->with('user', 'address','subscription')->get();
+        $pickups = $schedule->pickups()->with('user', 'address', 'subscription')->get();
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
@@ -77,7 +77,7 @@ class ScheduleController extends Controller {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
 
-        $c = Subscription::get()->toArray();
+        $c = Subscription::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
             $subscriptions[$value['id']] = $value['name'];
@@ -88,8 +88,8 @@ class ScheduleController extends Controller {
 
     public function edit() {
         $schedule = Schedule::find(Input::get('id'));
-        $pickups = $schedule->pickups()->with('user', 'address','subscription')->get();
-        
+        $pickups = $schedule->pickups()->with('user', 'address', 'subscription')->get();
+
         $userss = Role::find(3)->users->toArray();
         $users = [];
         foreach ($userss as $value) {
@@ -119,7 +119,7 @@ class ScheduleController extends Controller {
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
-        $c = Subscription::get()->toArray();
+        $c = Subscription::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
             $subscriptions[$value['id']] = $value['name'];
@@ -132,16 +132,16 @@ class ScheduleController extends Controller {
     public function show() {
         $schedule = Schedule::find(Input::get('id'));
         $pickups = $schedule->pickups()->with('user', 'address', 'subscription')->get();
-        
+
         $operators = $schedule->operators->toArray();
         $drivers = $schedule->drivers->toArray();
 
         return view(Config('constants.adminScheduleView') . '.show', compact('schedule', 'drivers', 'pickups', 'users', 'vans', 'operators'));
     }
-    
+
     public function map() {
         $schedule = Schedule::find(Input::get('id'));
-        $pickups = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();   
+        $pickups = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();
 //        Controller::pr($pickups);
         return view(Config('constants.adminScheduleView') . '.map', compact('schedule', 'pickups', 'users', 'vans'));
     }
@@ -157,6 +157,8 @@ class ScheduleController extends Controller {
 
     public function save() {
         $schedule_dates = explode(', ', Input::get('multiple_dates'));
+        $expired = NULL;
+        $error_message = 'Pickup Not created for expired subscriptions: ';
         foreach ($schedule_dates as $sdate) {
             $schedule = new Schedule;
             $schedule->for = $sdate;
@@ -167,18 +169,30 @@ class ScheduleController extends Controller {
 
             if (Input::get("pickup")) {
                 foreach (Input::get("pickup") as $pickup) {
-                    $pickup['schedule_id'] = $schedule->id;
-                    Pickup::create($pickup);
+                    $subscription = Subscription::where('id', $pickup['subscription_id'])->first(['id', 'name', 'start_date', 'end_date'])->toArray();
+                    $start_date = strtotime($subscription['start_date']);
+                    $end_date = strtotime($subscription['end_date']);
+                    $sch_date = strtotime($sdate);
+                    if ($start_date < $sch_date && $end_date > $sch_date) {
+                        $pickup['schedule_id'] = $schedule->id;
+                        Pickup::create($pickup);
+                    } else {
+                        $expired .= '<div>for: ' . date('d M Y', strtotime($sdate)) . ' - ' . $subscription['name'] . '</div>';
+                    }
                 }
             }
         }
 
-        Session::flash('Success', 'Schedule Added Successfully!');
+        if ($expired) {
+            Session::flash('Error', $error_message . $expired);
+        }
+        Session::flash('message', 'Schedule Added Successfully!');
         return redirect()->route('admin.schedule.view');
     }
 
     public function update() {
-
+        $expired = NULL;
+        $error_message = 'Pickup Not created for expired subscriptions: ';
         $schedule = Schedule::findOrNew(Input::get('id'));
         $schedule->fill(Input::except('operators', 'drivers', 'pickup'))->save();
         $schedule->operators()->sync(Input::get('operators'));
@@ -186,11 +200,22 @@ class ScheduleController extends Controller {
         Pickup::where("schedule_id", $schedule->id)->delete();
         if (Input::get("pickup")) {
             foreach (Input::get("pickup") as $pickup) {
-                $pickup['schedule_id'] = $schedule->id;
-                Pickup::create($pickup);
+                $subscription = Subscription::where('id', $pickup['subscription_id'])->first(['id', 'name', 'start_date', 'end_date'])->toArray();
+                $start_date = strtotime($subscription['start_date']);
+                $end_date = strtotime($subscription['end_date']);
+                $sch_date = strtotime(Input::get('for'));
+                if ($start_date < $sch_date && $end_date > $sch_date) {
+                    $pickup['schedule_id'] = $schedule->id;
+                    Pickup::create($pickup);
+                } else {
+                    $expired .= '<div>for: ' . date('d M Y', strtotime(Input::get('for'))) . ' - ' . $subscription['name'] . '</div>';
+                }
             }
         }
-        Session::flash('Success', 'Schedule Edited Successfully!');
+        if ($expired) {
+            Session::flash('Error', $error_message . $expired);
+        }
+        Session::flash('message', 'Schedule Edited Successfully!');
         return redirect()->route('admin.schedule.view');
     }
 

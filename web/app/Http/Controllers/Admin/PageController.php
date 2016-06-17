@@ -64,9 +64,27 @@ class PageController extends Controller {
             }
         }
         $monthly_sub_amt = Payment::where('billing_method', 1)->where('invoice_month', date('Y-m'))->sum('invoice_amount');
+        
+        $waste_till_date_sum = 0;
+        
+        $allwastes = array();
+        $waste_till_date = Service::with('wastetypes')->get()->toArray();
+        foreach ($waste_till_date as $totalwaste) {
+            foreach ($totalwaste['wastetypes'] as $key => $wastetype) {
+                $allwastes[$wastetype['id']]['id'] = $wastetype['id'];
+                $allwastes[$wastetype['id']]['name'] = $wastetype['name'];
+                if (isset($allwastes[$wastetype['id']]['total_quantity'])) {
+                    $allwastes[$wastetype['id']]['total_quantity'] += $wastetype['pivot']['quantity'];
+                } else {
+                    $allwastes[$wastetype['id']]['total_quantity'] = $wastetype['pivot']['quantity'];
+                }
+                $waste_till_date_sum = $waste_till_date_sum + $wastetype['pivot']['quantity'];
+            }
+            
+        }
+
         $wastes = array();
         $totalwastes = Service::where('created_at', 'LIKE', date('Y-m-d') . "%")->with('wastetypes')->get()->toArray();
-        
         foreach ($totalwastes as $totalwaste) {
             foreach ($totalwaste['wastetypes'] as $key => $wastetype) {
                 $wastes[$wastetype['id']]['id'] = $wastetype['id'];
@@ -78,10 +96,8 @@ class PageController extends Controller {
                 }
             }
         }
-
         $additives = array();
         $totaladditives = Service::where('created_at', 'LIKE', date('Y-m-d') . "%")->with('additives')->get()->toArray();
-
         foreach ($totaladditives as $totaladditive) {
             foreach ($totaladditive['additives'] as $key => $additive) {
                 $additives[$additive['id']]['id'] = $additive['id'];
@@ -93,8 +109,13 @@ class PageController extends Controller {
                 }
             }
         }
-        
+
         $pia_colors = ['#F15854', '#5DA5DA', '#60BD68', '#FAA43A', '#F17CB0', '#B2912F', '#B276B2', '#DECF3F', '#00FF66', '#5668E2', '#3B3178', '#3B5323'];
+        $cnt = 0;
+        foreach ($allwastes as $key => $waste) {
+            $allwastes[$key]['color'] = $pia_colors[$cnt];
+            $cnt++;
+        }
         $cnt = 0;
         foreach ($wastes as $key => $waste) {
             $wastes[$key]['color'] = $pia_colors[$cnt];
@@ -105,18 +126,20 @@ class PageController extends Controller {
             $additives[$key]['color'] = $pia_colors[$cnt];
             $cnt++;
         }
-        return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'wastes', 'additives']));
+        return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'allwastes', 'wastes', 'additives', 'waste_till_date_sum']));
     }
-    
-    public function vanLocationMap(){
-        $schedule = Schedule::with('van')->find(Input::get('id'));        
+
+    public function vanLocationMap() {
+        $schedule = Schedule::with('van')->find(Input::get('id'));
         $locations = $schedule->vanlocation->toArray();
+        $pickups = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();
 //        dd($locations);
-        return view(Config('constants.adminView') . '.map', compact(['schedule', 'locations']));
+        return view(Config('constants.adminView') . '.map', compact(['schedule', 'locations', 'pickups']));
     }
-    public function vanLocationGet(){
-        $schedule = Schedule::with('van')->find(Input::get('id'));        
-        $locations = VanLocation::where('schedule_id',Input::get('id'))->orderBy('created_at','desc')->first()->toArray();
+
+    public function vanLocationGet() {
+        $schedule = Schedule::with('van')->find(Input::get('id'));
+        $locations = VanLocation::where('schedule_id', Input::get('id'))->orderBy('created_at', 'desc')->first()->toArray();
         return $locations;
     }
 

@@ -56,6 +56,7 @@
                     <div style="text-align: center;">
                         <p style="color:green;">{{ Session::get('message') }}</p>
                         <p style="color:green;">{{ html_entity_decode(Session::get('duplicateSuccess')) }}</p>
+                        <div style="color:red;"><?php echo Session::get('Error'); ?></div>
                     </div>
 
                 </div>

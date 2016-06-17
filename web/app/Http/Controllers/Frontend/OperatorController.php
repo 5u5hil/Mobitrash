@@ -226,8 +226,11 @@ class OperatorController extends Controller {
         $latitude = Input::get('lat');
         $longitude = Input::get('lng');
         if ($schedule_id && $latitude && $longitude) {
-            $van_location = new VanLocation();
-            $van_location->schedule_id = $schedule_id;
+            $van_location = VanLocation::where('schedule_id',$schedule_id)->first();
+            if(!$van_location){
+                $van_location = new VanLocation();
+                $van_location->schedule_id = $schedule_id;
+            }  
             $van_location->latitude = $latitude;
             $van_location->longitude = $longitude;
             $van_location->save();

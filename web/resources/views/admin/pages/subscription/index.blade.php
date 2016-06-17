@@ -112,8 +112,8 @@
                                 <td>{{ @$asset->prefered_timeslot }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>
-                                <td>{{ $asset->start_date ? date('d M Y', strtotime($asset->start_date)) : '' }}</td>
-                                <td>{{ $asset->end_date ? date('d M Y', strtotime($asset->end_date)): '' }}</td>
+                                <td>{{ $asset->start_date != '0000-00-00' && $asset->start_date ? date('d M Y', strtotime($asset->start_date)) : '' }}</td>
+                                <td>{{ $asset->end_date != '0000-00-00' && $asset->end_date ? date('d M Y', strtotime($asset->end_date)): '' }}</td>
                                 <td>{{ $asset->max_waste }}</td>
                                 <td>@foreach($asset->wastetypes as $waste)
                                     <div>{{ $waste->name }}</div>

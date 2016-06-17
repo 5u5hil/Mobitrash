@@ -1,12 +1,10 @@
-<?php 
-
-?>
+<?php ?>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            
+
         </div>
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -29,16 +27,16 @@
                     <span>Service History</span>
                 </a>
             </li>
-            <li class=" {{ preg_match("/admin.subscription.view|admin.renewal.view/",Route::currentRouteName())? 'active' : ''}}">
-                <a href="{{ route('admin.subscription.view') }}">
+            <li class=" {{ preg_match("/admin.subscription.view|admin.subscription.trial/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="">
                     <i class="fa fa-user-plus"></i>
                     <span>User Subscriptions</span>
                 </a>
-                <!--                <ul class="treeview-menu">
-                                    <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
-                                    <li class="{{ preg_match("/admin.renewal.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.renewal.view') }}"><i class="fa fa-calendar-check-o"></i>Due for Renewal</a></li>
-                                    
-                                </ul>-->
+                <ul class="treeview-menu">
+                    <li class="{{ preg_match("/admin.subscription.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.view') }}"><i class="fa fa-user-plus"></i>All Subscriptions</a></li>
+                    <li class="{{ preg_match("/admin.subscription.trial/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.subscription.trial') }}"><i class="fa fa-calendar-check-o"></i>Trial Subscriptions</a></li>
+
+                </ul>
             </li>  
             <li class=" {{ preg_match("/admin.assets.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.assets.view') }}">
@@ -60,7 +58,7 @@
                     <span>Payment Management</span>
                 </a>
             </li>
-            
+
             <li class=" {{ preg_match("/admin.attendance.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="{{ route('admin.attendance.view') }}">
                     <i class="fa fa-check-square"></i>

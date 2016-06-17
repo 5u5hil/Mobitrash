@@ -78,9 +78,66 @@ $joureny .= ']';
             map: jmap,
             icon: symbol,
         });
-        drawPolyline();
-    }
+        //drawPolyline();
+        }
     initJMap();
+    
+         ////////////////////////////////Marker
+    var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    var icons = [
+        iconURLPrefix + 'red-dot.png',
+        iconURLPrefix + 'green-dot.png',
+        iconURLPrefix + 'blue-dot.png',
+        iconURLPrefix + 'orange-dot.png',
+        iconURLPrefix + 'purple-dot.png',
+        iconURLPrefix + 'pink-dot.png',
+        iconURLPrefix + 'yellow-dot.png'
+    ];
+
+    var locations = [
+<?php
+foreach ($pickups as $pickup):
+    if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
+        echo "['<h4>" . $pickup['subscription']['name'] . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
+    }
+endforeach;
+?>
+    ];
+
+    var infowindow = new google.maps.InfoWindow({
+        maxWidth: 160
+    });
+    var iconsLength = icons.length;
+    var markers = new Array();
+    var iconCounter = 0;
+    for (var i = 0; i < locations.length; i++) {
+        var marker1 = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: jmap,
+            icon: icons[iconCounter]
+        });
+        markers.push(marker1);
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(jmap, marker);
+            }
+        })(marker1, i));
+        iconCounter++;
+        // We only have a limited number of possible icon colors, so we may have to restart the counter
+        if (iconCounter >= iconsLength) {
+            iconCounter = 0;
+        }
+    }
+    function autoCenter() {
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(marker.position);
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].position);
+        }
+        jmap.fitBounds(bounds);
+    }
+    autoCenter();
     var numDeltas = 100;
     var delay = 10; //milliseconds
     var i = 0;
@@ -115,19 +172,19 @@ $joureny .= ']';
         }
     }
 
-    function drawPolyline() {
-        var poly_path = journey_path;
-        if (poly_path.length < 1) {
-            poly_path = [];
-        }
-        polyline = new google.maps.Polyline({
-            path: poly_path,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 3
-        });
-        polyline.setMap(jmap);
-    }
+//    function drawPolyline() {
+//        var poly_path = journey_path;
+//        if (poly_path.length < 1) {
+//            poly_path = [];
+//        }
+//        polyline = new google.maps.Polyline({
+//            path: poly_path,
+//            strokeColor: '#FF0000',
+//            strokeOpacity: 1.0,
+//            strokeWeight: 3
+//        });
+//        polyline.setMap(jmap);
+//    }
     setInterval(function () {
         $.ajax({
             url: "<?= route('admin.location.get') ?>",
@@ -136,9 +193,9 @@ $joureny .= ']';
                 id: <?php echo $schedule->id ?>,
             },
             success: function (response) {
-                journey_path.push({lat: response.latitude, lng: response.longitude});
+                //journey_path.push({lat: response.latitude, lng: response.longitude});
                 journeyTransition([response.latitude, response.longitude]);
-                drawPolyline();
+                //drawPolyline();
             }
         });
     }, 3000);

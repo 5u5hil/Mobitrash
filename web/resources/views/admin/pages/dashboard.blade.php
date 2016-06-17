@@ -126,7 +126,32 @@
         </div>
     </div><!-- /.row -->
 
-    <div class="row">        
+    <div class="row">   
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{$waste_till_date_sum}} kg waste MobiTrashed!</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="chart-responsive">
+                                <canvas id="pieChartAll" height="150"></canvas>
+                            </div><!-- ./chart-responsive -->
+                        </div><!-- /.col -->
+                        <div class="col-md-5">
+                            <ul class="chart-legend clearfix">
+                                <?php foreach ($allwastes as $waste) {
+                                    ?>
+                                    <li><i class="fa fa-circle" style="color:{{$waste['color']}}"></i> {{$waste['name']}}</li>
+                                <?php } ?>
+
+                            </ul>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
         <div class="col-md-4">
             <div class="box box-default">
                 <div class="box-header with-border">
@@ -185,19 +210,6 @@
 @section('myscripts')
 
 <script>
-    var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-    var pieChart = new Chart(pieChartCanvas);
-    var PieData = [
-<?php foreach ($wastes as $waste) {
-    ?>
-        {
-        value: <?php echo $waste['total_quantity'] ?>,
-                color: "<?php echo $waste['color'] ?>",
-                highlight: "<?php echo $waste['color'] ?>",
-                label: "<?php echo $waste['name'] ?>"
-        },
-<?php } ?>
-    ];
     var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
@@ -220,6 +232,38 @@
             // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
             maintainAspectRatio: false,
     };
+    //////////////////////  All mobitrashed
+    var pieChartCanvasAll = $("#pieChartAll").get(0).getContext("2d");
+    var pieChartAll = new Chart(pieChartCanvasAll);
+    var PieDataAll = [
+<?php foreach ($allwastes as $waste) {
+    ?>
+        {
+        value: <?php echo $waste['total_quantity'] ?>,
+                color: "<?php echo $waste['color'] ?>",
+                highlight: "<?php echo $waste['color'] ?>",
+                label: "<?php echo $waste['name'] ?>"
+        },
+<?php } ?>
+    ];
+    
+    pieChartAll.Doughnut(PieDataAll, pieOptions);
+    
+    ////////////////////// Daily waste
+    var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+    var pieChart = new Chart(pieChartCanvas);
+    var PieData = [
+<?php foreach ($wastes as $waste) {
+    ?>
+        {
+        value: <?php echo $waste['total_quantity'] ?>,
+                color: "<?php echo $waste['color'] ?>",
+                highlight: "<?php echo $waste['color'] ?>",
+                label: "<?php echo $waste['name'] ?>"
+        },
+<?php } ?>
+    ];
+    
     pieChart.Doughnut(PieData, pieOptions);
     ////////////////Aditive
     var pieAChartCanvas = $("#pieChartAdditive").get(0).getContext("2d");
