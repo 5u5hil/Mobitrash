@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Route;
 use Illuminate\Support\Facades\Input;
 use App\Models\Asset;
+use App\Models\User;
 use App\Models\Subscription;
 use App\Models\Service;
 use App\Models\VanLocation;
@@ -64,9 +65,9 @@ class PageController extends Controller {
             }
         }
         $monthly_sub_amt = Payment::where('billing_method', 1)->where('invoice_month', date('Y-m'))->sum('invoice_amount');
-        
+
         $waste_till_date_sum = 0;
-        
+
         $allwastes = array();
         $waste_till_date = Service::with('wastetypes')->get()->toArray();
         foreach ($waste_till_date as $totalwaste) {
@@ -80,7 +81,6 @@ class PageController extends Controller {
                 }
                 $waste_till_date_sum = $waste_till_date_sum + $wastetype['pivot']['quantity'];
             }
-            
         }
 
         $wastes = array();
@@ -142,5 +142,7 @@ class PageController extends Controller {
         $locations = VanLocation::where('schedule_id', Input::get('id'))->orderBy('created_at', 'desc')->first()->toArray();
         return $locations;
     }
+
+    
 
 }

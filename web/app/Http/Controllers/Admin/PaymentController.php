@@ -27,8 +27,8 @@ class PaymentController extends Controller {
             if ($filter_type == 'subscription_name') {
                 $field1 = Input::get('filter_value');
                 $payments = Payment::whereHas('subscription', function($q) {
-                    $q->where('name', 'LIKE' , "%".Input::get('filter_value')."%");
-                })->paginate(Config('constants.paginateNo'));
+                            $q->where('name', 'LIKE', "%" . Input::get('filter_value') . "%");
+                        })->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'invoice_date') {
                 $field2 = Input::get('filter_value');
                 $payments = Payment::where('invoice_date', date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
@@ -102,7 +102,7 @@ class PaymentController extends Controller {
         Session::flash('message', "Invoice has been sent successfully!");
         return redirect()->route('admin.payment.view');
     }
-    
+
     public function update() {
         $payment = Payment::find(Input::get('id'));
         $payment->payment_made = Input::get('payment_made');
@@ -119,5 +119,24 @@ class PaymentController extends Controller {
         return redirect()->back()->with("message", "Payment deleted sucessfully");
     }
 
+    public function paymentNotification() {
+        $payment_manager = User::whereHas('roles', function($q) {
+                    $q->where('id', 6);
+                })->get(['id', 'name', 'email'])->toArray();
+        $mail_to = array();
+        foreach ($payment_manager as $val) {
+            array_push($mail_to, $val['email']);
+        }
+        $prepaid_subscriptions = Subscription::where('billing_method', 1)->where('payment_type', 'Prepaid')->where('end_date', date('Y-m-d', strtotime(date('Y-m-d') . ' +4 day')))->get()->toArray();
+        $postpaid_subscriptions = Subscription::where('billing_method', 1)->where('payment_type', 'Postpaid')->where('end_date', date('Y-m-d', strtotime(date('Y-m-d') . ' +4 day')))->get()->toArray();
+        if(!empty($mail_to)) {
+            Mail::send(Config('constants.adminEmail') . '.paymentNotification', ['prepaid' => $prepaid_subscriptions, 'postpaid' => $postpaid_subscriptions], function ($message) use ($mail_to) {
+                $message->to($mail_to);
+                $message->subject('MobiTrash Subscriptions due for payment');
+            });
+        }
+        echo 'success';
+        exit();
+    }
 
 }

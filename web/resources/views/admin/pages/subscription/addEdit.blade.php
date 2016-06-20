@@ -74,6 +74,13 @@
                         </div>
                     </div>                    
                     <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group payment-types" style="{{$subscription->billing_method==1 ? 'display:block;': 'display:none;'}}">
+                        {!!Form::label('dop','Prepaid/Postpaid',['class'=>'col-sm-2']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('payment_type',[''=>'Select Payment Type','Prepaid'=>'Prepaid','Postpaid'=>'Postpaid'],null, ["class"=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group billing-amount" style="{{$subscription->billing_method==1 ? 'display:block;': 'display:none;'}}">
                         {!!Form::label('dop','Amount',['class'=>'col-sm-2']) !!}
                         <div class="col-sm-10">
@@ -200,7 +207,7 @@
             $("[name='chk[]']").removeAttr('Checked');
         }
     });
-    
+
     $(".select_user").change(function () {
         var select = $(this);
         var options = '';
@@ -215,35 +222,39 @@
                     $('#person_name').val(data.name);
                     $('#person_number').val(data.phone_number);
                     var selected = '';
-                    <?php 
-                    if($subscription->user_address_id){echo "var addressid = ".$subscription->user_address_id.";"; }else { echo 'var addressid = 0;';}
-                    ?>
-                    if(v.id == addressid){
+<?php
+if ($subscription->user_address_id) {
+    echo "var addressid = " . $subscription->user_address_id . ";";
+} else {
+    echo 'var addressid = 0;';
+}
+?>
+                    if (v.id == addressid) {
                         selected = 'selected';
                     }
-                    var opt = '<option value="'+v.id+'" '+selected+'>'+v.address+'</option>';
+                    var opt = '<option value="' + v.id + '" ' + selected + '>' + v.address + '</option>';
                     options += opt;
                 });
                 $(".select_add").html(options);
             }
         });
     }).change();
-    
-    $('.return-of-compost').change(function(){
-        if($(this).val() == '1'){
+
+    $('.return-of-compost').change(function () {
+        if ($(this).val() == '1') {
             $('.weekly-quantity').show();
-        }else{
+        } else {
             $('.weekly-quantity').hide();
             $('.weekly-quantity input').val('');
         }
     });
-    
-    $('.bulling-method').change(function(){
-        if($(this).val() == 1){
-            $('.billing-amount').show();
-        }else{
-            $('.billing-amount').hide();
-            $('.billing-amount input').val('');
+
+    $('.bulling-method').change(function () {
+        if ($(this).val() == 1) {
+            $('.billing-amount, .payment-types').show();
+        } else {
+            $('.billing-amount, .payment-types').hide();
+            $('.billing-amount input, .payment-types input').val('');
         }
     });
 

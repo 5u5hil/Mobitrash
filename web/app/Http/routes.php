@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
         Route::get('/get-user-subscriptions', ["as" => "getUserSub", "uses" => "SystemUsersController@getSubscriptions"]);
-        Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);        
+        Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
         Route::get('/remove-schedule-pickup', ["as" => "removeSchedulePickup", "uses" => "ScheduleController@removePickup"]);
         Route::get('/unauthorised', ["as" => "user.unauthorised", "uses" => "LoginController@unauthorised"]);
         Route::get('/record-index-filter', ["as" => "recordIndexFilter", "uses" => "RecordController@indexFilter"]);
@@ -166,6 +166,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.payment.edit', 'uses' => 'PaymentController@edit']);
                 Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);
                 Route::post('/update', ['as' => 'admin.payment.update', 'uses' => 'PaymentController@update']);
+                Route::get('/payment-notification', ["as" => "admin.payment.notification", "uses" => "PaymentController@paymentNotification"]);
             });
 
             Route::group(['prefix' => 'attendance'], function() {
@@ -252,8 +253,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/user-subscription', ['as' => 'user.subscription.view', 'uses' => 'UsersController@showUserSubscription']);
             Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']);
             Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']);
-            Route::post('/password-change', ['as' => 'user.password.change', 'uses' => 'UsersController@changePassword']);            
-            
+            Route::post('/password-change', ['as' => 'user.password.change', 'uses' => 'UsersController@changePassword']);
         });
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => 'operator'], function() {

@@ -96,7 +96,7 @@ class SystemUsersController extends Controller {
 
     public function save() {
         $chk = User::where("email", "=", Input::get('email'))->first();
-        if (empty($chk) || Input::get('roles') == 3 || Input::get('roles') == 4) { 
+        if (empty($chk) || Input::get('roles') == 3 || Input::get('roles') == 4) {
             $user = new User();
             $user->name = Input::get('name');
             $user->phone_number = Input::get('phone_number');
@@ -127,33 +127,40 @@ class SystemUsersController extends Controller {
     }
 
     public function update() {
+        $chk = User::where("email", Input::get('email'))->where('id', '!=', Input::get('id'))->first();
+        //dd($chk);
         $user = User::find(Input::get('id'));
-        $user->name = Input::get('name');
-        $user->email = Input::get('email');
-        if (Input::get('password')) {
-            $user->password = Hash::make(Input::get('password'));
-        }
-        $user->phone_number = Input::get('phone_number');
-        $user->user_type = 1;
-        if (Input::file('profile_picture')) {
-            $att = Input::file('profile_picture');
-            $destinationPath = public_path() . '/uploads/profile/';
-            $fileName = time() . '.' . $att->getClientOriginalExtension();
-            if ($att->move($destinationPath, $fileName)) {
-                $user->profile_picture = $fileName;
+        if (empty($chk) || Input::get('roles') == 3 || Input::get('roles') == 4) {
+            $user->name = Input::get('name');
+            $user->email = Input::get('email');
+            if (Input::get('password')) {
+                $user->password = Hash::make(Input::get('password'));
             }
-        }
-        $user->update();
+            $user->phone_number = Input::get('phone_number');
+            $user->user_type = 1;
+            if (Input::file('profile_picture')) {
+                $att = Input::file('profile_picture');
+                $destinationPath = public_path() . '/uploads/profile/';
+                $fileName = time() . '.' . $att->getClientOriginalExtension();
+                if ($att->move($destinationPath, $fileName)) {
+                    $user->profile_picture = $fileName;
+                }
+            }
+            $user->update();
 
-        if (!empty(Input::get('roles'))) {
-            $user->roles()->sync([Input::get('roles')]);
-            if (Input::get('roles') == 2) {
-                return redirect()->route('admin.users.view');
+            if (!empty(Input::get('roles'))) {
+                $user->roles()->sync([Input::get('roles')]);
+                if (Input::get('roles') == 2) {
+                    return redirect()->route('admin.users.view');
+                } else {
+                    return redirect()->route('admin.systemusers.view');
+                }
             } else {
                 return redirect()->route('admin.systemusers.view');
             }
         } else {
-            return redirect()->route('admin.systemusers.view');
+            Session::flash('message', "Email address already exist");
+            return redirect()->back();
         }
     }
 
@@ -196,7 +203,7 @@ class SystemUsersController extends Controller {
         } else {
             Session::flash('ProfileError', 'All Fields required');
         }
-        return redirect()->route('admin.systemusers.profile', array('tab'=>'change-password'));
+        return redirect()->route('admin.systemusers.profile', array('tab' => 'change-password'));
     }
 
     public function chk_existing_username() {
@@ -249,29 +256,36 @@ class SystemUsersController extends Controller {
             return redirect()->route('admin.users.view');
         } else {
             Session::flash('message', "Email address already exist");
-            return redirect()->route('admin.users.add');
+            return redirect()->back();
         }
     }
 
     public function updateUser() {
+        $chk = User::where("email", Input::get('email'))->where('id','!=',Input::get('id'))->first();
 
-        $user = User::find(Input::get('id'));
-        $user->name = Input::get('name');
-        $user->email = Input::get('email');
-        if (Input::get('password')) {
-            $user->password = Hash::make(Input::get('password'));
-        }
-        $user->phone_number = Input::get('phone_number');
-        $user->user_type = 2;
-        $user->update();
-        if (Input::get('address')) {
-            $address = new Address();
-            $address->user_id = $user->id;
-            $address->address = Input::get('address');
-            $address->latitude = Input::get('latitude');
-            $address->longitude = Input::get('longitude');
-            $address->city = 1;
-            $address->save();
+        if (empty($chk)) {
+
+            $user = User::find(Input::get('id'));
+            $user->name = Input::get('name');
+            $user->email = Input::get('email');
+            if (Input::get('password')) {
+                $user->password = Hash::make(Input::get('password'));
+            }
+            $user->phone_number = Input::get('phone_number');
+            $user->user_type = 2;
+            $user->update();
+            if (Input::get('address')) {
+                $address = new Address();
+                $address->user_id = $user->id;
+                $address->address = Input::get('address');
+                $address->latitude = Input::get('latitude');
+                $address->longitude = Input::get('longitude');
+                $address->city = 1;
+                $address->save();
+            }
+        } else {
+            Session::flash('message', "Email address already exist");
+            return redirect()->back();
         }
         return redirect()->route('admin.users.view');
     }
@@ -300,6 +314,5 @@ class SystemUsersController extends Controller {
         return redirect()->back()->with("message", "Address Removed sucessfully");
         exit();
     }
-    
 
 }
