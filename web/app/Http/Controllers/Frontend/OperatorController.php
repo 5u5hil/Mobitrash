@@ -32,8 +32,18 @@ class OperatorController extends Controller {
                     $q->where('id', '!=', 1);
                 })->first();
         $attendance = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
+        $schedules = Schedule::where('for', date('Y-m-d'));
+        $schedules = $schedules->where(function($subQuery) {
+            $subQuery->whereHas('operators', function($q) {
+            $q->where('user_id', Input::get("id"));
+            })
+            ->orWhereHas('drivers', function ( $q ) {
+            $q->where('user_id', Input::get("id"));
+            });
+        });
+        $schedules = $schedules->orderBy('created_at', 'DESC')->first(['id','start_kilometer','end_kilometer']);
         if ($user) {
-            return ['flash' => 'success', 'User' => $user, 'Attendance' => $attendance];
+            return ['flash' => 'success', 'User' => $user, 'Attendance' => $attendance, 'Schedule' => $schedules];
         } else {
             return ['flash' => 'error'];
         }
@@ -42,16 +52,23 @@ class OperatorController extends Controller {
     public function schedules() {
         $wastetype = Wastetype::where('is_active', 1)->get();
         $additives = Additive::where('is_active', 1)->get();
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address'])->whereHas('operators', function($q) {
-                    $q->where('user_id', Input::get("id"));
-                })->orderBy('created_at', 'DESC')->first();
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address']);
+        $schedules = $schedules->where(function($subQuery) {
+            $subQuery->whereHas('operators', function($q) {
+            $q->where('user_id', Input::get("id"));
+            })
+            ->orWhereHas('drivers', function ( $q ) {
+            $q->where('user_id', Input::get("id"));
+            });
+        });
+        $schedules = $schedules->orderBy('created_at', 'DESC')->first();
         $services = Service::get(['pickup_id']);
         $pickupids = array();
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
         if ($schedules) {
-            foreach ($schedules['pickups'] as $key => $pickup) {                
+            foreach ($schedules['pickups'] as $key => $pickup) {
                 unset($schedules['pickups'][$key]);
                 $schedules['pickups'][$pickup->id] = $pickup;
             }
@@ -135,6 +152,7 @@ class OperatorController extends Controller {
             $attendance = new Attendance();
             $attendance->user_id = Input::get('id');
             $attendance->date = date('Y-m-d');
+            $attendance->app_version = Input::get('app_version');
             $user = User::where('id', Input::get('id'))->first();
             if (Input::get('image_data')) {
                 $destinationPath = public_path() . '/uploads/attendance/';
@@ -185,7 +203,7 @@ class OperatorController extends Controller {
         $pickups = Input::get('offlinePickup');
         $kilometers = Input::get('offlineKM');
         if ($pickups) {
-            $cc= 0;
+            $cc = 0;
             foreach ($pickups as $pickup) {
                 $cc++;
                 $pickup_data = $pickup['pickup'];
@@ -219,26 +237,26 @@ class OperatorController extends Controller {
                 $schedule->update();
             }
         }
-        return ['flash' => 'success','cnt'=>$cc];
+        return ['flash' => 'success', 'cnt' => $cc];
     }
+
     public function locationUpdate() {
         $schedule_id = Input::get('id');
         $latitude = Input::get('lat');
         $longitude = Input::get('lng');
         if ($schedule_id && $latitude && $longitude) {
-            $van_location = VanLocation::where('schedule_id',$schedule_id)->first();
-            if(!$van_location){
+            $van_location = VanLocation::where('schedule_id', $schedule_id)->first();
+            if (!$van_location) {
                 $van_location = new VanLocation();
                 $van_location->schedule_id = $schedule_id;
-            }  
+            }
             $van_location->latitude = $latitude;
             $van_location->longitude = $longitude;
             $van_location->save();
             return ['flash' => 'success'];
-        }else{
+        } else {
             return ['flash' => 'error'];
         }
-        
     }
 
 }

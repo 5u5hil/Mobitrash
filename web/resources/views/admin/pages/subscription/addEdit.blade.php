@@ -166,7 +166,7 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('dop','Tial',['class'=>'col-sm-2']) !!}
+                        {!!Form::label('dop','Trial',['class'=>'col-sm-2']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('is_trial',[0 => "No", 1 => "Yes"],null, ["class"=>'return-of-compost form-control']) !!}
                         </div>
@@ -210,7 +210,7 @@
 
     $(".select_user").change(function () {
         var select = $(this);
-        var options = '';
+        var options = '<option value="">Select Address</option>';
         $.ajax({
             url: "<?= route('getUserAdd') ?>",
             type: "GET",

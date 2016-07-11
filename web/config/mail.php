@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'sharad@infiniteit.biz', 'name' => 'Mobitrash'],
+    'from' => ['address' => 'getit@mobitrash.in', 'name' => 'Mobitrash'],
 
     /*
     |--------------------------------------------------------------------------

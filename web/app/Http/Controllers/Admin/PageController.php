@@ -47,13 +47,17 @@ class PageController extends Controller {
                     $query->where('payment_made', 0);
                 })->count();
 
-        $vans = Asset::where("is_active", 1)->where("type_id", 1)->with('schedules')->get()->toArray();
+        $vans = Asset::where("is_active", 1)->where("type_id", 1)->whereHas('schedules' ,function($q){
+         $q->where('for', date('Y-m-d'));   
+        })->with(['schedules'=> function($q){          $q->where('for', date('Y-m-d'))->orderBy("created_at",'desc');   
+ }])->get()->toArray();
+        
         $services = Service::where('created_at', 'LIKE', "%" . date('Y-m-d') . "%")->get(['pickup_id']);
         $pickupids = array(); //        
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
-        foreach ($vans as $key => $van) {
+        foreach ($vans as $key => $van) { 
             if (isset($van['schedules'][0])) {
                 foreach ($van['schedules'][0]['pickups'] as $pkey => $pickup) {
                     if (in_array($pickup['id'], $pickupids)) {

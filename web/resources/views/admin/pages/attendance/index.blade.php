@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header">
+                <div class="box-header" style="height: 72px;">
                     <div class="filter-box">
                         <?php
                         $show_f1 = 'display:none;';
@@ -43,7 +43,7 @@
                         <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default pull-right" type="button">Add Attendance</a>-->      
                         @endpermission 
                     </h3>
-                    <div>
+                    <div style="margin-top: 20px;">
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
                     </div>
                 </div>

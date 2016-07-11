@@ -31,16 +31,16 @@ class ScheduleController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'name') {
                 $field1 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'for') {
                 $field2 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'van_id') {
                 $field3 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             }
         } else {
-            $schedule = Schedule::paginate(Config('constants.paginateNo'));
+            $schedule = Schedule::orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminScheduleView') . '.index', compact('schedule', 'vans', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
@@ -77,7 +77,7 @@ class ScheduleController extends Controller {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
 
-        $c = Subscription::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->get()->toArray();
+        $c = Subscription::where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
             $subscriptions[$value['id']] = $value['name'];
@@ -119,7 +119,7 @@ class ScheduleController extends Controller {
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
-        $c = Subscription::where('start_date', '<=', date('Y-m-d'))->where('end_date', '>=', date('Y-m-d'))->get()->toArray();
+        $c = Subscription::where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
             $subscriptions[$value['id']] = $value['name'];

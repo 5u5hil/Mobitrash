@@ -27,6 +27,17 @@
 
 
 Route::group(['middleware' => ['web']], function () {
+
+    Route::any('/test-mail', function() {
+
+
+        Mail::raw("Hi", function ($message) {
+            $message->to("sushil@infiniteit.biz")
+                    ->subject("Feedback From Customer");
+        });
+    });
+
+
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
         Route::get('/get-user-subscriptions', ["as" => "getUserSub", "uses" => "SystemUsersController@getSubscriptions"]);
@@ -231,7 +242,9 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => ''], function() {
         Route::get('/', ["as" => "/", "uses" => "PageController@index"]);
-        Route::get('/payment-success', ["as" => "payment.success", "uses" => "UsersController@paymentSuccess"]);
+        Route::any('/payment-success', ["as" => "payment.success", "uses" => "PayController@success"]);
+        Route::any('/paytm', ["as" => "payment.paytm", "uses" => "PayController@paytm"]);
+
         Route::get('/faq', ["as" => "user.faq", "uses" => "UsersController@faq"]);
         Route::get('/about', ["as" => "user.about", "uses" => "UsersController@about"]);
         Route::get('/contact-us', ['as' => 'user.contact.view', 'uses' => 'UsersController@contact']);
@@ -246,6 +259,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']);
         Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
         Route::group(['middleware' => 'CheckWebUser'], function() {
+
+            Route::any('/pay/{id}', ["as" => "payment.paynow", "uses" => "PayController@index"]);
             Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
             Route::get('/my-password', ["as" => "user.mypassword.view", "uses" => "UsersController@password"]);
             Route::get('/my-account', ["as" => "user.myaccount.view", "uses" => "UsersController@serviceSummary"]);

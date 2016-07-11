@@ -12,7 +12,7 @@
     <div style="width: 100%; display: table;">
          <div style="font-family:sans-serif;color: #333333;text-align:center;font-size: 13px;">
     <span style="font:'Arial Black', Gadget, sans-serif;"><h2>Greetings from MobiTrash!</h2><h4><span>
-                PFA your invoice dated {{$user['invoice']['billing_method'] == 1 ? date('M Y', strtotime($user['invoice']['invoice_month'])) : date('d.m.Y', strtotime($user['invoice']['invoice_date']))}}</span><br><br><span>Thanks,</span><br><span>Team MobiTrash</span></h4></span>
+                PFA your invoice dated {{$user['invoice']['billing_method'] == 1 ? date('M Y', strtotime($user['invoice']['invoice_month'])) : date('d.m.Y', strtotime($user['invoice']['invoice_date']))}}</span><br>To Pay Online click <a href='http://mobitrash.in/login?rurl=http://mobitrash.in/pay/{{$id}}' target='_blank'>here</a><br><br><span>Thanks,</span><br><span>Team MobiTrash</span></h4></span>
     
   </div>
 </div>

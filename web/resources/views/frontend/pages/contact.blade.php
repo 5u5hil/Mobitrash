@@ -21,7 +21,7 @@
 </section> -->
 <section id="content" style="margin-bottom: 0px;">
      <div class="secpad" style="background: url('http://mobitrash.in/public/Frontend/images/parallax/home/clouds-background.jpg') no-repeat;
-   background-size: 100% auto;padding-bottom: 220px;padding-top:88px">
+   background-size: 100% auto;padding-bottom: 237px;padding-top:88px">
 <div class="container clearfix">
     <div class="col_full">
      <div class="nobg full-screen" style="overflow:visible;max-height:825px;">
@@ -33,7 +33,7 @@
                         <!-- <h4 class="contex">For Being A Concerned Citizen </h4> -->
                     </div>
                 </div>
-                <div class="flash-message" style="color: #FF5D5D;padding: 15px;">
+                <div class="flash-message conmessg">
                     {{@Session::pull('contactSuccess')}}
                     {{@Session::pull('contactError')}}
                 </div>

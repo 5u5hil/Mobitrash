@@ -69,6 +69,7 @@
                                 <th>Remark</th>
                                 <th>Attachment</th>
                                 <th>Added By</th>
+                                <th>Txn Details</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -80,13 +81,23 @@
                                 <td>{{@$payment->user->name}}</td>
                                 <td>{{@$payment->billing_method == 1 ? date('M Y', strtotime($payment->invoice_month)) : date('d M Y', strtotime($payment->invoice_date))}}</td>
                                 <td>{{@$payment->invoice_amount}}</td>                                
-                                <td>{{@$payment->payment_made == 1? 'Yes' : 'No'}}</td>
-                                <td>{{ $payment->payment_date ? date('d M Y', strtotime(@$payment->payment_date)) : '' }}</td>
+                                <td>{{@$payment->payment_made == 1? 'Yes' : ($payment->payment_made == 2 ? 'Pending' :'No')}}</td>
+                                <td>{{ ($payment->payment_made == 1 || $payment->payment_made == 2) ? date('d M Y', strtotime(@$payment->payment_date)) : '-' }}</td>
                                 <td>{{@$payment->remark}}</td>
                                 <td>  
                                     <a href="{{ Config('constants.uploadRecord').@$payment->file }}" target="_BLANK"><i class="fa fa-file"></i></a>
                                 </td>
                                 <td>{{@$payment->addedBy->name}}</td>
+
+                                <td>
+                                    @if(!empty( $payment->txtdetails))
+                                    <?php $txn = json_decode($payment->txtdetails);
+                                    unset($txn->CHECKSUMHASH) ?>
+                                    <pre style='padding:0;margin: 0;font-size: 10px;'>
+                                    {{ json_encode($txn, JSON_PRETTY_PRINT)}};
+                                    </pre>
+                                    @endif
+                                </td>
                                 <td>
                                     @permission('admin.payment.edit')
                                     <a href="{{ route('admin.payment.edit',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>

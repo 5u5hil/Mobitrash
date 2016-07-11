@@ -28,22 +28,22 @@ class PaymentController extends Controller {
                 $field1 = Input::get('filter_value');
                 $payments = Payment::whereHas('subscription', function($q) {
                             $q->where('name', 'LIKE', "%" . Input::get('filter_value') . "%");
-                        })->paginate(Config('constants.paginateNo'));
+                        })->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'invoice_date') {
                 $field2 = Input::get('filter_value');
-                $payments = Payment::where('invoice_date', date("Y-m-d", strtotime(Input::get('filter_value'))))->paginate(Config('constants.paginateNo'));
+                $payments = Payment::where('invoice_date', date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'invoice_month') {
                 $field3 = Input::get('filter_value');
-                $payments = Payment::where('invoice_month', Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $payments = Payment::where('invoice_month', Input::get('filter_value'))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             }
         } else if (Input::get('filter_type') == 'received_payments') {
             $filter_type = Input::get('filter_type');
-            $payments = Payment::where('payment_made', 1)->paginate(Config('constants.paginateNo'));
+            $payments = Payment::where('payment_made', 1)->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
         } else if (Input::get('filter_type') == 'pending_payments') {
             $filter_type = Input::get('filter_type');
-            $payments = Payment::where('payment_made', 0)->paginate(Config('constants.paginateNo'));
+            $payments = Payment::where('payment_made', 0)->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
         } else {
-            $payments = Payment::paginate(Config('constants.paginateNo'));
+            $payments = Payment::orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
         }
 
         return view(Config('constants.adminPaymentView') . '.index', compact('payments', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
@@ -89,7 +89,7 @@ class PaymentController extends Controller {
         $payment->fill(Input::except('file'))->save();
         $user = User::where('id', Input::get('user_id'))->first()->toArray();
         $user['invoice'] = Input::except('file');
-        Mail::send(Config('constants.adminEmail') . '.paymentInvoice', ['user' => $user], function ($message) use ($newfile) {
+        Mail::send(Config('constants.adminEmail') . '.paymentInvoice', ['user' => $user, 'id' => $payment->id], function ($message) use ($newfile) {
             $message->to(Input::get("mail_to"));
             if (Input::get("mail_to_cc")) {
                 $emailids = str_replace(' ', '', Input::get("mail_to_cc"));
@@ -129,7 +129,7 @@ class PaymentController extends Controller {
         }
         $prepaid_subscriptions = Subscription::where('billing_method', 1)->where('payment_type', 'Prepaid')->where('end_date', date('Y-m-d', strtotime(date('Y-m-d') . ' +4 day')))->get()->toArray();
         $postpaid_subscriptions = Subscription::where('billing_method', 1)->where('payment_type', 'Postpaid')->where('end_date', date('Y-m-d', strtotime(date('Y-m-d') . ' +4 day')))->get()->toArray();
-        if(!empty($mail_to)) {
+        if (!empty($mail_to)) {
             Mail::send(Config('constants.adminEmail') . '.paymentNotification', ['prepaid' => $prepaid_subscriptions, 'postpaid' => $postpaid_subscriptions], function ($message) use ($mail_to) {
                 $message->to($mail_to);
                 $message->subject('MobiTrash Subscriptions due for payment');

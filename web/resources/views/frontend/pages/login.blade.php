@@ -55,11 +55,15 @@
                                 <label for="password" class="logintex">Password</label>
                                 <input type="password" id="password" name="password" value="" class="sm-form-control" />
                             </div>
+                            @if(Input::get('rurl'))
+                            <input type="hidden" name='rurl' value="{{ Input::get('rurl') }}" />
+                            @endif
 
                             <div class="col_full nobottommargin">
                                 <button type="submit" class="button button-3d button-black nomargin" id="login-form-submit">Login</button>
                                 <a href="{{route('user.forgot.password')}}" class="logintex fright">Forgot Password?</a>
                             </div>
+                            
                         </form>
 
                     </div> 

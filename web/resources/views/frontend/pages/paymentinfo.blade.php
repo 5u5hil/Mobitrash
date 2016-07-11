@@ -1,6 +1,15 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
+
+<!-- <section id="page-title" style="background:none;">
+            <div class="container clearfix">
+                <h1>Payment Info</h1>
+                <br>
+                 <p>Your Account Information</p>
+            </div>
+
+        </section> -->
+<!-- <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
             <div class="vertical-middle">
@@ -17,7 +26,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section id="content">
 
@@ -28,7 +37,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{$user->name}}</h4>
+                            <h3>{{ @Auth::user()->subscriptions()->first()->name }}</h3>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
@@ -51,36 +60,53 @@
                 ============================================= -->
                 <div class="col_full portfolio-single-image">
                     <div class="fancy-title title-bottom-border">
-                        <h4>Payment Info</h4>
+                        <h3>Payment Info</h3>
                     </div>
                     <div>  
                         <div class="table-responsive">
-                          <table class="table table-bordered nobottommargin">
-                            <thead>
-                              <tr>
-                                <th>Subscription</th>
-                                <th>Invoice Date/Month</th>
-                                <th>Invoice Amount</th>
-                                <th>Payment Made</th>
-                                <th>Payment Date</th>
-                                <th>Remark</th>
-                                <th>Attachment</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($payments as $payment)
-                              <tr>
-                                <td>{{@$payment->subscription->name}}</td>
-                                <td>{{@$payment->billing_method == 1 ? date('M Y', strtotime($payment->invoice_month)) : date('d M Y', strtotime($payment->invoice_date))}}</td>
-                                <td>{{@$payment->invoice_amount}}</td>
-                                <td>{{@$payment->payment_made == 1? 'Yes' : 'No'}}</td>
-                                <td>{{ $payment->payment_date ? date('d M Y', strtotime(@$payment->payment_date)) : '' }}</td>
-                                <td>{{@$payment->remark}}</td>
-                                <td><a href="{{ Config('constants.uploadRecord').@$payment->file }}" target="_BLANK"><i class="fa fa-paperclip attachfileicon" aria-hidden="true"></i></a></td>
-                              </tr>
-                              @endforeach
-                            </tbody>
-                          </table>
+                            <table class="table table-bordered nobottommargin">
+                                <thead>
+                                    <tr>
+                                        <th>Subscription</th>
+                                        <th>Invoice Date/Month</th>
+                                        <th>Invoice Amount</th>
+                                        <th>Payment Date</th>
+                                        <th>Remark</th>
+                                        <th>Attachment</th>
+                                        <th>Payment Made</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($payments as $payment)
+                                    <tr>
+                                        <td>{{@$payment->subscription->name}}</td>
+                                        <td>{{@$payment->billing_method == 1 ? date('M Y', strtotime($payment->invoice_month)) : date('d M Y', strtotime($payment->invoice_date))}}</td>
+                                        <td>{{@$payment->invoice_amount}}</td>
+
+                                        <td>{{ ($payment->payment_made == 1 || $payment->payment_made == 2) ? date('d M Y', strtotime(@$payment->payment_date)) : '-' }}</td>
+                                        <td>{{@$payment->remark}}</td>
+                                        <td>
+
+
+                                            @if(!empty($payment->file))
+                                            <a href="{{ Config('constants.uploadRecord').@$payment->file }}" target="_BLANK"><i class="fa fa-paperclip attachfileicon" aria-hidden="true"></i></a>
+                                            @endif
+                                        </td>
+                                        <td>
+
+                                            @if($payment->payment_made == 0)
+                                            <a href="{{ route("payment.paynow",['id' =>$payment->id ])}}" class="btn btn-success btn-small">Pay Now</a>
+                                            @elseif($payment->payment_made == 2)
+                                            Pending
+                                            @else 
+                                            Yes
+                                            @endif
+
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>                      
                     </div>
                 </div><!-- .portfolio-single-image end -->

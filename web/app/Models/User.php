@@ -19,6 +19,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Models\Address', 'user_id');
     }
 
+    public function subscriptions() {
+        return $this->hasMany('App\Models\Subscription', 'user_id')->orderBy("created_at","desc");
+    }
+
     public function roles() {
         return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
     }

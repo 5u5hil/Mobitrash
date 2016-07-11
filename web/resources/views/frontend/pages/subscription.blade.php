@@ -10,7 +10,16 @@
         border-bottom: 1px solid #e8e8e8;
     }
 </style>
-<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
+
+<!-- <section id="page-title" style="background:none;">
+            <div class="container clearfix">
+                <h1>Profile</h1>
+                <br>
+                 <p>Your Account Information</p>
+            </div>
+
+        </section> -->
+<!-- <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
     <div class="slider-parallax-inner">
         <div class="container clearfix">
             <div class="vertical-middle">
@@ -27,7 +36,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- <section id="page-title">
 
 <div class="container clearfix">
@@ -48,7 +57,7 @@
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
                         <div class="fancy-title title-bottom-border">
-                            <h4>{{Auth::user()->name}}</h4>
+                            <h3>{{ @Auth::user()->subscriptions()->first()->name }}</h3>
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
@@ -71,7 +80,7 @@
                 ============================================= -->
                 <div class="col_full portfolio-single-image">
                     <div class="fancy-title title-bottom-border">
-                        <h4>My Subscription</h4>
+                        <h3>My Subscription</h3>
                     </div>
                     <div class="contact-widget ">
                          <?php if ($subscription):?>
@@ -89,8 +98,11 @@
                             <td class="s-td">Pincode:</td><td>{{@$address->pincode}}</td>
                         </tr>
                         <tr>
-                            <td class="s-td">Occupancy Category:</td><td>{{@$subscription->occupancy->name}}</td>
+                            <td class="s-td">Frequency of Service:</td><td>{{@$subscription->occupancy->name}}</td>
                         </tr>
+                        <!-- <tr>
+                            <td class="s-td">Occupancy Category:</td><td>{{@$subscription->occupancy->name}}</td>
+                        </tr> -->
                         <tr>
                             <td class="s-td">Waste Category:</td><td>{{@$wastetypes}}</td>
                         </tr>
@@ -107,7 +119,7 @@
                             <td class="s-td">Agreement End Date:</td><td>{{@$subscription->end_date}}</td>
                         </tr>
                         <tr>
-                            <td class="s-td">Return oF Compost:</td><td>{{@$subscription->return_of_compost ? 'Yes':'No'}}</td>
+                            <td class="s-td">Return of Compost:</td><td>{{@$subscription->return_of_compost ? 'Yes':'No'}}</td>
                         </tr>
                         <tr>
                             <td class="s-td">Weekly Quantity:</td><td>{{@$subscription->weekly_quantity}}</td>

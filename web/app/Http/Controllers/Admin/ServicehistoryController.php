@@ -48,19 +48,19 @@ class ServicehistoryController extends Controller {
                 $field1 = Input::get('filter_value');
                 $services = Service::whereHas('schedule.van', function($q) {
                             $q->where('id', Input::get('filter_value'));
-                        })->paginate(Config('constants.paginateNo'));
+                        })->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'operator_id') {
                 $field2 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'created_at') {
                 $field3 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), 'LIKE', "%" . date("Y-m-d", strtotime(Input::get('filter_value'))) . "%")->paginate(Config('constants.paginateNo'));
+                $services = Service::where(Input::get('filter_type'), 'LIKE', "%" . date("Y-m-d", strtotime(Input::get('filter_value'))) . "%")->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'subscription_id') {
                 $field4 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
+                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
             }
         } else {
-            $services = Service::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+            $services = Service::orderBy('created_at', 'desc')->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'subscriptions', 'operators', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4'));
     }

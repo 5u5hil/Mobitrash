@@ -43,9 +43,9 @@ class RecordController extends Controller {
             } else if ($filter_type == 'asset_id') {
                 $assets_type = Input::get('filter_value');
             }
-            $record = Record::where(Input::get('filter_type'),$filter_value)->paginate(Config('constants.paginateNo'));
+            $record = Record::where(Input::get('filter_type'),$filter_value)->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
         } else {
-            $record = Record::with(['rtype', 'addedBy', 'asset'])->paginate(Config('constants.paginateNo'));
+            $record = Record::with(['rtype', 'addedBy', 'asset'])->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
         }
 
         return view(Config('constants.adminRecordView') . '.index', compact('record', 'filter', 'recordtypes', 'vans', 'filter_type', 'filter_value', 'record_type', 'assets_type', 'filter_date'));

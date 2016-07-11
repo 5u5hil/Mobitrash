@@ -107,7 +107,11 @@ class UsersController extends Controller {
             $roles = $user->roles()->first();
             $r = Role::find($roles->id);
             $per = $r->perms()->get()->toArray();
-            return redirect()->route('user.myprofile.view');
+         
+            if (!empty(Input::get('rurl')))
+                return redirect()->to(Input::get('rurl'));
+            else
+                return redirect()->route('user.myprofile.view');
         } else {
             Session::flash('invalidUser', 'Invalid Username or Password');
             return redirect()->route('user.login');
@@ -319,13 +323,6 @@ class UsersController extends Controller {
         $subscription->remark = Input::get('remark');
         $subscription->save();
         return redirect()->route('user.myprofile.view');
-    }
-
-    public function paymentSuccess() {
-        return "Payment Sucsess";
-        $user = User::find(Auth::id());
-//        echo $user->hasRole(1);
-//        exit();
     }
 
 }
