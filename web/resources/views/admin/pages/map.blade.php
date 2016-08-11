@@ -98,7 +98,7 @@ $joureny .= ']';
 <?php
 foreach ($pickups as $pickup):
     if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
-        echo "['<h4>" . $pickup['subscription']['name'] . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
+        echo "['<h4>" . htmlspecialchars($pickup['subscription']['name'],ENT_QUOTES) . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
     }
 endforeach;
 ?>
@@ -117,7 +117,7 @@ endforeach;
             icon: icons[iconCounter]
         });
         markers.push(marker1);
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        google.maps.event.addListener(marker1, 'click', (function (marker, i) {
             return function () {
                 infowindow.setContent(locations[i][0]);
                 infowindow.open(jmap, marker);

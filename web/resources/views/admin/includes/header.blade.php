@@ -235,13 +235,18 @@
                             <!--                            <div class="pull-left">
                                                             <a href="#" class="btn btn-default btn-flat">Profile</a>
                                                         </div>-->
-                            
+
                             <div class="pull-right">
                                 <a href="{{ route('adminLogout') }}" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                             <div class="pull-right" style="margin-right: 15px;">
                                 <a href="{{ route('admin.systemusers.profile') }}" class="btn btn-default btn-flat">Profile</a>
                             </div>
+                            @permission('admin.settings')
+                            <div class="pull-right" style="margin-right: 15px;">
+                                <a href="{{ route('admin.settings') }}" class="btn btn-default btn-flat">Settings</a>
+                            </div>
+                            @endpermission
                         </li>
                     </ul>
                 </li>

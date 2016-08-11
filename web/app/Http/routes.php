@@ -50,8 +50,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
         Route::group(['middleware' => 'CheckUser'], function() {
             Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "PageController@dashboard"]);
+            Route::get('/settings', ["as" => "admin.settings", "uses" => "PageController@setting"]);
             Route::get('/map', ["as" => "admin.location.map", "uses" => "PageController@vanLocationMap"]);
             Route::post('/location-get', ["as" => "admin.location.get", "uses" => "PageController@vanLocationGet"]);
+            Route::post('/settings-save', ["as" => "admin.settings.save", "uses" => "PageController@settingsSave"]);
             Route::group(['prefix' => 'master'], function() {
                 Route::group(['prefix' => 'cities'], function() {
                     Route::get('/', ['as' => 'admin.cities.view', 'uses' => 'CitiesController@index']);
@@ -75,6 +77,14 @@ Route::group(['middleware' => ['web']], function () {
                     Route::post('/save', ['as' => 'admin.timeslot.save', 'uses' => 'TimeslotController@save']);
                     Route::get('/edit', ['as' => 'admin.timeslot.edit', 'uses' => 'TimeslotController@edit']);
                     Route::get('/delete', ['as' => 'admin.timeslot.delete', 'uses' => 'TimeslotController@delete']);
+                });
+                
+                Route::group(['prefix' => 'shift'], function() {
+                    Route::get('/', ['as' => 'admin.shift.view', 'uses' => 'ShiftController@index']);
+                    Route::get('/add', ['as' => 'admin.shift.add', 'uses' => 'ShiftController@add']);
+                    Route::post('/save', ['as' => 'admin.shift.save', 'uses' => 'ShiftController@save']);
+                    Route::get('/edit', ['as' => 'admin.shift.edit', 'uses' => 'ShiftController@edit']);
+                    Route::get('/delete', ['as' => 'admin.shift.delete', 'uses' => 'ShiftController@delete']);
                 });
 
                 Route::group(['prefix' => 'servicetype'], function() {
@@ -277,6 +287,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/pickup-details', ["as" => "operator.pickup.details", "uses" => "OperatorController@pickupDetails"]);
         Route::post('/save-service-details', ["as" => "operator.service.save", "uses" => "OperatorController@serviceSave"]);
         Route::post('/receipt-data', ["as" => "operator.receipt.data", "uses" => "OperatorController@receiptData"]);
+        Route::post('/van-data', ["as" => "operator.van.data", "uses" => "OperatorController@vanData"]);
+        Route::post('/shift-data', ["as" => "operator.shift.data", "uses" => "OperatorController@shiftData"]);
+        Route::post('/save-setting', ["as" => "operator.setting.save", "uses" => "OperatorController@settingSave"]);
+        Route::post('/save-logout-time', ["as" => "operator.setting.logout", "uses" => "OperatorController@logoutSave"]);
         Route::post('/cleaning-data', ["as" => "operator.cleaning.data", "uses" => "OperatorController@cleaningData"]);
         Route::post('/attendance', ["as" => "operator.attendance", "uses" => "OperatorController@attendance"]);
         Route::post('/get-attendance', ["as" => "operator.attendance.get", "uses" => "OperatorController@getAttendance"]);

@@ -12,6 +12,7 @@ use App\Models\VanLocation;
 use App\Models\Schedule;
 use App\Models\Payment;
 use App\Models\Wastetype;
+use App\Models\Configuration;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Session;
@@ -131,6 +132,18 @@ class PageController extends Controller {
             $cnt++;
         }
         return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'allwastes', 'wastes', 'additives', 'waste_till_date_sum']));
+    }
+    
+    public function setting() {
+        $configuration = Configuration::find(1);
+        $action = "admin.settings.save";
+        return view(Config('constants.adminView') . '.setting', compact(['configuration', 'action']));
+    }
+    
+    public function settingsSave() {
+        $configuration = Configuration::findOrNew(Input::get('id'))->fill(Input::all())->save();
+        Session::flash('messageSuccess', "Settings Updated Successfully!");
+        return redirect()->route('admin.settings');
     }
 
     public function vanLocationMap() {

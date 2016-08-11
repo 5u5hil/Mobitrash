@@ -9,6 +9,7 @@ $adminConstants = [
     'adminCityView' => 'admin.pages.masters.cities',
     'adminFrequencyView' => 'admin.pages.masters.frequency',
     'adminTimeslotView' => 'admin.pages.masters.timeslot',
+    'adminShiftView' => 'admin.pages.masters.shift',
     'adminServicetypeView' => 'admin.pages.masters.servicetype',
     'adminWastetypeView' => 'admin.pages.masters.wastetype',
     'adminFueltypeView' => 'admin.pages.masters.fueltype',

@@ -21,6 +21,8 @@ use App\Models\Record;
 use App\Models\Attachment;
 use App\Models\Attendance;
 use App\Models\Subscription;
+use App\Models\Configuration;
+use App\Models\Shift;
 use File;
 use App\Http\Controllers\Controller;
 use Session;
@@ -35,13 +37,13 @@ class OperatorController extends Controller {
         $schedules = Schedule::where('for', date('Y-m-d'));
         $schedules = $schedules->where(function($subQuery) {
             $subQuery->whereHas('operators', function($q) {
-            $q->where('user_id', Input::get("id"));
-            })
-            ->orWhereHas('drivers', function ( $q ) {
-            $q->where('user_id', Input::get("id"));
-            });
+                        $q->where('user_id', Input::get("id"));
+                    })
+                    ->orWhereHas('drivers', function ( $q ) {
+                        $q->where('user_id', Input::get("id"));
+                    });
         });
-        $schedules = $schedules->orderBy('created_at', 'DESC')->first(['id','start_kilometer','end_kilometer']);
+        $schedules = $schedules->orderBy('created_at', 'DESC')->first(['id', 'start_kilometer', 'end_kilometer']);
         if ($user) {
             return ['flash' => 'success', 'User' => $user, 'Attendance' => $attendance, 'Schedule' => $schedules];
         } else {
@@ -52,35 +54,38 @@ class OperatorController extends Controller {
     public function schedules() {
         $wastetype = Wastetype::where('is_active', 1)->get();
         $additives = Additive::where('is_active', 1)->get();
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address']);
-        $schedules = $schedules->where(function($subQuery) {
-            $subQuery->whereHas('operators', function($q) {
-            $q->where('user_id', Input::get("id"));
-            })
-            ->orWhereHas('drivers', function ( $q ) {
-            $q->where('user_id', Input::get("id"));
-            });
-        });
-        $schedules = $schedules->orderBy('created_at', 'DESC')->first();
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address', 'shift']);
+        $schedules = $schedules->where('van_id', Input::get("id"));
+        $schedules = $schedules->orderBy('sort_order', 'asc')->get();
         $services = Service::get(['pickup_id']);
         $pickupids = array();
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
+        $cnt = 0;
         if ($schedules) {
-            foreach ($schedules['pickups'] as $key => $pickup) {
-                unset($schedules['pickups'][$key]);
-                $schedules['pickups'][$pickup->id] = $pickup;
+            foreach ($schedules as $ke => $schedule) {
+                    unset($schedules[$ke]);
+                    $schedules['SH'.$schedule->id] = $schedule;
             }
-            foreach ($schedules['pickups'] as $key => $pickup) {
-                $schedules['pickups'][$key]['pickuptime'] = date('h:i A', strtotime($pickup['pickuptime']));
-                if (in_array($pickup->id, $pickupids)) {
-                    unset($schedules['pickups'][$key]);
+            foreach ($schedules as $ke => $schedule) {
+                foreach ($schedule['pickups'] as $key => $pickup) {
+                    unset($schedules[$ke]['pickups'][$key]);
+                    $schedules[$ke]['pickups']['ID' . $pickup->id] = $pickup;
+                }
+            }
+            foreach ($schedules as $ke => $schedule) {
+                foreach ($schedule['pickups'] as $key => $pickup) {
+                    $schedules[$ke]['pickups'][$key]['pickuptime'] = date('h:i A', strtotime($pickup['pickuptime']));
+                    if (in_array($pickup->id, $pickupids)) {
+                        $cnt++;
+                        unset($schedules[$ke]['pickups'][$key]);
+                    }
                 }
             }
         }
         if ($schedules) {
-            return ['flash' => 'success', 'Schedules' => $schedules, 'Wastetype' => $wastetype, 'Additive' => $additives];
+            return ['flash' => 'success', 'Schedules' => $schedules, 'Wastetype' => $wastetype, 'Additive' => $additives, 'cnt' => $cnt];
         } else {
             return ['flash' => 'error'];
         }
@@ -129,6 +134,43 @@ class OperatorController extends Controller {
         }
     }
 
+    public function vanData() {
+        $assets = Asset::where('is_active', 1)->get();
+        if ($assets) {
+            return ['flash' => 'success', 'Assets' => $assets];
+        } else {
+            return ['flash' => 'error'];
+        }
+    }
+    
+    public function shiftData() {
+        $shifts = Shift::where('is_active', 1)->get();
+        if ($shifts) {
+            return ['flash' => 'success', 'Shifts' => $shifts];
+        } else {
+            return ['flash' => 'error'];
+        }
+    }
+
+    public function settingSave() {
+        $configuration = Configuration::where('id', 1)->first()->toArray();
+        if (Input::get('password') == $configuration['van_password']) {
+            return ['flash' => 'success'];
+        } else {
+            return ['flash' => 'error'];
+        }
+    }
+    
+    public function logoutSave() {        
+        $attendance = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->first();
+        $attendance->logout_at = date('Y-m-d H:i:s');
+        if ($attendance->update()) {
+            return ['flash' => 'success'];
+        } else {
+            return ['flash' => 'error'];
+        }
+    }
+
     public function receiptSave() {
         $record = new Record();
         $record->date = date('Y-m-d');
@@ -145,6 +187,16 @@ class OperatorController extends Controller {
     }
 
     public function attendance() {
+        $schedule = Schedule::where('shift_id', Input::get('shift_id'))->where('van_id',Input::get('van_id'))->where('for', date('Y-m-d'))->first();
+        $user = User::where('id',Input::get("id"))->with('roles')->first()->toArray();
+        
+        if($schedule){
+            if($user['roles'][0]['id']==3){
+                $schedule->operators()->sync([Input::get('id')]);
+            }else if($user['roles'][0]['id']==4){
+                $schedule->drivers()->sync([Input::get('id')]);
+            }
+        }
         $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         if ($attendance_exist > 0) {
             return ['flash' => 'exist'];
@@ -202,8 +254,8 @@ class OperatorController extends Controller {
     public function offlineDataSave() {
         $pickups = Input::get('offlinePickup');
         $kilometers = Input::get('offlineKM');
-        if ($pickups) {
-            $cc = 0;
+        $cc = 0;
+        if ($pickups) {            
             foreach ($pickups as $pickup) {
                 $cc++;
                 $pickup_data = $pickup['pickup'];

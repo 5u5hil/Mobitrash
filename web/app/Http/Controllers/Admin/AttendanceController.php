@@ -11,26 +11,19 @@ use App\Http\Controllers\Controller;
 
 class AttendanceController extends Controller {
 
-    function index() {
-        $filter = array('' => 'All', 'user_id' => 'Operator Id', 'date' => 'Date');        
-        $filter_type = NULL;
-        $filter_value = NULL;
-        $field1 = NULL;
-        $field2 = NULL;
-        if (Input::get('filter_value') && Input::get('filter_type')) {
-            $filter_type = Input::get('filter_type');
-            $filter_value = Input::get('filter_value');
-            if ($filter_type == 'user_id') {
-                $field1 = Input::get('filter_value');
-                $attendances = Attendance::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
-            } else if ($filter_type == 'date') {
-                $field2 = Input::get('filter_value');
-                $attendances = Attendance::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
-            }            
-        } else {
-            $attendances = Attendance::orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
-        }
-        
+    function index() {        
+        $attendances = Attendance::orderBy("created_at","desc");
+            if (Input::get('staff_id')) {
+                $attendances = $attendances->where('user_id', Input::get('staff_id'));                
+            } 
+            if (Input::get('start_date') && Input::get('end_date')) {
+                $attendances = $attendances->whereBetween('date', [date("Y-m-d", strtotime(Input::get('start_date'))),date("Y-m-d", strtotime(Input::get('end_date')))]);                
+            }else if (Input::get('start_date')) {
+                $attendances = $attendances->where('date', '>=', date("Y-m-d", strtotime(Input::get('start_date'))));
+            }else if (Input::get('end_date')) {
+                $attendances = $attendances->where('date', '<=' , date("Y-m-d", strtotime(Input::get('end_date'))));
+            } 
+        $attendances = $attendances->paginate(100);
         return view(Config('constants.adminAttendanceView') . '.index', compact('attendances', 'filter', 'filter_type', 'filter_value', 'field1', 'field2'));
     }
 

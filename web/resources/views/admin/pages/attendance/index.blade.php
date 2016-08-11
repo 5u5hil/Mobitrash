@@ -1,5 +1,21 @@
 @extends('admin.layouts.default')
 @section('content')
+<style>
+    @media print {
+        .print {
+            background-color: white;
+            height: 100%;
+            width: 100%;        
+        }
+        .print .no-print{
+            display: none;
+        }
+
+        .page-break{
+            page-break-after: always;
+        }
+    }
+</style>
 <section class="content-header">
     <h1>
         Attendance
@@ -15,28 +31,17 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header" style="height: 72px;">
-                    <div class="filter-box">
-                        <?php
-                        $show_f1 = 'display:none;';
-                        $show_f2 = 'display:none;';
-                        $dis_f1 = 'disabled';
-                        $dis_f2 = 'disabled';
-                        if ($field1) {
-                            $show_f1 = '';
-                            $dis_f1 = '';
-                        }
-                        if ($field2) {
-                            $show_f2 = '';
-                            $dis_f2 = '';
-                        }
-                        ?>
+                    <div class="filter-box" style="width: 900px;">
+
                         {!! Form::open(['method'=>'GET','route' => 'admin.attendance.view' , 'class' => 'form-horizontal' ]) !!}
-                        <label>Filter </label>
-                        {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
-                        <span>{!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}</span>
-                        <span>{!! Form::text('filter_value',$field2, ["class"=>'form-control f2 datepicker2', "style"=>$show_f2, $dis_f2]) !!}</span>
+
+                        <span>{!! Form::text('staff_id',Input::get('staff_id'), ["class"=>'form-control f1', 'placeholder'=>'Staff ID']) !!}</span>
+                        <span>{!! Form::text('start_date',Input::get('start_date'), ["class"=>'form-control f2 datepicker2', 'placeholder'=>'Start Date']) !!}</span>
+                        <span>{!! Form::text('end_date',Input::get('end_date'), ["class"=>'form-control f2 datepicker2', 'placeholder'=>'End Date']) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
+                        <button onclick="printDiv()" style="width: 100px;" class="btn btn-primary filter-button" type="button">Print</button>
                         {!! Form::close() !!}
+
                     </div>
                     <h3 class="box-title">  
                         @permission('admin.attendance.add')  
@@ -48,40 +53,47 @@
                     </div>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div id="print-content" class="box-body table-responsive no-padding print">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Picture</th>
+                                <th>Id</th>
+                                <th class="no-print">Picture</th>
                                 <th>Name</th>
                                 <th>Role</th>
                                 <th>Date</th>
-                                <th>Created At</th>    
-                                <th></th>
+                                <th>Login Time</th>    
+                                <th>Logout Time</th>    
+                                <th>Working Hours</th>    
+                                <th class="no-print"></th>
                             </tr>
                         </thead>
-                        <tbody id="indexdata">                          
+                        <tbody id="indexdata">
+                            <?php $index = 1; ?>
                             @foreach($attendances as $attendance)                            
-                            <tr>
-                                <td>{{$attendance->id}}</td>
-                                <td><img src="{{ $attendance->image ? Config('constants.uploadAttendance').$attendance->image : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;" /></td>
+                            <tr class="<?= $index % 23 == 0 ? 'page-break':''?>">
+                                <td>{{$attendance->user_id}}</td>
+                                <td class="no-print"><img src="{{ $attendance->image ? Config('constants.uploadAttendance').$attendance->image : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;" /></td>
                                 <td>{{@$attendance->user->name}}</td>
                                 <td>{{@$attendance->user->roles[0]->name}}</td>
                                 <td>{{date('d M Y', strtotime($attendance->date))}}</td>
-                                <td>{{date('d M Y h:i:s A', strtotime($attendance->created_at))}}</td> 
-                                <td>
+                                <td>{{date('h:i:s A', strtotime($attendance->created_at))}}</td> 
+                                <td>{{$attendance->logout_at ? date('h:i:s A', strtotime($attendance->logout_at)) : ''}}</td> 
+                                <td>{{$attendance->logout_at ? gmdate("H:i",(strtotime($attendance->logout_at) - strtotime($attendance->created_at))) : ''}}</td> 
+                                <td class="no-print">
                                     @permission('admin.attendance.delete')  
                                     <a href="{{ route('admin.attendance.delete',['id' => @$attendance->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>
                                     @endpermission
                                 </td>
                             </tr>
-                            @endforeach
+                            
+                        <?php $index++; ?>
+                        @endforeach
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= $attendances->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value])->render() ?>
+                    <?= $attendances->render() ?>
                 </div>
             </div><!-- /.box -->
         </div><!-- /.col -->
@@ -93,20 +105,14 @@
 @section('myscripts')
 
 <script>
-    if ($(".filter_type") != 'date') {
-        $('.datepicker').prop('disabled', true);
+    function printDiv(printable) {
+        var printContents = document.getElementById("print-content").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        document.title = "Mobitrash | Attendance Report";
+        window.print();
+        document.body.innerHTML = originalContents;
     }
-    $(".filter_type").change(function () {
-        if ($(this).val() == 'user_id') {
-            $(".f1").show().prop('disabled', false);
-            $(".f2").hide().prop('disabled', true);
-        } else if ($(this).val() == 'date') {
-            $(".f2").show().prop('disabled', false);
-            $(".f1").hide().prop('disabled', true);
-        } else {
-            $(".f1, .f2").hide().prop('disabled', true);
-        }
-    });
 </script>
 
 @stop

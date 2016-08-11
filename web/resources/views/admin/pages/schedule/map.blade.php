@@ -37,10 +37,10 @@
 
 <script>
 
-    
 
-   
-    
+
+
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -54,32 +54,35 @@
 <?php
 $index = 0;
 foreach ($pickups as $key => $pickup):
-    if($index == 0){
+    if ($index == 0) {
         $index++;
         continue;
     }
-    ?>   
 
-var directionsService<?php echo $key; ?> = new google.maps.DirectionsService;
-    var directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer;
-    directionsService<?php echo $key; ?>.route({
-        origin: new google.maps.LatLng(<?php echo $pickups[$key-1]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key-1]['subscription']['address']['longitude']; ?>),
-        destination: new google.maps.LatLng(<?php echo $pickups[$key]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key]['subscription']['address']['longitude']; ?>),
-        travelMode: google.maps.TravelMode.DRIVING
-    }, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            directionsDisplay<?php echo $key; ?>.setDirections(response);
-        } else {
-            alert(status);
-        }
-    });
-    directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer({
-        map: map,
-        suppressMarkers: true
-    });
-    directionsDisplay<?php echo $key; ?>.setMap(map);
-<?php
-$index++;
+    if ($pickups[$key]['subscription']['address']['latitude'] && $pickups[$key]['subscription']['address']['longitude'] && $pickups[$key - 1]['subscription']['address']['latitude'] && $pickups[$key - 1]['subscription']['address']['longitude']) {
+        ?>
+
+            var directionsService<?php echo $key; ?> = new google.maps.DirectionsService;
+            var directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer;
+            directionsService<?php echo $key; ?>.route({
+                origin: new google.maps.LatLng(<?php echo $pickups[$key - 1]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key - 1]['subscription']['address']['longitude']; ?>),
+                destination: new google.maps.LatLng(<?php echo $pickups[$key]['subscription']['address']['latitude']; ?>, <?php echo $pickups[$key]['subscription']['address']['longitude']; ?>),
+                travelMode: google.maps.TravelMode.DRIVING
+            }, function (response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay<?php echo $key; ?>.setDirections(response);
+                } else {
+                    alert(status);
+                }
+            });
+            directionsDisplay<?php echo $key; ?> = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: true
+            });
+            directionsDisplay<?php echo $key; ?>.setMap(map);
+        <?php
+    }
+    $index++;
 endforeach;
 ?>
     ////////////////////////////////Marker
@@ -98,7 +101,7 @@ endforeach;
 <?php
 foreach ($pickups as $pickup):
     if ($pickup['subscription']['address']['latitude'] && $pickup['subscription']['address']['longitude']) {
-        echo "['<h4>" . $pickup['subscription']['name'] . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
+        echo "['<h4>" . htmlspecialchars($pickup['subscription']['name'],ENT_QUOTES) . "</h4>', " . $pickup['subscription']['address']['latitude'] . ", " . $pickup['subscription']['address']['longitude'] . "],";
     }
 endforeach;
 ?>

@@ -9,6 +9,7 @@ use App\Models\Role;
 use App\Models\Service;
 use App\Models\Subscription;
 use App\Models\Asset;
+use App\Models\Shift;
 use Session;
 use App\Http\Controllers\Controller;
 
@@ -31,16 +32,16 @@ class ScheduleController extends Controller {
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'name') {
                 $field1 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), 'LIKE', "%" . Input::get('filter_value') . "%")->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'for') {
                 $field2 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'van_id') {
                 $field3 = Input::get('filter_value');
-                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                $schedule = Schedule::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
             }
         } else {
-            $schedule = Schedule::orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+            $schedule = Schedule::orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminScheduleView') . '.index', compact('schedule', 'vans', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
@@ -77,13 +78,22 @@ class ScheduleController extends Controller {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
 
+        $sh = Shift::where("is_active", 1)->get()->toArray();
+        $shifts = ['' => 'Select Shift'];
+        foreach ($sh as $value) {
+            $shifts[$value['id']] = $value['name'];
+        }
+        $sort_order = [];
+        foreach ($sh as $value) {
+            $sort_order[$value['sort_order']] = $value['id'];
+        }
         $c = Subscription::where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
             $subscriptions[$value['id']] = $value['name'];
         }
         $action = "admin.schedule.save";
-        return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'subscriptions', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd'));
+        return view(Config('constants.adminScheduleView') . '.add', compact('schedule', 'ops', 'subscriptions', 'users', 'vans', 'pickups', 'action', 'drivers', 'opsd', 'shifts', 'sort_order'));
     }
 
     public function edit() {
@@ -119,6 +129,13 @@ class ScheduleController extends Controller {
         foreach ($v as $value) {
             $vans[$value['id']] = $value['name'] . " - " . $value['asset_no'];
         }
+
+        $sh = Shift::where("is_active", 1)->get()->toArray();
+        $shifts = [];
+        foreach ($sh as $value) {
+            $shifts[$value['id']] = $value['name'];
+        }
+
         $c = Subscription::where('end_date', '>=', date('Y-m-d'))->get()->toArray();
         $subscriptions = [0 => "Select a Subscription"];
         foreach ($c as $value) {
@@ -126,7 +143,7 @@ class ScheduleController extends Controller {
         }
         $action = "admin.schedule.update";
 
-        return view(Config('constants.adminScheduleView') . '.edit', compact('schedule', 'subscriptions', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd'));
+        return view(Config('constants.adminScheduleView') . '.edit', compact('schedule', 'subscriptions', 'pickups', 'users', 'vans', 'ops', 'action', 'drivers', 'opsd', 'shifts'));
     }
 
     public function show() {
@@ -158,13 +175,23 @@ class ScheduleController extends Controller {
     public function save() {
         $schedule_dates = explode(', ', Input::get('multiple_dates'));
         $expired = NULL;
+        $sh = Shift::where("is_active", 1)->get()->toArray();
+        $shift_order = [];
+        foreach ($sh as $value) {
+            $shift_order[$value['id']] = $value['sort_order'];
+        }
         $error_message = 'Pickup Not created for expired subscriptions: ';
         foreach ($schedule_dates as $sdate) {
             $schedule = new Schedule;
             $schedule->for = $sdate;
+            $schedule->sort_order = $shift_order[Input::get('shift_id')];
             $schedule->fill(Input::except('operators', 'drivers', 'pickup', 'multiple_dates'))->save();
-            $schedule->operators()->sync(Input::get('operators'));
-            $schedule->drivers()->sync(Input::get('drivers'));
+            if (Input::get('operators')) {
+                $schedule->operators()->sync(Input::get('operators'));
+            }
+            if (Input::get('drivers')) {
+                $schedule->drivers()->sync(Input::get('drivers'));
+            }
             Pickup::where("schedule_id", $schedule->id)->delete();
 
             if (Input::get("pickup")) {
@@ -193,10 +220,20 @@ class ScheduleController extends Controller {
     public function update() {
         $expired = NULL;
         $error_message = 'Pickup Not created for expired subscriptions: ';
+        $sh = Shift::where("is_active", 1)->get()->toArray();
+        $shift_order = [];
+        foreach ($sh as $value) {
+            $shift_order[$value['id']] = $value['sort_order'];
+        }
         $schedule = Schedule::findOrNew(Input::get('id'));
+        $schedule->sort_order = $shift_order[Input::get('shift_id')];
         $schedule->fill(Input::except('operators', 'drivers', 'pickup'))->save();
-        $schedule->operators()->sync(Input::get('operators'));
-        $schedule->drivers()->sync(Input::get('drivers'));
+        if (Input::get('operators')) {
+            $schedule->operators()->sync(Input::get('operators'));
+        }
+        if (Input::get('drivers')) {
+            $schedule->drivers()->sync(Input::get('drivers'));
+        }
         Pickup::where("schedule_id", $schedule->id)->delete();
         if (Input::get("pickup")) {
             foreach (Input::get("pickup") as $pickup) {

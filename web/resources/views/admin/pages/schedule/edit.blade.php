@@ -42,17 +42,24 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Operators',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('user','Shift',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "required", "multiple" => true]) !!}
+                            {!! Form::select('shift_id',$shifts,null, ["class"=>'form-control', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('user','Operators',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('operators[]',$users,$ops, ["class"=>'form-control', "multiple" => true]) !!}
                         </div>
                     </div>
 
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('user','Drivers',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('user','Drivers',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
-                            {!! Form::select('drivers[]',$drivers, $opsd, ["class"=>'form-control', "required", "multiple" => true]) !!}
+                            {!! Form::select('drivers[]',$drivers, $opsd, ["class"=>'form-control', "multiple" => true]) !!}
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

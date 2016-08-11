@@ -96,6 +96,7 @@
                     <li class="{{ preg_match("/admin.recordtype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.recordtype.view') }}"><i class="fa fa-file-o"></i>Recordtype</a></li>
                     <!--<li class="{{ preg_match("/admin.package.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.package.view') }}"><i class="fa fa-archive"></i>Package</a></li>-->
                     <li class="{{ preg_match("/admin.recordtype.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.occupancy.view') }}"><i class="fa fa-check-circle"></i>Occupancy</a></li>
+                    <li class="{{ preg_match("/admin.shift.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.shift.view') }}"><i class="fa fa-calendar"></i>Shift</a></li>
 
 
                 </ul>

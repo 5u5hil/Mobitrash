@@ -23,6 +23,10 @@ class Schedule extends \Eloquent {
         return $this->belongsTo('App\Models\Asset', 'van_id');
     }
     
+    public function shift() {
+        return $this->belongsTo('App\Models\Shift', 'shift_id');
+    }
+    
     public function vanlocation() {
         return $this->hasMany('App\Models\VanLocation', 'schedule_id');
     }
