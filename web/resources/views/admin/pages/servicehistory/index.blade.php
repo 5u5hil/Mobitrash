@@ -70,11 +70,11 @@
                             <tr>
                                 <th>id</th>
                                 <th>Van</th>
-                                <th>Staff Names</th>
+                                <th>Staff Name</th>
                                 <th style="min-width: 88px;">Date</th>
                                 <th style="width: 160px;">User Subscription</th>
-                                <th style="min-width: 125px;">Additives</th>
                                 <th style="min-width: 135px;">Waste Collected</th>
+                                <th style="min-width: 125px;">Additives</th>
                                 <th>Time Taken</th>
                                 <th>No of Crates</th>
                                 <th></th>
@@ -85,20 +85,20 @@
                             <tr>
                                 <td>{{$service->id}}</td>
                                 <td>{{@$service->schedule->van->name}} - {{@$service->schedule->van->asset_no}}</td>
-                                <td>@foreach($service->schedule->operators as $operator)
-                                    <div>{{$operator->name}}</div>
-                                    @endforeach
+                                <td>
+                                    <div>{{$service->operator->name}}</div>
+                                    
                                 </td>
                                 <td><div>{{date('d M Y', strtotime($service->created_at))}}</div><div>{{date('h:i:s A', strtotime($service->created_at))}}</div></td>
-                                <td>{{@$service->subscription->name}}</td>
-                                <td> 
-                                    @foreach($service->additives as $additive)
-                                    <div>{{@$additive->name}} : {{@$additive->pivot->quantity}} kg</div>
-                                    @endforeach</td>
+                                <td>{{@$service->subscription->name}}</td>                                
                                 <td>@foreach($service->wastetypes as $waste)
                                     <div>{{@$waste->name}} : {{@$waste->pivot->quantity}} kg</div>
                                     @endforeach
                                 </td>
+                                <td> 
+                                    @foreach($service->additives as $additive)
+                                    <div>{{@$additive->name}} : {{@$additive->pivot->quantity}} kg</div>
+                                    @endforeach</td>
                                 <td>{{$service->time_taken}}</td>
                                 <td>{{$service->crates_filled}}</td>
                                 <td>

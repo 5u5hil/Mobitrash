@@ -1,6 +1,55 @@
 @extends('admin.layouts.default')
 
+<style>
+    button.accordion {
+        background-color: #fff;
+        color: #444;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        border-top: 1px solid #efefef;
+        font-weight: bold;
+    }
 
+    .van-tracking{
+        min-height: 300px;
+    }
+
+
+    button.accordion:after {
+        content: '\02795';
+        font-size: 13px;
+        color: #777;
+        float: right;
+        margin-left: 5px;
+    }
+
+    button.accordion.active:after {
+        content: "\2796";
+    }
+
+    div.acc-con {
+        background-color: #f3f3f3;
+        display: none;
+        overflow: hidden;
+        transition: 0.6s ease-in-out;
+        opacity: 0;
+    }
+    div.acc-con div{
+        padding: 8px;
+        padding-left: 20px;
+    }
+
+    div.acc-con.show {
+        opacity: 1;
+        display: block;
+    }
+</style>
 
 @section('content')
 
@@ -90,13 +139,13 @@
     </div><!-- /.row -->
 
     <div class="row">        
-        <div class="col-md-12">
+<!--        <div class="col-md-12">
             <div class="box box-warning" style="background: transparent; border-left: 1px solid #fff;border-bottom: 1px solid #fff;border-right: 1px solid #fff;">
                 <div class="box-header with-border"  style="background: #fff;"> 
                     <h3 class="box-title">Van Tracking</h3>
-                </div><!-- /.box-header -->
+                </div> /.box-header 
                 <div class="box-body">
-                    <div class="row">
+                    <div class="row">-->
                         @foreach($vans as $van)
                         @if(!$van['schedules'])
                         @continue
@@ -107,23 +156,27 @@
                                     <h3 class="widget-user-username">{{$van['name']}}</h3>
                                     <h5 class="widget-user-desc">{{$van['asset_no']}}</h5>
                                 </div>
-                                <div class="box-footer no-padding">
-                                    <ul class="nav nav-stacked">
-                                        @foreach($van['schedules']['0']['pickups'] as $pickup)
-                                        <li><a>{{$pickup['subscription']['name'] }}<span class="pull-right"><?php echo $pickup['isPicked'] ? '<i class="fa fa-check text-success"></i>' : '' ?></span></a></li>
+                                <div class="box-footer no-padding van-tracking">
+                                    @foreach($van['schedules'] as $schedule)
+                                    <button class="accordion">{{ @$schedule['name']}}</button>
+                                    <div class="acc-con">
+                                        @foreach($schedule['pickups'] as $pickup)
+                                        <div>{{$pickup['subscription']['name'] }}<span class="pull-right"><?php echo $pickup['isPicked'] ? '<i class="fa fa-check text-success"></i>' : '' ?></span></div>
                                         @endforeach
-                                        <li><div class="box-footer clearfix">
-                                                <a href="{{route('admin.location.map',['id' => $van['schedules'][0]['id'] ])}}" target="_BLANK" class="btn btn-sm btn-success btn-flat pull-right">View on Map</a>
-                                            </div></li>
-                                    </ul>
+                                    </div>
+                                    @endforeach
+
+                                </div>
+                                <div class="box-footer clearfix">
+                                    <a href="{{route('admin.location.map',['id' => $van['id']])}}" target="_BLANK" class="btn btn-sm btn-success btn-flat pull-right">View on Map</a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
-                    </div>
+<!--                    </div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div><!-- /.row -->
 
     <div class="row">   
@@ -210,6 +263,16 @@
 @section('myscripts')
 
 <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+    this.classList.toggle("active");
+    this.nextElementSibling.classList.toggle("show");
+    }
+    }
+
+
     var pieOptions = {
     //Boolean - Whether we should show a stroke on each segment
     segmentShowStroke: true,
@@ -246,9 +309,7 @@
         },
 <?php } ?>
     ];
-    
     pieChartAll.Doughnut(PieDataAll, pieOptions);
-    
     ////////////////////// Daily waste
     var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
     var pieChart = new Chart(pieChartCanvas);
@@ -263,7 +324,6 @@
         },
 <?php } ?>
     ];
-    
     pieChart.Doughnut(PieData, pieOptions);
     ////////////////Aditive
     var pieAChartCanvas = $("#pieChartAdditive").get(0).getContext("2d");

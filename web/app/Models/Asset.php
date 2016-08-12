@@ -23,6 +23,10 @@ class Asset extends \Eloquent {
         return $this->belongsTo('App\Models\Asset', 'parent_id');
     }
     
+    public function vanlocation() {
+        return $this->hasMany('App\Models\VanLocation', 'van_id');
+    }
+    
     public function schedules() {
         return $this->hasMany('App\Models\Schedule', 'van_id')->where('for', date('Y-m-d'))->with('pickups.subscription');
     }

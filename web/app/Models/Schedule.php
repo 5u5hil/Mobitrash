@@ -27,10 +27,6 @@ class Schedule extends \Eloquent {
         return $this->belongsTo('App\Models\Shift', 'shift_id');
     }
     
-    public function vanlocation() {
-        return $this->hasMany('App\Models\VanLocation', 'schedule_id');
-    }
-
     public function pickups() {
         return $this->hasMany('App\Models\Pickup', 'schedule_id')->orderBy('pickuptime','ASC');
     }

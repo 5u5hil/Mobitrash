@@ -190,7 +190,7 @@ endforeach;
             url: "<?= route('admin.location.get') ?>",
             type: "POST",
             data: {
-                id: <?php echo $schedule->id ?>,
+                id: <?php echo $van->id ?>,
             },
             success: function (response) {
                 //journey_path.push({lat: response.latitude, lng: response.longitude});

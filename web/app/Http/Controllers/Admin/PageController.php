@@ -48,23 +48,27 @@ class PageController extends Controller {
                     $query->where('payment_made', 0);
                 })->count();
 
-        $vans = Asset::where("is_active", 1)->where("type_id", 1)->whereHas('schedules' ,function($q){
-         $q->where('for', date('Y-m-d'));   
-        })->with(['schedules'=> function($q){          $q->where('for', date('Y-m-d'))->orderBy("created_at",'desc');   
- }])->get()->toArray();
-        
+        $vans = Asset::where("is_active", 1)->where("type_id", 1)->whereHas('schedules', function($q) {
+                    $q->where('for', date('Y-m-d'));
+                })->with(['schedules' => function($q) {
+                        $q->where('for', date('Y-m-d'))->orderBy("sort_order", 'asc');
+                    }])->get()->toArray();
+
         $services = Service::where('created_at', 'LIKE', "%" . date('Y-m-d') . "%")->get(['pickup_id']);
         $pickupids = array(); //        
         foreach ($services as $service) {
             array_push($pickupids, $service->pickup_id);
         }
-        foreach ($vans as $key => $van) { 
-            if (isset($van['schedules'][0])) {
-                foreach ($van['schedules'][0]['pickups'] as $pkey => $pickup) {
-                    if (in_array($pickup['id'], $pickupids)) {
-                        $vans[$key]['schedules'][0]['pickups'][$pkey]['isPicked'] = true;
-                    } else {
-                        $vans[$key]['schedules'][0]['pickups'][$pkey]['isPicked'] = false;
+
+        foreach ($vans as $key => $van) {
+            foreach ($van['schedules'] as $key1 => $schedule) {
+                if ($schedule) {
+                    foreach ($schedule['pickups'] as $pkey => $pickup) {
+                        if (in_array($pickup['id'], $pickupids)) {
+                            $vans[$key]['schedules'][$key1]['pickups'][$pkey]['isPicked'] = true;
+                        } else {
+                            $vans[$key]['schedules'][$key1]['pickups'][$pkey]['isPicked'] = false;
+                        }
                     }
                 }
             }
@@ -133,13 +137,13 @@ class PageController extends Controller {
         }
         return view(Config('constants.adminView') . '.dashboard', compact(['subscription', 'pending_payment', 'vans', 'monthly_sub_amt', 'allwastes', 'wastes', 'additives', 'waste_till_date_sum']));
     }
-    
+
     public function setting() {
         $configuration = Configuration::find(1);
         $action = "admin.settings.save";
         return view(Config('constants.adminView') . '.setting', compact(['configuration', 'action']));
     }
-    
+
     public function settingsSave() {
         $configuration = Configuration::findOrNew(Input::get('id'))->fill(Input::all())->save();
         Session::flash('messageSuccess', "Settings Updated Successfully!");
@@ -147,19 +151,22 @@ class PageController extends Controller {
     }
 
     public function vanLocationMap() {
-        $schedule = Schedule::with('van')->find(Input::get('id'));
-        $locations = $schedule->vanlocation->toArray();
-        $pickups = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();
-//        dd($locations);
-        return view(Config('constants.adminView') . '.map', compact(['schedule', 'locations', 'pickups']));
+        $schedules = Schedule::where('van_id', Input::get('id'))->where('for', date('Y-m-d'))->get();
+        $van = Asset::find(Input::get('id'));
+        $locations = $van->vanlocation->toArray();
+        $pickups = [];
+        foreach ($schedules as $schedule) {
+            $sch = $schedule->pickups()->with('user', 'subscription.address')->get()->toArray();
+            foreach ($schedule['pickups'] as $pickup) {
+                array_push($pickups, $pickup);
+            }
+        }
+        return view(Config('constants.adminView') . '.map', compact(['schedule', 'locations', 'pickups', 'van']));
     }
 
     public function vanLocationGet() {
-        $schedule = Schedule::with('van')->find(Input::get('id'));
-        $locations = VanLocation::where('schedule_id', Input::get('id'))->orderBy('created_at', 'desc')->first()->toArray();
+        $locations = VanLocation::where('van_id', Input::get('id'))->orderBy('created_at', 'desc')->first()->toArray();
         return $locations;
     }
-
-    
 
 }

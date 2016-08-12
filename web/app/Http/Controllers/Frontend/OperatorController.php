@@ -266,6 +266,7 @@ class OperatorController extends Controller {
                 $service->user_id = $subscription->user_id;
                 $service->address_id = $subscription->user_address_id;
                 $service->schedule_id = $pickup_data['schedule_id'];
+                $service->subscription_id = $pickup_data['subscription_id'];
                 $service->pickup_id = $pickup_data['id'];
                 if (isset($service_data['crates_filled'])) {
                     $service->crates_filled = $service_data['crates_filled'];
@@ -293,14 +294,14 @@ class OperatorController extends Controller {
     }
 
     public function locationUpdate() {
-        $schedule_id = Input::get('id');
+        $van_id = Input::get('id');
         $latitude = Input::get('lat');
         $longitude = Input::get('lng');
-        if ($schedule_id && $latitude && $longitude) {
-            $van_location = VanLocation::where('schedule_id', $schedule_id)->first();
+        if ($van_id && $latitude && $longitude) {
+            $van_location = VanLocation::where('van_id', $van_id)->first();
             if (!$van_location) {
                 $van_location = new VanLocation();
-                $van_location->schedule_id = $schedule_id;
+                $van_location->van_id = $van_id;
             }
             $van_location->latitude = $latitude;
             $van_location->longitude = $longitude;
