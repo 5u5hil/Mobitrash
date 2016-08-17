@@ -142,11 +142,13 @@ class OperatorController extends Controller {
             return ['flash' => 'error'];
         }
     }
-    
-    public function shiftData() {
-        $shifts = Shift::where('is_active', 1)->get();
-        if ($shifts) {
-            return ['flash' => 'success', 'Shifts' => $shifts];
+            
+    public function scheduleList() {
+        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address', 'shift']);
+        $schedules = $schedules->where('van_id', Input::get("id"));
+        $schedules = $schedules->orderBy('sort_order', 'asc')->get();
+        if ($schedules) {
+            return ['flash' => 'success', 'Schedules' => $schedules];
         } else {
             return ['flash' => 'error'];
         }
@@ -187,16 +189,17 @@ class OperatorController extends Controller {
     }
 
     public function attendance() {
-        $schedule = Schedule::where('shift_id', Input::get('shift_id'))->where('van_id',Input::get('van_id'))->where('for', date('Y-m-d'))->first();
-        $user = User::where('id',Input::get("id"))->with('roles')->first()->toArray();
-        
+        $user = User::where('id',Input::get("id"))->with('roles')->first()->toArray();    
+        foreach( Input::get('schedule_id') as $sch_id){
+        $schedule = Schedule::where('id', $sch_id)->where('van_id',Input::get('van_id'))->where('for', date('Y-m-d'))->first();
+            
         if($schedule){
             if($user['roles'][0]['id']==3){
-                $schedule->operators()->sync([Input::get('id')]);
+                $schedule->operators()->attach([Input::get('id')]);
             }else if($user['roles'][0]['id']==4){
-                $schedule->drivers()->sync([Input::get('id')]);
+                $schedule->drivers()->attach([Input::get('id')]);
             }
-        }
+        }}
         $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         if ($attendance_exist > 0) {
             return ['flash' => 'exist'];

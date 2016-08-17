@@ -288,7 +288,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/save-service-details', ["as" => "operator.service.save", "uses" => "OperatorController@serviceSave"]);
         Route::post('/receipt-data', ["as" => "operator.receipt.data", "uses" => "OperatorController@receiptData"]);
         Route::post('/van-data', ["as" => "operator.van.data", "uses" => "OperatorController@vanData"]);
-        Route::post('/shift-data', ["as" => "operator.shift.data", "uses" => "OperatorController@shiftData"]);
+        Route::post('/schedule-list', ["as" => "operator.schedule.list", "uses" => "OperatorController@scheduleList"]);
         Route::post('/save-setting', ["as" => "operator.setting.save", "uses" => "OperatorController@settingSave"]);
         Route::post('/save-logout-time', ["as" => "operator.setting.logout", "uses" => "OperatorController@logoutSave"]);
         Route::post('/cleaning-data', ["as" => "operator.cleaning.data", "uses" => "OperatorController@cleaningData"]);
