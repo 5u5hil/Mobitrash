@@ -69,7 +69,7 @@ $joureny .= ']';
             mapTypeControl: false,
             streetViewControl: false,
             panControl: false,
-            scrollwheel: false,
+            scrollwheel: true,
             navigationControl: false,
             center: myLatLng
         });

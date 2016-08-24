@@ -166,6 +166,13 @@ class OperatorController extends Controller {
     public function logoutSave() {        
         $attendance = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->first();
         $attendance->logout_at = date('Y-m-d H:i:s');
+        if (Input::get('image_data')) {
+                $destinationPath = public_path() . '/uploads/attendance/';
+                $fileName = time() . '.jpg';
+                if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
+                    $attendance->logout_image = $fileName;
+                }
+            }
         if ($attendance->update()) {
             return ['flash' => 'success'];
         } else {
@@ -234,7 +241,7 @@ class OperatorController extends Controller {
     }
 
     public function cleaningData() {
-        $record = Record::where('recordtype_id', 3)->where('date', date('Y-m-d'))->count();
+        $record = Record::where('recordtype_id', 3)->where('asset_id',Input::get("id"))->where('date', date('Y-m-d'))->count();
         $vans = Asset::where('is_active', 1)->get()->toArray();
         return ['flash' => 'success', 'Records' => $record, 'Vans' => $vans];
     }

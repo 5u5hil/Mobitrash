@@ -64,7 +64,8 @@
                                 <th>Date</th>
                                 <th>Login Time</th>    
                                 <th>Logout Time</th>    
-                                <th>Working Hours</th>    
+                                <th>Working Hours</th>
+                                <th class="no-print">Logout Image</th> 
                                 <th class="no-print"></th>
                             </tr>
                         </thead>
@@ -80,6 +81,7 @@
                                 <td>{{date('h:i:s A', strtotime($attendance->created_at))}}</td> 
                                 <td>{{$attendance->logout_at ? date('h:i:s A', strtotime($attendance->logout_at)) : ''}}</td> 
                                 <td>{{$attendance->logout_at ? gmdate("H:i",(strtotime($attendance->logout_at) - strtotime($attendance->created_at))) : ''}}</td> 
+                                <td class="no-print"><img src="{{ $attendance->logout_image ? Config('constants.uploadAttendance').$attendance->logout_image : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;" /></td>
                                 <td class="no-print">
                                     @permission('admin.attendance.delete')  
                                     <a href="{{ route('admin.attendance.delete',['id' => @$attendance->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>

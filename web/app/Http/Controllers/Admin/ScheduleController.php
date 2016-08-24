@@ -230,9 +230,13 @@ class ScheduleController extends Controller {
         $schedule->fill(Input::except('operators', 'drivers', 'pickup'))->save();
         if (Input::get('operators')) {
             $schedule->operators()->sync(Input::get('operators'));
+        }else{
+            $schedule->operators()->sync([]);
         }
         if (Input::get('drivers')) {
             $schedule->drivers()->sync(Input::get('drivers'));
+        }else{
+            $schedule->drivers()->sync([]);
         }
         Pickup::where("schedule_id", $schedule->id)->delete();
         if (Input::get("pickup")) {
