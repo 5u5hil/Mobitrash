@@ -65,8 +65,8 @@ class OperatorController extends Controller {
         $cnt = 0;
         if ($schedules) {
             foreach ($schedules as $ke => $schedule) {
-                    unset($schedules[$ke]);
-                    $schedules['SH'.$schedule->id] = $schedule;
+                unset($schedules[$ke]);
+                $schedules['SH' . $schedule->id] = $schedule;
             }
             foreach ($schedules as $ke => $schedule) {
                 foreach ($schedule['pickups'] as $key => $pickup) {
@@ -142,9 +142,9 @@ class OperatorController extends Controller {
             return ['flash' => 'error'];
         }
     }
-            
+
     public function scheduleList() {
-        $schedules = Schedule::where('for', date('Y-m-d'))->with(['pickups.subscription.address', 'shift']);
+        $schedules = Schedule::where('for', date('Y-m-d'));
         $schedules = $schedules->where('van_id', Input::get("id"));
         $schedules = $schedules->orderBy('sort_order', 'asc')->get();
         if ($schedules) {
@@ -162,17 +162,17 @@ class OperatorController extends Controller {
             return ['flash' => 'error'];
         }
     }
-    
-    public function logoutSave() {        
+
+    public function logoutSave() {
         $attendance = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->first();
         $attendance->logout_at = date('Y-m-d H:i:s');
         if (Input::get('image_data')) {
-                $destinationPath = public_path() . '/uploads/attendance/';
-                $fileName = time() . '.jpg';
-                if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
-                    $attendance->logout_image = $fileName;
-                }
+            $destinationPath = public_path() . '/uploads/attendance/';
+            $fileName = time() . '.jpg';
+            if (File::put($destinationPath . $fileName, base64_decode(Input::get('image_data')))) {
+                $attendance->logout_image = $fileName;
             }
+        }
         if ($attendance->update()) {
             return ['flash' => 'success'];
         } else {
@@ -196,17 +196,19 @@ class OperatorController extends Controller {
     }
 
     public function attendance() {
-        $user = User::where('id',Input::get("id"))->with('roles')->first()->toArray();    
-        foreach( Input::get('schedule_id') as $sch_id){
-        $schedule = Schedule::where('id', $sch_id)->where('van_id',Input::get('van_id'))->where('for', date('Y-m-d'))->first();
-            
-        if($schedule){
-            if($user['roles'][0]['id']==3){
-                $schedule->operators()->attach([Input::get('id')]);
-            }else if($user['roles'][0]['id']==4){
-                $schedule->drivers()->attach([Input::get('id')]);
+        $user = User::where('id', Input::get("id"))->with('roles')->first()->toArray();
+        
+        foreach (Input::get('schedule_id') as $sch_id) {            
+            if ($sch_id['checked']) {
+                $schedule = Schedule::where('id', $sch_id['id'])->first();
+                if ($user['roles'][0]['id'] == 3) {
+                    $schedule->operators()->attach([Input::get("id")]);
+                } else if ($user['roles'][0]['id'] == 4) {
+                    $schedule->drivers()->attach([Input::get("id")]);
+                }
             }
-        }}
+        }
+        
         $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         if ($attendance_exist > 0) {
             return ['flash' => 'exist'];
@@ -241,7 +243,7 @@ class OperatorController extends Controller {
     }
 
     public function cleaningData() {
-        $record = Record::where('recordtype_id', 3)->where('asset_id',Input::get("id"))->where('date', date('Y-m-d'))->count();
+        $record = Record::where('recordtype_id', 3)->where('asset_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         $vans = Asset::where('is_active', 1)->get()->toArray();
         return ['flash' => 'success', 'Records' => $record, 'Vans' => $vans];
     }
@@ -265,7 +267,7 @@ class OperatorController extends Controller {
         $pickups = Input::get('offlinePickup');
         $kilometers = Input::get('offlineKM');
         $cc = 0;
-        if ($pickups) {            
+        if ($pickups) {
             foreach ($pickups as $pickup) {
                 $cc++;
                 $pickup_data = $pickup['pickup'];

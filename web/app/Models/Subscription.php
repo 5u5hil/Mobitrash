@@ -30,6 +30,10 @@ class Subscription extends \Eloquent {
     public function servicetype() {
         return $this->belongsTo('App\Models\Servicetype', 'servicetype_id');
     }
+    
+    public function city() {
+        return $this->belongsTo('App\Models\City', 'city_id');
+    }
 
     public function packages() {
         return $this->belongsTo('App\Models\Package', 'package_id');

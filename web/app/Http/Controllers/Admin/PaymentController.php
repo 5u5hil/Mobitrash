@@ -14,39 +14,39 @@ use Session;
 class PaymentController extends Controller {
 
     function index() {
-        $filter = array('' => 'All', 'subscription_name' => 'Subscription', 'invoice_date' => 'Invoice Date', 'invoice_month' => 'Invoice Month', 'received_payments' => 'Received Payments', 'pending_payments' => 'Pending Payments');
+        $filter = array('' => 'All', 'subscription_name' => 'Subscription', 'received_payments' => 'Received Payments', 'pending_payments' => 'Pending Payments');
 
         $filter_type = NULL;
         $filter_value = NULL;
         $field1 = NULL;
-        $field2 = NULL;
-        $field3 = NULL;
+        
+        $payments = Payment::orderBy("created_at", "desc");
+        if (Input::get('invoice_date')) {
+            $payments = $payments->whereNull('invoice_month')->where('invoice_date', date("Y-m-d", strtotime(Input::get('invoice_date'))));
+        }
+        if (Input::get('invoice_month')) {
+            $payments = $payments->whereNull('invoice_date')->where('invoice_month', Input::get('invoice_month'));
+        }
         if (Input::get('filter_value') && Input::get('filter_type')) {
             $filter_type = Input::get('filter_type');
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'subscription_name') {
                 $field1 = Input::get('filter_value');
-                $payments = Payment::whereHas('subscription', function($q) {
+                $payments = $payments->whereHas('subscription', function($q) {
                             $q->where('name', 'LIKE', "%" . Input::get('filter_value') . "%");
-                        })->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
-            } else if ($filter_type == 'invoice_date') {
-                $field2 = Input::get('filter_value');
-                $payments = Payment::where('invoice_date', date("Y-m-d", strtotime(Input::get('filter_value'))))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
-            } else if ($filter_type == 'invoice_month') {
-                $field3 = Input::get('filter_value');
-                $payments = Payment::where('invoice_month', Input::get('filter_value'))->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
-            }
+                        })->paginate(Config('constants.paginateNo'));
+            } 
         } else if (Input::get('filter_type') == 'received_payments') {
             $filter_type = Input::get('filter_type');
-            $payments = Payment::where('payment_made', 1)->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
+            $payments = $payments->where('payment_made', 1)->paginate(Config('constants.paginateNo'));
         } else if (Input::get('filter_type') == 'pending_payments') {
             $filter_type = Input::get('filter_type');
-            $payments = Payment::where('payment_made', 0)->orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
+            $payments = $payments->where('payment_made', 0)->paginate(Config('constants.paginateNo'));
         } else {
-            $payments = Payment::orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
+            $payments = $payments->paginate(Config('constants.paginateNo'));
         }
 
-        return view(Config('constants.adminPaymentView') . '.index', compact('payments', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
+        return view(Config('constants.adminPaymentView') . '.index', compact('payments', 'filter', 'filter_type', 'filter_value', 'field1'));
     }
 
     public function add() {

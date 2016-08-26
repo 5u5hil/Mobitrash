@@ -16,12 +16,11 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="filter-box">
+                    <div class="filter-box" style="width: 925px;">
 
                         <?php
                         $show_f1 = 'display:none;';
                         $show_f2 = 'display:none;';
-                        $show_f3 = 'display:none;';
                         $show_f4 = 'display:none;';
                         $dis_f1 = 'disabled';
                         $dis_f2 = 'disabled';
@@ -35,10 +34,6 @@
                             $show_f2 = '';
                             $dis_f2 = '';
                         }
-                        if ($field3) {
-                            $show_f3 = '';
-                            $dis_f3 = '';
-                        }
                         if ($field4) {
                             $show_f4 = '';
                             $dis_f4 = '';
@@ -49,8 +44,9 @@
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::select('filter_value',$vans,$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
                         {!! Form::select('filter_value',$operators,$field2, ["class"=>'form-control f2 ', "style"=>$show_f2, $dis_f2]) !!}
-                        {!! Form::text('filter_value', $field3, ["class"=>'form-control f3 datepicker2', "style"=>$show_f3, $dis_f3]) !!}
                         {!! Form::select('filter_value', $subscriptions, $field4, ["class"=>'form-control f4', "style"=>$show_f4, $dis_f4]) !!}
+                        {!! Form::text('start_date', Input::get('start_date'), ["class"=>'form-control datepicker2', "placeholder" => "Start Date"]) !!}
+                        {!! Form::text('end_date', Input::get('end_date'), ["class"=>'form-control datepicker2', "placeholder" => "End Date"]) !!}
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>

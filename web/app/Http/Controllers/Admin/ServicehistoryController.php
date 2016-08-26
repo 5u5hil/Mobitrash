@@ -27,6 +27,7 @@ class ServicehistoryController extends Controller {
         foreach ($sub as $value) {
             $subscriptions[$value['id']] = $value['name'];
         }
+
         $op = User::whereHas('roles', function($q) {
                     $q->where('id', 3);
                 })->get()->toArray();
@@ -34,33 +35,46 @@ class ServicehistoryController extends Controller {
         foreach ($op as $value) {
             $operators[$value['id']] = $value['name'];
         }
-        $filter = array('' => 'All', 'van_id' => 'Van', 'operator_id' => 'Staff Name', 'created_at' => 'Date', 'subscription_id' => 'User Subscription');
+        $dr = User::whereHas('roles', function($q) {
+                    $q->where('id', 4);
+                })->get()->toArray();
+        foreach ($dr as $value) {
+            $operators[$value['id']] = $value['name'];
+        }
+        $filter = array('' => 'All', 'van_id' => 'Van', 'operator_id' => 'Staff Name', 'subscription_id' => 'User Subscription');
         $filter_type = NULL;
         $filter_value = NULL;
         $field1 = NULL;
         $field2 = NULL;
         $field3 = NULL;
         $field4 = NULL;
+        $services = Service::orderBy("created_at", "desc");
+
+        if (Input::get('start_date')) {
+            $services = $services->where('created_at', '>=', date("Y-m-d", strtotime(Input::get('start_date'))));
+        }
+        
+        if (Input::get('end_date')) {
+            $services = $services->where('created_at', '<=', date("Y-m-d", strtotime(Input::get('end_date'))));
+        }
+
         if (Input::get('filter_value') && Input::get('filter_type')) {
             $filter_type = Input::get('filter_type');
             $filter_value = Input::get('filter_value');
             if ($filter_type == 'van_id') {
                 $field1 = Input::get('filter_value');
-                $services = Service::whereHas('schedule.van', function($q) {
+                $services = $services->whereHas('schedule.van', function($q) {
                             $q->where('id', Input::get('filter_value'));
-                        })->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                        })->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'operator_id') {
                 $field2 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
-            } else if ($filter_type == 'created_at') {
-                $field3 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), 'LIKE', "%" . date("Y-m-d", strtotime(Input::get('filter_value'))) . "%")->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                $services = $services->where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             } else if ($filter_type == 'subscription_id') {
                 $field4 = Input::get('filter_value');
-                $services = Service::where(Input::get('filter_type'), Input::get('filter_value'))->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+                $services = $services->where(Input::get('filter_type'), Input::get('filter_value'))->paginate(Config('constants.paginateNo'));
             }
         } else {
-            $services = Service::orderBy('created_at', 'desc')->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
+            $services = $services->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'subscriptions', 'operators', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4'));
     }
@@ -101,12 +115,12 @@ class ServicehistoryController extends Controller {
         $wastes = Input::get('wastetype');
         $additives = Input::get('additive');
         foreach ($wastes as $key => $wate) {
-            if(!$wate['quantity']){
+            if (!$wate['quantity']) {
                 unset($wastes[$key]);
             }
         }
         foreach ($additives as $key => $add) {
-            if(!$add['quantity']){
+            if (!$add['quantity']) {
                 unset($additives[$key]);
             }
         }

@@ -47,6 +47,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('city','City',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('city_id',$city,null, ["class"=>'form-control', "data-show-content" => "false", "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('user','Occupancy Type',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('occupancy_id',$occupancy,null, ["class"=>'form-control', "data-show-content" => "false", "required"]) !!}

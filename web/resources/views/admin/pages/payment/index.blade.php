@@ -15,33 +15,22 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="filter-box">
+                    <div class="filter-box" style="width: 950px;">
                         <?php
                         $show_f1 = 'display:none;';
-                        $show_f2 = 'display:none;';
-                        $show_f3 = 'display:none;';
                         $dis_f1 = 'disabled';
-                        $dis_f2 = 'disabled';
-                        $dis_f3 = 'disabled';
                         if ($field1) {
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        if ($field2) {
-                            $show_f2 = '';
-                            $dis_f2 = '';
-                        }
-                        if ($field3) {
-                            $show_f3 = '';
-                            $dis_f3 = '';
-                        }
+                        
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.payment.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
-                        {!! Form::text('filter_value', $field2, ["class"=>'form-control f2 datepicker2', "style"=>$show_f2, $dis_f2]) !!}
-                        {!! Form::text('filter_value',$field3, ["class"=>'form-control f3 monthpicker', "style"=>$show_f3, $dis_f3]) !!}
+                        {!! Form::text('invoice_date', Input::get('invoice_date'), ["class"=>'form-control  datepicker2', 'placeholder' => 'Date']) !!}
+                        <!--{!! Form::text('invoice_month',Input::get('invoice_month'), ["class"=>'form-control  monthpicker', 'placeholder' => 'Month']) !!}-->
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>

@@ -24,12 +24,14 @@
                         $show_f4 = 'display:none;';
                         $show_f5 = 'display:none;';
                         $show_f6 = 'display:none;';
+                        $show_f7 = 'display:none;';
                         $dis_f1 = 'disabled';
                         $dis_f2 = 'disabled';
                         $dis_f3 = 'disabled';
                         $dis_f4 = 'disabled';
                         $dis_f5 = 'disabled';
                         $dis_f6 = 'disabled';
+                        $dis_f7 = 'disabled';
                         if ($field1) {
                             $show_f1 = '';
                             $dis_f1 = '';
@@ -54,6 +56,10 @@
                             $show_f6 = '';
                             $dis_f6 = '';
                         }
+                        if ($field7) {
+                            $show_f7 = '';
+                            $dis_f7 = '';
+                        }
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.subscription.trial' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
@@ -62,7 +68,8 @@
                         <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f3', "style"=>$show_f3, $dis_f3]) !!}</span>
                         <span>{!! Form::text('filter_value',$field4, ["class"=>'form-control f4 datepicker2', "style"=>$show_f4, $dis_f4]) !!}</span>
                         <span>{!! Form::text('filter_value',$field5, ["class"=>'form-control f5 datepicker2', "style"=>$show_f5, $dis_f5]) !!}</span>
-                        <span>{!! Form::text('filter_value', $field3, ["class"=>'form-control f6', "style"=>$show_f6, $dis_f6]) !!}</span>
+                        <span>{!! Form::text('filter_value', $field6, ["class"=>'form-control f6', "style"=>$show_f6, $dis_f6]) !!}</span>
+                        <span>{!! Form::select('filter_value', $city, $field7, ["class"=>'form-control f7', "style"=>$show_f7, $dis_f7]) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
@@ -153,24 +160,27 @@
     $(".filter_type").change(function () {
         if ($(this).val() == 'timeslot_id') {
             $(".f1").show().prop('disabled', false);
-            $(".f2, .f3, .f4, .f5").hide().prop('disabled', true);
+            $(".f2, .f3, .f4, .f5, .f6, .f7").hide().prop('disabled', true);
         } else if ($(this).val() == 'frequency_id') {
             $(".f2").show().prop('disabled', false);
-            $(".f1, .f3, .f4, .f5").hide().prop('disabled', true);
+            $(".f1, .f3, .f4, .f5, .f6, .f7").hide().prop('disabled', true);
         } else if ($(this).val() == 'amt_paid') {
             $(".f3").show().prop('disabled', false);
-            $(".f1, .f2, .f4, .f5").hide().prop('disabled', true);
+            $(".f1, .f2, .f4, .f5, .f6, .f7").hide().prop('disabled', true);
         } else if ($(this).val() == 'start_date') {
             $(".f4").show().prop('disabled', false);
-            $(".f1, .f2, .f3, .f5").hide().prop('disabled', true);
+            $(".f1, .f2, .f3, .f5, .f6, .f7").hide().prop('disabled', true);
         } else if ($(this).val() == 'end_date') {
             $(".f5").show().prop('disabled', false);
-            $(".f1, .f2, .f3, .f4").hide().prop('disabled', true);
-        } else if ($(this).val() == 'user_id') {
+            $(".f1, .f2, .f3, .f4, .f6, .f7").hide().prop('disabled', true);
+        } else if ($(this).val() == 'name') {
             $(".f6").show().prop('disabled', false);
-            $(".f1, .f2, .f3, .f4, .f5").hide().prop('disabled', true);
-        } else {
+            $(".f1, .f2, .f3, .f4, .f5, .f7").hide().prop('disabled', true);
+        } else if ($(this).val() == 'city_id') {
+            $(".f7").show().prop('disabled', false);
             $(".f1, .f2, .f3, .f4, .f5, .f6").hide().prop('disabled', true);
+        } else {
+            $(".f1, .f2, .f3, .f4, .f5, .f6, .f7").hide().prop('disabled', true);
         }
     });
 </script>
