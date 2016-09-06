@@ -1,20 +1,7 @@
 @extends('admin.layouts.default')
 @section('content')
 <style>
-    @media print {
-        .print {
-            background-color: white;
-            height: 100%;
-            width: 100%;        
-        }
-        .print .no-print{
-            display: none;
-        }
-
-        .page-break{
-            page-break-after: always;
-        }
-    }
+    
 </style>
 <section class="content-header">
     <h1>
@@ -30,25 +17,27 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header" style="height: 72px;">
-                    <div class="filter-box" style="width: 900px;">
+                <div class="box-header">
+                    <h3 class="box-title">  
+                        @permission('admin.attendance.add')  
+                        <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default" type="button">Add Attendance</a>-->      
+                        @endpermission 
+                        <button onclick="printDiv()" style="width: 152px;"  class="btn btn-primary" type="button">Print</button>
+                    </h3>
+                    <div class="filter-box">
 
                         {!! Form::open(['method'=>'GET','route' => 'admin.attendance.view' , 'class' => 'form-horizontal' ]) !!}
-
+                        <label>Filter </label>
                         <span>{!! Form::text('staff_id',Input::get('staff_id'), ["class"=>'form-control f1', 'placeholder'=>'Staff ID']) !!}</span>
                         <span>{!! Form::text('start_date',Input::get('start_date'), ["class"=>'form-control f2 datepicker2', 'placeholder'=>'Start Date']) !!}</span>
                         <span>{!! Form::text('end_date',Input::get('end_date'), ["class"=>'form-control f2 datepicker2', 'placeholder'=>'End Date']) !!}</span>
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
-                        <button onclick="printDiv()" style="width: 100px;" class="btn btn-primary filter-button" type="button">Print</button>
+
                         {!! Form::close() !!}
 
                     </div>
-                    <h3 class="box-title">  
-                        @permission('admin.attendance.add')  
-                        <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default pull-right" type="button">Add Attendance</a>-->      
-                        @endpermission 
-                    </h3>
-                    <div style="margin-top: 20px;">
+
+                    <div class="message-box">
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
                     </div>
                 </div>
@@ -72,7 +61,7 @@
                         <tbody id="indexdata">
                             <?php $index = 1; ?>
                             @foreach($attendances as $attendance)                            
-                            <tr class="<?= $index % 23 == 0 ? 'page-break':''?>">
+                            <tr class="<?= $index % 23 == 0 ? 'page-break' : '' ?>">
                                 <td>{{$attendance->user_id}}</td>
                                 <td class="no-print"><img src="{{ $attendance->image ? Config('constants.uploadAttendance').$attendance->image : asset('public/Admin/dist/img/noimage.jpg') }}" style="height: 80px;" /></td>
                                 <td>{{@$attendance->user->name}}</td>
@@ -88,9 +77,9 @@
                                     @endpermission
                                 </td>
                             </tr>
-                            
-                        <?php $index++; ?>
-                        @endforeach
+
+                            <?php $index++; ?>
+                            @endforeach
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->

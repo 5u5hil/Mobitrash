@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jqueryui-timepicker-adon.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/mdp.css') }}">
 <link rel="stylesheet" href="{{ asset('public/Admin/dist/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('public/Admin/dist/css/jquery.monthpicker.css') }}">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

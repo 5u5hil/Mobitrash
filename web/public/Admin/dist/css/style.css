@@ -42,15 +42,22 @@
     display: none;
 }
 
+.filter-box form{
+    width: 100%;
+    margin-left: 100px;
+}
+.filter-box form label{
+    width: 50px;
+}
 .filter-box{
-    float: right;
-    width: 495px;
-    position: absolute;
-    right: 15px;
+    /*float: right;*/
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+    /*text-align: right;*/
+    /*right: 15px;*/
 }
-.filter-box label{
-    margin-right: 10px;
-}
+
 .filter-box input, .filter-box select{
     width: 185px; 
     margin-right: 10px;
@@ -66,3 +73,34 @@
 .datepicker{
     background: #fff!important;
 }
+
+.box-title{
+    width: 100%;
+}
+.box-title a,.box-title button{
+    margin-right: 10px;
+}
+
+.message-box{
+    line-height: 45px;
+    font-weight: bold;
+}
+.message-box p{
+    margin: 0px;
+    text-align: center;
+}
+
+@media print {
+        .print {
+            background-color: white;
+            height: 100%;
+            width: 100%;        
+        }
+        .print .no-print{
+            display: none;
+        }
+
+        .page-break{
+            page-break-after: always;
+        }
+    }

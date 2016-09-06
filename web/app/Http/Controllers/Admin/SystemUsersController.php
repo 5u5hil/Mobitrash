@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 class SystemUsersController extends Controller {
 
     public function index() {
-        $filter = array('' => 'All', 'name' => 'Customer Name', 'email' => 'Email', 'roles' => 'Role');
+        $filter = array('' => 'All', 'name' => 'Staff Name', 'email' => 'Email', 'roles' => 'Role');
         $filter_type = NULL;
         $filter_value = NULL;
         $field1 = NULL;

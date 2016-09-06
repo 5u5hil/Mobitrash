@@ -16,7 +16,13 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="filter-box" style="width: 925px;">
+                    <h3 class="box-title">  
+                        <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default" type="button">Add New Service History</a>-->      
+                        <button onclick="printDiv()" style="width: 142px;"  class="btn btn-primary" type="button">Print</button>
+                        <a href="{!! route('admin.servicehistory.excel') !!}?filter_type={{Input::get('filter_type')}}&filter_value={{Input::get('filter_value')}}&start_date={{Input::get('start_date')}}&end_date={{Input::get('end_date')}}" style="width: 142px;" class="btn btn-default" type="button">Export</a>
+                    </h3>
+
+                    <div class="filter-box">
 
                         <?php
                         $show_f1 = 'display:none;';
@@ -50,17 +56,15 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
-                        <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default pull-right" type="button">Add New Service History</a>-->      
-                    </h3>
 
-                    <div>
+
+                    <div class="message-box">
                         <p style="color:red;text-align: center">{{ Session::get('message') }}  </p>
                     </div>
 
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div id="print-content" class="box-body table-responsive no-padding print">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -73,7 +77,7 @@
                                 <th style="min-width: 125px;">Additives</th>
                                 <th>Time Taken</th>
                                 <th>No of Crates</th>
-                                <th></th>
+                                <th class="no-print"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +87,7 @@
                                 <td>{{@$service->schedule->van->name}} - {{@$service->schedule->van->asset_no}}</td>
                                 <td>
                                     <div>{{$service->operator->name}}</div>
-                                    
+
                                 </td>
                                 <td><div>{{date('d M Y', strtotime($service->created_at))}}</div><div>{{date('h:i:s A', strtotime($service->created_at))}}</div></td>
                                 <td>{{@$service->subscription->name}}</td>                                
@@ -97,7 +101,7 @@
                                     @endforeach</td>
                                 <td>{{$service->time_taken}}</td>
                                 <td>{{$service->crates_filled}}</td>
-                                <td>
+                                <td class="no-print">
                                     @permission('admin.servicehistory.edit')
                                     <a href="{{ route('admin.servicehistory.edit',['id' => $service->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                                     @endpermission
@@ -144,6 +148,14 @@
             $(".f1, .f2, .f3, .f4").hide().prop('disabled', true);
         }
     });
+    function printDiv(printable) {
+        var printContents = document.getElementById("print-content").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        document.title = "Mobitrash | Service History";
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
 </script>
 
 @stop

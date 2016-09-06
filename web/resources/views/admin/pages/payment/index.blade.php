@@ -15,7 +15,14 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="filter-box" style="width: 950px;">
+                    <h3 class="box-title action-box"> 
+                        @permission('admin.payment.add')
+                        <a href="{!! route('admin.payment.add') !!}" class="btn btn-default" type="button">Create New Invoice</a>      
+                        @endpermission
+                        <button onclick="printDiv()" style="width: 142px;"  class="btn btn-default" type="button">Print</button>
+                        <a href="{!! route('admin.payment.excel') !!}?filter_type={{Input::get('filter_type')}}&filter_value={{Input::get('filter_value')}}&invoice_date={{Input::get('invoice_date')}}&invoice_month={{Input::get('invoice_month')}}" style="width: 142px;" class="btn btn-default" type="button">Export</a>
+                    </h3>
+                    <div class="filter-box">
                         <?php
                         $show_f1 = 'display:none;';
                         $dis_f1 = 'disabled';
@@ -29,22 +36,18 @@
                         <label>Filter </label>
                         {!! Form::select('filter_type',$filter,$filter_type, ["class"=>'form-control filter_type']) !!}
                         {!! Form::text('filter_value',$field1, ["class"=>'form-control f1', "style"=>$show_f1, $dis_f1]) !!}
-                        {!! Form::text('invoice_date', Input::get('invoice_date'), ["class"=>'form-control  datepicker2', 'placeholder' => 'Date']) !!}
-                        <!--{!! Form::text('invoice_month',Input::get('invoice_month'), ["class"=>'form-control  monthpicker', 'placeholder' => 'Month']) !!}-->
+                        {!! Form::text('invoice_date', Input::get('invoice_date'), ["class"=>'form-control  datepicker2 date-select', 'placeholder' => 'Date']) !!}
+                        {!! Form::text('invoice_month',Input::get('invoice_month'), ["class"=>'form-control  month-picker month-select', 'placeholder' => 'Month']) !!}
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title"> 
-                        @permission('admin.payment.add')
-                        <a href="{!! route('admin.payment.add') !!}" class="btn btn-default pull-right" type="button">Create New Invoice</a>      
-                        @endpermission
-                    </h3>
-                    <div>
+                    
+                    <div class="message-box">
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
                     </div>
                 </div>
 
-                <div class="box-body table-responsive no-padding">
+                <div id="print-content" class="box-body table-responsive no-padding print">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -56,10 +59,10 @@
                                 <th>Payment Made</th>
                                 <th>Payment Date</th>
                                 <th>Remark</th>
-                                <th>Attachment</th>
+                                <th class="no-print">Attachment</th>
                                 <th>Added By</th>
                                 <th>Txn Details</th>
-                                <th></th>
+                                <th class="no-print"></th>
                             </tr>
                         </thead>
                         <tbody id="indexdata">                          
@@ -73,7 +76,7 @@
                                 <td>{{@$payment->payment_made == 1? 'Yes' : ($payment->payment_made == 2 ? 'Pending' :'No')}}</td>
                                 <td>{{ ($payment->payment_made == 1 || $payment->payment_made == 2) ? date('d M Y', strtotime(@$payment->payment_date)) : '-' }}</td>
                                 <td>{{@$payment->remark}}</td>
-                                <td>  
+                                <td class="no-print">  
                                     <a href="{{ Config('constants.uploadRecord').@$payment->file }}" target="_BLANK"><i class="fa fa-file"></i></a>
                                 </td>
                                 <td>{{@$payment->addedBy->name}}</td>
@@ -87,7 +90,7 @@
                                     </pre>
                                     @endif
                                 </td>
-                                <td>
+                                <td  class="no-print">
                                     @permission('admin.payment.edit')
                                     <a href="{{ route('admin.payment.edit',['id' => @$payment->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                                     @endpermission
@@ -128,6 +131,21 @@
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });
+    $('.date-select').change(function(){
+        $('.month-select').val('');
+    });
+    $('.month-select').change(function(){
+        $('.date-select').val('');
+    });
+    
+    function printDiv(printable) {
+        var printContents = document.getElementById("print-content").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        document.title = "Mobitrash | Payments";
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
 </script>
 
 @stop

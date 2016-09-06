@@ -37,7 +37,7 @@
                     <div class="form-group invoice_month" style="display: none;">
                         {!!Form::label('user','Month of Invoice',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
-                            {!! Form::text('invoice_month',null, ["class"=>'form-control monthpicker', 'placeholder'=>'YYYY-MM', "required"]) !!}
+                            {!! Form::text('invoice_month',null, ["class"=>'form-control month-picker', 'placeholder'=>'YYYY-MM', "required"]) !!}
                         </div>
                     </div> 
                     <div class="line line-dashed b-b line-lg pull-in"></div> 

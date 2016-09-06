@@ -16,6 +16,17 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
+                    <h3 class="box-title">
+                        @permission('admin.pipedrive.trial')
+                        <a href="{!! route('admin.pipedrive.trial') !!}" class="btn btn-default"type="button">Import Trial Deals</a>      
+                        @endpermission
+                        @permission('admin.pipedrive.all')
+                        <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default" type="button">Import Won Deals</a>      
+                        @endpermission
+                        @permission('admin.subscription.add')
+                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default" type="button">Add New Subscription</a>      
+                        @endpermission
+                    </h3>
                     <div class="filter-box">
                         <?php
                         $show_f1 = 'display:none;';
@@ -73,19 +84,9 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">
-                        @permission('admin.pipedrive.trial')
-                        <a href="{!! route('admin.pipedrive.trial') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" type="button">Import Trial Deals</a>      
-                        @endpermission
-                        @permission('admin.pipedrive.all')
-                        <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default pull-right" style="margin-left: 10px;" type="button">Import Won Deals</a>      
-                        @endpermission
-                        @permission('admin.subscription.add')
-                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default pull-right" type="button">Add New Subscription</a>      
-                        @endpermission
-                    </h3>
+                    
 
-                    <div>
+                    <div class="message-box">
                         <p style="color:green;text-align: center">{{ Session::pull('message') }}</p>
                         <p style="color:red;text-align: center">{{ Session::pull('messageError') }}</p>
                     </div>

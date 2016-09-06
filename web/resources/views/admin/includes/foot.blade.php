@@ -9,6 +9,7 @@
 <script src="{{ asset('public/Admin/dist/js/jqueryui1.11.4.js') }}"></script>
 <script src="{{ asset('public/Admin/dist/js/jquery-ui-timepicker-addon.js') }}"></script>
 <script src="{{ asset('public/Admin/dist/js/jquery-ui.multidatespicker.js') }}"></script>
+<script src="{{ asset('public/Admin/dist/js/jquery.monthpicker.js') }}"></script>
 <script src="{{ asset('public/Admin/dist/js/moment.js') }}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('public/Admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>

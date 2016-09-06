@@ -15,6 +15,11 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
+                    <h3 class="box-title">  
+                        @permission('admin.record.add')
+                        <a href="{!! route('admin.record.add') !!}" class="btn btn-default" type="button">Add New Record</a>      
+                        @endpermission
+                    </h3>
                     <div class="filter-box">
                         <?php
                         $show_record = 'display:none;';
@@ -45,13 +50,7 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    <h3 class="box-title">  
-                        @permission('admin.record.add')
-                        <a href="{!! route('admin.record.add') !!}" class="btn btn-default pull-right" type="button">Add New Record</a>      
-                        @endpermission
-                    </h3>
-
-                    <div>
+                    <div class="message-box">
                         <p style="color:red;text-align: center">{{ Session::get('message') }}</p>
                     </div>
 

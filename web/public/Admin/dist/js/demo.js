@@ -356,24 +356,34 @@
         }
         $(this).attr('name', '');
     });
-    
-    $('.datepicker2').datepicker({
-            dateFormat: 'dd M yy',
-            changeMonth: true,
-            changeYear: true,
-            defaultDate: new Date(),
-        });
 
-    $('.monthpicker').datepicker({
+    $('.datepicker2').datepicker({
+        dateFormat: 'dd M yy',
         changeMonth: true,
         changeYear: true,
-        showButtonPanel: true,
-        dateFormat: 'yy-mm',
-        showCalendar: false,
-        onClose: function (dateText, inst) {
-            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        defaultDate: new Date(),
+    });
+    var  years = [];
+    var y = 2000;
+    for(var i=0;i<=50;i++){        
+        years.push(++y);
+    }
+    $('.month-picker').monthpicker({
+        years: years,
+        topOffset: 100,
+        onMonthSelect: function (m, y) {
         }
     });
+//    $('.monthpicker').datepicker({
+//        changeMonth: true,
+//        changeYear: true,
+//        showButtonPanel: true,
+//        dateFormat: 'yy-mm',
+//        showCalendar: false,
+//        onClose: function (dateText, inst) {
+//            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+//        }
+//    });
     $('.timepicker').timepicker({
         stepMinute: 15
     });

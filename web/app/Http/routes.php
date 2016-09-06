@@ -166,6 +166,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::group(['prefix' => 'servicehistory'], function() {
                 Route::get('/', ['as' => 'admin.servicehistory.view', 'uses' => 'ServicehistoryController@index']);
                 Route::get('/add', ['as' => 'admin.servicehistory.add', 'uses' => 'ServicehistoryController@add']);
+                Route::get('/excel', ['as' => 'admin.servicehistory.excel', 'uses' => 'ServicehistoryController@exportExcel']);
                 Route::post('/save', ['as' => 'admin.servicehistory.save', 'uses' => 'ServicehistoryController@save']);
                 Route::get('/edit', ['as' => 'admin.servicehistory.edit', 'uses' => 'ServicehistoryController@edit']);
                 Route::get('/delete', ['as' => 'admin.servicehistory.delete', 'uses' => 'ServicehistoryController@delete']);
@@ -183,6 +184,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::group(['prefix' => 'payment'], function() {
                 Route::get('/', ['as' => 'admin.payment.view', 'uses' => 'PaymentController@index']);
                 Route::get('/add', ['as' => 'admin.payment.add', 'uses' => 'PaymentController@add']);
+                Route::get('/excel', ['as' => 'admin.payment.excel', 'uses' => 'PaymentController@exportExcel']);
                 Route::post('/save', ['as' => 'admin.payment.save', 'uses' => 'PaymentController@save']);
                 Route::get('/edit', ['as' => 'admin.payment.edit', 'uses' => 'PaymentController@edit']);
                 Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);

@@ -11,6 +11,7 @@ use App\Models\Additive;
 use App\Models\Pickup;
 use App\Models\Asset;
 use App\Models\User;
+use Excel;
 use App\Http\Controllers\Controller;
 
 class ServicehistoryController extends Controller {
@@ -53,7 +54,7 @@ class ServicehistoryController extends Controller {
         if (Input::get('start_date')) {
             $services = $services->where('created_at', '>=', date("Y-m-d", strtotime(Input::get('start_date'))));
         }
-        
+
         if (Input::get('end_date')) {
             $services = $services->where('created_at', '<=', date("Y-m-d", strtotime(Input::get('end_date'))));
         }
@@ -77,6 +78,54 @@ class ServicehistoryController extends Controller {
             $services = $services->paginate(Config('constants.paginateNo'));
         }
         return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'subscriptions', 'operators', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4'));
+    }
+
+    public function exportExcel() {
+        $services = Service::orderBy("created_at", "desc");
+        if (Input::get('start_date')) {
+            $services = $services->where('created_at', '>=', date("Y-m-d", strtotime(Input::get('start_date'))));
+        }
+        if (Input::get('end_date')) {
+            $services = $services->where('created_at', '<=', date("Y-m-d", strtotime(Input::get('end_date'))));
+        }
+        if (Input::get('filter_value') && Input::get('filter_type')) {
+            $filter_type = Input::get('filter_type');
+            if ($filter_type == 'van_id') {
+                $services = $services->whereHas('schedule.van', function($q) {
+                            $q->where('id', Input::get('filter_value'));
+                        })->get();
+            } else if ($filter_type == 'operator_id') {
+                $services = $services->where(Input::get('filter_type'), Input::get('filter_value'))->get();
+            } else if ($filter_type == 'subscription_id') {
+                $services = $services->where(Input::get('filter_type'), Input::get('filter_value'))->get();
+            }
+        } else {
+            $services = $services->get();
+        }
+        Excel::create('service_history', function($excel) use($services) {
+            $excel->sheet('Sheet 1', function($sheet) use($services) {
+                $arr = array();
+                foreach ($services as $service) {
+                    $all_waste = "";
+                    $all_additives = "";
+                    foreach ($service->wastetypes as $waste)
+                        $all_waste .= $waste->name . ' : ' . $waste->pivot->quantity . 'kg, ';
+
+                    foreach ($service->additives as $additive)
+                        $all_additives .= $additive->name . ' : ' . $additive->pivot->quantity . 'kg, ';
+
+                    $data = array($service->id, $service->schedule->van->name . ' - ' . $service->schedule->van->asset_no,
+                        $service->operator->name, date('d M Y h:i:s A', strtotime($service->created_at)), $service->subscription ? $service->subscription->name : '',
+                        $all_waste, $all_additives, $service->time_taken, $service->crates_filled ? $service->crates_filled : '');
+                    array_push($arr, $data);
+                }
+                $sheet->fromArray($arr, null, 'A1', false, false)->prependRow(array(
+                    'Id', 'Van', 'Staff Name', 'Date', 'User Subscription',
+                    'Waste Collected', 'Additives', 'Time Taken', 'No of Crates'
+                        )
+                );
+            });
+        })->export('xls');
     }
 
     public function add() {
