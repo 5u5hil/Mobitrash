@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title"> 
                         @permission('admin.additive.add')
-                        <a href="{!! route('admin.additive.add') !!}" class="btn btn-default pull-right" type="button">Add New Additive</a>      
+                        <a href="{!! route('admin.additive.add') !!}" class="btn btn-default" type="button">Add New Additive</a>      
                         @endpermission
                     </h3>
 

@@ -28,7 +28,7 @@
             <div class="container vertical-middle divcenter clearfix">
                 <div class="row center">
                     <div class="container clearfix">
-                         <h1 class="contex conhead">Sign Up Now!</h1>
+                         <h1 class="contex conhead">Contact Us</h1>
                         <!-- <h1 class="contex conhead">Thank you</h1> -->
                         <!-- <h4 class="contex">For Being A Concerned Citizen </h4> -->
                     </div>

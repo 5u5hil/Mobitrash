@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">  
                         @permission('admin.recordtype.add')
-                        <a href="{!! route('admin.recordtype.add') !!}" class="btn btn-default pull-right" type="button">Add New Recordtype</a>      
+                        <a href="{!! route('admin.recordtype.add') !!}" class="btn btn-default" type="button">Add New Recordtype</a>      
                         @endpermission
                     </h3>
 

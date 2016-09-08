@@ -161,6 +161,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::group(['prefix' => 'pipedrive'], function() {
                 Route::get('/get-all', ['as' => 'admin.pipedrive.all', 'uses' => 'PipedriveController@getAll']);
                 Route::get('/get-trial', ['as' => 'admin.pipedrive.trial', 'uses' => 'PipedriveController@getTrial']);
+                Route::get('/get-stages', ['as' => 'admin.pipedrive.stages', 'uses' => 'PipedriveController@getStages']);
             });
 
             Route::group(['prefix' => 'servicehistory'], function() {

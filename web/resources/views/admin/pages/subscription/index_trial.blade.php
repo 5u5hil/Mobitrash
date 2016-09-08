@@ -17,14 +17,14 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">
-                        @permission('admin.pipedrive.trial')
-                        <a href="{!! route('admin.pipedrive.trial') !!}" class="btn btn-default" type="button">Import Trial Deals</a>      
+                        @permission('admin.subscription.add')
+                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default" type="button">Add New Subscription</a>      
                         @endpermission
                         @permission('admin.pipedrive.all')
                         <a href="{!! route('admin.pipedrive.all') !!}" class="btn btn-default" type="button">Import Won Deals</a>      
                         @endpermission
-                        @permission('admin.subscription.add')
-                        <a href="{!! route('admin.subscription.add') !!}" class="btn btn-default" type="button">Add New Subscription</a>      
+                        @permission('admin.pipedrive.trial')
+                        <a href="{!! route('admin.pipedrive.trial') !!}" class="btn btn-default" type="button">Import Trial Deals</a>      
                         @endpermission
                     </h3>
                     <div class="filter-box">

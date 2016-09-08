@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">
                         @permission('admin.fueltype.add')
-                        <a href="{!! route('admin.fueltype.add') !!}" class="btn btn-default pull-right" type="button">Add New Fueltype</a>      
+                        <a href="{!! route('admin.fueltype.add') !!}" class="btn btn-default" type="button">Add New Fueltype</a>      
                         @endpermission
                     </h3>
 

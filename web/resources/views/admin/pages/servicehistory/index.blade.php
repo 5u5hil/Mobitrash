@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">  
                         <!--<a href="{!! route('admin.servicehistory.add') !!}" class="btn btn-default" type="button">Add New Service History</a>-->      
-                        <button onclick="printDiv()" style="width: 142px;"  class="btn btn-primary" type="button">Print</button>
+                        <button onclick="printDiv()" style="width: 142px;"  class="btn btn-default" type="button">Print</button>
                         <a href="{!! route('admin.servicehistory.excel') !!}?filter_type={{Input::get('filter_type')}}&filter_value={{Input::get('filter_value')}}&start_date={{Input::get('start_date')}}&end_date={{Input::get('end_date')}}" style="width: 142px;" class="btn btn-default" type="button">Export</a>
                     </h3>
 

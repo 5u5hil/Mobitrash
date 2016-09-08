@@ -17,7 +17,9 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">  
-                        <a href="{!! route('admin.cities.add') !!}" class="btn btn-default pull-right" type="button">Add New City</a>      
+                        @permission('admin.cities.add')  
+                        <a href="{!! route('admin.cities.add') !!}" class="btn btn-default" type="button">Add New City</a>      
+                        @endpermission
                     </h3>
 
                     <div>
@@ -32,6 +34,8 @@
                             <tr>
                                 <th>Id</th>
                                 <th>City</th>
+                                <th>Pipeline Id</th>
+                                <th>Stage Id</th>
                                 <th>Active</th>
                             </tr>
                         </thead>
@@ -40,6 +44,8 @@
                             <tr>
                                 <td>{{ $city->id }}</td>
                                 <td>{{ $city->name }}</td>
+                                <td>{{ $city->pipeline_id }}</td>
+                                <td>{{ $city->stage_id }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>                                
                                 <td>
                                     @permission('admin.cities.edit')                                    

@@ -30,7 +30,6 @@
                             $show_f1 = '';
                             $dis_f1 = '';
                         }
-                        
                         ?>
                         {!! Form::open(['method'=>'GET','route' => 'admin.payment.view' , 'class' => 'form-horizontal' ]) !!}
                         <label>Filter </label>
@@ -41,7 +40,7 @@
                         {!! Form::submit('Go',["class" => "btn btn-primary filter-button"]) !!}
                         {!! Form::close() !!}
                     </div>
-                    
+
                     <div class="message-box">
                         <p style="color:green;text-align: center">{{ @Session::pull('message') }}</p>
                     </div>
@@ -81,13 +80,23 @@
                                 </td>
                                 <td>{{@$payment->addedBy->name}}</td>
 
-                                <td>
+                                <td style="font-size: 10px;">
                                     @if(!empty( $payment->txtdetails))
-                                    <?php $txn = json_decode($payment->txtdetails);
-                                    unset($txn->CHECKSUMHASH) ?>
-                                    <pre style='padding:0;margin: 0;font-size: 10px;'>
-                                    {{ json_encode($txn, JSON_PRETTY_PRINT)}};
-                                    </pre>
+                                    <?php
+                                    $txn = json_decode($payment->txtdetails);
+                                    unset($txn->CHECKSUMHASH)
+                                    ?>
+                                    <!--{{ json_encode($txn, JSON_PRETTY_PRINT)}};-->
+                                    @foreach($txn as $key=>$tx)
+                                    <div style="display: table-row;">
+                                    <div style="display: table-cell;min-width: 105px;">
+                                        {{$key}} :
+                                    </div>
+                                    <div style="display: table-cell;">
+                                        {{$tx}}
+                                    </div>
+                                    </div>
+                                    @endforeach
                                     @endif
                                 </td>
                                 <td  class="no-print">
@@ -131,13 +140,13 @@
             $(".f1, .f2, .f3").hide().prop('disabled', true);
         }
     });
-    $('.date-select').change(function(){
+    $('.date-select').change(function () {
         $('.month-select').val('');
     });
-    $('.month-select').change(function(){
+    $('.month-select').change(function () {
         $('.date-select').val('');
     });
-    
+
     function printDiv(printable) {
         var printContents = document.getElementById("print-content").innerHTML;
         var originalContents = document.body.innerHTML;

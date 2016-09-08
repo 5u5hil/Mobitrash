@@ -28,6 +28,20 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('City','Pipeline Id',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('pipeline_id', $pipelines,null, ["class"=>'form-control pipeline_id', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('City','Pipline Stage for Trial Deals',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('stage_id', $stages,null, ["class"=>'form-control stages', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('Active','Active',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('is_active',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}
@@ -62,6 +76,27 @@
         } else {
             $("[name='chk[]']").removeAttr('Checked');
         }
+    });
+    
+    $('.pipeline_id').change(function(){
+        var id = $(this).val();
+        $('.stages').html('');
+        $.ajax({
+            url: "<?= route('admin.pipedrive.stages') ?>",
+            type: "GET",
+            data: {
+                id: id,
+            },
+            success: function (response) {
+                if (response.flash == 'success') {
+                    var options = '<option>Select Pipeline Stage for Trial Deals</option>';
+                    $.each(response.stages, function(key,stage){
+                        options += '<option value="'+stage.id+'">'+stage.name+'</option>';
+                    });
+                    $('.stages').html(options);
+                }
+            }
+        });
     });
 
 </script>

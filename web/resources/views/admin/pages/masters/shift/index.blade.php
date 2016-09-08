@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">
                         @permission('admin.shift.add')
-                        <a href="{!! route('admin.shift.add') !!}" class="btn btn-default pull-right" type="button">Add New Shift</a>      
+                        <a href="{!! route('admin.shift.add') !!}" class="btn btn-default" type="button">Add New Shift</a>      
                         @endpermission
                     </h3>
 

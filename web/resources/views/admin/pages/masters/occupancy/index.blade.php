@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">  
                         @permission('admin.occupancy.add')
-                        <a href="{!! route('admin.occupancy.add') !!}" class="btn btn-default pull-right" type="button">Add New Occupancy</a>      
+                        <a href="{!! route('admin.occupancy.add') !!}" class="btn btn-default" type="button">Add New Occupancy</a>      
                         @endpermission
                     </h3>
 

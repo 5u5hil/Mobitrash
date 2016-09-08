@@ -22,7 +22,7 @@
                         @permission('admin.attendance.add')  
                         <!--<a href="{!! route('admin.attendance.add') !!}" class="btn btn-default" type="button">Add Attendance</a>-->      
                         @endpermission 
-                        <button onclick="printDiv()" style="width: 152px;"  class="btn btn-primary" type="button">Print</button>
+                        <button onclick="printDiv()" style="width: 152px;"  class="btn btn-default" type="button">Print</button>
                     </h3>
                     <div class="filter-box">
 

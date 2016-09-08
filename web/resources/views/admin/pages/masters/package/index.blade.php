@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">
                         @permission('admin.package.add')
-                        <a href="{!! route('admin.package.add') !!}" class="btn btn-default pull-right" type="button">Add New Package</a>      
+                        <a href="{!! route('admin.package.add') !!}" class="btn btn-default" type="button">Add New Package</a>      
                         @endpermission
                         @permission('admin.recordtype.delete')
                     </h3>

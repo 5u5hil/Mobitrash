@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">  
                         @permission('admin.frequency.add')
-                        <a href="{!! route('admin.frequency.add') !!}" class="btn btn-default pull-right" type="button">Add New Frequency</a>      
+                        <a href="{!! route('admin.frequency.add') !!}" class="btn btn-default" type="button">Add New Frequency</a>      
                         @endpermission
                     </h3>
 
