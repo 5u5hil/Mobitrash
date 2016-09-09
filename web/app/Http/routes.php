@@ -48,6 +48,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
         Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
+        Route::group(['prefix' => 'payment'], function() {
+            Route::get('/payment-notification', ["as" => "admin.payment.notification", "uses" => "PaymentController@paymentNotification"]);
+        });
         Route::group(['middleware' => 'CheckUser'], function() {
             Route::get('/dashboard', ["as" => "admin.dashboard", "uses" => "PageController@dashboard"]);
             Route::get('/settings', ["as" => "admin.settings", "uses" => "PageController@setting"]);
@@ -78,7 +81,7 @@ Route::group(['middleware' => ['web']], function () {
                     Route::get('/edit', ['as' => 'admin.timeslot.edit', 'uses' => 'TimeslotController@edit']);
                     Route::get('/delete', ['as' => 'admin.timeslot.delete', 'uses' => 'TimeslotController@delete']);
                 });
-                
+
                 Route::group(['prefix' => 'shift'], function() {
                     Route::get('/', ['as' => 'admin.shift.view', 'uses' => 'ShiftController@index']);
                     Route::get('/add', ['as' => 'admin.shift.add', 'uses' => 'ShiftController@add']);
@@ -190,7 +193,6 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.payment.edit', 'uses' => 'PaymentController@edit']);
                 Route::get('/delete', ['as' => 'admin.payment.delete', 'uses' => 'PaymentController@delete']);
                 Route::post('/update', ['as' => 'admin.payment.update', 'uses' => 'PaymentController@update']);
-                Route::get('/payment-notification', ["as" => "admin.payment.notification", "uses" => "PaymentController@paymentNotification"]);
             });
 
             Route::group(['prefix' => 'attendance'], function() {

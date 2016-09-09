@@ -35,7 +35,8 @@
                                 <th>Id</th>
                                 <th>City</th>
                                 <th>Pipeline Id</th>
-                                <th>Stage Id</th>
+                                <th>Inquiry Stage Id</th>
+                                <th>Free Trial Stage Id</th>
                                 <th>Active</th>
                             </tr>
                         </thead>
@@ -45,6 +46,7 @@
                                 <td>{{ $city->id }}</td>
                                 <td>{{ $city->name }}</td>
                                 <td>{{ $city->pipeline_id }}</td>
+                                <td>{{ $city->inquiry_stage_id }}</td>
                                 <td>{{ $city->stage_id }}</td>
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>                                
                                 <td>

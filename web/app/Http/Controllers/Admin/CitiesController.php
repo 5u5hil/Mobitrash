@@ -34,7 +34,7 @@ class CitiesController extends Controller {
             $pipelines[$val['id']] = $val['name'];
         }
         $stage = app('App\Http\Controllers\Admin\PipedriveController')->getStage($city->pipeline_id);
-        $stages = ['' => 'Select Pipeline Stage for Trial Deals'];
+        $stages = ['' => 'Select Pipeline Stage'];
         foreach ($stage['stages'] as $val){
             $stages[$val['id']] = $val['name'];
         }

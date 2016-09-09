@@ -181,8 +181,9 @@ class UsersController extends Controller {
     }
 
     public function contact() {
+        $city = City::where('is_active', 1)->get()->toArray();        
         $action = 'user.contact.save';
-        return view(Config('constants.frontendView') . '.contact', compact('action'));
+        return view(Config('constants.frontendView') . '.contact', compact('action', 'city'));
     }
 
     public function faq() {
@@ -202,16 +203,14 @@ class UsersController extends Controller {
     }
 
     public function saveContact() {
-        $contact_us = new Contactus();
-        $contact_us->fill(Input::all())->save();
+        $city = City::where('id', Input::get('location'))->where('is_active', 1)->first()->toArray();
         $postData = array(
             'title' => Input::get('name'),
             'person_id' => Input::get('name'),
             'f9717f095c375ebfc91312429b54821df8972fb3' => Input::get('email'),
             'f856d0351336a040cbe422113dbcf31736fa29a6' => Input::get('phone'),
-            '0f564b10f66aa6eba1294de86c0ffcb670039947' => Input::get('location'),
             '57790cc8503d26fece54897eb9ed1ef7de4407a6' => 'Website Subscription',
-            'stage_id' => 11
+            'stage_id' => $city['inquiry_stage_id']
         );
 
         $ch = curl_init('https://api.pipedrive.com/v1/deals?api_token=' . Config('constants.pipedriveApiToken'));

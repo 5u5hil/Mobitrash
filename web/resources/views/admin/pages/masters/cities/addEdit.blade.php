@@ -35,7 +35,14 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        {!!Form::label('City','Pipline Stage for Trial Deals',['class'=>'col-sm-2 required']) !!}
+                        {!!Form::label('City','Pipeline Stage for Inquiry',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('inquiry_stage_id', $stages,null, ["class"=>'form-control stages', "required"]) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        {!!Form::label('City','Pipeline Stage for Trial Deals',['class'=>'col-sm-2 required']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('stage_id', $stages,null, ["class"=>'form-control stages', "required"]) !!}
                         </div>
@@ -89,7 +96,7 @@
             },
             success: function (response) {
                 if (response.flash == 'success') {
-                    var options = '<option>Select Pipeline Stage for Trial Deals</option>';
+                    var options = '<option>Select Pipeline Stage</option>';
                     $.each(response.stages, function(key,stage){
                         options += '<option value="'+stage.id+'">'+stage.name+'</option>';
                     });
