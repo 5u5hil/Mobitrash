@@ -14,6 +14,8 @@ use App\Models\Pickup;
 use App\Models\Attachment;
 use App\Http\Controllers\Controller;
 use App\Models\Occupancy;
+use Request;
+use Session;
 
 class SubscriptionController extends Controller {
 
@@ -77,6 +79,7 @@ class SubscriptionController extends Controller {
         } else {
             $subscription = Subscription::where('is_trial', '!=', 1)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminSubscriptionView') . '.index', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'city', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7'));
     }
 
@@ -110,7 +113,7 @@ class SubscriptionController extends Controller {
         if (Input::get('filter_value') && Input::get('filter_type')) {
             $filter_type = Input::get('filter_type');
             $filter_value = Input::get('filter_value');
-            if ($filter_type == 'user_id') {
+            if ($filter_type == 'name') {
                 $field6 = Input::get('filter_value');
                 $subscription = Subscription::where('name', 'LIKE', "%" . Input::get('filter_value') . "%")->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
             } else {
@@ -139,6 +142,7 @@ class SubscriptionController extends Controller {
         } else {
             $subscription = Subscription::where('is_trial', 1)->orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
         }
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminSubscriptionView') . '.index_trial', compact('subscription', 'frequency', 'timeslot', 'filter', 'filter_type', 'filter_value', 'city', 'field1', 'field2', 'field3', 'field4', 'field5', 'field6', 'field7'));
     }
 
@@ -273,7 +277,7 @@ class SubscriptionController extends Controller {
                 }
             }
         }
-        return redirect()->route('admin.subscription.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {

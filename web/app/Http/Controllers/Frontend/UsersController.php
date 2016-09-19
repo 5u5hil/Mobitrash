@@ -31,66 +31,50 @@ class UsersController extends Controller {
     }
 
     public function register() {
-        $wastetypess = Wastetype::all()->toArray();
-        $wastetype = [];
-        foreach ($wastetypess as $value) {
-            $wastetype[$value['id']] = $value['name'];
-        }
-
-        $f = Frequency::where("is_active", 1)->get()->toArray();
-        $frequency = [];
-        foreach ($f as $value) {
-            $frequency[$value['id']] = $value['name'];
-        }
-
-        $pack = Package::where("is_active", 1)->get()->toArray();
-        $packages = [];
-        foreach ($pack as $value) {
-            $packages[$value['id']] = $value['name'];
-        }
-
-        $t = Timeslot::where("is_active", 1)->where("type", 2)->get()->toArray();
-        $timeslot = [];
-        foreach ($t as $value) {
-            $timeslot[$value['id']] = $value['name'];
-        }
-
         $citiesd = City::where("is_active", 1)->get()->toArray();
-        $cities = [];
+        $cities = ['' => 'select City'];
+        $action = 'user.register.save';
         foreach ($citiesd as $value) {
             $cities[$value['id']] = $value['name'];
         }
-        $occupancyd = Occupancy::where("is_active", 1)->get()->toArray();
-        $occupancy = [];
-        foreach ($occupancyd as $value) {
-            $occupancy[$value['id']] = $value['name'];
-        }
-        return view(Config('constants.frontendView') . '.register', compact('frequency', 'timeslot', 'action', 'wastetype', 'wastetype_selected', 'packages', 'cities', 'occupancy'));
+        return view(Config('constants.frontendView') . '.register', compact('action', 'cities'));
     }
 
-    public function registerUser() {
+    public function registerSave() {
         $chk = User::where("email", "=", Input::get('email'))->first();
 
         if (empty($chk)) {
-            $user = new User();
-            $user->name = Input::get('name');
-            $user->email = Input::get('email');
-            $user->phone_number = Input::get('phone_number');
-            $user->password = Hash::make(Input::get('password'));
-            $user->user_type = 1;
-            $user->save();
-            $user->roles()->sync([2]);
-            $userD = ['email' => Input::get('email'),
-                'password' => Input::get('password')
-            ];
-            if (Auth::attempt($userD, true)) {
-                Session::put('loggedinUserId', $user->id);
-                return redirect()->route('user.register');
+            $city = City::where('id', Input::get('location'))->where("is_active", 1)->get()->toArray();
+            if (Input::get('location') == 6) {
+                $result = $this->saveContact();
+                if ($result) {
+                    Session::flash('message', 'Thank you! We shall get in touch with you soon.');
+                    return redirect()->route(Input::get('redirect_url'));
+                } else {
+                    Session::flash('messageError', 'Error Occured! Please try again!');
+                    return redirect()->route(Input::get('redirect_url'));
+                }
             } else {
-                return redirect()->route('user.register');
+                $user = new User();
+                $user->name = Input::get('name');
+                $user->email = Input::get('email');
+                $user->phone_number = Input::get('phone_number');
+                $user->password = Hash::make(Input::get('password'));
+                $user->user_type = 1;
+                $user->save();
+                $user->roles()->sync([2]);
+                $userD = ['email' => Input::get('email'),
+                    'password' => Input::get('password')
+                ];
+                if (Auth::attempt($userD, true)) {
+                    Session::put('loggedinUserId', $user->id);
+                    return redirect()->route('garden.waste');
+                } else {
+                    return redirect()->route('user.register');
+                }
             }
         } else {
-            Session::flash("usenameError", "Username already exist");
+            Session::flash("messageError", "Email already exist");
             return redirect()->back();
         }
     }
@@ -107,7 +91,7 @@ class UsersController extends Controller {
             $roles = $user->roles()->first();
             $r = Role::find($roles->id);
             $per = $r->perms()->get()->toArray();
-         
+
             if (!empty(Input::get('rurl')))
                 return redirect()->to(Input::get('rurl'));
             else
@@ -181,7 +165,7 @@ class UsersController extends Controller {
     }
 
     public function contact() {
-        $city = City::where('is_active', 1)->get()->toArray();        
+        $city = City::where('is_active', 1)->get()->toArray();
         $action = 'user.contact.save';
         return view(Config('constants.frontendView') . '.contact', compact('action', 'city'));
     }
@@ -204,12 +188,23 @@ class UsersController extends Controller {
 
     public function saveContact() {
         $city = City::where('id', Input::get('location'))->where('is_active', 1)->first()->toArray();
+        $location_name = "";
+        if($city['id'] == 6){
+            if(Input::get('city_name')){
+            $location_name = Input::get('city_name');
+            }else{
+                $location_name = 'Other City';
+            }
+        }else{
+            $location_name = $city['name'];
+        }
         $postData = array(
             'title' => Input::get('name'),
             'person_id' => Input::get('name'),
             'f9717f095c375ebfc91312429b54821df8972fb3' => Input::get('email'),
             'f856d0351336a040cbe422113dbcf31736fa29a6' => Input::get('phone'),
             '57790cc8503d26fece54897eb9ed1ef7de4407a6' => 'Website Subscription',
+            '0f564b10f66aa6eba1294de86c0ffcb670039947' => $location_name,
             'stage_id' => $city['inquiry_stage_id']
         );
 
@@ -226,8 +221,10 @@ class UsersController extends Controller {
         $output = json_decode($output, true);
         if ($output['success'] == true) {
             $data = Input::all();
+            $data['city'] = $location_name;
             Mail::send(Config('constants.adminEmail') . '.inquiryReceived', ['data' => $data], function ($message) {
-                $message->to('getit@mobitrash.in');
+//                $message->to('getit@mobitrash.in');
+                $message->to('sharad@infiniteit.biz');
                 $message->subject('MobiTrash Inquiry Received');
             });
             Session::flash('contactSuccess', 'Thank you! We shall get in touch with you soon.');
@@ -235,7 +232,15 @@ class UsersController extends Controller {
             Session::flash('contactError', 'Error Occured! Please try again!');
         }
         curl_close($ch);
-        return redirect()->route('user.contact.view');
+        if (Input::get('redirect_url')) {
+            if ($output['success'] == true) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return redirect()->route('user.contact.view');
+        }
     }
 
     public function update() {
@@ -322,6 +327,23 @@ class UsersController extends Controller {
         $subscription->remark = Input::get('remark');
         $subscription->save();
         return redirect()->route('user.myprofile.view');
+    }
+
+    public function gardenWaste() {
+        return view(Config('constants.frontendView') . '.garden_waste');
+    }
+
+    public function loginOTP() {
+        $user = User::where('phone_number', Input::get('phone_number'))->first();
+        if ($user) {
+            $otp = substr(str_shuffle(time() . time()), 0, 6);
+            $user->otp_code = $otp;
+            $user->update();
+            ////// Send SMS
+            return ['flash' => 'success'];
+        } else {
+            return ['flash' => 'error'];
+        }
     }
 
 }

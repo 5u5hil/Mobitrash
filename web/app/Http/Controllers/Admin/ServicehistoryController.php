@@ -13,6 +13,8 @@ use App\Models\Asset;
 use App\Models\User;
 use Excel;
 use App\Http\Controllers\Controller;
+use Request;
+use Session;
 
 class ServicehistoryController extends Controller {
 
@@ -77,6 +79,7 @@ class ServicehistoryController extends Controller {
         } else {
             $services = $services->paginate(Config('constants.paginateNo'));
         }
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminServiceHistoryView') . '.index', compact('services', 'vans', 'subscriptions', 'operators', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3', 'field4'));
     }
 
@@ -180,7 +183,7 @@ class ServicehistoryController extends Controller {
         $service->save();
         $service->wastetypes()->sync($wastes);
         $service->additives()->sync($additives);
-        return redirect()->route('admin.servicehistory.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {

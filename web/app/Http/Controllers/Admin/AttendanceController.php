@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Session;
 use App\Http\Controllers\Controller;
+use Request;
 
 class AttendanceController extends Controller {
 
@@ -24,6 +25,7 @@ class AttendanceController extends Controller {
                 $attendances = $attendances->where('date', '<=' , date("Y-m-d", strtotime(Input::get('end_date'))));
             } 
         $attendances = $attendances->paginate(100);
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminAttendanceView') . '.index', compact('attendances', 'filter', 'filter_type', 'filter_value', 'field1', 'field2'));
     }
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Mail;
 use Excel;
 use Session;
+use Request;
 
 class PaymentController extends Controller {
 
@@ -46,7 +47,7 @@ class PaymentController extends Controller {
         } else {
             $payments = $payments->paginate(Config('constants.paginateNo'));
         }
-
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminPaymentView') . '.index', compact('payments', 'filter', 'filter_type', 'filter_value', 'field1'));
     }
     
@@ -104,6 +105,7 @@ class PaymentController extends Controller {
     }
 
     public function edit() {
+        
         $payment = Payment::find(Input::get('id'));
         $sub = Subscription::all()->toArray();
         $subscription = [];
@@ -153,7 +155,8 @@ class PaymentController extends Controller {
         $payment->remark = Input::get('remark');
         $payment->update();
         Session::flash('message', "Invoice Modified successfully!");
-        return redirect()->route('admin.payment.view');
+        
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {

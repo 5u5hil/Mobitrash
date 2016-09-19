@@ -36,6 +36,8 @@
                     @else
                     <li class="{{ preg_match("/user.login/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('user.login') }}"><div>Login</div></a></li>
                     @endif 
+                    <li class="{{ preg_match("/garden.waste/",Route::currentRouteName())? 'current' : ''}}"><a href="{{ route('garden.waste') }}" style="padding: 10px 0px;"><div style="padding: 8px;border-radius: 4px;color: #fff; background: #87C540;">Pick my Garden Waste</div></a>
+                    </li>
                 </ul>
 
                 <!-- Top Search

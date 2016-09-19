@@ -18,7 +18,7 @@
                 <div class="box-header">
                     <h3 class="box-title">
                         @permission('admin.roles.add')
-                        <a href="{!! route('admin.roles.add') !!}" class="btn btn-default pull-right" type="button">Add New Role</a>      
+                        <a href="{!! route('admin.roles.add') !!}" class="btn btn-default" type="button">Add New Role</a>      
                         @endpermission
                     </h3>
                     <div>

@@ -37,8 +37,8 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
-
-    Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
+    Route::any('/sync/bonfleet', ["as" => "bonfleet.insert", 'namespace'=> 'Admin', "uses" => "Admin\BonfleetController@insert"]);
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {        
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
         Route::get('/get-user-subscriptions', ["as" => "getUserSub", "uses" => "SystemUsersController@getSubscriptions"]);
         Route::get('/get-user-approx-time', ["as" => "getUserApproxTime", "uses" => "SystemUsersController@getApproxTime"]);
@@ -222,6 +222,14 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/show', ['as' => 'admin.assets.show', 'uses' => 'AssetsController@show']);
                 Route::get('/delete', ['as' => 'admin.assets.delete', 'uses' => 'AssetsController@delete']);
             });
+            
+            Route::group(['prefix' => 'bonfleet'], function() {
+                Route::get('/', ['as' => 'admin.bonfleet.view', 'uses' => 'BonfleetController@index']);
+                Route::post('/save', ['as' => 'admin.bonfleet.save', 'uses' => 'BonfleetController@save']);
+                Route::get('/edit', ['as' => 'admin.bonfleet.edit', 'uses' => 'BonfleetController@edit']);
+                Route::get('/show', ['as' => 'admin.bonfleet.show', 'uses' => 'BonfleetController@show']);
+                Route::get('/delete', ['as' => 'admin.bonfleet.delete', 'uses' => 'BonfleetController@delete']);
+            });
 
             Route::group(['prefix' => 'acl'], function() {
                 Route::group(['prefix' => 'roles'], function() {
@@ -273,8 +281,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/check-login', ["as" => "user.check.login", "uses" => "UsersController@checkUserLogin"]);
         Route::get('/password-reset', ['as' => 'user.password.reset', 'uses' => 'UsersController@passwordReset']);
         Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
+        Route::get('/register', ["as" => "user.register", "uses" => "UsersController@register"]);
+        Route::post('/register-save', ["as" => "user.register.save", "uses" => "UsersController@registerSave"]);
         Route::group(['middleware' => 'CheckWebUser'], function() {
-
+            Route::get('/garden-waste', ["as" => "garden.waste", "uses" => "UsersController@gardenWaste"]);
             Route::any('/pay/{id}', ["as" => "payment.paynow", "uses" => "PayController@index"]);
             Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
             Route::get('/my-password', ["as" => "user.mypassword.view", "uses" => "UsersController@password"]);

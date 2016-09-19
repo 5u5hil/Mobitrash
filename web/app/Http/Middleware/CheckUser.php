@@ -7,12 +7,13 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\Miscellaneous;
+use Illuminate\Routing\Router;
 use Auth;
 use Session;
+use Route;
 
 class CheckUser {
     public function handle($request, Closure $next) {
-
         if (Auth::id()) {
             $user = User::with('roles')->find(Auth::id());
             $roles = $user->roles;
@@ -22,9 +23,11 @@ class CheckUser {
             foreach ($roles_data as $role) {
                 if ($role['id'] == 2) {
                     Session::flash('invalidUser', "Access Denied!");
+                }else if($user->can(Route::currentRouteName())){
+                    return $next($request);
                 }
                 else{
-                    return $next($request);
+                    Session::flash('invalidUser', "Unauthorised!");                    
                 }
             }            
         }

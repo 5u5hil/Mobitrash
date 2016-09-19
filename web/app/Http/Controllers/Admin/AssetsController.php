@@ -7,6 +7,8 @@ use App\Models\Asset;
 use App\Models\City;
 use App\Models\AssetType;
 use App\Http\Controllers\Controller;
+use Request;
+use Session;
 
 class AssetsController extends Controller {
 
@@ -48,7 +50,7 @@ class AssetsController extends Controller {
         } else {
             $assets = Asset::orderBy("id","desc")->paginate(Config('constants.paginateNo'));
         }
-        
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminAssetView') . '.index', compact('assets', 'cities', 'types', 'filter', 'filter_type', 'filter_value','field1', 'field2', 'field3'));
     }
 
@@ -109,7 +111,7 @@ class AssetsController extends Controller {
 
     public function save() {
         $asset = Asset::findOrNew(Input::get('id'))->fill(Input::all())->save();
-        return redirect()->route('admin.assets.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {

@@ -100,6 +100,7 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>User</th>
+                                <th>City</th>
                                 <th>Preferred Timeslot</th>
                                 <th>Frequency</th>
                                 <th>Amount</th>
@@ -117,6 +118,7 @@
                                 <td>{{ $asset->id }}</td>
                                 <td>{{ $asset->name }}</td>
                                 <td>{{ @$asset->user()->first()->name }}</td>
+                                <td>{{ @$asset->city->name }}</td>
                                 <td>{{ @$asset->prefered_timeslot }}</td>
                                 <td>{{ @$asset->frequency()->first()->name }}</td>
                                 <td>{{ $asset->amt_paid }}</td>

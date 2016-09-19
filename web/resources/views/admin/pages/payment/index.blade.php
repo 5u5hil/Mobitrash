@@ -18,9 +18,11 @@
                     <h3 class="box-title action-box"> 
                         @permission('admin.payment.add')
                         <a href="{!! route('admin.payment.add') !!}" class="btn btn-default" type="button">Create New Invoice</a>      
-                        @endpermission
+                        @endpermission                        
                         <button onclick="printDiv()" style="width: 142px;"  class="btn btn-default" type="button">Print</button>
+                        @permission('admin.payment.excel')
                         <a href="{!! route('admin.payment.excel') !!}?filter_type={{Input::get('filter_type')}}&filter_value={{Input::get('filter_value')}}&invoice_date={{Input::get('invoice_date')}}&invoice_month={{Input::get('invoice_month')}}" style="width: 142px;" class="btn btn-default" type="button">Export</a>
+                        @endpermission
                     </h3>
                     <div class="filter-box">
                         <?php

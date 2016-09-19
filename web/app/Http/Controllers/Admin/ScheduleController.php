@@ -12,6 +12,7 @@ use App\Models\Asset;
 use App\Models\Shift;
 use Session;
 use App\Http\Controllers\Controller;
+use Request;
 
 class ScheduleController extends Controller {
 
@@ -43,6 +44,7 @@ class ScheduleController extends Controller {
         } else {
             $schedule = Schedule::orderBy("created_at", "desc")->paginate(Config('constants.paginateNo'));
         }
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminScheduleView') . '.index', compact('schedule', 'vans', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
@@ -257,7 +259,7 @@ class ScheduleController extends Controller {
             Session::flash('Error', $error_message . $expired);
         }
         Session::flash('message', 'Schedule Edited Successfully!');
-        return redirect()->route('admin.schedule.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function duplicate() {

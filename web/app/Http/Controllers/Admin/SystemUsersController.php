@@ -11,6 +11,7 @@ use Hash;
 use Auth;
 use Session;
 use App\Http\Controllers\Controller;
+use Request;
 
 class SystemUsersController extends Controller {
 
@@ -50,7 +51,7 @@ class SystemUsersController extends Controller {
         foreach ($rolesa as $value) {
             $roles[$value['id']] = $value['name'];
         }
-
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminSystemUsersView') . '.index', compact('system_users', 'roles', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
@@ -77,6 +78,7 @@ class SystemUsersController extends Controller {
         } else {
             $users = Role::find(2)->users()->paginate(Config('constants.paginateNo'));
         }
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminUsersView') . '.index', compact('users', 'filter', 'filter_type', 'filter_value', 'field1', 'field2', 'field3'));
     }
 
@@ -147,20 +149,20 @@ class SystemUsersController extends Controller {
                 }
             }
             $user->update();
-
-            if (!empty(Input::get('roles'))) {
-                $user->roles()->sync([Input::get('roles')]);
-                if (Input::get('roles') == 2) {
-                    return redirect()->route('admin.users.view');
-                } else {
-                    return redirect()->route('admin.systemusers.view');
-                }
-            } else {
-                return redirect()->route('admin.systemusers.view');
-            }
+return redirect()->to(Session::get('backUrl'));
+//            if (!empty(Input::get('roles'))) {
+//                $user->roles()->sync([Input::get('roles')]);
+//                if (Input::get('roles') == 2) {
+//                    return redirect()->route('admin.users.view');
+//                } else {
+//                    return redirect()->route('admin.systemusers.view');
+//                }
+//            } else {
+//                return redirect()->route('admin.systemusers.view');
+//            }
         } else {
             Session::flash('message', "Email address already exist");
-            return redirect()->back();
+            return redirect()->to(Session::get('backUrl'));
         }
     }
 
@@ -285,9 +287,9 @@ class SystemUsersController extends Controller {
             }
         } else {
             Session::flash('message', "Email address already exist");
-            return redirect()->back();
+            return redirect()->to(Session::get('backUrl'));
         }
-        return redirect()->route('admin.users.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function editUser() {

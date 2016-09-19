@@ -9,6 +9,8 @@ use App\Models\Fueltype;
 use App\Models\Asset;
 use App\Models\Attachment;
 use App\Http\Controllers\Controller;
+use Request;
+use Session;
 
 class RecordController extends Controller {
 
@@ -47,7 +49,7 @@ class RecordController extends Controller {
         } else {
             $record = Record::with(['rtype', 'addedBy', 'asset'])->orderBy("created_at","desc")->paginate(Config('constants.paginateNo'));
         }
-
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminRecordView') . '.index', compact('record', 'filter', 'recordtypes', 'vans', 'filter_type', 'filter_value', 'record_type', 'assets_type', 'filter_date'));
     }
 
@@ -122,7 +124,7 @@ class RecordController extends Controller {
                 }
             }
         }
-        return redirect()->route('admin.record.view');
+        return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {

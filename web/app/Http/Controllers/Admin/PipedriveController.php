@@ -25,7 +25,7 @@ class PipedriveController extends Controller {
             if ($city->pipeline_id) {
                 $deals = file_get_contents('https://api.pipedrive.com/v1/pipelines/' . $city->pipeline_id . '/deals?filter_id=2&api_token=' . Config('constants.pipedriveApiToken'));
                 $deals = json_decode($deals, true);
-                dd($deals);
+                //dd($deals);
                 if (isset($deals['data'])) {
                     foreach ($deals['data'] as $key => $deal) {
                         if (!$deal['f9717f095c375ebfc91312429b54821df8972fb3']) {

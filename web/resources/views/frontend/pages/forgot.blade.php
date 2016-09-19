@@ -45,7 +45,7 @@
                                     </div>
                                     <!-- Small modal -->
                                     <button type="button" class="button button-3d button-black nomargin forgot">Reset Password</button>
-                                    <span style="margin-left: 10px; display: none;" class="small-loading" ><img src="{{asset('public/Frontend/images/preloader.gif')}}" /></span>
+                                    <span style="margin-left: 10px; display: none; color: #fff; font-size: 21px;" class="small-loading" ><i class="fa fa-refresh fa-spin fa-fw"></i></span>
                                     <button type="button" style="display: none;" id="show-mmodal-m" class="button button-3d button-black nomargin" data-toggle="modal" data-target=".bs-example-modal-sm"></button>
                                     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                                         <div class="modal-dialog modal-sm">
