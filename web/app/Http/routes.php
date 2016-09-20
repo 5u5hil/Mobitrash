@@ -285,6 +285,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/register-save', ["as" => "user.register.save", "uses" => "UsersController@registerSave"]);
         Route::group(['middleware' => 'CheckWebUser'], function() {
             Route::get('/garden-waste', ["as" => "garden.waste", "uses" => "UsersController@gardenWaste"]);
+            Route::get('/pickup-history', ["as" => "user.pickup.history", "uses" => "UsersController@pickupHistory"]);
+            Route::get('/garden-waste-gunny', ["as" => "garden.waste.emptygunny", "uses" => "UsersController@emptyGunny"]);
+            Route::get('/message-us', ["as" => "user.message.view", "uses" => "UsersController@userMessage"]);
+            Route::post('/message-save', ["as" => "user.message.save", "uses" => "UsersController@userMessageSave"]);
+            Route::post('/garden-save-gunny', ["as" => "garden.waste.savegunny", "uses" => "UsersController@saveGunny"]);
+            Route::post('/garden-waste-save', ["as" => "garden.waste.save", "uses" => "UsersController@gardenWasteSave"]);
             Route::any('/pay/{id}', ["as" => "payment.paynow", "uses" => "PayController@index"]);
             Route::get('/my-profile', ["as" => "user.myprofile.view", "uses" => "UsersController@myProfile"]);
             Route::get('/my-password', ["as" => "user.mypassword.view", "uses" => "UsersController@password"]);

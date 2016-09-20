@@ -18,10 +18,12 @@ use App\Models\Package;
 use App\Models\City;
 use App\Models\Occupancy;
 use App\Models\Address;
+use App\Models\Configuration;
 use App\Models\Contactus;
 use App\Models\Subscription;
 use App\Models\Service;
 use App\Models\Payment;
+use App\Models\GunnyOrder;
 use Mail;
 
 class UsersController extends Controller {
@@ -44,7 +46,6 @@ class UsersController extends Controller {
         $chk = User::where("email", "=", Input::get('email'))->first();
 
         if (empty($chk)) {
-            $city = City::where('id', Input::get('location'))->where("is_active", 1)->get()->toArray();
             if (Input::get('location') == 6) {
                 $result = $this->saveContact();
                 if ($result) {
@@ -60,6 +61,7 @@ class UsersController extends Controller {
                 $user->email = Input::get('email');
                 $user->phone_number = Input::get('phone_number');
                 $user->password = Hash::make(Input::get('password'));
+                $user->city_id = Input::get('location');
                 $user->user_type = 1;
                 $user->save();
                 $user->roles()->sync([2]);
@@ -93,7 +95,7 @@ class UsersController extends Controller {
             $per = $r->perms()->get()->toArray();
 
             if (!empty(Input::get('rurl')))
-                return redirect()->to(Input::get('rurl'));
+                return redirect()->route(Input::get('rurl'));
             else
                 return redirect()->route('user.myprofile.view');
         } else {
@@ -189,13 +191,13 @@ class UsersController extends Controller {
     public function saveContact() {
         $city = City::where('id', Input::get('location'))->where('is_active', 1)->first()->toArray();
         $location_name = "";
-        if($city['id'] == 6){
-            if(Input::get('city_name')){
-            $location_name = Input::get('city_name');
-            }else{
+        if ($city['id'] == 6) {
+            if (Input::get('city_name')) {
+                $location_name = Input::get('city_name');
+            } else {
                 $location_name = 'Other City';
             }
-        }else{
+        } else {
             $location_name = $city['name'];
         }
         $postData = array(
@@ -330,20 +332,41 @@ class UsersController extends Controller {
     }
 
     public function gardenWaste() {
-        return view(Config('constants.frontendView') . '.garden_waste');
+        
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
+        $gunny_bags = GunnyOrder::where('user_id', Auth::user()->id)->sum('no_of_bags');
+        $action = 'garden.waste.save';
+        if($gunny_bags > 0) {
+            return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config'));
+        }else{
+            return redirect()->route('garden.waste.emptygunny');
+        }
     }
 
-    public function loginOTP() {
-        $user = User::where('phone_number', Input::get('phone_number'))->first();
-        if ($user) {
-            $otp = substr(str_shuffle(time() . time()), 0, 6);
-            $user->otp_code = $otp;
-            $user->update();
-            ////// Send SMS
-            return ['flash' => 'success'];
-        } else {
-            return ['flash' => 'error'];
-        }
+    public function gardenWasteSave() {
+        $action = 'garden.waste.save';
+        return view(Config('constants.frontendView') . '.garden_waste', compact('action'));
+    }
+
+    public function emptyGunny() {
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
+        $action = 'garden.waste.savegunny';
+        return view(Config('constants.frontendView') . '.empty_gunny', compact('action', 'config'));
+    }
+
+    public function saveGunny() {
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
+        $address = new Address();
+        $address->fill(Input::except('no_of_gunny'))->save();
+        $gunny_order = new GunnyOrder();
+        $gunny_order->user_id = Input::get('user_id');
+        $gunny_order->no_of_bags = Input::get('no_of_gunny');
+        $gunny_order->amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
+        $gunny_order->save();
+        $user = User::find(Input::get('user_id'));
+        $user->default_address_id = $address->id;
+        $user->update();
+        return redirect()->route('garden.waste');
     }
 
 }
