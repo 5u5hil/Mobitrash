@@ -27,16 +27,6 @@
 
 
 Route::group(['middleware' => ['web']], function () {
-
-    Route::any('/test-mail', function() {
-
-
-        Mail::raw("Hi", function ($message) {
-            $message->to("sushil@infiniteit.biz")
-                    ->subject("Feedback From Customer");
-        });
-    });
-
     Route::any('/sync/bonfleet', ["as" => "bonfleet.insert", 'namespace'=> 'Admin', "uses" => "Admin\BonfleetController@insert"]);
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {        
         Route::get('/get-user-addresses', ["as" => "getUserAdd", "uses" => "SystemUsersController@getAddresses"]);
@@ -185,6 +175,20 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/delete', ['as' => 'admin.record.delete', 'uses' => 'RecordController@delete']);
                 Route::get('/rmfile', ['as' => 'admin.record.rmfile', 'uses' => 'RecordController@rmfile']);
             });
+            
+            Route::group(['prefix' => 'gardenwaste'], function() {
+                Route::get('/', ['as' => 'admin.gardenwaste.view', 'uses' => 'GardenwasteController@index']);
+                Route::get('/setting', ['as' => 'admin.gardenwaste.setting', 'uses' => 'GardenwasteController@setting']);
+                Route::get('/pickupslot', ['as' => 'admin.gardenwaste.pickupslot', 'uses' => 'GardenwasteController@pickupslot']);
+                Route::post('/pickupslot-save', ['as' => 'admin.gardenwaste.savepickupslot', 'uses' => 'GardenwasteController@savePickupslot']);
+                Route::get('/add', ['as' => 'admin.gardenwaste.add', 'uses' => 'GardenwasteController@add']);
+                Route::post('/save', ['as' => 'admin.gardenwaste.save', 'uses' => 'GardenwasteController@save']);
+                Route::post('/save', ['as' => 'admin.gardenwaste.savesetting', 'uses' => 'GardenwasteController@saveSetting']);
+                Route::get('/edit', ['as' => 'admin.gardenwaste.edit', 'uses' => 'GardenwasteController@edit']);
+                Route::get('/show', ['as' => 'admin.gardenwaste.show', 'uses' => 'GardenwasteController@show']);
+                Route::get('/delete', ['as' => 'admin.gardenwaste.delete', 'uses' => 'GardenwasteController@delete']);
+            });
+            
             Route::group(['prefix' => 'payment'], function() {
                 Route::get('/', ['as' => 'admin.payment.view', 'uses' => 'PaymentController@index']);
                 Route::get('/add', ['as' => 'admin.payment.add', 'uses' => 'PaymentController@add']);
@@ -283,6 +287,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/password-update', ['as' => 'user.password.update', 'uses' => 'UsersController@passwordUpdate']);
         Route::get('/register', ["as" => "user.register", "uses" => "UsersController@register"]);
         Route::post('/register-save', ["as" => "user.register.save", "uses" => "UsersController@registerSave"]);
+        Route::post('/address-save', ["as" => "user.address.add", "uses" => "UsersController@addressSave"]);
         Route::group(['middleware' => 'CheckWebUser'], function() {
             Route::get('/garden-waste', ["as" => "garden.waste", "uses" => "UsersController@gardenWaste"]);
             Route::get('/pickup-history', ["as" => "user.pickup.history", "uses" => "UsersController@pickupHistory"]);

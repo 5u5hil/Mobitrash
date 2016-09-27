@@ -27,7 +27,7 @@ class CheckUser {
                     return $next($request);
                 }
                 else{
-                    Session::flash('invalidUser', "Unauthorised!");                    
+                    Session::flash('invalidUser', "Unauthorised Access!");                    
                 }
             }            
         }

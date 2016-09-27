@@ -49,7 +49,7 @@
                         <div class="form-process"></div>
                         <div class="col_half gunny-form">
                             <label>Enter the number of garden gunny bags</label><small>*</small>
-                            {!! Form::text('no_of_gunny',null, ["class"=>"sm-form-control validate[required,custom[integer],min[1]] number_of_gunny_bags" ,"placeholder"=>"Enter the number of garden gunny bags"]) !!}
+                            {!! Form::text('no_of_gunny',null, ["class"=>"sm-form-control validate[required,custom[integer],min[1],max[".$config['max_gunny_bags']."]] number_of_gunny_bags", "placeholder"=>"Enter the number of garden gunny bags"]) !!}
                             <div class="col_half" style="margin-bottom: 0px;">
                                 <div style="line-height: 45px;height: 45px;"></div>
                                 <div><span style="font-size: 40px;" class="bag_count">0</span><span style="font-size: 20px;" id="bag_price"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x {{$config['gunny_bag_price']}} = </span></div>
@@ -123,7 +123,6 @@
         $('.gunny-bag-button').click(function (e) {
             if ($(".gunny-bag-count").validationEngine('validate') == true) {
                 $('.gunny-bags').hide();
-                $('.drop-address').show();
                 $('.drop-address').show();
                 $('.no_of_gunny_bags').val($('.number_of_gunny_bags').val());
             }

@@ -11,7 +11,7 @@
 
     <div class="content-wrap nopadding">
 
-       <img src="/public/Frontend/images/parallax/home/footer-truck.png" class="img-responsive" />
+       <img src="{{asset('/public/Frontend/images/parallax/home/footer-truck.png')}}" class="img-responsive" />
 
     </div>
 

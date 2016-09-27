@@ -13229,6 +13229,10 @@ padding:15px;
 font-size:17px
 }
 
+.button-loading{
+    margin-left: auto; top: 0; color: #fff; font-size: 21px;position: absolute;margin-right: auto;right: 0px;display: none;
+}
+
 .counters1 {
     font-size: 31px;
     font-weight: 600;
@@ -13245,4 +13249,21 @@ font-size:17px
     color: #fff;
     font-size: 13px;
     font-weight: normal;	
+}
+
+.checkbox-circle{
+    border-radius: 9px;
+    border: 1px solid #ccc;
+    padding: 12px 0px 8px 0px;
+    margin-bottom: 10px;
+}
+
+.checkbox-circle-input{
+    margin-top: 0px!important;
+    margin-left: 20px!important;
+    height: 25px;
+    width: 25px;
+}
+.checkbox-circle-label{
+    vertical-align: bottom;
 }

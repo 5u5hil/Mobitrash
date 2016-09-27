@@ -21,8 +21,10 @@ use App\Models\Address;
 use App\Models\Configuration;
 use App\Models\Contactus;
 use App\Models\Subscription;
+use App\Models\PickupSlot;
 use App\Models\Service;
 use App\Models\Payment;
+use App\Models\GardenWaste;
 use App\Models\GunnyOrder;
 use Mail;
 
@@ -167,7 +169,11 @@ class UsersController extends Controller {
     }
 
     public function contact() {
-        $city = City::where('is_active', 1)->get()->toArray();
+        $city = City::where('name', '!=', 'Other')->where('is_active', 1)->get()->toArray();
+        $cityother = City::where('name', 'Other')->where('is_active', 1)->get()->toArray();
+        if ($cityother) {
+            array_push($city, $cityother[0]);
+        }
         $action = 'user.contact.save';
         return view(Config('constants.frontendView') . '.contact', compact('action', 'city'));
     }
@@ -332,24 +338,47 @@ class UsersController extends Controller {
     }
 
     public function gardenWaste() {
-        
-        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
+        $pickups = PickupSlot::get()->toArray();
+        $pickupslots = [];
+        foreach ($pickups as $key => $pickup) {
+            array_push($pickupslots, $pickup['pickup_date']);
+        }
+        $pickupslots = json_encode($pickupslots);
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
         $gunny_bags = GunnyOrder::where('user_id', Auth::user()->id)->sum('no_of_bags');
+        $addresses = Address::where('user_id', Auth::user()->id)->get()->toArray();
         $action = 'garden.waste.save';
-        if($gunny_bags > 0) {
-            return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config'));
-        }else{
+        if ($gunny_bags > 0) {
+            return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config', 'pickupslots', 'addresses'));
+        } else {
             return redirect()->route('garden.waste.emptygunny');
         }
     }
 
     public function gardenWasteSave() {
-        $action = 'garden.waste.save';
-        return view(Config('constants.frontendView') . '.garden_waste', compact('action'));
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
+        if (Input::get('no_of_gunny') <= $config['max_gunny_bags']) {
+            $garden_waste = new GardenWaste();
+            $garden_waste->user_id = Input::get('user_id');
+            $garden_waste->address_id = Input::get('pickup_address_id');
+            $garden_waste->gunny_bags = Input::get('no_of_gunny');
+            $garden_waste->amount = Input::get('no_of_gunny') * $config['garden_waste_pickup_price'];
+            $garden_waste->payment_status = 0;
+            $garden_waste->pickup_date = Input::get('date_of_pickup');
+            $garden_waste->is_picked_up = 0;
+            if ($garden_waste->save()) {
+                Session::flash('message', 'Pickup Request Received Successfully!');
+            } else {
+                Session::flash('messageError', 'Error Occured! Please try again!');
+            }
+        } else {
+            Session::flash('messageError', 'Gunny bags exceed maximum limit!');
+        }
+        return redirect()->back();
     }
 
     public function emptyGunny() {
-        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
         $action = 'garden.waste.savegunny';
         return view(Config('constants.frontendView') . '.empty_gunny', compact('action', 'config'));
     }
@@ -367,6 +396,17 @@ class UsersController extends Controller {
         $user->default_address_id = $address->id;
         $user->update();
         return redirect()->route('garden.waste');
+    }
+
+    public function addressSave() {
+        $address = new Address();
+        $address->fill(Input::all());
+        if ($address->save()) {
+            $address_text = $address->address_line_1 . ' ' . $address->address_line_2 . ' ' . $address->locality . ' ' . $address->city . ' ' . $address->pincode;
+            return ['flash' => 'success', 'address_id' => $address->id, 'address' => $address_text];
+        } else {
+            return ['flash' => 'error'];
+        }
     }
 
 }

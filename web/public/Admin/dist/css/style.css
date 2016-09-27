@@ -91,16 +91,20 @@
 }
 
 @media print {
-        .print {
-            background-color: white;
-            height: 100%;
-            width: 100%;        
-        }
-        .print .no-print{
-            display: none;
-        }
-
-        .page-break{
-            page-break-after: always;
-        }
+    .print {
+        background-color: white;
+        height: 100%;
+        width: 100%;        
     }
+    .print .no-print{
+        display: none;
+    }
+
+    .page-break{
+        page-break-after: always;
+    }
+}
+
+.main-header .logo .logo-lg {
+    margin-top: 10px;
+}

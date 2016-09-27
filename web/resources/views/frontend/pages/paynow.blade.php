@@ -1,24 +1,5 @@
 @extends('frontend.layouts.site')
 @section('content')
-<section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
-    <div class="slider-parallax-inner">
-        <div class="container clearfix">
-            <div class="vertical-middle">
-
-                <div class="heading-block nobottomborder">
-                    <h1>
-                        <div>
-                            <span>Pay Now</span>
-                        </div>
-                    </h1>
-                    <p>Your Payment Information</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-
 <section id="content">
 
     <div class="content-wrap">
