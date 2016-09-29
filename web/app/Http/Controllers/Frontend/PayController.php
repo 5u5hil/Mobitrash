@@ -5,23 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use Route;
 use Illuminate\Support\Facades\Input;
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Permission;
 use App\Http\Controllers\Controller;
 use Hash;
 use Session;
-use App\Models\Wastetype;
-use App\Models\Frequency;
-use App\Models\Timeslot;
-use App\Models\Package;
-use App\Models\City;
-use App\Models\Occupancy;
-use App\Models\Address;
-use App\Models\Contactus;
-use App\Models\Subscription;
-use App\Models\Service;
 use App\Models\Payment;
+use App\Models\GardenWaste;
+use App\Models\GunnyOrder;
 use Mail;
 
 class PayController extends Controller {
@@ -33,8 +23,19 @@ class PayController extends Controller {
     }
 
     public function paytm() {
-        $id = Input::get('id');
-        $amt = Payment::find($id)->invoice_amount;
+        if (Input::get('payment_for') == 'garden_waste') {
+            $id = base64_decode(Input::get('id'));
+            $amt = GardenWaste::find($id)->amount;
+            $id_prefix = '101';
+        } else if (Input::get('payment_for') == 'gunny_bags') {
+            $id = base64_decode(Input::get('id'));
+            $amt = GunnyOrder::find($id)->amount;
+            $id_prefix = '201';
+        } else {
+            $id = Input::get('id');
+            $amt = Payment::find($id)->invoice_amount;
+            $id_prefix = '301';
+        }
         $mid = 'MobiTr05774251764030';
         $key = '!wfbpZ65Cef%lc%l';
         $type = 'DEFAULT';
@@ -42,11 +43,10 @@ class PayController extends Controller {
         $industryTypeId = 'Retail110';
         $channel = 'WEB';
         $cust = Auth::id();
-        $mob = Input::get('phone_number');
-        $email = Input::get('email');
-
+        $mob = Auth::user()->phone_number;
+        $email = Auth::user()->email;
         $paramList["MID"] = $mid;
-        $paramList["ORDER_ID"] = date("Ymdhis" . "-" . $id);
+        $paramList["ORDER_ID"] = date("Ymdhis" . "-" . $id_prefix . "-" . $id);
         $paramList["CUST_ID"] = $cust;
         $paramList["INDUSTRY_TYPE_ID"] = $industryTypeId;
         $paramList["CHANNEL_ID"] = $channel;
@@ -77,38 +77,69 @@ class PayController extends Controller {
     }
 
     public function success() {
-
         $id = explode("-", Input::get('ORDERID'));
-        $pay = Payment::find($id[1]);
-        $pay->txtdetails = json_encode(Input::all());
-
-        if (Input::get('STATUS') == "TXN_SUCCESS" || Input::get('RESPCODE') == "01") {
-
-            $pay->payment_made = 1;
-            $pay->payment_date = date("Y-m-d");
-
-
-
-            $user = User::find(Auth::id())->toArray();
-
-            Mail::send(Config('constants.adminEmail') . '.paymentSuccess', ['user' => $user, 'amt' => $pay->invoice_amount], function ($message)  {
-                $message->to(Auth::user()->email);
-              
-                    $message->cc('getit@mobitrash.in');
-                
-                $message->subject('MobiTrash Payment Receipt');
-            });
-
-            $success = 1;
-        } else if (Input::get('STATUS') == "PENDING") {
-            $pay->payment_made = 2;
-            $pay->payment_date = date("Y-m-d");
-            $success = 2;
-        } else {
-            $success = 0;
+        $invoice_amount = 0;
+        $success = 0;
+        if ($id[1] == '301') {
+            $pay = Payment::find($id[2]);
+            $invoice_amount = $pay->invoice_amount;
+            $pay->txtdetails = json_encode(Input::all());
+            if (Input::get('STATUS') == "TXN_SUCCESS" || Input::get('RESPCODE') == "01") {
+                $pay->payment_made = 1;
+                $pay->payment_date = date("Y-m-d");
+                $success = 1;
+            } else if (Input::get('STATUS') == "PENDING") {
+                $pay->payment_made = 2;
+                $pay->payment_date = date("Y-m-d");
+                $success = 2;
+            } else {
+                $success = 0;
+            }
+            $pay->update();
+        } else if ($id[1] == '101') {
+            $pay = GardenWaste::find($id[2]);
+            $invoice_amount = $pay->amount;
+            $pay->txtdetails = json_encode(Input::all());
+            if (Input::get('STATUS') == "TXN_SUCCESS" || Input::get('RESPCODE') == "01") {
+                $pay->payment_made = 1;
+                $pay->payment_date = date("Y-m-d");
+                $success = 1;
+            } else if (Input::get('STATUS') == "PENDING") {
+                $pay->payment_made = 2;
+                $pay->payment_date = date("Y-m-d");
+                $success = 2;
+            } else {
+                $success = 0;
+            }
+            $pay->update();
+        } else if ($id[1] == '201') {
+            $pay = GunnyOrder::find($id[2]);
+            $invoice_amount = $pay->amount;
+            $pay->txtdetails = json_encode(Input::all());
+            if (Input::get('STATUS') == "TXN_SUCCESS" || Input::get('RESPCODE') == "01") {
+                $pay->payment_made = 1;
+                $pay->payment_date = date("Y-m-d");
+                $success = 1;
+            } else if (Input::get('STATUS') == "PENDING") {
+                $pay->payment_made = 2;
+                $pay->payment_date = date("Y-m-d");
+                $success = 2;
+            } else {
+                $success = 0;
+            }
+            $pay->update();
         }
 
-        $pay->update();
+
+        if ($success == 1) {
+            $user = User::find(Auth::id())->toArray();
+            Mail::send(Config('constants.adminEmail') . '.paymentSuccess', ['user' => $user, 'amt' => $invoice_amount], function ($message) {
+                $message->to(Auth::user()->email);
+                $message->cc('getit@mobitrash.in');
+//                $message->cc('sharad@infiniteit.biz');
+                $message->subject('MobiTrash Payment Receipt');
+            });
+        }
         return view(Config('constants.frontendView') . '.thankyou', compact("success"));
     }
 

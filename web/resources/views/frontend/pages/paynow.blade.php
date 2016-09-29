@@ -64,6 +64,7 @@
                         </div>
 
                         {!! Form::hidden('id',$id) !!}
+                        {!! Form::hidden('payment_for','subscription') !!}
                         {!! Form::close() !!}  
 
 

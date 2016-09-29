@@ -8,14 +8,34 @@ use App\Models\User;
 use App\Models\GardenWaste;
 use App\Models\Configuration;
 use App\Models\PickupSlot;
+use App\Models\Message;
 use Request;
 use Session;
 
 class GardenwasteController extends Controller {
 
     function index() {
-        $pickups = GardenWaste::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+        $pickups = GardenWaste::orderBy('created_at', 'desc');
+            if (Input::get('staff_id')) {
+                $pickups = $pickups->where('user_id', Input::get('staff_id'));                
+            } 
+            if (Input::get('pickup_date')) {
+                $pickups = $pickups->where('pickup_date', date("Y-m-d", strtotime(Input::get('pickup_date'))));                
+            }
+            if (Input::get('pickup_status')) {
+                $pickups = $pickups->where('pickup_status',Input::get('pickup_status'));
+            }
+            if (Input::get('payment_made')) {
+                $pickups = $pickups->where('payment_made',Input::get('payment_made'));
+            } 
+        $pickups = $pickups->paginate(Config('constants.paginateNo'));
+        Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminGardenwasteView') . '.index', compact('pickups'));
+    }
+    
+    function messages() {
+        $messages = Message::orderBy('created_at', 'desc')->paginate(Config('constants.paginateNo'));
+        return view(Config('constants.adminGardenwasteView') . '.messages', compact('messages'));
     }
 
     function setting() {
@@ -59,16 +79,22 @@ class GardenwasteController extends Controller {
         $assets = Asset::find(Input::get('id'));
         return view(Config('constants.adminAssetView') . '.show', compact('assets'));
     }
+    function edit() {
+        $pickup = GardenWaste::find(Input::get('id'));
+        $action = "admin.gardenwaste.save";
+        return view(Config('constants.adminGardenwasteView') . '.addEdit', compact('action', 'pickup'));
+    }
+    
 
     public function save() {
-        $asset = Asset::findOrNew(Input::get('id'))->fill(Input::all())->save();
+        $pickup = GardenWaste::findOrNew(Input::get('id'))->fill(Input::all())->save();
         return redirect()->to(Session::get('backUrl'));
     }
 
     public function delete() {
-        $city = Asset::find(Input::get('id'));
-        $city->delete();
-        return redirect()->back()->with("message", "Asset deleted sucessfully");
+        $pickup = GardenWaste::find(Input::get('id'));
+        $pickup->delete();
+        return redirect()->back()->with("message", "Garden Waste Pickup deleted sucessfully");
     }
 
 }

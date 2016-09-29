@@ -178,12 +178,13 @@ Route::group(['middleware' => ['web']], function () {
             
             Route::group(['prefix' => 'gardenwaste'], function() {
                 Route::get('/', ['as' => 'admin.gardenwaste.view', 'uses' => 'GardenwasteController@index']);
+                Route::get('/messages', ['as' => 'admin.gardenwaste.messages', 'uses' => 'GardenwasteController@messages']);
                 Route::get('/setting', ['as' => 'admin.gardenwaste.setting', 'uses' => 'GardenwasteController@setting']);
                 Route::get('/pickupslot', ['as' => 'admin.gardenwaste.pickupslot', 'uses' => 'GardenwasteController@pickupslot']);
                 Route::post('/pickupslot-save', ['as' => 'admin.gardenwaste.savepickupslot', 'uses' => 'GardenwasteController@savePickupslot']);
                 Route::get('/add', ['as' => 'admin.gardenwaste.add', 'uses' => 'GardenwasteController@add']);
                 Route::post('/save', ['as' => 'admin.gardenwaste.save', 'uses' => 'GardenwasteController@save']);
-                Route::post('/save', ['as' => 'admin.gardenwaste.savesetting', 'uses' => 'GardenwasteController@saveSetting']);
+                Route::post('/savesetting', ['as' => 'admin.gardenwaste.savesetting', 'uses' => 'GardenwasteController@saveSetting']);
                 Route::get('/edit', ['as' => 'admin.gardenwaste.edit', 'uses' => 'GardenwasteController@edit']);
                 Route::get('/show', ['as' => 'admin.gardenwaste.show', 'uses' => 'GardenwasteController@show']);
                 Route::get('/delete', ['as' => 'admin.gardenwaste.delete', 'uses' => 'GardenwasteController@delete']);
@@ -291,6 +292,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => 'CheckWebUser'], function() {
             Route::get('/garden-waste', ["as" => "garden.waste", "uses" => "UsersController@gardenWaste"]);
             Route::get('/pickup-history', ["as" => "user.pickup.history", "uses" => "UsersController@pickupHistory"]);
+            Route::get('/pickup-history-view/{id}', ["as" => "pickup.history.view", "uses" => "UsersController@pickupHistoryView"]);
             Route::get('/garden-waste-gunny', ["as" => "garden.waste.emptygunny", "uses" => "UsersController@emptyGunny"]);
             Route::get('/message-us', ["as" => "user.message.view", "uses" => "UsersController@userMessage"]);
             Route::post('/message-save', ["as" => "user.message.save", "uses" => "UsersController@userMessageSave"]);

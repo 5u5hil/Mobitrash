@@ -337,7 +337,7 @@
     }
     $('.datepicker').after('<input type="hidden" class="altdate" />');
     $(".datepicker").each(function () {
-        $(this).attr('readonly', 'readonly');
+        //$(this).attr('readonly', 'readonly');
         $(this).attr('placeholder', 'Select Date');
         var date = $(this).val();
         $(this).datepicker({
@@ -389,6 +389,30 @@
     });
     $('.timepicker-f2').timepicker({
         timeFormat: 'hh:mm TT'
+    });
+    $('.datetimepicker').after('<input type="hidden" class="altdatetime" />');
+    $(".datetimepicker").each(function () {
+        //$(this).attr('readonly', 'readonly');
+        $(this).attr('placeholder', 'Select Date Time');
+        var date = $(this).val();
+        $(this).datetimepicker({
+            dateFormat: 'dd M yy',
+            timeFormat: 'hh:mm TT',
+            changeMonth: true,
+            changeYear: true,
+            altFormat: 'yy-mm-dd',
+            altTimeFormat: 'HH:mm',
+            defaultDate: new Date(),
+            altField: $(this).parent().find('.altdatetime'),
+            altFieldTimeOnly: false
+        });
+        $(this).parent().find('.altdatetime').attr('name', $(this).attr('name'));
+        $(this).parent().find('.altdatetime').addClass($(this).attr('class'));
+        $(this).parent().find('.altdatetime').val($(this).val());
+        if (date) {
+            $(this).val(moment(date, 'YYYY-MM-DD HH:mm').format('DD MMM YYYY h:mm A'));
+        }
+        $(this).attr('name', '');
     });
 
 })(jQuery, $.AdminLTE);

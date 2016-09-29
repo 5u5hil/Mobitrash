@@ -57,7 +57,7 @@
                                 </div>
                                 <button type="button" class="button button-3d button-black gunny-bag-button" style="width: 100%;margin: 15px 0px;">Check Available Pickup Slots</button>
 
-                                {!! Form::hidden('user_id',Auth::user()->id) !!}
+                                {!! Form::hidden('user_id',Auth::id()) !!}
                                 {!! Form::close() !!}  
 
                             </div>
@@ -75,7 +75,7 @@
                                 <div class="datepicker-pickup col-md-8 pull-right" ></div>
                                 {!! Form::text('pickup_date',null , ["class"=>'form-control pickup-date-input validate[required]', 'data-errormessage'=> 'Please Select Pickup Date', 'style'=>'visibility:hidden;height:1px;', "id"=>"pickup-date"]) !!}
                                 <button type="button" class="button button-3d button-black proceed-pickup-button" style="width: 100%;margin: 15px 0px;">Proceed</button>
-                                {!! Form::hidden('user_id',Auth::user()->id) !!}
+                                {!! Form::hidden('user_id',Auth::id()) !!}
                                 {!! Form::close() !!}  
                             </div>
                         </div>
@@ -84,16 +84,25 @@
                             <div class='addresses'>
                                 {!! Form::model(null, ['method' => 'post', 'route' => $action , 'class' => 'nobottommargin pickup-final-address' ]) !!}
                                 <div class="pickup-final-address-input">
-                                @foreach($addresses as $address)
-                                <div class="checkbox-circle">   
-                                    <label class="checkbox-circle-label col-md-10">{{$address['address_line_1']. ' ' .$address['address_line_2']. ' ' .$address['locality']. ' ' .$address['city']. ' ' .$address['pincode'] }}</label>
-                                    <input class="checkbox-circle-input" type="radio" value="{{$address['id']}}" name="pickup_address_id" />
+                                    @foreach($addresses as $address)
+                                    <div class="checkbox-circle">   
+                                        <label class="checkbox-circle-label col-md-10">{{$address['address_line_1']. ' ' .$address['address_line_2']. ' ' .$address['locality']. ' ' .$address['city']. ' ' .$address['pincode'] }}</label>
+                                        <input class="checkbox-circle-input" type="radio" value="{{$address['id']}}" name="pickup_address_id" />
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
+                                <div class=" pickup-summary-2" style="display: none;">
+                                    <h4 style="margin-top: 30px;padding-bottom: 10px;border-bottom: 1px solid #ccc;">Pickup Request Summary</h4>
+                                    <table style="width: 100%;">
+                                        <tr><td>Garden Gunny Bags</td><td class="bag_count" style="font-weight: bold;text-align: right;"></td></tr>
+                                        <tr><td>Pickup Date</td><td  style="font-weight: bold;text-align: right;"><span class="display-pickup-date"></span></td></tr>
+                                        <tr><td>Net Payable</td><td  style="font-weight: bold;text-align: right;">Rs.<span class="total_payable"></span></td></tr>
+                                        <tr><td>Pickup Address</td><td  style="text-align: right;" class="pickup-address-detail"></td></tr>
+                                    </table>
                                 </div>
                                 <button type="button" class="button button-3d button-black show-address-form" style="width: 100%;margin: 15px 0px;">Pickup at a different address</button>
                                 <button type="submit" class="button button-3d button-black proceed-to-pay" style="width: 100%;margin: 15px 0px;display: none;">Proceed to Pay</button>
-                                {!! Form::hidden('user_id',Auth::user()->id) !!}
+                                {!! Form::hidden('user_id',Auth::id()) !!}
                                 {!! Form::text('no_of_gunny', null, ['class'=>'no_of_gunny_bags validate[required]','style'=>'visibility:hidden;height:1px;']) !!}
                                 {!! Form::text('date_of_pickup', null, ['class'=>'date_of_pickup validate[required]','style'=>'visibility:hidden;height:1px;']) !!}
                                 {!! Form::close() !!}  
@@ -112,7 +121,7 @@
                                 {!! Form::text('pincode',null, ["class"=>"sm-form-control validate[required,custom[integer]]" ,"placeholder"=>"Pincode"]) !!}
                                 <button type="button" class="button button-3d button-black save-address" style="width: 100%;margin: 15px 0px;">Submit & Proceed<div class="small-loading button-loading" ><i class="fa fa-refresh fa-spin fa-fw"></i></div></button>
                                 <div style="text-align: center;">This will be saved as your default pickup address but we shall confirm it always before scheduling a pickup.</div>
-                                {!! Form::hidden('user_id',Auth::user()->id) !!}                                
+                                {!! Form::hidden('user_id',Auth::id()) !!}                                
                                 {!! Form::close() !!}
                             </div>                        
                         </div>
@@ -205,14 +214,14 @@
         });
         $('.save-address').click(function () {
             if ($(".new-pickup-address-form").validationEngine('validate') == true) {
-                $(this).prop('disabled',true);
+                $(this).prop('disabled', true);
                 $('.small-loading').show();
                 $.ajax({
                     url: '<?= route('user.address.add') ?>',
                     type: "POST",
                     data: $(".new-pickup-address-form").serialize(),
                     success: function (data) {
-                        $(this).prop('disabled',false);
+                        $(this).prop('disabled', false);
                         $('.small-loading').hide();
                         if (data.flash == 'success') {
                             $('.pickup-final-address-input input[type=radio]').removeAttr('checked');
@@ -220,24 +229,30 @@
                             $('.pickup-final-address-input').append(option);
                             $('.show-address-form').hide();
                             $('.pickup-address-form').hide();
-                            $('.proceed-to-pay').show();                            
+                            $('.proceed-to-pay').show();
+                            $('.pickup-summary-2').show();
+                            $('.pickup-summary').hide();
+                            $('.pickup-address-detail').html(data.address);
                         } else {
                             $('#flash-message').html('<div class="red">Unable to save data. Please try again!</div>');
-                            
+
                         }
                     },
-                    error: function(error){
-                        $(this).prop('disabled',false);
+                    error: function (error) {
+                        $(this).prop('disabled', false);
                         $('.small-loading').hide();
                     }
 
                 });
             }
         });
-        $('.pickup-final-address-input input[name=pickup_address_id]').click(function(){
-            $('.proceed-to-pay').show(); 
+        $('.pickup-final-address-input input[name=pickup_address_id]').click(function () {
+            $('.proceed-to-pay').show();
             $('.show-address-form').hide();
-            
+            $('.pickup-summary-2').show();
+            $('.pickup-summary').hide();
+            $('.pickup-address-detail').html($(this).closest('.checkbox-circle').find('label').html());
+
         });
     });
 </script>

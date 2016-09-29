@@ -26,6 +26,7 @@ use App\Models\Service;
 use App\Models\Payment;
 use App\Models\GardenWaste;
 use App\Models\GunnyOrder;
+use App\Models\Message;
 use Mail;
 
 class UsersController extends Controller {
@@ -231,8 +232,8 @@ class UsersController extends Controller {
             $data = Input::all();
             $data['city'] = $location_name;
             Mail::send(Config('constants.adminEmail') . '.inquiryReceived', ['data' => $data], function ($message) {
-//                $message->to('getit@mobitrash.in');
-                $message->to('sharad@infiniteit.biz');
+                $message->to('getit@mobitrash.in');
+//                $message->to('sharad@infiniteit.biz');
                 $message->subject('MobiTrash Inquiry Received');
             });
             Session::flash('contactSuccess', 'Thank you! We shall get in touch with you soon.');
@@ -363,16 +364,20 @@ class UsersController extends Controller {
             $garden_waste->address_id = Input::get('pickup_address_id');
             $garden_waste->gunny_bags = Input::get('no_of_gunny');
             $garden_waste->amount = Input::get('no_of_gunny') * $config['garden_waste_pickup_price'];
-            $garden_waste->payment_status = 0;
+            $garden_waste->payment_made = 0;
             $garden_waste->pickup_date = Input::get('date_of_pickup');
-            $garden_waste->is_picked_up = 0;
+            $garden_waste->pickup_status = 'Request Received';
+            $user = User::where('id', Auth::user()->id)->first()->toArray();
+            $payment_for = 'garden_waste';
+            $amount = Input::get('no_of_gunny') * $config['garden_waste_pickup_price'];
             if ($garden_waste->save()) {
-                Session::flash('message', 'Pickup Request Received Successfully!');
+                $id = base64_encode($garden_waste->id);
+                return view(Config('constants.frontendView') . '.confirmpay', compact('id', 'user', 'amount', 'payment_for'));
             } else {
                 Session::flash('messageError', 'Error Occured! Please try again!');
             }
         } else {
-            Session::flash('messageError', 'Gunny bags exceed maximum limit!');
+            Session::flash('messageError', 'Gunny bags exceeds maximum limit!');
         }
         return redirect()->back();
     }
@@ -384,18 +389,28 @@ class UsersController extends Controller {
     }
 
     public function saveGunny() {
-        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price'])->toArray();
-        $address = new Address();
-        $address->fill(Input::except('no_of_gunny'))->save();
-        $gunny_order = new GunnyOrder();
-        $gunny_order->user_id = Input::get('user_id');
-        $gunny_order->no_of_bags = Input::get('no_of_gunny');
-        $gunny_order->amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
-        $gunny_order->save();
-        $user = User::find(Input::get('user_id'));
-        $user->default_address_id = $address->id;
-        $user->update();
-        return redirect()->route('garden.waste');
+        $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
+        if (Input::get('no_of_gunny') <= $config['max_gunny_bags']) {            
+            $address = new Address();
+            $address->fill(Input::except('no_of_gunny'))->save();
+            $gunny_order = new GunnyOrder();
+            $gunny_order->user_id = Input::get('user_id');
+            $gunny_order->address_id = $address->id;
+            $gunny_order->no_of_bags = Input::get('no_of_gunny');
+            $gunny_order->amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
+            $user = User::where('id', Auth::user()->id)->first()->toArray();
+            $payment_for = 'gunny_bags';
+            $amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
+            if ($gunny_order->save()) {
+                $id = base64_encode($gunny_order->id);
+                return view(Config('constants.frontendView') . '.confirmpay', compact('id', 'user', 'amount', 'payment_for'));
+            } else {
+                Session::flash('messageError', 'Error Occured! Please try again!');
+            }
+        } else {
+            Session::flash('messageError', 'Gunny bags exceeds maximum limit!');            
+        }
+        return redirect()->back();
     }
 
     public function addressSave() {
@@ -407,6 +422,37 @@ class UsersController extends Controller {
         } else {
             return ['flash' => 'error'];
         }
+    }
+    public function pickupHistory() {
+        $pickups = GardenWaste::where('user_id', Auth::id())->where('payment_made', 1)->get();
+        return view(Config('constants.frontendView') . '.pickuphistory', compact('pickups'));
+    }
+    public function pickupHistoryView($id) {
+        $pickup = GardenWaste::where('user_id', Auth::id())->where('id', $id)->first();        
+        return view(Config('constants.frontendView') . '.pickuphistoryview', compact('pickup'));
+    }
+    
+    public function userMessage(){
+        $action = 'user.message.save';
+        return view(Config('constants.frontendView') . '.messageus', compact('action'));
+    }
+    public function userMessageSave(){
+        $message = new Message();
+        $message->fill(Input::all());
+        $user = User::where('id', Input::get('user_id'))->first()->toArray();
+        $data = Input::all();
+        if($message->save()){
+            Session::flash('message', 'Thank You, for your feedback! Your message saved successfully!');
+            Mail::send(Config('constants.adminEmail') . '.messageReceived', ['data' => $data, 'user'=> $user], function ($message) use ($user) {
+                $message->to('getit@mobitrash.in');
+//                $message->to('sharad@infiniteit.biz');
+                $message->replyTo($user['email'], $user['name']);                
+                $message->subject('Feedback Received');
+            });
+        }else{
+            Session::flash('messageError', 'Error Occured! Please try again!');
+        }
+        return redirect()->back();
     }
 
 }

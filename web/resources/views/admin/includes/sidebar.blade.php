@@ -66,16 +66,17 @@
                     <span>Attendance Management</span>
                 </a>
             </li>
-            <li class="treeview {{ preg_match("/admin.gardenwaste.view|admin.gardenwaste.pickupslot|admin.gardenwaste.setting/",Route::currentRouteName())? 'active' : ''}}">
+            <li class="treeview {{ preg_match("/admin.gardenwaste.view|admin.gardenwaste.pickupslot|admin.gardenwaste.setting|admin.gardenwaste.messages/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="#">
                     <i class="fa fa-leaf"></i>
                     <span>Garden Waste Management</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ preg_match("/admin.gardenwaste.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.view') }}"><i class="fa fa-leaf"></i>Garden Waste</a></li>
-                    <li class="{{ preg_match("/admin.gardenwaste.pickupslot/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.pickupslot') }}"><i class="fa fa-leaf"></i>Manage Pickup Slots</a></li>
-                    <li class="{{ preg_match("/admin.gardenwaste.setting/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.setting') }}"><i class="fa fa-leaf"></i>Garden Waste Setting</a></li>
+                    <li class="{{ preg_match("/admin.gardenwaste.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.view') }}"><i class="fa fa-pagelines"></i>Garden Waste</a></li>
+                    <li class="{{ preg_match("/admin.gardenwaste.pickupslot/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.pickupslot') }}"><i class="fa fa-calendar"></i>Manage Pickup Slots</a></li>
+                    <li class="{{ preg_match("/admin.gardenwaste.setting/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.setting') }}"><i class="fa fa-cogs"></i>Garden Waste Setting</a></li>
+                    <li class="{{ preg_match("/admin.gardenwaste.messages/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.gardenwaste.messages') }}"><i class="fa fa-envelope"></i>Customers Messages</a></li>
                 </ul>
             </li>
             <li class=" {{ preg_match("/admin.bonfleet.view/",Route::currentRouteName())? 'active' : ''}}">
