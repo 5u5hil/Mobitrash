@@ -25,7 +25,7 @@ class GardenwasteController extends Controller {
             if (Input::get('pickup_status')) {
                 $pickups = $pickups->where('pickup_status',Input::get('pickup_status'));
             }
-            if (Input::get('payment_made')) {
+            if (!is_null(Input::get('payment_made'))) {
                 $pickups = $pickups->where('payment_made',Input::get('payment_made'));
             } 
         $pickups = $pickups->paginate(Config('constants.paginateNo'));

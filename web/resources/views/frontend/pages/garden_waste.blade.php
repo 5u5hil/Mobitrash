@@ -121,6 +121,7 @@
                                 {!! Form::text('pincode',null, ["class"=>"sm-form-control validate[required,custom[integer]]" ,"placeholder"=>"Pincode"]) !!}
                                 <button type="button" class="button button-3d button-black save-address" style="width: 100%;margin: 15px 0px;">Submit & Proceed<div class="small-loading button-loading" ><i class="fa fa-refresh fa-spin fa-fw"></i></div></button>
                                 <div style="text-align: center;">This will be saved as your default pickup address but we shall confirm it always before scheduling a pickup.</div>
+                                {!! Form::hidden('flag',1) !!}                                
                                 {!! Form::hidden('user_id',Auth::id()) !!}                                
                                 {!! Form::close() !!}
                             </div>                        

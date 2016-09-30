@@ -347,7 +347,7 @@ class UsersController extends Controller {
         $pickupslots = json_encode($pickupslots);
         $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
         $gunny_bags = GunnyOrder::where('user_id', Auth::user()->id)->sum('no_of_bags');
-        $addresses = Address::where('user_id', Auth::user()->id)->get()->toArray();
+        $addresses = Address::where('flag', 1)->where('user_id', Auth::user()->id)->get()->toArray();
         $action = 'garden.waste.save';
         if ($gunny_bags > 0) {
             return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config', 'pickupslots', 'addresses'));

@@ -184,7 +184,7 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/pickupslot-save', ['as' => 'admin.gardenwaste.savepickupslot', 'uses' => 'GardenwasteController@savePickupslot']);
                 Route::get('/add', ['as' => 'admin.gardenwaste.add', 'uses' => 'GardenwasteController@add']);
                 Route::post('/save', ['as' => 'admin.gardenwaste.save', 'uses' => 'GardenwasteController@save']);
-                Route::post('/savesetting', ['as' => 'admin.gardenwaste.savesetting', 'uses' => 'GardenwasteController@saveSetting']);
+                Route::post('/save-setting', ['as' => 'admin.gardenwaste.savesetting', 'uses' => 'GardenwasteController@saveSetting']);
                 Route::get('/edit', ['as' => 'admin.gardenwaste.edit', 'uses' => 'GardenwasteController@edit']);
                 Route::get('/show', ['as' => 'admin.gardenwaste.show', 'uses' => 'GardenwasteController@show']);
                 Route::get('/delete', ['as' => 'admin.gardenwaste.delete', 'uses' => 'GardenwasteController@delete']);

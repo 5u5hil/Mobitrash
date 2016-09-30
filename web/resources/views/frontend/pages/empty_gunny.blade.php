@@ -83,6 +83,7 @@
                             <button type="submit" class="button button-3d button-black" style="width: 100%;margin: 15px 0px;">Submit & Proceed to Pay</button>
                             <div style="text-align: center;">This will be saved as your default pickup address but we shall confirm it always before scheduling a pickup.</div>
                             {!! Form::hidden('user_id',Auth::user()->id) !!}
+                            {!! Form::hidden('flag',1) !!}
                             {!! Form::hidden('no_of_gunny', null, ['class'=>'no_of_gunny_bags']) !!}
                             {!! Form::close() !!}  
 
