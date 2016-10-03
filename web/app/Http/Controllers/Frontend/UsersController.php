@@ -36,10 +36,14 @@ class UsersController extends Controller {
     }
 
     public function register() {
-        $citiesd = City::where("is_active", 1)->get()->toArray();
-        $cities = ['' => 'select City'];
         $action = 'user.register.save';
-        foreach ($citiesd as $value) {
+        $city = City::where('name', '!=', 'Other')->where('is_active', 1)->get()->toArray();
+        $cityother = City::where('name', 'Other')->where('is_active', 1)->get()->toArray();
+        if ($cityother) {
+            array_push($city, $cityother[0]);
+        }
+        $cities = ['' => 'select City'];
+        foreach ($city as $value) {
             $cities[$value['id']] = $value['name'];
         }
         return view(Config('constants.frontendView') . '.register', compact('action', 'cities'));
@@ -47,9 +51,9 @@ class UsersController extends Controller {
 
     public function registerSave() {
         $chk = User::where("email", "=", Input::get('email'))->first();
-
+        $city = City::where('id', Input::get('location'))->where('is_active', 1)->first()->toArray();
         if (empty($chk)) {
-            if (Input::get('location') == 6) {
+            if ($city['name'] == 'Other') {
                 $result = $this->saveContact();
                 if ($result) {
                     Session::flash('message', 'Thank you! We shall get in touch with you soon.');
@@ -198,7 +202,7 @@ class UsersController extends Controller {
     public function saveContact() {
         $city = City::where('id', Input::get('location'))->where('is_active', 1)->first()->toArray();
         $location_name = "";
-        if ($city['id'] == 6) {
+        if ($city['name'] == 'Other') {
             if (Input::get('city_name')) {
                 $location_name = Input::get('city_name');
             } else {
@@ -346,7 +350,7 @@ class UsersController extends Controller {
         }
         $pickupslots = json_encode($pickupslots);
         $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
-        $gunny_bags = GunnyOrder::where('user_id', Auth::user()->id)->sum('no_of_bags');
+        $gunny_bags = GunnyOrder::where('payment_made', 1)->where('user_id', Auth::user()->id)->sum('no_of_bags');
         $addresses = Address::where('flag', 1)->where('user_id', Auth::user()->id)->get()->toArray();
         $action = 'garden.waste.save';
         if ($gunny_bags > 0) {
@@ -390,7 +394,7 @@ class UsersController extends Controller {
 
     public function saveGunny() {
         $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
-        if (Input::get('no_of_gunny') <= $config['max_gunny_bags']) {            
+        if (Input::get('no_of_gunny') <= $config['max_gunny_bags']) {
             $address = new Address();
             $address->fill(Input::except('no_of_gunny'))->save();
             $gunny_order = new GunnyOrder();
@@ -408,7 +412,7 @@ class UsersController extends Controller {
                 Session::flash('messageError', 'Error Occured! Please try again!');
             }
         } else {
-            Session::flash('messageError', 'Gunny bags exceeds maximum limit!');            
+            Session::flash('messageError', 'Gunny bags exceeds maximum limit!');
         }
         return redirect()->back();
     }
@@ -423,33 +427,36 @@ class UsersController extends Controller {
             return ['flash' => 'error'];
         }
     }
+
     public function pickupHistory() {
         $pickups = GardenWaste::where('user_id', Auth::id())->where('payment_made', 1)->get();
         return view(Config('constants.frontendView') . '.pickuphistory', compact('pickups'));
     }
+
     public function pickupHistoryView($id) {
-        $pickup = GardenWaste::where('user_id', Auth::id())->where('id', $id)->first();        
+        $pickup = GardenWaste::where('user_id', Auth::id())->where('id', $id)->first();
         return view(Config('constants.frontendView') . '.pickuphistoryview', compact('pickup'));
     }
-    
-    public function userMessage(){
+
+    public function userMessage() {
         $action = 'user.message.save';
         return view(Config('constants.frontendView') . '.messageus', compact('action'));
     }
-    public function userMessageSave(){
+
+    public function userMessageSave() {
         $message = new Message();
         $message->fill(Input::all());
         $user = User::where('id', Input::get('user_id'))->first()->toArray();
         $data = Input::all();
-        if($message->save()){
+        if ($message->save()) {
             Session::flash('message', 'Thank You, for your feedback! Your message saved successfully!');
-            Mail::send(Config('constants.adminEmail') . '.messageReceived', ['data' => $data, 'user'=> $user], function ($message) use ($user) {
+            Mail::send(Config('constants.adminEmail') . '.messageReceived', ['data' => $data, 'user' => $user], function ($message) use ($user) {
                 $message->to('getit@mobitrash.in');
 //                $message->to('sharad@infiniteit.biz');
-                $message->replyTo($user['email'], $user['name']);                
+                $message->replyTo($user['email'], $user['name']);
                 $message->subject('Feedback Received');
             });
-        }else{
+        } else {
             Session::flash('messageError', 'Error Occured! Please try again!');
         }
         return redirect()->back();

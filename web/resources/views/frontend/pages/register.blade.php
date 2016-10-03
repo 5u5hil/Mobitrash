@@ -23,10 +23,10 @@
                         <div class="panel panel-default divcenter noradius noborder loginpan">
                             <div class="panel-body" style="padding: 40px;"> 
                                 <h3 class="logintex">Register</h3>
-                                <div class="flash-message red" style="height: 20px;">
+                                <div class="flash-message red" style="">
                                     {{@Session::pull('messageError')}}                            
                                 </div>
-                                <div class="flash-message" style="color: #74f774;height: 20px;">
+                                <div class="flash-message" style="color: #74f774;">
                                     {{@Session::pull('message')}}                            
                                 </div>
                                 <form id="register-form" name="login-form" class="nobottommargin" action="{{ route($action) }}" method="post">
@@ -85,7 +85,8 @@
     $(document).ready(function () {
         
         $(".select-city").change(function(){
-            if($(this).val() == '6'){
+            var option = $(this).find("option:selected").text();
+            if(option == 'Other'){
                 $('.city_message').html('');
                 $('.user_password').hide();
                 $('.user_password input').prop('disabled',true);

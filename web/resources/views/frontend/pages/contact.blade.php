@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="col_full">
-                                        <input type="text" id="phone" name="phone" value="" class="sm-form-control required  validate[required]" aria-required="true" placeholder="Phone No ">
+                                        <input type="text" id="phone" name="phone_number" value="" class="sm-form-control required  validate[required]" aria-required="true" placeholder="Phone No ">
                                     </div>
 
                                     <div class="col_full">
@@ -64,6 +64,10 @@
                                             }
                                             ?>
                                         </select>
+                                    </div>
+                                    
+                                    <div class="col_full">
+                                        <input type="text" id="other-city" name="city_name" style="display: none;" value="" disabled="true" class="sm-form-control required  validate[required]" aria-required="true" placeholder="Enter your city">
                                     </div>
                                     <center>
                                         <button type="submit" class="button button-3d button-rounded button-green">Submit</button>
@@ -119,6 +123,21 @@
 
 </section>
 @stop
+@section("myscripts")
+<script>
+    $(document).ready(function () {
+        $('#location').change(function (e) {            
+            var option = $(this).find("option:selected").text();            
+            if(option == 'Other'){
+                $('#other-city').slideDown().prop('disabled', false);
+            }else{
+                $('#other-city').slideUp().prop('disabled', true);
+            }
+        });
+    });
+</script>
+@stop
+
 <!-- External JavaScripts
 ============================================= -->
 

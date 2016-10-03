@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\GardenWaste;
 use App\Models\Configuration;
 use App\Models\PickupSlot;
+use App\Models\GunnyOrder;
 use App\Models\Message;
 use Request;
 use Session;
@@ -31,6 +32,25 @@ class GardenwasteController extends Controller {
         $pickups = $pickups->paginate(Config('constants.paginateNo'));
         Session::put('backUrl', Request::fullUrl());
         return view(Config('constants.adminGardenwasteView') . '.index', compact('pickups'));
+    }
+    
+    function gunnyOrders() {
+        $pickups = GunnyOrder::orderBy('created_at', 'desc');
+            if (Input::get('staff_id')) {
+                $pickups = $pickups->where('user_id', Input::get('staff_id'));                
+            } 
+            if (Input::get('pickup_date')) {
+                $pickups = $pickups->where('pickup_date', date("Y-m-d", strtotime(Input::get('pickup_date'))));                
+            }
+            if (Input::get('pickup_status')) {
+                $pickups = $pickups->where('pickup_status',Input::get('pickup_status'));
+            }
+            if (!is_null(Input::get('payment_made'))) {
+                $pickups = $pickups->where('payment_made',Input::get('payment_made'));
+            } 
+        $pickups = $pickups->paginate(Config('constants.paginateNo'));
+        Session::put('backUrl', Request::fullUrl());
+        return view(Config('constants.adminGardenwasteView') . '.gunnyOrders', compact('pickups'));
     }
     
     function messages() {
@@ -93,6 +113,11 @@ class GardenwasteController extends Controller {
 
     public function delete() {
         $pickup = GardenWaste::find(Input::get('id'));
+        $pickup->delete();
+        return redirect()->back()->with("message", "Garden Waste Pickup deleted sucessfully");
+    }
+    public function deleteGunnyOrder() {
+        $pickup = GunnyOrder::find(Input::get('id'));
         $pickup->delete();
         return redirect()->back()->with("message", "Garden Waste Pickup deleted sucessfully");
     }

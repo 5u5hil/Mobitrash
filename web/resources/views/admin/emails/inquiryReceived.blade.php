@@ -14,7 +14,7 @@
     <span style="font:'Arial Black', Gadget, sans-serif;"><h2>Inquiry received from {{ $data['name'] }}!</h2><h4>
             <div>Name: {{$data['name']}}</div>
             <div>Email: {{$data['email']}}</div>
-            <div>Phone: {{$data['phone']}}</div>
+            <div>Phone: {{$data['phone_number']}}</div>
             <div>Location: {{$data['city']}}</div>
             
             <br><br><span></span><br><span></span></h4></span>

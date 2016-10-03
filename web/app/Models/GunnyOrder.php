@@ -10,5 +10,9 @@ class GunnyOrder extends \Eloquent {
     public function user() {
         return $this->belongsTo('App\Models\User', 'user_id');
     }
+    
+    public function address() {
+        return $this->belongsTo('App\Models\Address', 'address_id');
+    }
 
 }

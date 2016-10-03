@@ -188,6 +188,8 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/edit', ['as' => 'admin.gardenwaste.edit', 'uses' => 'GardenwasteController@edit']);
                 Route::get('/show', ['as' => 'admin.gardenwaste.show', 'uses' => 'GardenwasteController@show']);
                 Route::get('/delete', ['as' => 'admin.gardenwaste.delete', 'uses' => 'GardenwasteController@delete']);
+                Route::get('/gunny-order-delete', ['as' => 'admin.gunnyorder.delete', 'uses' => 'GardenwasteController@deleteGunnyOrder']);
+                Route::get('/gunny-order', ['as' => 'admin.gunnyorder.view', 'uses' => 'GardenwasteController@gunnyOrders']);
             });
             
             Route::group(['prefix' => 'payment'], function() {
