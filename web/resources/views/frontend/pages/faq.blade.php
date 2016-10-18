@@ -87,7 +87,7 @@
                     <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>
                     What is the procedure for starting the MobiTrash service?</div>
                     <div class="acc_content clearfix">
-                    It is very simple! You need to sign up for the service on our website www.MobiTrash.in. One of us will call you to set up an appointment with you fairly soon. We shall set up a free trial for a month. Mid-way during the trial period, we shall enter into a longer term commercial agreement with you.</div>
+                    It is very simple! You need to sign up for the service on our website www.MobiTrash.in. One of us will call you to set up an appointment with you fairly soon. We shall set up a free trial for a week. Mid-way during the trial period, we shall enter into a longer term commercial agreement with you.</div>
 
                     <div class="acctitle"><i class="acc-closed icon-question-sign"></i><i class="acc-open icon-question-sign"></i>
                     ​Will there be bad smell generated from the MobiTrash van while it is parked in my premises and carrying out the treatment?</div>

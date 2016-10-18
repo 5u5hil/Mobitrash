@@ -85,7 +85,7 @@
                                 <td>{{@$pickup->created_at}}</td>
                                 <td  class="no-print">
                                     @permission('admin.gunnyorder.edit')
-                                    <!--<a href="{{ route('admin.gunnyorder.edit',['id' => @$pickup->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>-->
+                                    <a href="{{ route('admin.gunnyorder.edit',['id' => @$pickup->id ])  }}" class="label label-success active" ui-toggle-class="">Edit</a>
                                     @endpermission
                                     @permission('admin.gunnyorder.delete')
                                     <a href="{{ route('admin.gunnyorder.delete',['id' => @$pickup->id ])  }}" class="label label-danger active" onclick="return confirm('Are you really want to continue?')" ui-toggle-class="">Delete</a>

@@ -102,8 +102,8 @@
                 $('.reg-input input').prop('disabled',true);
             }
         });
-        $(".user_location input").change(function(){           
-                $('.city_message').html('Mobitrash is soon coming in '+ $(this).val() +'!');           
+        $(".user_location input").on('keyup change', function (){           
+                $('.city_message').html('Mobitrash is soon coming to '+ $(this).val() +'!<br>If you\'d like to get a heads up when we are in your city, please enter your email id');           
         });
         
         

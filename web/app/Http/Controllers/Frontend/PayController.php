@@ -80,7 +80,9 @@ class PayController extends Controller {
         $id = explode("-", Input::get('ORDERID'));
         $invoice_amount = 0;
         $success = 0;
+        $redirect = 'user.payment.success';
         if ($id[1] == '301') {
+            $redirect = 'user.payment.success';
             $pay = Payment::find($id[2]);
             $invoice_amount = $pay->invoice_amount;
             $pay->txtdetails = json_encode(Input::all());
@@ -97,6 +99,7 @@ class PayController extends Controller {
             }
             $pay->update();
         } else if ($id[1] == '101') {
+            $redirect = 'pickup.order.success';
             $pay = GardenWaste::find($id[2]);
             $invoice_amount = $pay->amount;
             $pay->txtdetails = json_encode(Input::all());
@@ -113,6 +116,7 @@ class PayController extends Controller {
             }
             $pay->update();
         } else if ($id[1] == '201') {
+            $redirect = 'gunny.order.success';
             $pay = GunnyOrder::find($id[2]);
             $invoice_amount = $pay->amount;
             $pay->txtdetails = json_encode(Input::all());
@@ -140,7 +144,19 @@ class PayController extends Controller {
                 $message->subject('MobiTrash Payment Receipt');
             });
         }
+        return redirect()->route($redirect,['success' => $success]);
+    }
+    public function paymentSuccess() {        
+        $success = Input::get('success');
         return view(Config('constants.frontendView') . '.thankyou', compact("success"));
+    }
+    public function pickupOrderSuccess() {        
+        $success = Input::get('success');
+        return view(Config('constants.frontendView') . '.pickupOrderSuccess', compact("success"));
+    }
+    public function gunnyOederSuccess() {        
+        $success = Input::get('success');
+        return view(Config('constants.frontendView') . '.gunnyOrderSuccess', compact("success"));
     }
 
     public function encrypt_e($input, $ky) {

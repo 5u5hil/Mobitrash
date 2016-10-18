@@ -42,7 +42,7 @@ class UsersController extends Controller {
         if ($cityother) {
             array_push($city, $cityother[0]);
         }
-        $cities = ['' => 'select City'];
+        $cities = ['' => 'Select City'];
         foreach ($city as $value) {
             $cities[$value['id']] = $value['name'];
         }
@@ -215,12 +215,12 @@ class UsersController extends Controller {
             'title' => Input::get('name'),
             'person_id' => Input::get('name'),
             'f9717f095c375ebfc91312429b54821df8972fb3' => Input::get('email'),
-            'f856d0351336a040cbe422113dbcf31736fa29a6' => Input::get('phone'),
+            'f856d0351336a040cbe422113dbcf31736fa29a6' => Input::get('phone_number'),
             '57790cc8503d26fece54897eb9ed1ef7de4407a6' => 'Website Subscription',
             '0f564b10f66aa6eba1294de86c0ffcb670039947' => $location_name,
             'stage_id' => $city['inquiry_stage_id']
         );
-
+        
         $ch = curl_init('https://api.pipedrive.com/v1/deals?api_token=' . Config('constants.pipedriveApiToken'));
         curl_setopt_array($ch, array(
             CURLOPT_POST => TRUE,
@@ -343,6 +343,7 @@ class UsersController extends Controller {
     }
 
     public function gardenWaste() {
+        $city = City::where('id',Auth::user()->city_id)->first();
         $pickups = PickupSlot::get()->toArray();
         $pickupslots = [];
         foreach ($pickups as $key => $pickup) {
@@ -354,7 +355,7 @@ class UsersController extends Controller {
         $addresses = Address::where('flag', 1)->where('user_id', Auth::user()->id)->get()->toArray();
         $action = 'garden.waste.save';
         if ($gunny_bags > 0) {
-            return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config', 'pickupslots', 'addresses'));
+            return view(Config('constants.frontendView') . '.garden_waste', compact('action', 'config', 'pickupslots', 'addresses', 'city'));
         } else {
             return redirect()->route('garden.waste.emptygunny');
         }
@@ -387,9 +388,10 @@ class UsersController extends Controller {
     }
 
     public function emptyGunny() {
+        $city = City::where('id',Auth::user()->city_id)->first();
         $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
         $action = 'garden.waste.savegunny';
-        return view(Config('constants.frontendView') . '.empty_gunny', compact('action', 'config'));
+        return view(Config('constants.frontendView') . '.empty_gunny', compact('action', 'config', 'city'));
     }
 
     public function saveGunny() {

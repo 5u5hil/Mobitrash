@@ -83,6 +83,12 @@ class OperatorController extends Controller {
                     }
                 }
             }
+            
+            foreach ($schedules as $ke => $schedule) {
+                if (!count($schedule['pickups']) > 0 && $schedule['end_kilometer'] > 0) {
+                    unset($schedules[$ke]);
+                }
+            }
         }
         if ($schedules) {
             return ['flash' => 'success', 'Schedules' => $schedules, 'Wastetype' => $wastetype, 'Additive' => $additives, 'cnt' => $cnt];
@@ -147,8 +153,9 @@ class OperatorController extends Controller {
         $schedules = Schedule::where('for', date('Y-m-d'));
         $schedules = $schedules->where('van_id', Input::get("id"));
         $schedules = $schedules->orderBy('sort_order', 'asc')->get();
+        $config = Configuration::first(['no_of_login_allowed'])->toArray();
         if ($schedules) {
-            return ['flash' => 'success', 'Schedules' => $schedules];
+            return ['flash' => 'success', 'Schedules' => $schedules, 'max_logins' => $config['no_of_login_allowed']];
         } else {
             return ['flash' => 'error'];
         }
@@ -197,18 +204,18 @@ class OperatorController extends Controller {
 
     public function attendance() {
         $user = User::where('id', Input::get("id"))->with('roles')->first()->toArray();
-        
-        foreach (Input::get('schedule_id') as $sch_id) {            
-            if ($sch_id['checked']) {
-                $schedule = Schedule::where('id', $sch_id['id'])->first();
-                if ($user['roles'][0]['id'] == 3) {
-                    $schedule->operators()->attach([Input::get("id")]);
-                } else if ($user['roles'][0]['id'] == 4) {
-                    $schedule->drivers()->attach([Input::get("id")]);
-                }
+//        foreach (Input::get('schedule_id') as $sch_id) {            
+//            if ($sch_id['checked']) {
+        if (Input::get('schedule_id')) {
+            $schedule = Schedule::where('id', Input::get('schedule_id'))->first();
+            if ($user['roles'][0]['id'] == 3) {
+                $schedule->operators()->attach([Input::get("id")]);
+            } else if ($user['roles'][0]['id'] == 4) {
+                $schedule->drivers()->attach([Input::get("id")]);
             }
         }
-        
+//        }
+
         $attendance_exist = Attendance::where('user_id', Input::get("id"))->where('date', date('Y-m-d'))->count();
         if ($attendance_exist > 0) {
             return ['flash' => 'exist'];

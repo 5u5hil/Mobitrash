@@ -79,7 +79,7 @@
                                     @permission('admin.users.edit')       
                                     <a href="{!! route('admin.users.edit',['id'=>$system_user->id]) !!}" class="label label-success active" ui-toggle-class="">Edit</a>
                                     @endpermission
-                                    @permission('admin.users.delete')
+                                    @permission('admin.systemusers.delete')
                                     <a href="{!! route('admin.systemusers.delete',['id'=>$system_user->id]) !!}" onclick="return confirm('Are you sure you want to continue?')" class="label label-danger active" ui-toggle-class="">Delete</a>
                                     @endpermission
                                 </td>

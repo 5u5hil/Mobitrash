@@ -77,7 +77,7 @@
                             <label>Locality </label> <small>*</small>
                             {!! Form::text('locality',null, ["class"=>"sm-form-control validate[required]]" ,"placeholder"=>"Locality"]) !!}
                             <label>City </label><small>*</small>
-                            {!! Form::text('city',null, ["class"=>"sm-form-control validate[required]" ,"placeholder"=>"City"]) !!}
+                            {!! Form::text('city',@$city->name, ["class"=>"sm-form-control validate[required]" ,"placeholder"=>"City"]) !!}
                             <label>Pincode </label><small>*</small>
                             {!! Form::text('pincode',null, ["class"=>"sm-form-control validate[required,custom[integer]]" ,"placeholder"=>"Pincode"]) !!}
                             <button type="submit" class="button button-3d button-black" style="width: 100%;margin: 15px 0px;">Submit & Proceed to Pay</button>

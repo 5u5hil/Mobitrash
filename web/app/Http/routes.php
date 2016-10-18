@@ -189,6 +189,8 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/show', ['as' => 'admin.gardenwaste.show', 'uses' => 'GardenwasteController@show']);
                 Route::get('/delete', ['as' => 'admin.gardenwaste.delete', 'uses' => 'GardenwasteController@delete']);
                 Route::get('/gunny-order-delete', ['as' => 'admin.gunnyorder.delete', 'uses' => 'GardenwasteController@deleteGunnyOrder']);
+                Route::get('/gunny-order-edit', ['as' => 'admin.gunnyorder.edit', 'uses' => 'GardenwasteController@editGunnyOrder']);
+                Route::post('/gunny-order-save', ['as' => 'admin.gunnyorder.save', 'uses' => 'GardenwasteController@saveGunnyOrder']);
                 Route::get('/gunny-order', ['as' => 'admin.gunnyorder.view', 'uses' => 'GardenwasteController@gunnyOrders']);
             });
             
@@ -233,6 +235,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::group(['prefix' => 'bonfleet'], function() {
                 Route::get('/', ['as' => 'admin.bonfleet.view', 'uses' => 'BonfleetController@index']);
                 Route::post('/save', ['as' => 'admin.bonfleet.save', 'uses' => 'BonfleetController@save']);
+                Route::get('/add', ['as' => 'admin.bonfleet.add', 'uses' => 'BonfleetController@add']);
                 Route::get('/edit', ['as' => 'admin.bonfleet.edit', 'uses' => 'BonfleetController@edit']);
                 Route::get('/show', ['as' => 'admin.bonfleet.show', 'uses' => 'BonfleetController@show']);
                 Route::get('/delete', ['as' => 'admin.bonfleet.delete', 'uses' => 'BonfleetController@delete']);
@@ -309,6 +312,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/save-subscription', ['as' => 'user.subscription.save', 'uses' => 'UsersController@saveSubscription']);
             Route::post('/profile-update', ['as' => 'user.profile.update', 'uses' => 'UsersController@update']);
             Route::post('/password-change', ['as' => 'user.password.change', 'uses' => 'UsersController@changePassword']);
+            Route::get('/users-payment-success', ["as" => "user.payment.success", "uses" => "PayController@paymentSuccess"]);
+            Route::get('/pickup-order-success', ["as" => "pickup.order.success", "uses" => "PayController@pickupOrderSuccess"]);
+            Route::get('/gunny-order-success', ["as" => "gunny.order.success", "uses" => "PayController@gunnyOederSuccess"]);
         });
     });
     Route::group(['namespace' => 'Frontend', 'prefix' => 'operator'], function() {

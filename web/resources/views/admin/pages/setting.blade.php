@@ -31,6 +31,13 @@
                     </div>                    
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('user','No of Logins Allowed for APP',['class'=>'col-sm-2 required']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::text('no_of_login_allowed',null, ["class"=>'form-control', 'placeholder'=>'No of Logins', "required"]) !!}
+                        </div>
+                    </div>                    
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-2">
                             {!! Form::hidden('id',null) !!}
                             {!! Form::submit('Submit',["class" => "btn btn-primary"]) !!}

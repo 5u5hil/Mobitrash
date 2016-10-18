@@ -26,7 +26,7 @@ class GardenwasteController extends Controller {
             if (Input::get('pickup_status')) {
                 $pickups = $pickups->where('pickup_status',Input::get('pickup_status'));
             }
-            if (!is_null(Input::get('payment_made'))) {
+            if (Input::get('payment_made') || Input::get('payment_made')=='0') {
                 $pickups = $pickups->where('payment_made',Input::get('payment_made'));
             } 
         $pickups = $pickups->paginate(Config('constants.paginateNo'));
@@ -45,7 +45,7 @@ class GardenwasteController extends Controller {
             if (Input::get('pickup_status')) {
                 $pickups = $pickups->where('pickup_status',Input::get('pickup_status'));
             }
-            if (!is_null(Input::get('payment_made'))) {
+            if (Input::get('payment_made') || Input::get('payment_made')=='0') {
                 $pickups = $pickups->where('payment_made',Input::get('payment_made'));
             } 
         $pickups = $pickups->paginate(Config('constants.paginateNo'));
@@ -103,11 +103,21 @@ class GardenwasteController extends Controller {
         $pickup = GardenWaste::find(Input::get('id'));
         $action = "admin.gardenwaste.save";
         return view(Config('constants.adminGardenwasteView') . '.addEdit', compact('action', 'pickup'));
-    }
-    
+    }    
 
     public function save() {
         $pickup = GardenWaste::findOrNew(Input::get('id'))->fill(Input::all())->save();
+        return redirect()->to(Session::get('backUrl'));
+    }
+    
+    function editGunnyOrder() {
+        $pickup = GunnyOrder::find(Input::get('id'));
+        $action = "admin.gunnyorder.save";
+        return view(Config('constants.adminGardenwasteView') . '.editGunnyOrder', compact('action', 'pickup'));
+    }
+    
+    public function saveGunnyOrder() {
+        $pickup = GunnyOrder::findOrNew(Input::get('id'))->fill(Input::all())->save();
         return redirect()->to(Session::get('backUrl'));
     }
 
