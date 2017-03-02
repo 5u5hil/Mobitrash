@@ -33,7 +33,7 @@ class FueltypeController extends Controller {
     public function delete() {
         $fueltype = Fueltype::find(Input::get('id'));
         $fueltype->delete();
-        return redirect()->back()->with("message", "Fueltype deleted sucessfully");
+        return redirect()->back()->with("message", "Fueltype deleted successfully");
     }
 
 }

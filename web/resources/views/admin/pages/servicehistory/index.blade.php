@@ -118,7 +118,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= $services->render() ?> 
+                    <?= $services->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value, 'start_date'=> Input::get('start_date'), 'end_date' => Input::get('end_date')])->render() ?> 
 
                 </div>
             </div><!-- /.box -->

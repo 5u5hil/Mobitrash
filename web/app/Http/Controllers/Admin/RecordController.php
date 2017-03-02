@@ -130,14 +130,14 @@ class RecordController extends Controller {
     public function delete() {
         $record = Record::find(Input::get('id'));
         $record->delete();
-        return redirect()->back()->with("message", "Record deleted sucessfully");
+        return redirect()->back()->with("message", "Record deleted successfully");
     }
 
     public function rmfile() {
         $atta = Attachment::find(Input::get('id'));
         $atta->is_active = '0';
         $atta->save();
-        return redirect()->back()->with("message", "Attachment Removed sucessfully");
+        return redirect()->back()->with("message", "Attachment Removed successfully");
         exit();
     }
 

@@ -33,7 +33,7 @@ class WastetypeController extends Controller {
     public function delete() {
         $wastetype = Wastetype::find(Input::get('id'));
         $wastetype->delete();
-        return redirect()->back()->with("message", "Wastetype deleted sucessfully");
+        return redirect()->back()->with("message", "Wastetype deleted successfully");
     }
 
 }

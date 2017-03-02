@@ -33,7 +33,7 @@ class RecordtypeController extends Controller {
     public function delete() {
         $recordtype = Recordtype::find(Input::get('id'));
         $recordtype->delete();
-        return redirect()->back()->with("message", "Recordtype deleted sucessfully");
+        return redirect()->back()->with("message", "Recordtype deleted successfully");
     }
 
 }

@@ -33,7 +33,7 @@ class ServicetypeController extends Controller {
     public function delete() {
         $servicetype = Servicetype::find(Input::get('id'));
         $servicetype->delete();
-        return redirect()->back()->with("message", "Servicetype deleted sucessfully");
+        return redirect()->back()->with("message", "Servicetype deleted successfully");
     }
 
 }

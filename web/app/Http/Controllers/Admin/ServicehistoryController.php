@@ -189,7 +189,7 @@ class ServicehistoryController extends Controller {
     public function delete() {
         $services = Service::find(Input::get('id'));
         $services->delete();
-        return redirect()->back()->with("message", "Service deleted sucessfully");
+        return redirect()->back()->with("message", "Service deleted successfully");
     }
 
 }

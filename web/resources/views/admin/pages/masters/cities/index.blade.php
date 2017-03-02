@@ -37,6 +37,7 @@
                                 <th>Pipeline Id</th>
                                 <th>Inquiry Stage Id</th>
                                 <th>Free Trial Stage Id</th>
+                                <th>Garden Waste</th>
                                 <th>Active</th>
                             </tr>
                         </thead>
@@ -48,6 +49,7 @@
                                 <td>{{ $city->pipeline_id }}</td>
                                 <td>{{ $city->inquiry_stage_id }}</td>
                                 <td>{{ $city->stage_id }}</td>
+                                <td>{{ $city->garden_waste == 1 ? 'Yes' : 'No' }}</td>                                
                                 <td>{{ $city->is_active == 1 ? 'Yes' : 'No' }}</td>                                
                                 <td>
                                     @permission('admin.cities.edit')                                    

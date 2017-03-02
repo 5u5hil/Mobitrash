@@ -12,6 +12,7 @@ use Session;
 use App\Models\Payment;
 use App\Models\GardenWaste;
 use App\Models\GunnyOrder;
+use App\Models\Address;
 use Mail;
 
 class PayController extends Controller {
@@ -81,6 +82,7 @@ class PayController extends Controller {
         $invoice_amount = 0;
         $success = 0;
         $redirect = 'user.payment.success';
+        $user = User::find(Auth::id())->toArray();
         if ($id[1] == '301') {
             $redirect = 'user.payment.success';
             $pay = Payment::find($id[2]);
@@ -90,6 +92,12 @@ class PayController extends Controller {
                 $pay->payment_made = 1;
                 $pay->payment_date = date("Y-m-d");
                 $success = 1;
+                
+                Mail::send(Config('constants.adminEmail') . '.paymentSuccess', ['user' => $user, 'amt' => $invoice_amount], function ($message) {
+                    $message->to(Auth::user()->email);
+                    $message->cc('getit@mobitrash.in');
+                    $message->subject('MobiTrash Payment Receipt');
+                });
             } else if (Input::get('STATUS') == "PENDING") {
                 $pay->payment_made = 2;
                 $pay->payment_date = date("Y-m-d");
@@ -101,12 +109,21 @@ class PayController extends Controller {
         } else if ($id[1] == '101') {
             $redirect = 'pickup.order.success';
             $pay = GardenWaste::find($id[2]);
+            $address = Address::where('id',$pay->address_id)->first()->toArray();
             $invoice_amount = $pay->amount;
             $pay->txtdetails = json_encode(Input::all());
             if (Input::get('STATUS') == "TXN_SUCCESS" || Input::get('RESPCODE') == "01") {
                 $pay->payment_made = 1;
                 $pay->payment_date = date("Y-m-d");
                 $success = 1;
+                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderConfirmation', ['user' => $user, 'no_of_bags'=>$pay->gunny_bags, 'amount'=>$invoice_amount, 'address' => $address], function ($message) use ($user) {
+                    $message->to($user['email']);
+                    $message->subject('Garden Waste Pickup Order Confirmation');
+                });
+                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderReceived', ['user' => $user, 'no_of_bags'=>$pay->gunny_bags, 'amount'=>$invoice_amount, 'address' => $address], function ($message) {
+                    $message->to('getit@mobitrash.in');
+                    $message->subject('Garden Waste Pickup Request Received');
+                });
             } else if (Input::get('STATUS') == "PENDING") {
                 $pay->payment_made = 2;
                 $pay->payment_date = date("Y-m-d");
@@ -124,6 +141,15 @@ class PayController extends Controller {
                 $pay->payment_made = 1;
                 $pay->payment_date = date("Y-m-d");
                 $success = 1;
+                ////////No pay Email at Save
+//                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderConfirmation', ['user' => $user, 'no_of_bags'=>$pay->no_of_bags, 'amount'=>$invoice_amount, 'address' => $address->toArray()], function ($message) use ($user) {
+//                    $message->to($user['email']);
+//                    $message->subject('Gunny Order Confirmation');
+//                });
+//                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderReceived', ['user' => $user, 'no_of_bags'=>$pay->no_of_bags, 'amount'=>$invoice_amount, 'address' => $address->toArray()], function ($message) {
+//                    $message->to('getit@mobitrash.in');
+//                    $message->subject('Pickup Request');
+//                });
             } else if (Input::get('STATUS') == "PENDING") {
                 $pay->payment_made = 2;
                 $pay->payment_date = date("Y-m-d");
@@ -136,27 +162,27 @@ class PayController extends Controller {
 
 
         if ($success == 1) {
-            $user = User::find(Auth::id())->toArray();
-            Mail::send(Config('constants.adminEmail') . '.paymentSuccess', ['user' => $user, 'amt' => $invoice_amount], function ($message) {
-                $message->to(Auth::user()->email);
-                $message->cc('getit@mobitrash.in');
-//                $message->cc('sharad@infiniteit.biz');
-                $message->subject('MobiTrash Payment Receipt');
-            });
+            
         }
-        return redirect()->route($redirect,['success' => $success]);
+        return redirect()->route($redirect, ['success' => $success]);
     }
-    public function paymentSuccess() {        
+
+    public function paymentSuccess() {
         $success = Input::get('success');
         return view(Config('constants.frontendView') . '.thankyou', compact("success"));
     }
-    public function pickupOrderSuccess() {        
+
+    public function pickupOrderSuccess() {
         $success = Input::get('success');
         return view(Config('constants.frontendView') . '.pickupOrderSuccess', compact("success"));
     }
-    public function gunnyOederSuccess() {        
+
+    public function gunnyOederSuccess() {
         $success = Input::get('success');
-        return view(Config('constants.frontendView') . '.gunnyOrderSuccess', compact("success"));
+        if (Input::get('id')) {
+            $gunnyOrder = GunnyOrder::with('address')->find(Input::get('id'))->toArray();
+        }
+        return view(Config('constants.frontendView') . '.gunnyOrderSuccess', compact("success", 'gunnyOrder'));
     }
 
     public function encrypt_e($input, $ky) {

@@ -40,7 +40,7 @@
 
                         <div class="panel-default divcenter noradius noborder" style="max-width:500px;">
                             <div class="panel-body" style="padding:2px;">
-                                <form id="login-form" name="login-form" class="nobottommargin" action="{{ route($action)}}" method="post">
+                                <form id="contact-form" name="login-form" class="nobottommargin" action="{{ route($action)}}" method="post">
                                     @if(!Auth::id())<center><!-- <h4 class="consub">Become a Mobitrasher</h4> --></center>@endif
 
                                     <div class="col_full">
@@ -60,17 +60,17 @@
                                             <option value="">Select Your Location</option>
                                             <?php
                                             foreach ($city as $val) {
-                                                echo '<option value="'.$val['id'].'">'.$val['name'].'</option>';
+                                                echo '<option value="' . $val['id'] . '">' . $val['name'] . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col_full">
                                         <input type="text" id="other-city" name="city_name" style="display: none;" value="" disabled="true" class="sm-form-control required  validate[required]" aria-required="true" placeholder="Enter your city">
                                     </div>
                                     <center>
-                                        <button type="submit" class="button button-3d button-rounded button-green">Submit</button>
+                                        <button id="contactSubmit" type="button" class="button button-3d button-rounded button-green">Submit</button>
                                     </center>
                                     <div class="line line-sm"></div>
                                 </form>
@@ -126,13 +126,25 @@
 @section("myscripts")
 <script>
     $(document).ready(function () {
-        $('#location').change(function (e) {            
-            var option = $(this).find("option:selected").text();            
-            if(option == 'Other'){
+        $('#location').change(function (e) {
+            var option = $(this).find("option:selected").text();
+            if (option == 'Other') {
                 $('#other-city').slideDown().prop('disabled', false);
-            }else{
+            } else {
                 $('#other-city').slideUp().prop('disabled', true);
             }
+        });
+        var submit = true;
+        $('#contactSubmit').click(function () {
+            if (submit) {
+                $('#contact-form').submit();
+
+            }
+            if ($("#contact-form").validationEngine('validate')) {
+                $(this).css('background', "#ccc");
+                submit = false;
+            }
+
         });
     });
 </script>

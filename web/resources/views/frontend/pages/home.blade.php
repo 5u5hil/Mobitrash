@@ -1,27 +1,27 @@
 @extends('frontend.layouts.site')
 @section('content')
 
-    <div class="bannersec">
-        <div class="bannersec2">
-            <p>Lets <span>Mobitrash</span> it!</p>
-            <p>Before the garbage piles around eat us alive, let us together turn it,into 'green'!
-                Introducing MOBITRASH,
-                India's first comprehensive mobile organic waste collection and treatment solution 
-                <br><br><?php if (!Auth::id()): ?>
-                <span>Join Today & Inspire Others!</span> 
-                <div>
-               
-                <div class="text-center butttop">
-                 <a href="{{ route('user.contact.view') }}" class="button button-large resbutt1 resbutt2 resbutt1-border resbutt1-large button-border button-rounded bannerbutt">Sign Up Now!</a>   
-                </div> 
-   <?php endif; ?>
-                <div class="counter counters1"><span data-from="0" data-to="{{ @$waste_till_date_sum }}" data-refresh-interval="50" data-speed="2000">{{ @$waste_till_date_sum }}</span>kg</div>
-                <h6 class="counters2">Waste Treated So Far</h6>
-                </div>
-                
-            </p>   
+<div class="bannersec">
+    <div class="bannersec2">
+        <p>Lets <span>Mobitrash</span> it!</p>
+        <p>Before the garbage piles around eat us alive, let us together turn it,into 'green'!
+            Introducing MOBITRASH,
+            India's first comprehensive mobile organic waste collection and treatment solution 
+            <br><br><?php if (!Auth::id()): ?>
+            <span>Join Today & Inspire Others!</span> 
+        <div>
+
+            <div class="text-center butttop">
+                <a href="{{ route('user.contact.view') }}" class="button button-large resbutt1 resbutt2 resbutt1-border resbutt1-large button-border button-rounded bannerbutt">Sign Up Now!</a>   
+            </div> 
+            <?php endif; ?>
+            <div class="counter counters1"><span data-from="0" data-to="{{ @$waste_till_date_sum }}" data-refresh-interval="50" data-speed="2000">{{ @$waste_till_date_sum }}</span>kg</div>
+            <h6 class="counters2">Waste Treated So Far</h6>
         </div>
- 
+
+        </p>   
+    </div>
+
 
     <!-- <div class="preloadhiddenimb" style="display:none; position:absolute; left:-9999999; top:-999999; opacity:0;">
     <img src="public/Frontend/images/bannerimg/1.jpg"><img src="public/Frontend/images/bannerimg/2.jpg"><img src="public/Frontend/images/bannerimg/3.jpg"><img src="public/Frontend/images/bannerimg/4.jpg"><img src="public/Frontend/images/bannerimg/5.jpg"><img src="public/Frontend/images/bannerimg/6.jpg"><img src="public/Frontend/images/bannerimg/7.jpg"><img src="public/Frontend/images/bannerimg/8.jpg"><img src="public/Frontend/images/bannerimg/9.jpg"><img src="public/Frontend/images/bannerimg/10.jpg"><img src="public/Frontend/images/bannerimg/11.jpg"><img src="public/Frontend/images/bannerimg/12.jpg"><img src="public/Frontend/images/bannerimg/13.jpg"><img src="public/Frontend/images/bannerimg/14.jpg"><img src="public/Frontend/images/bannerimg/15.jpg"><img src="public/Frontend/images/bannerimg/16.jpg"><img src="public/Frontend/images/bannerimg/17.jpg"><img src="public/Frontend/images/bannerimg/18.jpg"><img src="public/Frontend/images/bannerimg/19.jpg"><img src="public/Frontend/images/bannerimg/20.jpg"><img src="public/Frontend/images/bannerimg/21.jpg"><img src="public/Frontend/images/bannerimg/22.jpg"><img src="public/Frontend/images/bannerimg/23.jpg"><img src="public/Frontend/images/bannerimg/24.jpg"><img src="public/Frontend/images/bannerimg/25.jpg"><img src="public/Frontend/images/bannerimg/26.jpg"><img src="public/Frontend/images/bannerimg/27.jpg"><img src="public/Frontend/images/bannerimg/28.jpg"><img src="public/Frontend/images/bannerimg/29.jpg"><img src="public/Frontend/images/bannerimg/30.jpg"><img src="public/Frontend/images/bannerimg/31.jpg"><img src="public/Frontend/images/bannerimg/32.jpg"><img src="public/Frontend/images/bannerimg/33.jpg"><img src="public/Frontend/images/bannerimg/34.jpg"><img src="public/Frontend/images/bannerimg/35.jpg"><img src="public/Frontend/images/bannerimg/36.jpg"><img src="public/Frontend/images/bannerimg/37.jpg"></div> -->
@@ -105,7 +105,7 @@
 </div>
 
 <div class="clear"></div>
-<section id="content">
+<section id="content" class="content3">
     <div class="container clearfix">
         <div class="center fruittop">
             <h1>Treat your Waste. Professionally!</h1>
@@ -423,4 +423,11 @@
 <div class="clear"></div>
 </div>
 </div>
+@stop
+
+@section("myscripts")
+<script>
+    var page = '<?= Input::get('content') ?>';
+    $('html,body').animate({scrollTop: $(".content" + page).offset().top - 100}, 'slow');
+</script>
 @stop

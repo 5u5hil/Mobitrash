@@ -99,6 +99,12 @@
                     <li class="{{ preg_match("/admin.users.view/",Route::currentRouteName()) ? 'active' : '' }}"><a  href="{{ route('admin.users.view') }}"><i class="fa fa-users"></i>Customers</a></li>
                 </ul>
             </li>
+            <li class="treeview {{ preg_match("/admin.gallery.view/",Route::currentRouteName())? 'active' : ''}}">
+                <a href="{{ route('admin.gallery.view') }}">
+                    <i class="fa fa-picture-o"></i>
+                    <span>Gallery</span>
+                </a>
+            </li>
 
             <li class="treeview {{ preg_match("/admin.cities.view|admin.frequency.view|admin.additive.view|admin.fueltype.view|admin.wastetype.view|admin.recordtype.view|admin.occupancy.view|admin.timeslot.view|admin.servicetype.view/",Route::currentRouteName())? 'active' : ''}}">
                 <a href="#">

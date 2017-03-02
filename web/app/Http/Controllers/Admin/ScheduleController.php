@@ -299,7 +299,7 @@ class ScheduleController extends Controller {
         $schedule->delete();
         Pickup::where('schedule_id', Input::get('id'))->delete();
         Service::where('schedule_id', Input::get('id'))->delete();
-        return redirect()->back()->with("message", "Schedule deleted sucessfully!");
+        return redirect()->back()->with("message", "Schedule deleted successfully!");
     }
 
 }

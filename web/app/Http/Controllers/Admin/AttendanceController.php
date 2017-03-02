@@ -39,7 +39,7 @@ class AttendanceController extends Controller {
     public function delete() {
         $attendance = Attendance::find(Input::get('id'));
         $attendance->delete();
-        return redirect()->back()->with("message", "Attendance deleted sucessfully");
+        return redirect()->back()->with("message", "Attendance deleted successfully");
     }
 
 }

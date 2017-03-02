@@ -27,6 +27,7 @@ use App\Models\Payment;
 use App\Models\GardenWaste;
 use App\Models\GunnyOrder;
 use App\Models\Message;
+use App\Models\Gallery;
 use Mail;
 
 class UsersController extends Controller {
@@ -35,9 +36,13 @@ class UsersController extends Controller {
         return view(Config('constants.frontendView') . '.login');
     }
 
+    public function loginGarden() {
+        return view(Config('constants.frontendView') . '.login_garden');
+    }
+
     public function register() {
         $action = 'user.register.save';
-        $city = City::where('name', '!=', 'Other')->where('is_active', 1)->get()->toArray();
+        $city = City::where('name', '!=', 'Other')->where('is_active', 1)->where('garden_waste', 1)->get()->toArray();
         $cityother = City::where('name', 'Other')->where('is_active', 1)->get()->toArray();
         if ($cityother) {
             array_push($city, $cityother[0]);
@@ -104,7 +109,7 @@ class UsersController extends Controller {
             if (!empty(Input::get('rurl')))
                 return redirect()->route(Input::get('rurl'));
             else
-                return redirect()->route('user.myprofile.view');
+                return redirect()->route('user.subscription.view');
         } else {
             Session::flash('invalidUser', 'Invalid Username or Password');
             return redirect()->route('user.login');
@@ -187,6 +192,11 @@ class UsersController extends Controller {
         return view(Config('constants.frontendView') . '.faq');
     }
 
+    public function gallery() {
+        $images = Gallery::get()->toArray();
+        return view(Config('constants.frontendView') . '.gallery', compact('images'));
+    }
+
     public function about() {
         return view(Config('constants.frontendView') . '.about');
     }
@@ -220,7 +230,7 @@ class UsersController extends Controller {
             '0f564b10f66aa6eba1294de86c0ffcb670039947' => $location_name,
             'stage_id' => $city['inquiry_stage_id']
         );
-        
+
         $ch = curl_init('https://api.pipedrive.com/v1/deals?api_token=' . Config('constants.pipedriveApiToken'));
         curl_setopt_array($ch, array(
             CURLOPT_POST => TRUE,
@@ -237,6 +247,7 @@ class UsersController extends Controller {
             $data['city'] = $location_name;
             Mail::send(Config('constants.adminEmail') . '.inquiryReceived', ['data' => $data], function ($message) {
                 $message->to('getit@mobitrash.in');
+//                $message->to(['nithika.sailesh@excelind.com','saurabh.shah@excelind.com']);
 //                $message->to('sharad@infiniteit.biz');
                 $message->subject('MobiTrash Inquiry Received');
             });
@@ -343,7 +354,7 @@ class UsersController extends Controller {
     }
 
     public function gardenWaste() {
-        $city = City::where('id',Auth::user()->city_id)->first();
+        $city = City::where('id', Auth::user()->city_id)->first();
         $pickups = PickupSlot::get()->toArray();
         $pickupslots = [];
         foreach ($pickups as $key => $pickup) {
@@ -388,7 +399,7 @@ class UsersController extends Controller {
     }
 
     public function emptyGunny() {
-        $city = City::where('id',Auth::user()->city_id)->first();
+        $city = City::where('id', Auth::user()->city_id)->first();
         $config = Configuration::first(['gunny_bag_price', 'garden_waste_pickup_price', 'max_gunny_bags'])->toArray();
         $action = 'garden.waste.savegunny';
         return view(Config('constants.frontendView') . '.empty_gunny', compact('action', 'config', 'city'));
@@ -404,12 +415,27 @@ class UsersController extends Controller {
             $gunny_order->address_id = $address->id;
             $gunny_order->no_of_bags = Input::get('no_of_gunny');
             $gunny_order->amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
+            $gunny_order->payment_made = 1; // nopay
+            $gunny_order->payment_date = date("Y-m-d"); // nopay
             $user = User::where('id', Auth::user()->id)->first()->toArray();
             $payment_for = 'gunny_bags';
-            $amount = $config['gunny_bag_price'] * Input::get('no_of_gunny');
+//            $amount = $config['gunny_bag_price'] * Input::get('no_of_gunny'); // nopay
+            $amount = 0; // nopay
             if ($gunny_order->save()) {
                 $id = base64_encode($gunny_order->id);
-                return view(Config('constants.frontendView') . '.confirmpay', compact('id', 'user', 'amount', 'payment_for'));
+                //////No pay mail here
+                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderConfirmation', ['user' => $user, 'no_of_bags'=>Input::get('no_of_gunny'), 'amount'=>$amount, 'address' => $address->toArray()], function ($message) use ($user) {
+                    $message->to($user['email']);
+                    $message->subject('Gunny Order Confirmation');
+                });
+                Mail::send(Config('constants.frontendEmail') . '.gunnyOrderReceived', ['user' => $user, 'no_of_bags'=>Input::get('no_of_gunny'), 'amount'=>$amount, 'address' => $address->toArray()], function ($message) {
+                    $message->to('getit@mobitrash.in');
+                    $message->subject('Gunny Order Received');
+                });
+                //////
+                Session::flash('message', 'Empty Gunny bags drop request received successfully!'); // nopay
+                return redirect()->route('gunny.order.success', ['success' => 1, 'id' => $gunny_order->id]); // nopay
+//                return view(Config('constants.frontendView') . '.confirmpay', compact('id', 'user', 'amount', 'payment_for')); // nopay
             } else {
                 Session::flash('messageError', 'Error Occured! Please try again!');
             }

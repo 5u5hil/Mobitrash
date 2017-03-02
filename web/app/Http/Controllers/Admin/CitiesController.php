@@ -51,7 +51,7 @@ class CitiesController extends Controller {
     public function delete() {
         $city = City::find(Input::get('id'));
         $city->delete();
-        return redirect()->back()->with("message", "City deleted sucessfully");
+        return redirect()->back()->with("message", "City deleted successfully");
     }
 
 }

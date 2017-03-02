@@ -431,7 +431,7 @@
 
 					} else {
 						$("html, body").animate({
-							scrollTop: destination
+							scrollTop: destination - 150
 						}, 1100, function(){
 							if(options.focusFirstField) first_err.focus();
 						});

@@ -33,7 +33,7 @@ class OccupancyController extends Controller {
     public function delete() {
         $occupancy = Occupancy::find(Input::get('id'));
         $occupancy->delete();
-        return redirect()->back()->with("message", "Occupancy deleted sucessfully");
+        return redirect()->back()->with("message", "Occupancy deleted successfully");
     }
 
 }

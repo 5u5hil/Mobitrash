@@ -67,9 +67,12 @@
                                     @if(!empty( $pickup->txtdetails))
                                     <?php
                                     $txn = json_decode($pickup->txtdetails);
-                                    unset($txn->CHECKSUMHASH)
+                                    //print_r($txn);exit;
+                                    
                                     ?>
                                     <!--{{ json_encode($txn, JSON_PRETTY_PRINT)}};-->
+                                    @if($txn != null)
+                                    <?php unset($txn->CHECKSUMHASH); ?>
                                     @foreach($txn as $key=>$tx)
                                     <div style="display: table-row;">
                                     <div style="display: table-cell;min-width: 105px;">
@@ -79,7 +82,9 @@
                                         {{$tx}}
                                     </div>
                                     </div>
+                                    
                                     @endforeach
+                                    @endif
                                     @endif
                                 </td>
                                 <td>{{@$pickup->created_at}}</td>
@@ -98,7 +103,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= @$pickups->render() ?>
+                    <?= @$pickups->appends(['pickup_status' => Input::get('pickup_status'), 'payment_made'=> Input::get('payment_made')])->render() ?>
                 </div>
             </div><!-- /.box -->
         </div><!-- /.col -->

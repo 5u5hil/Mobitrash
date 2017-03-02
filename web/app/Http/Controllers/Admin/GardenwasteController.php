@@ -124,12 +124,12 @@ class GardenwasteController extends Controller {
     public function delete() {
         $pickup = GardenWaste::find(Input::get('id'));
         $pickup->delete();
-        return redirect()->back()->with("message", "Garden Waste Pickup deleted sucessfully");
+        return redirect()->back()->with("message", "Garden Waste Pickup deleted successfully");
     }
     public function deleteGunnyOrder() {
         $pickup = GunnyOrder::find(Input::get('id'));
         $pickup->delete();
-        return redirect()->back()->with("message", "Garden Waste Pickup deleted sucessfully");
+        return redirect()->back()->with("message", "Garden Waste Pickup deleted successfully");
     }
 
 }

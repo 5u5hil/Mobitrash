@@ -284,14 +284,14 @@ class SubscriptionController extends Controller {
         $subscription = Subscription::find(Input::get('id'));
         $subscription->delete();
         Pickup::where('subscription_id', Input::get('id'))->delete();
-        return redirect()->back()->with("message", "Subscription deleted sucessfully");
+        return redirect()->back()->with("message", "Subscription deleted successfully");
     }
 
     public function rmfile() {
         $atta = Attachment::find(Input::get('id'));
         $atta->is_active = '0';
         $atta->save();
-        return redirect()->back()->with("message", "Attachment Removed sucessfully");
+        return redirect()->back()->with("message", "Attachment Removed successfully");
         exit();
     }
 

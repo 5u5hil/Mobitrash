@@ -33,7 +33,7 @@ class ShiftController extends Controller {
     public function delete() {
         $shift = Shift::find(Input::get('id'));
         $shift->delete();
-        return redirect()->back()->with("message", "Shift deleted sucessfully");
+        return redirect()->back()->with("message", "Shift deleted successfully");
     }
 
 }

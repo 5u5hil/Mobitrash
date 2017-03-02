@@ -313,7 +313,7 @@ return redirect()->to(Session::get('backUrl'));
 
     public function rmAddress() {
         Address::find(Input::get('id'))->delete();
-        return redirect()->back()->with("message", "Address Removed sucessfully");
+        return redirect()->back()->with("message", "Address Removed successfully");
         exit();
     }
 

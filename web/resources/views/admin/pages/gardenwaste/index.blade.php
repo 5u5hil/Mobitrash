@@ -98,7 +98,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= @$pickups->render() ?>
+                    <?= @$pickups->appends(['pickup_date' => Input::get('pickup_date'), 'pickup_status'=> Input::get('pickup_status'), 'payment_made' => Input::get('payment_made')])->render() ?>
                 </div>
             </div><!-- /.box -->
         </div><!-- /.col -->

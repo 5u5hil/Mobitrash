@@ -10,6 +10,10 @@
             {{Session::pull('messageError')}}  
         </div>
         <div class="container clearfix">
+            <ul class="nav nav-tabs mb30">
+                <li class=""><a href="{{route('user.subscription.view')}}">Kitchen Waste</a></li>
+                <li class="active"><a>Garden Waste</a></li>
+            </ul>
             <div class="sidebar nobottommargin">
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
@@ -18,10 +22,10 @@
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
-                                <li class="actives"><a href="{{route('garden.waste')}}">Schedule Pickup</a></li>
-                                <li><a href="{{route('garden.waste.emptygunny')}}">Empty Gunny</a></li>
+                                <li><a href="{{route('garden.waste')}}">Schedule Pickup</a></li>
+                                <li><a href="{{route('garden.waste.emptygunny')}}">Order Bags</a></li>
                                 <li><a href="{{route('user.pickup.history')}}">Pickup History</a></li>
-                                <li><a href="{{route('user.message.view')}}">Message Us</a></li>
+                                <li class="actives"><a href="{{route('user.message.view')}}">Message Us</a></li>
                             </ul>
 
                         </div>
@@ -38,7 +42,7 @@
                     <div class="fancy-title title-bottom-border">
                         <h3>Message Us</h3>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7" style="padding-left: 0px;">
                         <div class="gunny-bags">  
                             <h4></h4>
 

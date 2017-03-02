@@ -162,7 +162,7 @@ class PaymentController extends Controller {
     public function delete() {
         $payment = Payment::find(Input::get('id'));
         $payment->delete();
-        return redirect()->back()->with("message", "Payment deleted sucessfully");
+        return redirect()->back()->with("message", "Payment deleted successfully");
     }
 
     public function paymentNotification() {

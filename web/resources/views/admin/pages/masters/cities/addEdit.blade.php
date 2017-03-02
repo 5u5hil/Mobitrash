@@ -49,6 +49,13 @@
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
+                        {!!Form::label('Garden Waste','Garden Waste',['class'=>'col-sm-2 optional']) !!}
+                        <div class="col-sm-10">
+                            {!! Form::select('garden_waste',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
                         {!!Form::label('Active','Active',['class'=>'col-sm-2 optional']) !!}
                         <div class="col-sm-10">
                             {!! Form::select('is_active',[1 => "Yes", 0 => "No"],null, ["class"=>'form-control']) !!}

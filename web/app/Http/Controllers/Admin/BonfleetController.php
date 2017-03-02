@@ -33,7 +33,7 @@ class BonfleetController extends Controller {
     public function delete() {
         $bonfleets = Bonfleet::find(Input::get('id'));
         $bonfleets->delete();
-        return redirect()->back()->with("message", "Bonfleet deleted sucessfully");
+        return redirect()->back()->with("message", "Bonfleet deleted successfully");
     }
 
     public function insert() {

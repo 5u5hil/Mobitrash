@@ -11,40 +11,6 @@
     }
 </style>
 
-<!-- <section id="page-title" style="background:none;">
-            <div class="container clearfix">
-                <h1>Profile</h1>
-                <br>
-                 <p>Your Account Information</p>
-            </div>
-
-        </section> -->
-<!-- <section id="slider" class="slider-parallax loginsec" data-height-lg="300" data-height-md="500" data-height-sm="250px" data-height-xs="250" data-height-xxs="200">
-    <div class="slider-parallax-inner">
-        <div class="container clearfix">
-            <div class="vertical-middle">
-
-                <div class="heading-block nobottomborder">
-                    <h1>
-                        <div>
-                            <span>Profile</span>
-                        </div>
-                    </h1>
-                    <p>Your Account Information</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- <section id="page-title">
-
-<div class="container clearfix">
-<h1>My Account</h1>
-
-</div>
-
-</section>  --> <!-- #page-title end -->
 
 <!-- Content
 ============================================= -->
@@ -53,6 +19,10 @@
     <div class="content-wrap">
 
         <div class="container clearfix">
+            <ul class="nav nav-tabs mb30">
+                <li class="active"><a>Kitchen Waste</a></li>
+                <li><a href="{{route('garden.waste')}}">Garden Waste</a></li>
+            </ul>
             <div class="sidebar nobottommargin">
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
@@ -61,11 +31,11 @@
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
-                                <li><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
                                 <li class="actives"><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
+                                <li><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>                                
                                 <li><a href="{{route('user.payment.info')}}">Payment Info</a></li>
-                                <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
-                                <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
+<!--                                <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
+                                <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>-->
                             </ul>
 
                         </div>

@@ -33,7 +33,7 @@ class FrequencyController extends Controller {
     public function delete() {
         $frequency = Frequency::find(Input::get('id'));
         $frequency->delete();
-        return redirect()->back()->with("message", "Frequency deleted sucessfully");
+        return redirect()->back()->with("message", "Frequency deleted successfully");
     }
 
 }

@@ -33,7 +33,7 @@ class AdditiveController extends Controller {
     public function delete() {
         $additive = Additive::find(Input::get('id'));
         $additive->delete();
-        return redirect()->back()->with("message", "Additive deleted sucessfully");
+        return redirect()->back()->with("message", "Additive deleted successfully");
     }
 
 }

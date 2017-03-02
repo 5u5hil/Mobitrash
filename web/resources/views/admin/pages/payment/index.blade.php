@@ -116,7 +116,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= $payments->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value])->render() ?>
+                    <?= $payments->appends(['filter_type' => $filter_type, 'filter_value' => $filter_value, 'invoice_date' => Input::get('invoice_date'), 'invoice_month' => Input::get('invoice_month')])->render() ?>
                 </div>
             </div><!-- /.box -->
         </div><!-- /.col -->

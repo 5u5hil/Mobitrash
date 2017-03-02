@@ -117,7 +117,7 @@ class AssetsController extends Controller {
     public function delete() {
         $city = Asset::find(Input::get('id'));
         $city->delete();
-        return redirect()->back()->with("message", "Asset deleted sucessfully");
+        return redirect()->back()->with("message", "Asset deleted successfully");
     }
 
 }

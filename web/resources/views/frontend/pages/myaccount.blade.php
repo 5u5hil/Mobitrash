@@ -44,6 +44,10 @@
     <div class="content-wrap">
 
         <div class="container clearfix">
+            <ul class="nav nav-tabs mb30">
+                <li class="active"><a>Kitchen Waste</a></li>
+                <li><a href="{{route('garden.waste')}}">Garden Waste</a></li>
+            </ul>
             <div class="sidebar nobottommargin">
                 <div class="sidebar-widgets-wrap">
                     <div class="widget clearfix">
@@ -52,11 +56,11 @@
                         </div>
                         <div id="headsub">
                             <ul class="icons iconlist-large iconlist-color">
-                                <li class="actives"><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>
                                 <li><a href="{{route('user.subscription.view')}}">My Subscription</a></li>
+                                <li class="actives"><a href="{{route('user.myaccount.view')}}">Service Summary</a></li>                                
                                 <li><a href="{{route('user.payment.info')}}">Payment Info</a></li>
-                                <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
-                                <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>
+<!--                                <li><a href="{{route('user.myprofile.view')}}">My Profile</a></li>
+                                <li><a href="{{route('user.mypassword.view')}}">Change Password</a></li>-->
                                 
                             </ul>
 

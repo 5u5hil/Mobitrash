@@ -33,7 +33,7 @@ class TimeslotController extends Controller {
     public function delete() {
         $timeslot = Timeslot::find(Input::get('id'));
         $timeslot->delete();
-        return redirect()->back()->with("message", "Timeslot deleted sucessfully");
+        return redirect()->back()->with("message", "Timeslot deleted successfully");
     }
 
 }

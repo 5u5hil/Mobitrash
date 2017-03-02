@@ -36,7 +36,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/unauthorised', ["as" => "user.unauthorised", "uses" => "LoginController@unauthorised"]);
         Route::get('/record-index-filter', ["as" => "recordIndexFilter", "uses" => "RecordController@indexFilter"]);
         Route::get('/', ["as" => "adminLogin", "uses" => "LoginController@index"]);
-        Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);
+        Route::post('/check-user', ["as" => "check_admin_user", "uses" => "LoginController@chk_admin_user"]);        
         Route::get('/admin-logout', ["as" => "adminLogout", "uses" => "LoginController@admin_logout"]);
         Route::group(['prefix' => 'payment'], function() {
             Route::get('/payment-notification', ["as" => "admin.payment.notification", "uses" => "PaymentController@paymentNotification"]);
@@ -54,6 +54,13 @@ Route::group(['middleware' => ['web']], function () {
                     Route::post('/save', ['as' => 'admin.cities.save', 'uses' => 'CitiesController@save']);
                     Route::get('/edit', ['as' => 'admin.cities.edit', 'uses' => 'CitiesController@edit']);
                     Route::get('/delete', ['as' => 'admin.cities.delete', 'uses' => 'CitiesController@delete']);
+                });
+                Route::group(['prefix' => 'gardenWasteCities'], function() {
+                    Route::get('/', ['as' => 'admin.garden.cities.view', 'uses' => 'CitiesController@indexGardenWaste']);
+                    Route::get('/add', ['as' => 'admin.garden.cities.add', 'uses' => 'CitiesController@addGardenWaste']);
+                    Route::post('/save', ['as' => 'admin.garden.cities.save', 'uses' => 'CitiesController@saveGardenWaste']);
+                    Route::get('/edit', ['as' => 'admin.garden.cities.edit', 'uses' => 'CitiesController@editGardenWaste']);
+                    Route::get('/delete', ['as' => 'admin.garden.cities.delete', 'uses' => 'CitiesController@deleteGardenWaste']);
                 });
 
                 Route::group(['prefix' => 'frequency'], function() {
@@ -209,6 +216,11 @@ Route::group(['middleware' => ['web']], function () {
                 Route::get('/add', ['as' => 'admin.attendance.add', 'uses' => 'AttendanceController@add']);
                 Route::get('/delete', ['as' => 'admin.attendance.delete', 'uses' => 'AttendanceController@delete']);
             });
+            Route::group(['prefix' => 'gallery'], function() {
+                Route::get('/', ['as' => 'admin.gallery.view', 'uses' => 'GalleryController@index']);
+                Route::post('/save-image', ['as' => 'admin.gallery.save', 'uses' => 'GalleryController@save']);
+                Route::get('/delete', ['as' => 'admin.gallery.delete', 'uses' => 'GalleryController@delete']);
+            });
 
             Route::group(['prefix' => 'schedule'], function() {
                 Route::get('/', ['as' => 'admin.schedule.view', 'uses' => 'ScheduleController@index']);
@@ -279,6 +291,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::any('/paytm', ["as" => "payment.paytm", "uses" => "PayController@paytm"]);
 
         Route::get('/faq', ["as" => "user.faq", "uses" => "UsersController@faq"]);
+        Route::get('/gallery', ["as" => "user.gallery", "uses" => "UsersController@gallery"]);
+        Route::get('/login-garden-waste', ["as" => "user.login.garden", "uses" => "UsersController@loginGarden"]);
         Route::get('/about', ["as" => "user.about", "uses" => "UsersController@about"]);
         Route::get('/contact-us', ['as' => 'user.contact.view', 'uses' => 'UsersController@contact']);
         Route::post('/save-contact', ['as' => 'user.contact.save', 'uses' => 'UsersController@saveContact']);

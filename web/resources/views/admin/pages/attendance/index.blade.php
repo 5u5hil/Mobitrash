@@ -84,7 +84,7 @@
                     </table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                    <?= $attendances->render() ?>
+                    <?= $attendances->appends(['staff_id' => Input::get('staff_id'), 'start_date'=> Input::get('start_date'), 'end_date' => Input::get('end_date')])->render() ?>
                 </div>
             </div><!-- /.box -->
         </div><!-- /.col -->

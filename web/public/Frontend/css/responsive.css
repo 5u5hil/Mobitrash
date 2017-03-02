@@ -21,7 +21,37 @@
 	.promo-uppercase > .container > span { font-size: 14px; }
 
 }
-
+@media only screen and (min-width: 992px) and (max-width: 1122px) {
+#primary-menu ul li > a {
+    display: block;
+    line-height: 12px;
+    padding: 19px 2px;
+}
+#header.full-header #logo {
+    padding-right: 10px;
+    margin-right: 10px;
+}
+.socialborder {
+    float: left;
+    padding-right: 11px;
+    margin-right: 11px;
+}
+#header.full-header #primary-menu > ul {
+    float: left;
+    padding-right: 12px;
+    margin-right: 15px;
+    border-right: none;
+}	
+}
+@media only screen and (min-width: 1026px) and (max-width: 1125px) {
+#header.full-header #primary-menu > ul {
+    float: left;
+    padding-right: 11px;
+    margin-right: 11px;
+    border-right: none;
+}
+	
+}
 
 @media (min-width: 992px) and (max-width: 1199px) {
 
@@ -70,6 +100,7 @@
 		line-height: 36px;
 		font-size: 20px;
 	}
+
 
 	/* ----------------------------------------------------------------
 	Portfolio
@@ -1792,7 +1823,7 @@ only screen and (                min-resolution: 2dppx) and (max-width: 991px) {
 .socialborder{
    float: left;
    padding-right: 61px;
-   margin-right: 73px !important;
+   margin-right: 73px;
    border-right: 1px solid #EEE;	
 }
 .socialyset {

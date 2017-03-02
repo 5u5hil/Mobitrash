@@ -80,7 +80,7 @@ class RolesController extends Controller {
         $getUsers = $roles->users()->get()->toArray();
     if(empty($getUsers)){
        $roles->delete();
-       return redirect()->back()->with("message","Role deleted sucessfully");
+       return redirect()->back()->with("message","Role deleted successfully");
        
     }else{
            return redirect()->back()->with("message","Sorry,You can not delete role!");

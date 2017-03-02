@@ -33,7 +33,7 @@ class PackageController extends Controller {
     public function delete() {
         $package = Package::find(Input::get('id'));
         $package->delete();
-        return redirect()->back()->with("message", "Package deleted sucessfully");
+        return redirect()->back()->with("message", "Package deleted successfully");
     }
 
 }
